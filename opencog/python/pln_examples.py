@@ -47,20 +47,22 @@ bc/plus_test.conf
 bc/new/pathfinding_test.conf
 ''')
 
-files_list = '''bc/new/pathfinding_test.conf'''
+#files_list = '''bc/new/pathfinding_test.conf'''
 
 #files_list = '''bc/plus_test.conf'''
 #files_list ='''
 #both/new/BasicForAllDemo_test.conf
 #both/new/BasicForAllDemo2_test.conf
 #'''
-
 files = files_list.split('\n')
 
 def test_all(a):
     for f in files:
         if f != '' and not f.startswith('#'):
-            run_pln_example(a, f)
+	    try:
+		run_pln_example(a, f)
+	    except Exception, e:
+	        print e
 
     print 'Passed %s out of %s tests' % (len(passed), len(passed+failed))
     if len(failed):
@@ -85,18 +87,10 @@ def run_pln_example(a, f):
     def get(field):
         return config.get('PLN_TEST',field)
 
-    print f
-    
-    #kf = 'tests/reasoning/pln/json/'+get('load')+'.json'
-    #util.load_atomspace_json(a,kf)    
-    #util.load_atomspace_json(a,kf)
-    #json_target = '{"truthvalue": {"simple": {"count": 0, "str": 0.0}}, "outgoing": [{"truthvalue": {"simple": {"count": 0, "str": 1.0}}, "outgoing": [{"truthvalue": {"simple": {"count": 0, "str": 1.0}}, "outgoing": [], "type": "ConceptNode", "name": "toy_6"}, {"truthvalue": {"simple": {"count": 0, "str": 1.0}}, "outgoing": [], "type": "ConceptNode", "name": "toy"}], "type": "InheritanceLink", "name": ""}, {"truthvalue": {"simple": {"count": 0, "str": 1.0}}, "outgoing": [{"truthvalue": {"simple": {"count": 0, "str": 1.0}}, "outgoing": [], "type": "ConceptNode", "name": "red_bucket_6"}, {"truthvalue": {"simple": {"count": 0, "str": 1.0}}, "outgoing": [], "type": "ConceptNode", "name": "bucket"}], "type": "InheritanceLink", "name": ""}, {"truthvalue": {"simple": {"count": 0, "str": 1.0}}, "outgoing": [{"truthvalue": {"simple": {"count": 0, "str": 1.0}}, "outgoing": [], "type": "PredicateNode", "name": "placed_under"}, {"truthvalue": {"simple": {"count": 0, "str": 1.0}}, "outgoing": [{"truthvalue": {"simple": {"count": 0, "str": 1.0}}, "outgoing": [], "type": "ConceptNode", "name": "toy_6"}, {"truthvalue": {"simple": {"count": 0, "str": 1.0}}, "outgoing": [], "type": "ConceptNode", "name": "red_bucket_6"}], "type": "ListLink", "name": ""}], "type": "EvaluationLink", "name": ""}], "type": "AndLink", "name": ""}'
-    #target = util._atom_from_json(a,json_target)
     
     kf = '../tests/reasoning/pln/scm/'+get('load')+'.scm'
     scheme_wrapper.load_scm(a, kf)
     scm_target = '(cog-handle %s)' % (get('target'),)
-    print scm_target
     handle_str = scheme_wrapper.scheme_eval(scm_target)
     try:
         h = int(handle_str)
@@ -106,8 +100,6 @@ def run_pln_example(a, f):
     
     target = Atom(Handle(h), a)
     
-    print kf
-    print target
     
     import logic
     import tree

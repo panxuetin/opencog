@@ -12,24 +12,28 @@ from util import *
 from collections import namedtuple
 
 def coerce_tree(x):
+    '''transform x to a tree with T() '''
     assert type(x) != type(None)
     if isinstance(x, Tree):
         return x
     else:
         return T(x)
 
+##
+# @brief   construct a tree, no recursive, Transparently record Links as strings rather than Handles
+#
+#
+# @param op : if it's a atom, would be change to string,  should not be a nonempty link Atom
+# @param args
+#
+# @return 
 def T(op, *args):
-    # Transparently allow using passing a list or using it in the more streamlined way
-    # (better for constructing trees by hand). It will also wrap arguments of any kind
-    # into Trees (BUT NOT RECURSIVELY!). Just using the Tree constructor directly would
-    # be more appropriate if you need efficiency or want to use the Trees to represent
-    # something beside Atoms.
-    
     if len(args) and isinstance(args[0], list):
         args = args[0]
     # Transparently record Links as strings rather than Handles
     assert type(op) != type(None)
     if len(args):
+    # inner node
         if isinstance(op, Atom):
             assert not op.is_a(types.Link)
             final_op = op.type_name
@@ -37,6 +41,7 @@ def T(op, *args):
             final_op = op
         final_args = [coerce_tree(x) for x in args]
     else:
+    # leaf
         final_op = op
         final_args = []
 
@@ -46,21 +51,26 @@ def Var(op):
     return Tree(op)
 
 class Tree (object):
+    ''' a general tree, have no tranformation of data '''
     def __init__(self, op, args = None):
         # Transparently record Links as strings rather than Handles
         assert type(op) != type(None)
-        self.op = op
+        ## the value of the node, could be int, Atom, or string
+	## ,a link would be converted to string
+        self.op = op  
         if args is None:
+	    ## could be subtree or just immediate child
             self.args = []
         else:
-            self.args = args
+            self.args = args               
         
         self._tuple = None
 
     def __str__(self):
         if self.is_leaf():
             if isinstance(self.op, Atom):
-                return self.op.name+':'+self.op.type_name
+                #return self.op.name+':'+self.op.type_name
+                return self.op.name
             else:
                 return '$'+str(self.op)
         else:
@@ -69,16 +79,6 @@ class Tree (object):
     # TODO add doctests
     def __repr__(self):
         return str(self)
-        # Display it as code to create the corresponding Atom
-#        if self.is_variable():
-#            return "a.add(t.VariableNode, name='$%s')" % (str(self.op),)
-#        elif self.is_leaf() and isinstance(self.op, Atom):
-#            # a.add(t.ConceptNode, name='cat')
-#            return "a.add(t.%s, '%s')" % (self.op.type_name, self.op.name)
-#        else:
-#            # a.add(t.ListLink, out=[ a.add(t.ConceptNode, name='eat') ])
-#            return "a.add(t.%s, out=%s)" % (self.op, repr(self.args))
-        # Display it as code to create the Tree and required Nodes
         if self.is_variable():
             # e.g. T(123)
             return "T(%s)" % (str(int(self.op)),)
@@ -146,20 +146,30 @@ class Tree (object):
         return canonical_trees([self])[0]
 
     def flatten(self):
+	# @@? could be used to reproduce the tree ?
         # t=Tree('EvaluationLink',Tree(1),Tree('ListLink',Tree('cat'),Tree('dog')))
         return [self]+concat_lists(map(Tree.flatten, self.args))
 
 class DAG(Tree):
+    '''double directed Graph '''
     def __init__(self,op,args):
         Tree.__init__(self,op,[])
         self.parents = []
-        
+	self.path_axiom = None
+	# when tv > 0, is fact!
+	# @@!
+	# @@@
+	self.is_fact = False
+	self.path_pre = None
+	self.tv = TruthValue(0,0)
+
         for a in args:
             self.append(a)
     
     def append(self,child):
         if self not in child.parents:
             child.parents.append(self)
+	    ## children
             self.args.append(child)
     
     def __eq__(self,other):
@@ -171,13 +181,20 @@ class DAG(Tree):
         return hash(self.op)
     
     def __str__(self):
-        return 'PDN '+str(self.op)
+        return str(self.op)
     
     def any_path_up_contains(self,targets):
         if self in targets:
             return True
         return any(p.any_path_up_contains(targets) for p in self.parents)
         
+##
+# @brief recursive construct a tree from atom
+#
+# @param atom
+# @param dic : help to replace VariableNode in the tree to consistent int var
+#
+# @return 
 def tree_from_atom(atom, dic = {}):
     if atom.is_node():
         if atom.t in [types.VariableNode, types.FWVariableNode]:
@@ -194,6 +211,7 @@ def tree_from_atom(atom, dic = {}):
         return Tree(atom.type_name, args)
 
 def atom_from_tree(tree, a):
+    ''' also add the the tree to atomspace! '''
     if tree.is_variable():
         return a.add(types.VariableNode, name='$'+str(tree.op))
     elif tree.is_leaf():
@@ -270,13 +288,6 @@ def find_matching_conjunctions(conj, trees, match = Match()):
         tr = standardize_apart(tr)
         s2 = unify(conj[0], tr, match.subst)
         if s2 != None:
-            # partly_bound_tr is like conj[0] but with its variables replaced by the specific
-            # values in this tree. e.g. if we were looking for:
-            # (AtTimeLink Tree:1000001 (EvaluationLink actionDone:PredicateNode (ListLink Tree:1000003)))
-            # we could get:
-            # (AtTimeLink Tree:1000005 (EvaluationLink actionDone:PredicateNode (ListLink
-            #       (ExecutionLink eat:GroundedSchemaNode (ListLink Tree:1000006)))))
-            #partly_bound_tr = subst(s2, conj[0])
             match2 = Match(conj=match.conj+(conj[0],), subst=s2)
             
             #print pp(match2.conj), pp(match2.subst)
@@ -299,7 +310,16 @@ def apply_rule(precedent, conclusion, atoms):
     return ret
 
 # Further code adapted from AIMA-Python under the MIT License (see http://code.google.com/p/aima-python/)
+# @@?
 
+##
+# @brief unify x to y, return a unification change x(r.head) to y(target)
+#
+# @param x : a tree
+# @param y : a tree
+# @param s : dict, source to target map
+#
+# @return : {}:  match without substitution, None: failed to unify
 def unify(x, y, s):
     """Unify expressions x,y with substitution s; return a substitution that
     would make x,y equal, or None if x,y can not unify. x and y can be
@@ -329,15 +349,18 @@ def unify(x, y, s):
     #   return s
     elif tx == Tree and ty == Tree and x.is_variable() and y.is_variable() and x == y:
         return s
+    # extend s if possible
     elif tx == Tree and x.is_variable():
         return unify_var(x, y, s)
     elif ty == Tree and y.is_variable():
         return unify_var(y, x, s)
+    # end extend
         
     elif tx == Tree and ty == Tree:
+	# @@?
+	# none variable, could be a link or a concept
         s2 = unify(x.op, y.op, s)
         return unify(x.args,  y.args, s2)
-
     # Recursion to handle arguments.
     elif tx == list and ty == list:
         if len(x) == len(y):
@@ -356,7 +379,9 @@ def unify(x, y, s):
 
 def unify_var(var, x, s):
     if var in s:
+	#@@? just return s
         return unify(s[var], x, s)
+    # check for the first time
     elif occur_check(var, x, s):
         raise ValueError('cycle in variable bindings')
         return None
@@ -380,20 +405,25 @@ def occur_check(var, x, s):
     else:
         return False
 
+##
+# @brief add the map between 'var' and 'val'
+#
+# @param s
+# @param var
+# @param val
+#
+# @return 
 def extend(s, var, val):
     """Copy the substitution s and extend it by setting var to val;
     return copy.
     
-    >>> initial = {'x': 1}
-    >>> extend({'x': 1}, 'y', 2)
-    {'y': 2, 'x': 1}
-    >>> initial
-    {'x': 1}
+    >>> initial = {x: a}
+    >>> extend({x: a}, y, b)
+    {y: b, x: a}
     """
     s2 = s.copy()
     s2[var] = val
     return s2
-    
 def subst(s, x):
     """Substitute the substitution s into the expression x.
     >>> subst({x: 42, y:0}, F(x) + y)
@@ -429,9 +459,14 @@ def binding_from_subst(subst, atomspace):
 def bind_conj(conj, b):
     return subst_conjunction(subst_from_binding(b), conj)
 
+##
+# @brief :replace all the variables in tree with new variables
+#
+# @param tr : a tree of a tuple of tree or a tuple of tuple of tree
+# @param dic :the map between the tree and new variable
+#
+# @return :a tree or a tuple
 def standardize_apart(tr, dic=None):
-    """Replace all the variables in tree with new variables."""
-
     if dic == None:
         dic = {}
 
@@ -447,23 +482,21 @@ def standardize_apart(tr, dic=None):
     else:
         return Tree(tr.op, [standardize_apart(a, dic) for a in tr.args])
 
-#def standardize_apart_subst(s, dic={}):
-#    """Replace all the variables in subst with new variables."""
-#    new_s = dict(
-#                 ( (new_var(), new_var()) for (v1, v2) in s.items() )
-#                 )
 
 def new_var():
+    '''return a new variable tree node '''
     global _new_var_counter
     _new_var_counter += 1
     return Tree(_new_var_counter)
-
+## the begin of new variables
 _new_var_counter = 10**6
 
 def unify_conj(xs, ys, s):
+    '''unify conjunction of trees '''
     assert isinstance(xs, tuple) and isinstance(ys, tuple)
     if len(xs) == len(ys):
         for perm in permutations(xs):
+	    # iterate over N x N possible unifies, util find one
             s2 = unify(list(perm), list(ys), s)
             if s2 != None:
                 return s2
@@ -478,12 +511,18 @@ def isomorphic_conjunctions(xs, ys):
     return False
 
 def isomorphic_conjunctions_ordered(xs, ys):
+    ''' return true if just variables'name of two tree are different''' 
     xs, ys = canonical_trees(xs), canonical_trees(ys)
     return xs == ys
 
-#def permutated_canonical_tuples(trs):
-#    return [ tuple(canonical_trees(perm)) for perm in permutations(trs) ]
 
+##
+# @brief 
+#
+# @param trs
+# @param dic : same as function standardize_apart
+#
+# @return : a list of canonical trees
 def canonical_trees(trs, dic = {}):
     '''Returns the canonical version of a list of trees, i.e. with the variables renamed (consistently) from 0,1,2.
     It can be a list of only one tree. If you want to use multiple trees, you must put them in the same list, so that
@@ -491,6 +530,7 @@ def canonical_trees(trs, dic = {}):
 
     global _new_var_counter
     tmp = _new_var_counter
+    # make variable number begin from 0
     _new_var_counter = 0
     ret = []
     dic = {}
@@ -501,6 +541,12 @@ def canonical_trees(trs, dic = {}):
     
     return ret
 
+##
+# @brief    
+#
+# @param t : tuple of conjunction trees, or Tree
+#
+# @return : a list of variables in tree
 def get_varlist(t):
     """Return a list of variables in tree, in the order they appear (with depth-first traversal). Would also work on a conjunction."""
     if isinstance(t, Tree) and t.is_variable():
@@ -519,9 +565,6 @@ def get_varlist(t):
     else:
         return []
 
-
-# These functions print their arguments in a standard order
-# to compensate for the random order in the standard representation
 
 def ppsubst(s):
     """Print substitution s"""

@@ -1,5 +1,6 @@
 import collections
 import cPickle as pickle
+import logging
 
 def if_(cond, t, f):
     if cond:
@@ -194,19 +195,33 @@ class OrderedSet(collections.OrderedDict, collections.MutableSet):
     symmetric_difference_update = property(lambda self: self.__ixor__)
     union = property(lambda self: self.__or__)
 
-class Logger(object):
-    def __init__(self, f = 'opencog-python.log'):
-        self._file = open(f,'w')
+#class Logger(object):
+    #def __init__(self, f = 'opencog-python.log'):
+        #self._file = open(f,'w')
+	#self.to_stdout = False
     
-    def info(self, msg):
-        print >>self._file, msg
-        self._file.flush()
-        #pass
+    #def info(self, msg):
+        #print >>self._file, msg
+        #self._file.flush()
+	#if self.to_stdout:
+	   #print msg 
+        ##pass
     
-    def use_stdout(self, use):
-        pass
+    #def use_stdout(self, use):
+	#self.to_stdout = use
 
-log = Logger()
+#log = Logger()
+
+log = logging.getLogger("pln")
+console =  logging.StreamHandler()
+filehandle = logging.FileHandler('opencog.log','w')
+#formatter =  logging.Formatter('%(asctime)s %(levelname)s %(message)s')
+formatter =  logging.Formatter('%(message)s')
+console.setFormatter(formatter)
+filehandle.setFormatter(formatter)
+log.setLevel(logging.DEBUG)
+log.addHandler(filehandle)
+log.addHandler(console)
 
 
 # Note. Due to various technical annoyances, the json save/load
