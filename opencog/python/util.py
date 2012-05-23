@@ -198,17 +198,17 @@ class OrderedSet(collections.OrderedDict, collections.MutableSet):
 #class Logger(object):
     #def __init__(self, f = 'opencog-python.log'):
         #self._file = open(f,'w')
-	#self.to_stdout = False
+        #self.to_stdout = False
     
     #def info(self, msg):
         #print >>self._file, msg
         #self._file.flush()
-	#if self.to_stdout:
-	   #print msg 
+        #if self.to_stdout:
+           #print msg 
         ##pass
     
     #def use_stdout(self, use):
-	#self.to_stdout = use
+        #self.to_stdout = use
 
 #log = Logger()
 
@@ -290,3 +290,4 @@ def _dict_from_atom(a):
 def _tv_from_dict(d):
     stv_dict = d['simple']
     return TruthValue(stv_dict['str'], stv_dict['count'])
+

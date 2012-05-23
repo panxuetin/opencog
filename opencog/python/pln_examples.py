@@ -59,10 +59,10 @@ files = files_list.split('\n')
 def test_all(a):
     for f in files:
         if f != '' and not f.startswith('#'):
-	    try:
-		run_pln_example(a, f)
-	    except Exception, e:
-	        print e
+            try:
+                run_pln_example(a, f)
+            except Exception, e:
+                print e
 
     print 'Passed %s out of %s tests' % (len(passed), len(passed+failed))
     if len(failed):

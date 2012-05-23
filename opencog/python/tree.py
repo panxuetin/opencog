@@ -10,6 +10,8 @@ from itertools import permutations
 from util import *
 
 from collections import namedtuple
+#from rules import Rule
+#import rules
 
 def coerce_tree(x):
     '''transform x to a tree with T() '''
@@ -56,10 +58,10 @@ class Tree (object):
         # Transparently record Links as strings rather than Handles
         assert type(op) != type(None)
         ## the value of the node, could be int, Atom, or string
-	## ,a link would be converted to string
+        ## ,a link would be converted to string
         self.op = op  
         if args is None:
-	    ## could be subtree or just immediate child
+            ## could be subtree or just immediate child
             self.args = []
         else:
             self.args = args               
@@ -146,7 +148,7 @@ class Tree (object):
         return canonical_trees([self])[0]
 
     def flatten(self):
-	# @@? could be used to reproduce the tree ?
+        # @@? could be used to reproduce the tree ?
         # t=Tree('EvaluationLink',Tree(1),Tree('ListLink',Tree('cat'),Tree('dog')))
         return [self]+concat_lists(map(Tree.flatten, self.args))
 
@@ -155,21 +157,20 @@ class DAG(Tree):
     def __init__(self,op,args):
         Tree.__init__(self,op,[])
         self.parents = []
-	self.path_axiom = None
-	# when tv > 0, is fact!
-	# @@!
-	# @@@
-	self.is_fact = False
-	self.path_pre = None
-	self.tv = TruthValue(0,0)
-
+        self.trace = Data_Trace()
+        self.tv = TruthValue(0,0)
         for a in args:
             self.append(a)
+        try:
+           self.trace.path_pre = op.trace.path_pre 
+           self.trace.path_axiom = op.trace.path_axiom 
+        except Exception:
+            pass
     
     def append(self,child):
         if self not in child.parents:
             child.parents.append(self)
-	    ## children
+            ## children
             self.args.append(child)
     
     def __eq__(self,other):
@@ -357,8 +358,8 @@ def unify(x, y, s):
     # end extend
         
     elif tx == Tree and ty == Tree:
-	# @@?
-	# none variable, could be a link or a concept
+        # @@?
+        # none variable, could be a link or a concept
         s2 = unify(x.op, y.op, s)
         return unify(x.args,  y.args, s2)
     # Recursion to handle arguments.
@@ -379,7 +380,7 @@ def unify(x, y, s):
 
 def unify_var(var, x, s):
     if var in s:
-	#@@? just return s
+        #@@? just return s
         return unify(s[var], x, s)
     # check for the first time
     elif occur_check(var, x, s):
@@ -496,7 +497,7 @@ def unify_conj(xs, ys, s):
     assert isinstance(xs, tuple) and isinstance(ys, tuple)
     if len(xs) == len(ys):
         for perm in permutations(xs):
-	    # iterate over N x N possible unifies, util find one
+            # iterate over N x N possible unifies, util find one
             s2 = unify(list(perm), list(ys), s)
             if s2 != None:
                 return s2
@@ -569,3 +570,12 @@ def get_varlist(t):
 def ppsubst(s):
     """Print substitution s"""
     ppdict(s)
+
+class Data_Trace(object):
+    """docstring for Data_Trace"""
+    def __init__(self,):
+        # when tv > 0, is fact!
+        self.is_fact = False
+        self.path_pre = None
+        self.path_axiom = None
+        #self.tv = TruthValue(0,0)

@@ -4,8 +4,9 @@ except ImportError:
     from atomspace_remote import TruthValue, types as t, confidence_to_count, types as t
 
 import formulas
-from tree import *
 import math
+#import inference_analyze
+from tree import *
 
 ##
 # @brief    initial rules in the system
@@ -22,7 +23,7 @@ def rules(a, deduction_types):
     # All existing Atoms
     for obj in a.get_atoms_by_type(t.Atom):
         # POLICY: Ignore all false things. This means you can never disprove something! But much more useful for planning!
-	# add all nonvariable Atom, exist rule like axiom
+        # add all nonvariable Atom, exist rule like axiom
         if obj.tv.count > 0 and obj.tv.mean > 0:
             tr = tree_from_atom(obj)
             if not tr.is_variable():
@@ -292,16 +293,17 @@ class Rule :
 
     def __init__ (self, head, goals, name, tv = TruthValue(0, 0),
                   formula = None, match = None):
-	''' head, goals : tree '''
+        ''' head, goals : tree '''
         self.head = head
         self.goals = goals
 
         self.name = name
         self.tv = tv
         self.match = match
+        #@@! could be replaced with ...
         self.formula = if_(formula, formula, formulas.identityFormula)
-	self.path_pre = None
-	self.path_axiom = None
+        self.trace = Data_Trace()
+
 
         if name == 'Lookup':
             assert len(goals) == 0
@@ -330,6 +332,8 @@ class Rule :
         tmp = standardize_apart(head_goals)
         new_version = Rule(tmp[0], tmp[1:], name=self.name, tv = self.tv,
                            formula=self.formula, match = self.match)
+        new_version.trace.path_pre = self.trace.path_pre
+        new_version.trace.path_axiom = self.trace.path_axiom
 
         return new_version
 
@@ -351,14 +355,14 @@ class Rule :
             return self._tuple
 
     def unifies(self, other):
-	'''return true if could be unified to tree other '''
+        '''return true if could be unified to tree other '''
         self_conj = (self.head,)+tuple(self.goals)
         other_conj = (other.head,)+tuple(other.goals)
 
         return unify(self_conj, other_conj, {}) != None
 
     def subst(self, s):
-	'''return new substitued rule '''
+        '''return new substitued rule '''
         new_head = subst(s, self.head)
         new_goals = list(subst_conjunction(s, self.goals))
         new_rule = Rule(new_head, new_goals, name=self.name, tv = self.tv,
