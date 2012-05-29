@@ -1,6 +1,6 @@
 import collections
 import cPickle as pickle
-import logging
+import inspect
 
 def if_(cond, t, f):
     if cond:
@@ -195,33 +195,51 @@ class OrderedSet(collections.OrderedDict, collections.MutableSet):
     symmetric_difference_update = property(lambda self: self.__ixor__)
     union = property(lambda self: self.__or__)
 
-#class Logger(object):
-    #def __init__(self, f = 'opencog-python.log'):
-        #self._file = open(f,'w')
-        #self.to_stdout = False
+class Logger(object):
+    def __init__(self, f = 'opencog-python.log'):
+        self._file = open(f,'w')
+        self.to_stdout = False
+        self._leves = []
+        self.DEBUG = 0
+        self.INFO = 1
+        self.WARNING = 2
+        self.ERROR = 3
+        #
+        self.trace = False
+        self.ident = 0
     
-    #def info(self, msg):
-        #print >>self._file, msg
-        #self._file.flush()
-        #if self.to_stdout:
-           #print msg 
-        ##pass
+    def debug(self,msg):
+        """docstring for debug"""
+        if self.trace and self.DEBUG in self._leves:
+            print >>self._file, "[DEBUG]:"  + msg
+            if self.to_stdout:
+                print "[DEBUG]:" +  msg 
+    def info(self, msg):
+        if self.trace and self.INFO in self._leves:
+            print >>self._file, "[INFO]:"  + msg
+            if self.to_stdout:
+                print "[INFO]:" +  msg 
+    def warning(self,msg):
+        """docstring for debug"""
+        if self.trace and self.WARNING in self._leves:
+            print >>self._file, "[WARNING]:"  + msg
+            if self.to_stdout:
+                print "[WARNING]:" +  msg 
+    def error(self, msg):
+        if self.trace and self.ERROR in self._leves:
+            print >>self._file, "[ERROR]:"  + msg
+            if self.to_stdout:
+                print "[ERROR]:" +  msg 
+    def flush(self):
+        self._file.flush()
     
-    #def use_stdout(self, use):
-        #self.to_stdout = use
+    def use_stdout(self, use):
+        self.to_stdout = use
+    def setLevel(self, level):
+        self._leves.append(level)
 
-#log = Logger()
+log = Logger()
 
-log = logging.getLogger("pln")
-console =  logging.StreamHandler()
-filehandle = logging.FileHandler('opencog.log','w')
-#formatter =  logging.Formatter('%(asctime)s %(levelname)s %(message)s')
-formatter =  logging.Formatter('%(message)s')
-console.setFormatter(formatter)
-filehandle.setFormatter(formatter)
-log.setLevel(logging.DEBUG)
-log.addHandler(filehandle)
-log.addHandler(console)
 
 
 # Note. Due to various technical annoyances, the json save/load
@@ -291,3 +309,14 @@ def _tv_from_dict(d):
     stv_dict = d['simple']
     return TruthValue(stv_dict['str'], stv_dict['count'])
 
+def format_log(offset, dsp_suffix = True, *args):
+    global _line    
+    #out = '['+str(_line) + '] ' + ' ' * offset +  ' '.join(map(str, args))
+    #_line+=1
+    if dsp_suffix:
+        stack = inspect.stack()
+        suffix = " -- %s %s" % (stack[1][2], stack[1][3])
+    else:
+        suffix = "" 
+    out =  ' ' * offset +  ' '.join(map(str, args)) + suffix
+    return out
