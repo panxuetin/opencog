@@ -419,12 +419,10 @@ class Chainer:
         # determine if the premise is valuable
         self.propagate_result(new_app)     # @@% propagate_result
         log.ident -= 3
-        if self.got_target:
-            # probably, i may never happen that progate_result to target, and new_app.head != orig_app.head
-            # because this would imply that goal like "a -> $1" may be an infernced fact or axiom
-            # which would unlikely happen, because $1 is just for rule, not variables in fact
-            # so check self.got_target is unncessary
-           return 
+        # probably, i may never happen that progate_result to target, and new_app.head != orig_app.head
+        # because this would imply that goal like "a -> $1" may be an infernced fact or axiom
+        # which would unlikely happen, because $1 is just for rule, not variables in fact
+        # so check self.got_target is unncessary
         # Specialize higher-level rules, if the head has actually been changed 
         # (if the unify lessen the number of vars in the head of orig_app)
         # which imply the head include the same var as current goal

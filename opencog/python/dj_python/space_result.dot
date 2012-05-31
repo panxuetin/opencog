@@ -1,0 +1,83 @@
+ digraph visualisation{ 
+node[style = filled]
+	"Deduction (ImplicationLink A D) :- (ImplicationLink A $1000007),(ImplicationLink\
+ $1000007 D),A,$1000007,D," -> D;
+	"Deduction (ImplicationLink A D) :- (ImplicationLink A $1000007),(ImplicationLink\
+ $1000007 D),A,$1000007,D," -> A;
+	"Deduction (ImplicationLink A D) :- (ImplicationLink A $1000007),(ImplicationLink\
+ $1000007 D),A,$1000007,D," -> "(ImplicationLink $1 D)";
+	"Deduction (ImplicationLink A D) :- (ImplicationLink A $1000007),(ImplicationLink\
+ $1000007 D),A,$1000007,D," -> "$1";
+	"Deduction (ImplicationLink A D) :- (ImplicationLink A $1000007),(ImplicationLink\
+ $1000007 D),A,$1000007,D," -> "(ImplicationLink A $1)";
+	"(ImplicationLink A B)" -> "[axiom] (ImplicationLink A B) :- ";
+	"Deduction (ImplicationLink A D) :- (ImplicationLink A B),(ImplicationLink B D),A\
+,B,D," -> "(ImplicationLink B D)";
+	"Deduction (ImplicationLink A D) :- (ImplicationLink A B),(ImplicationLink B D),A\
+,B,D," -> "(ImplicationLink A B)";
+	"Deduction (ImplicationLink A D) :- (ImplicationLink A B),(ImplicationLink B D),A\
+,B,D," -> D;
+	"Deduction (ImplicationLink A D) :- (ImplicationLink A B),(ImplicationLink B D),A\
+,B,D," -> A;
+	"Deduction (ImplicationLink A D) :- (ImplicationLink A B),(ImplicationLink B D),A\
+,B,D," -> B;
+	D -> "[axiom] D :- ";
+	"(ImplicationLink A D)" -> "Deduction (ImplicationLink A D) :- (ImplicationLink A $1000007),(ImplicationLink\
+ $1000007 D),A,$1000007,D,";
+	"(ImplicationLink A D)" -> "Deduction (ImplicationLink A D) :- (ImplicationLink A B),(ImplicationLink B D),A\
+,B,D,";
+	"(ImplicationLink A D)" -> "Deduction (ImplicationLink A D) :- (ImplicationLink A C),(ImplicationLink C D),A\
+,C,D,";
+	"producing target $WIN :- (ImplicationLink A D)," -> "(ImplicationLink A D)";
+	A -> "[axiom] A :- ";
+	C -> "[axiom] C :- ";
+	B -> "[axiom] B :- ";
+	"Deduction (ImplicationLink A C) :- (ImplicationLink A $1000012),(ImplicationLink\
+ $1000012 C),A,$1000012,C," -> "(ImplicationLink $1 C)";
+	"Deduction (ImplicationLink A C) :- (ImplicationLink A $1000012),(ImplicationLink\
+ $1000012 C),A,$1000012,C," -> A;
+	"Deduction (ImplicationLink A C) :- (ImplicationLink A $1000012),(ImplicationLink\
+ $1000012 C),A,$1000012,C," -> C;
+	"Deduction (ImplicationLink A C) :- (ImplicationLink A $1000012),(ImplicationLink\
+ $1000012 C),A,$1000012,C," -> "$1";
+	"Deduction (ImplicationLink A C) :- (ImplicationLink A $1000012),(ImplicationLink\
+ $1000012 C),A,$1000012,C," -> "(ImplicationLink A $1)";
+	"(ImplicationLink B C)" -> "[axiom] (ImplicationLink B C) :- ";
+	"(ImplicationLink A C)" -> "Deduction (ImplicationLink A C) :- (ImplicationLink A $1000012),(ImplicationLink\
+ $1000012 C),A,$1000012,C,";
+	"(ImplicationLink A C)" -> "Deduction (ImplicationLink A C) :- (ImplicationLink A B),(ImplicationLink B C),A\
+,B,C,";
+	"Deduction (ImplicationLink C D) :- (ImplicationLink C $1000008),(ImplicationLink\
+ $1000008 D),C,$1000008,D," -> D;
+	"Deduction (ImplicationLink C D) :- (ImplicationLink C $1000008),(ImplicationLink\
+ $1000008 D),C,$1000008,D," -> C;
+	"Deduction (ImplicationLink C D) :- (ImplicationLink C $1000008),(ImplicationLink\
+ $1000008 D),C,$1000008,D," -> "(ImplicationLink $1 D)";
+	"Deduction (ImplicationLink C D) :- (ImplicationLink C $1000008),(ImplicationLink\
+ $1000008 D),C,$1000008,D," -> "$1";
+	"Deduction (ImplicationLink C D) :- (ImplicationLink C $1000008),(ImplicationLink\
+ $1000008 D),C,$1000008,D," -> "(ImplicationLink C $1)";
+	"(ImplicationLink C D)" -> "[axiom] (ImplicationLink C D) :- ";
+	"(ImplicationLink C D)" -> "Deduction (ImplicationLink C D) :- (ImplicationLink C $1000008),(ImplicationLink\
+ $1000008 D),C,$1000008,D,";
+	"Deduction (ImplicationLink A D) :- (ImplicationLink A C),(ImplicationLink C D),A\
+,C,D," -> D;
+	"Deduction (ImplicationLink A D) :- (ImplicationLink A C),(ImplicationLink C D),A\
+,C,D," -> A;
+	"Deduction (ImplicationLink A D) :- (ImplicationLink A C),(ImplicationLink C D),A\
+,C,D," -> C;
+	"Deduction (ImplicationLink A D) :- (ImplicationLink A C),(ImplicationLink C D),A\
+,C,D," -> "(ImplicationLink A C)";
+	"Deduction (ImplicationLink A D) :- (ImplicationLink A C),(ImplicationLink C D),A\
+,C,D," -> "(ImplicationLink C D)";
+	"Deduction (ImplicationLink A C) :- (ImplicationLink A B),(ImplicationLink B C),A\
+,B,C," -> "(ImplicationLink A B)";
+	"Deduction (ImplicationLink A C) :- (ImplicationLink A B),(ImplicationLink B C),A\
+,B,C," -> A;
+	"Deduction (ImplicationLink A C) :- (ImplicationLink A B),(ImplicationLink B C),A\
+,B,C," -> C;
+	"Deduction (ImplicationLink A C) :- (ImplicationLink A B),(ImplicationLink B C),A\
+,B,C," -> B;
+	"Deduction (ImplicationLink A C) :- (ImplicationLink A B),(ImplicationLink B C),A\
+,B,C," -> "(ImplicationLink B C)";
+}
