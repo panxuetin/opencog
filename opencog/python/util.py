@@ -195,6 +195,30 @@ class OrderedSet(collections.OrderedDict, collections.MutableSet):
     symmetric_difference_update = property(lambda self: self.__ixor__)
     union = property(lambda self: self.__or__)
 
+#class Logger(object):
+    #def __init__(self, f = 'opencog-python.log'):
+        #self._file = open(f,'w')
+    
+    #def info(self, msg):
+        #print >>self._file, msg
+        #self._file.flush()
+        ##pass
+    
+    #def use_stdout(self, use):
+        #pass
+
+def format_log(offset, dsp_suffix = True, *args):
+    global _line    
+    #out = '['+str(_line) + '] ' + ' ' * offset +  ' '.join(map(str, args))
+    #_line+=1
+    if dsp_suffix:
+        stack = inspect.stack()
+        suffix = " -- %s %s" % (stack[1][2], stack[1][3])
+    else:
+        suffix = "" 
+    out =  ' ' * offset +  ' '.join(map(str, args)) + suffix
+    return out
+
 class Logger(object):
     def __init__(self, f = 'opencog-python.log'):
         self._file = open(f,'w')
@@ -239,7 +263,6 @@ class Logger(object):
         self._leves.append(level)
 
 log = Logger()
-
 
 
 # Note. Due to various technical annoyances, the json save/load
@@ -308,15 +331,3 @@ def _dict_from_atom(a):
 def _tv_from_dict(d):
     stv_dict = d['simple']
     return TruthValue(stv_dict['str'], stv_dict['count'])
-
-def format_log(offset, dsp_suffix = True, *args):
-    global _line    
-    #out = '['+str(_line) + '] ' + ' ' * offset +  ' '.join(map(str, args))
-    #_line+=1
-    if dsp_suffix:
-        stack = inspect.stack()
-        suffix = " -- %s %s" % (stack[1][2], stack[1][3])
-    else:
-        suffix = "" 
-    out =  ' ' * offset +  ' '.join(map(str, args)) + suffix
-    return out
