@@ -46,7 +46,7 @@ TRACE = True
 #_line = 1
 
 #log.setLevel(log.DEBUG)
-#log.setLevel(log.INFO)
+log.setLevel(log.INFO)
 #log.setLevel(log.WARNING)
 #log.setLevel(log.ERROR)
 log.use_stdout(True)
@@ -56,10 +56,8 @@ class Trace_Chainer(object):
     def __init__(self):
         self.visit_order = 0
         self.begin_propagating = False
-        self.paths = {}
-        # apps in path could reath the target
-        self.path = []
         self.step_count = 0
+        self.propagating = False
     
 class Chainer:
 
@@ -181,7 +179,7 @@ class Chainer:
         
         # it could uset inferenced fact knowledge
         self.trace.begin_propagating = True 
-        self.propogate_result(next_app,[])
+        self.propogate_result(next_app)
         log.debug(format_log(0, True, "---- find rules -----" ))
         for goal in next_app.goals:
             apps = self.find_rule_applications(goal)
@@ -360,7 +358,7 @@ class Chainer:
                 if len(s) == 0:
                     assert goal == axiom_app.head
                     self.trace.begin_propagating = True 
-                    self.propogate_result(app,[])
+                    self.propogate_result(app)
                     
                     # Record the best confidence score below a PDN. This can change
                     # at any time.
@@ -417,29 +415,21 @@ class Chainer:
                             
                             found_axiom(axiom_app, s)
 
-    def propogate_result(self, orig_app, path):
+    def propogate_result(self, orig_app):
         # app was already precise enough to look up this axiom exactly.
         # Attempt to apply the app using the new TV for the premise
+
         app = orig_app
         got_result = self.check_goals_found_already(app)
         log.ident += 3
         log.debug(format_log(log.ident, True, "## check premise: "+str(app)))
         if got_result:
             self.compute_and_add_tv(app)
-            path.append(app)
             if self.trace.begin_propagating:
                 self.trace.begin_propagating = False
             # reach the target
             if app.head == self.root:
                 log.debug(format_log(log.ident, True, "##sucess! ^_^ "))
-                # remove rule "WIN <- target" 
-                path.pop()
-                if TRACE:
-                    key = str(path)
-                    try:
-                        self.trace.paths[key]
-                    except Exception:
-                        self.trace.paths[str(key)] = path
                 self.results.append(app.goals[0])
                 return 
             
@@ -448,15 +438,12 @@ class Chainer:
             result_pdn = self.expr2pdn(app.head.canonical())
             upper_pdns = [app_pdn for app_pdn in result_pdn.parents]
             for app_pdn in upper_pdns:
-                self.propagating = True
-                noshare_path = []
-                if TRACE:
-                    noshare_path = [item for item in path]
-                self.propogate_result(app_pdn.op,noshare_path)
+                self.trace.propagating = True
+                self.propogate_result(app_pdn.op)
             log.ident -= 3
         else:
             # the propagating breaks
-            self.propagating = False
+            self.trace.propagating = False
             log.ident -= 3
             return
     
@@ -507,7 +494,7 @@ class Chainer:
         # After you finish specializing, it may be a usable rule app
         # (i.e. all premises have been found exactly).
         # This will check, and do nothing if it's not.
-        self.propogate_result(new_app,[])
+        self.propogate_result(new_app)
         log.ident -= 3
         
         # Specialize higher-up rules, iff the head has actually been changed
