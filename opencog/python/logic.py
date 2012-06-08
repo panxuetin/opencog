@@ -10,6 +10,8 @@ except ImportError:
 from tree import *
 from util import pp, OrderedSet, concat_lists, inplace_set_attributes
 from pprint import pprint
+from sets import Set
+from copy import deepcopy
 #try:
 #    from opencog.util import log
 #except ImportError:
@@ -33,7 +35,7 @@ from time import time
 import exceptions
 
 t = types
-
+TRACE = True
 #def format_log(*args):
     #global _line    
     #out = '['+str(_line) + '] ' + ' '.join(map(str, args))
@@ -43,11 +45,22 @@ t = types
     #return out
 #_line = 1
 
-log.setLevel(log.DEBUG)
-log.setLevel(log.INFO)
-log.setLevel(log.WARNING)
+#log.setLevel(log.DEBUG)
+#log.setLevel(log.INFO)
+#log.setLevel(log.WARNING)
+#log.setLevel(log.ERROR)
 log.use_stdout(True)
 log.trace = True
+class Trace_Chainer(object):
+    """docstring for Chainer_Trace"""
+    def __init__(self):
+        self.visit_order = 0
+        self.begin_propagating = False
+        self.paths = {}
+        # apps in path could reath the target
+        self.path = []
+        self.step_count = 0
+    
 class Chainer:
 
     # Convert Atoms into FakeAtoms for Pypy/Pickle/Multiprocessing compatibility
@@ -65,10 +78,10 @@ class Chainer:
         self.viz = PLNviz(space)
         self.viz.connect()
         self.setup_rules()
+        self.trace = Trace_Chainer()
 
         self.bc_later = OrderedSet()
 
-        self.bc_step_count = 0
         global _line
         _line = 1
         
@@ -99,33 +112,22 @@ class Chainer:
             # viz - visualize the root
             self.viz.outputTarget(target, None, 0, 'TARGET')
     
-            start = time()
-            while self.bc_later and not self.results and nsteps > 0:
+            #while self.bc_later and not self.results and nsteps > 0:
+            while self.bc_later :
                 self.bc_step()
                 nsteps -= 1
     
-                #msg = '%s goals expanded, %s remaining, %s Proof DAG Nodes' % (len(self.bc_before), len(self.bc_later), len(self.pd))
-                msg = '%s goals remaining, %s Proof DAG Nodes' % (len(self.bc_later), len(self.pd))
-                #log.info(format_log('PD:'))
-                #for pdn in self.pd:
-                #    log.info(format_log(len(pdn.args),str(pdn)))
-            
-            #print msg
+                #msg = '%s goals remaining, %s Proof DAG Nodes' % (len(self.bc_later), len(self.pd))
+                #print msg
     
             #for res in self.results:
                 #print 'Inference trail:'
                 #trail = self.trail(res)
                 #self.print_tree(trail)
 
-            log.debug("------------------ step count :-------------------------")
-            log.debug(format_log(1,False,"bc_step:" + str(self.bc_step_count)))
             #log.debug("------------------bc_before :-------------------------")
             #for expand in self.bc_before:
                 #log.debug(format_log(1,False, str(expand)))
-            log.debug("------------------results :-------------------------")
-            for expand in self.results:
-                log.debug(format_log(1,False, str(expand)))
-    
             #return self.results
             ret = []
             for tr in self.results:
@@ -144,25 +146,6 @@ class Chainer:
 
 
 
-    #def fc(self):
-    #    axioms = [r.head for r in self.rules if r.tv.count > 0]
-    #    self.propogate_results_loop(axioms)
-    #    
-    #    while self.fc_later:
-    #        next_premise = self.get_fittest() # Best-first search
-    #        log.info(format_log('-FCQ', next_premise))
-    #
-    #        apps = self.find_new_rule_applications_by_premise(next_premise)
-    #        for app in apps:
-    #            got_result = self.check_goals_found_already(app)
-    #            if got_result:
-    #                self.compute_and_add_tv(app)
-    #                
-    #                if not self.contains_isomorphic_tree(app.head, self.fc_before) and not self.contains_isomorphic_tree(app.head, self.fc_later):
-    #                    self.add_tree_to_index(app.head, self.fc_before)
-    #                    self.add_tree_to_index(app.head, self.fc_later)
-    #                    log.info(format_log('+FCQ', app.head, app.name))
-    #                    stdout.flush()
 
     def bc_step(self):
         # Choose the best app
@@ -176,32 +159,46 @@ class Chainer:
         # and not the original app.
         
         assert self.bc_later
-        self.bc_step_count += 1
-        #print 'bcq', map(str, self.bc_later)
-        #next_target = self.bc_later.pop_first() # Breadth-first search
-        #next_target = self.bc_later.pop_last() # Depth-first search
-        #next_target = self.get_fittest(self.bc_later) # Best-first search
-        #next_target = self.select_stochastic() # A better version of best-first search (still a prototype)
+        self.trace.step_count += 1
 
-        next_app = self.get_fittest(self.bc_later) # Best-first search
+        #next_app = self.get_fittest(self.bc_later) # Best-first search
+        next_app = self.bc_later.pop_last()
 
+        log.debug(format_log(0, False, "\n" ))
+        log.debug(format_log(0, True,"********** expanding \"%s\" **********"%(next_app)))
+
+        head = self.expr2pdn(next_app.head.canonical())
+        for arg in head.args:
+            if arg.op == next_app :
+                self.trace.visit_order += 1
+                arg.trace.visit_order = self.trace.visit_order
+        if next_app.trace.path_pre:
+            log.debug(format_log(0,False, "path_pre: %s" %next_app.trace.path_pre))
+            log.debug(format_log(0, False,"path_axiom: %s"%next_app.trace.path_axiom))
         # This step will also call propogate_results and propogate_specialization,
         # so it will check for premises, compute the TV if possible, etc.
         self.find_axioms_for_rule_app(next_app)
         
-        # This should probably use the extra things in found_axiom
-        self.propogate_result(next_app)
-        
-        #next_target = standardize_apart(next_target)
-
+        # it could uset inferenced fact knowledge
+        self.trace.begin_propagating = True 
+        self.propogate_result(next_app,[])
+        log.debug(format_log(0, True, "---- find rules -----" ))
         for goal in next_app.goals:
             apps = self.find_rule_applications(goal)
-    
             for a in apps:
-                a = a.standardize_apart()
-                self.add_app_if_good(a)
-    
+                t = a.standardize_apart()
+                t.trace = a.trace
+
+                log.debug(format_log(6, True, "rule: "+ str(a)))
+                log.debug(format_log(10, True, "^^adding app: "+ str(t)))
+                self.add_app_if_good(t)
+        #log.debug(format_log(0, True, "self.bc_later:"))
+        #for app in self.bc_later:
+            #log.debug(format_log(4, True, str(app)))
         return None
+    def result_pdn_of_app(self, app):
+        """ get the parent of dag related to app"""
+        return self.expr2pdn(app.head.canonical())
 
     def contains_isomorphic_tree(self, tr, idx):        
         #return any(expr.isomorphic(tr) for expr in idx)
@@ -271,10 +268,8 @@ class Chainer:
         Return the PDN for this app (which is also in canonical form)'''
         def goal_is_stupid(goal):
             return goal.is_variable()
-
         if any(map(self._app_is_stupid, app.goals)) or self._app_is_stupid(app.head) or not all(g.is_variable() or self.check_domain_recursive(g) for g in list(app.goals)+[app.head]):
             return
-
         # If the app is a cycle or already added, don't add it or any of its goals
         (status, app_pdn) = self.add_app_to_pd(app)
         if status == 'NEW':
@@ -282,47 +277,14 @@ class Chainer:
             # viz
             for (i, input) in enumerate(app.goals):
                 self.viz.outputTarget(input.canonical(), app.head.canonical(), i, app)
-
         if status == 'CYCLE' or status == 'EXISTING':
             return
-        
         assert app not in self.bc_later
         self.bc_later.append(app)
+        log.debug(format_log(log.ident + 6, True, "^^adding app: %s"%(str(app))))
         
         return app_pdn
 
-    #def add_queries(self, app):
-    #    def goal_is_stupid(goal):
-    #        return goal.is_variable()
-    #
-    #    if any(map(self._app_is_stupid, app.goals)) or self._app_is_stupid(app.head) or not all(g.is_variable() or self.check_domain_recursive(g) for g in list(app.goals)+[app.head]):
-    #        return
-    #
-    #    # If the app is a cycle or already added, don't add it or any of its goals
-    #    (status, app_pdn) = self.add_app_to_pd(app)
-    #    if status == 'NEW':
-    #        # Only visualize it if it is actually new
-    #        # viz
-    #        for (i, input) in enumerate(app.goals):
-    #            self.viz.outputTarget(input.canonical(), app.head.canonical(), i, app)
-    #
-    #    if status == 'CYCLE' or status == 'EXISTING':
-    #        return
-    #    
-    #    # NOTE: For generators, the app_pdn will exist already for some reason
-    #    # It's useful to add the head if (and only if) it is actually more specific than anything currently in the BC tree.
-    #    # This happens all the time when atoms are found.
-    #    for goal in tuple(app.goals):
-    #        if     not goal_is_stupid(goal):
-    #            if  (not self.contains_isomorphic_tree(goal, self.bc_before) and
-    #                 not self.contains_isomorphic_tree(goal, self.bc_later) ):
-    #                assert goal not in self.bc_before
-    #                assert goal not in self.bc_later
-    #                self.add_tree_to_index(goal, self.bc_later)
-    #                #added_queries.append(goal)
-    #                log.info(format_log('+BCQ', goal, app.name))
-    #                #stdout.flush()
-    #    return app
 
     def check_goals_found_already(self, app):
         '''Check whether the given app can produce a result. This will happen if all its premises are
@@ -356,6 +318,8 @@ class Chainer:
         '''The main 'meat' of the chainer. Finds all possible rule-applications matching your criteria.
         Chainers can be made by searching for certain apps and doing things with them.'''
         ret = []
+        # ignore axiom
+        log.debug(format_log(3, True, "with goal: %s"%str(target)))
         for r in self.rules:
             if not r.goals:
                 continue
@@ -367,66 +331,68 @@ class Chainer:
             
             s = unify(r.head, target, {})
             if s != None:
-                #if r.name == '[axiom]':
-                #    print '>>>>>',repr(r)
                 new_rule = r.subst(s)
                 new_rule.trace.path_pre = r
                 new_rule.trace.path_axiom = target
+                new_rule.trace.made_by_rule = True
                 ret.append(new_rule)
         return ret
 
+    ##
+    # @brief :try to prove goals of app with axioms
+    #
+    # @param app : standardize_aparted app
+    #
+    # @return 
     def find_axioms_for_rule_app(self, app):
-        for (i, goal) in enumerate(app.goals):
-
-            def found_axiom(axiom_app, s):
-                if axiom_app != None:
-                    (status, axiom_app_pdn) = self.add_app_to_pd(axiom_app)
-                    if status == 'CYCLE':
-                        return None
-                    
-                    if axiom_app.tv.count > 0:
-                        self.viz.outputTarget(None,axiom_app.head,0,axiom_app)
-                        self.viz.declareResult(axiom_app.head)
-                    
-                    # Neither of these options work with ForAllLinks...
-                    #gvs = get_varlist(goal)
-                    #goal_vars_mapped = [v for v in s.keys() if v in gvs]
-                    #if len(goal_vars_mapped) == 0:
-                    if len(s) == 0:
-                        assert goal == axiom_app.head
-                        self.propogate_result(app)
-                        
-                        # Record the best confidence score below a PDN. This can change
-                        # at any time.
-                        conf = axiom_app.tv.confidence
-                        if conf > 0.0:
-                            axiom_expr_pdn = self.expr2pdn(axiom_app.head)
-                            self.propogate_scores_upward(axiom_expr_pdn, conf)
-                    else:
-                        # add specialized trees above this result (if necessary)
-                        self.propogate_specialization(axiom_app.head, i, app)
-                    
+        def found_axiom(axiom_app, s):
+            if axiom_app != None:
+                (status, axiom_app_pdn) = self.add_app_to_pd(axiom_app)
+                if status == 'CYCLE':
                     return None
+                
+                
+                # Neither of these options work with ForAllLinks...
+                #gvs = get_varlist(goal)
+                #goal_vars_mapped = [v for v in s.keys() if v in gvs]
+                #if len(goal_vars_mapped) == 0:
+                log.ident += 10
+                if len(s) == 0:
+                    assert goal == axiom_app.head
+                    self.trace.begin_propagating = True 
+                    self.propogate_result(app,[])
+                    
+                    # Record the best confidence score below a PDN. This can change
+                    # at any time.
+                    conf = axiom_app.tv.confidence
+                    if conf > 0.0:
+                        axiom_expr_pdn = self.expr2pdn(axiom_app.head)
+                        self.propogate_scores_upward(axiom_expr_pdn, conf)
+                else:
+                    # add specialized trees above this result (if necessary)
+                    self.propogate_specialization(axiom_app.head, i, app)
+                log.ident = 0
+                
+                return None
 
             # For example, if you need Inh Mohammad $x, Inh $x terrorist, $x
             # this will avoid finding $x (which could be any atom in the system!) -
             # it'll find the InheritanceLink first and then the ConceptNode
+        for (i, goal) in enumerate(app.goals):
+            log.debug(format_log(3, True, "with goal: %s"%str(goal)))
             if self.reject_expression(goal):
                 continue
             for r in self.rules:
                 axiom_app = None
                 if len(r.goals):
                     continue
-                
-                r = r.standardize_apart()
-                
+                # @@@
+                #r = r.standardize_apart()
+                # r == axiom 
                 if r.match == None:
                     s = unify(r.head, goal, {})
                     if s != None:
-                        #if r.name == '[axiom]':
-                        #    print '>>>>>',repr(r)
                         axiom_app = r.subst(s)
-                        
                         found_axiom(axiom_app, s)
                 else:
                     # If the Rule has a special function for producing answers, run it
@@ -451,43 +417,64 @@ class Chainer:
                             
                             found_axiom(axiom_app, s)
 
-    def propogate_result(self, orig_app):
+    def propogate_result(self, orig_app, path):
         # app was already precise enough to look up this axiom exactly.
         # Attempt to apply the app using the new TV for the premise
         app = orig_app
         got_result = self.check_goals_found_already(app)
+        log.ident += 3
+        log.debug(format_log(log.ident, True, "## check premise: "+str(app)))
         if got_result:
-            # Only allow one result. NOTE: this will break the Revision rule
-            #if len(self.get_tvs(app.head)):
-            #    print 'WARNING: rejecting repeated result', app.head
-            #    return
-            
-            #if app.head.op == 'TARGET':
-            #    target = app.goals[0]
-            #    log.info(format_log('Target produced!', target))
-            #    self.results.append(target)
-            #viz
-            self.viz.declareResult(app.head)
             self.compute_and_add_tv(app)
-
+            path.append(app)
+            if self.trace.begin_propagating:
+                self.trace.begin_propagating = False
+            # reach the target
             if app.head == self.root:
-            #if app.head == self.target:
+                log.debug(format_log(log.ident, True, "##sucess! ^_^ "))
+                # remove rule "WIN <- target" 
+                path.pop()
+                if TRACE:
+                    key = str(path)
+                    try:
+                        self.trace.paths[key]
+                    except Exception:
+                        self.trace.paths[str(key)] = path
                 self.results.append(app.goals[0])
-                return
+                return 
             
             # then propogate the result further upward
+            # @@!
             result_pdn = self.expr2pdn(app.head.canonical())
             upper_pdns = [app_pdn for app_pdn in result_pdn.parents]
             for app_pdn in upper_pdns:
-                self.propogate_result(app_pdn.op)
+                self.propagating = True
+                noshare_path = []
+                if TRACE:
+                    noshare_path = [item for item in path]
+                self.propogate_result(app_pdn.op,noshare_path)
+            log.ident -= 3
+        else:
+            # the propagating breaks
+            self.propagating = False
+            log.ident -= 3
+            return
     
+    ##
+    # @brief to propogate a premise
+    #
+    # @param axiom_goal : an more specialized node(could be an axiom) result from unification of the ith goal of orig_app, like "a->b" 
+    # @param i : the index of goal in an substitued rule
+    # @param orig_app :the standardize_aparted and substitued rule (premise), like " a->c | a->x, x->c, a, x, c" 
+    #
+    # @return 
     def propogate_specialization(self, new_premise, i, orig_app):
         '''When variables are filled in (i.e. an app is specialized), you also want to
         specialize other apps higher up in the PD (i.e. ones that use this app as their goal).
         new_premise is the new version of some goal in orig_app. It can have variables filled in.
         i is the index for the goal in orig_app matching new_premise.'''
-        orig_app = orig_app.standardize_apart()
-        #new_premise = standardize_apart(new_premise)
+        # @@@
+        #orig_app = orig_app.standardize_apart()
         s = unify(orig_app.goals[i], new_premise, {})
         
         assert s != None
@@ -497,10 +484,12 @@ class Chainer:
         
         new_app = orig_app.subst(s)        
         new_app.trace.path_pre = orig_app
+        #log.error(format_log(0, True, "new_app:%s ---- pre_app:%s"%(str(new_app),str(orig_app))))
         new_app.trace.path_axiom = standardize_apart(new_premise)
         
         # Add the new app to the Proof DAG and the backward chaining queue.
         # Stop if it's a cycle or already exists.
+        log.debug(format_log(6, True, "[axiom:]: %s"%str(new_premise)))
         if not self.add_app_if_good(new_app):
             return
         
@@ -512,11 +501,14 @@ class Chainer:
         
         if self.reject_expression(new_result):
             return
-        
+        self.trace.begin_propagating = True 
+        log.ident += 3
+        #log.debug(format_log(log.ident, True, "##premise: "+str(new_app)))
         # After you finish specializing, it may be a usable rule app
         # (i.e. all premises have been found exactly).
         # This will check, and do nothing if it's not.
-        self.propogate_result(new_app)
+        self.propogate_result(new_app,[])
+        log.ident -= 3
         
         # Specialize higher-up rules, iff the head has actually been changed
         if new_app.head != orig_app.head:
@@ -598,15 +590,10 @@ class Chainer:
             # Otherwise add it to the Proof DAG
             app_pdn = DAG(app,[])
             app_pdn.tv = app.tv
-            
-            #print 'add_app_to_pd:',repr(app)
-            
             for goal_pdn in goal_pdns:
                 app_pdn.append(goal_pdn)
             head_pdn.append(app_pdn)
-        
-            #print 'add_app_to_pd adding %s for the first time' % (app_pdn,)
-        
+
             return ('NEW',app_pdn)
 
     def app2pdn(self,app):
@@ -1035,7 +1022,7 @@ class PLNPlanningMindAgent(opencog.cogserver.MindAgent):
         try:
             do_planning(atomspace, target)
         except Exception, e:
-            #log.info(format_log(e))
+            #log.debug(format_log(e))
             pass
 
 if __name__ == '__main__':

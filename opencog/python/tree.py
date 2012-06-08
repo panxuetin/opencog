@@ -156,7 +156,10 @@ class Data_Trace(object):
     def __init__(self,):
         self.is_fact = False
         self.path_pre = None
+        # could be a target or a axiom
         self.path_axiom = None
+        self.visit_order = 0
+        self.made_by_rule = False
         #self.tv = TruthValue(0,0)
 class DAG(Tree):
     def __init__(self,op,args):
@@ -168,11 +171,12 @@ class DAG(Tree):
 
         self.trace = Data_Trace()
         self.tv = TruthValue(0,0)
+        self.visit_order = 0
         for a in args:
             self.append(a)
+            
         try:
-           self.trace.path_pre = op.trace.path_pre 
-           self.trace.path_axiom = op.trace.path_axiom 
+           self.trace = op.trace
         except Exception:
             pass
     
