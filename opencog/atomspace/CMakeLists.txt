@@ -49,7 +49,6 @@ ADD_LIBRARY (atomspace SHARED
     TruthValue.cc
     TypeIndex.cc
     VersionHandle.cc
-    ZMQMessages.pb.cc
 )
 
 ADD_DEPENDENCIES(atomspace opencog_atom_types)
@@ -58,7 +57,6 @@ SET(ATOMSPACE_LINK_LIBS
     xml util SpaceMap
     ${GSL_LIBRARIES}
     ${Boost_SIGNALS_LIBRARY} ${Boost_THREAD_LIBRARY}
-    protobuf
 )
 
 IF (HAVE_ZMQ)
@@ -131,7 +129,6 @@ INSTALL (FILES
     TypeIndex.h
     VersionHandle.h
     types.h
-    ZMQMessages.pb.h
     DESTINATION "include/${PROJECT_NAME}/atomspace"
 )
 
