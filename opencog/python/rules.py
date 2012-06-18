@@ -60,13 +60,13 @@ def rules(a, deduction_types):
                                     formula = formulas.deductionSimpleFormula))
     
     # Inversion
-    #for type in deduction_types:
-        #rules.append(Rule( T(type, 2, 1), 
-                                     #[T(type, 1, 2),
-                                      #Var(1),
-                                      #Var(2)], 
-                                     #name='Inversion', 
-                                     #formula = formulas.inversionFormula))
+    for type in deduction_types:
+        rules.append(Rule( T(type, 2, 1), 
+                                     [T(type, 1, 2),
+                                      Var(1),
+                                      Var(2)], 
+                                     name='Inversion', 
+                                     formula = formulas.inversionFormula))
     
     # ModusPonens
     for ty in ['ImplicationLink', 'PredictiveImplicationLink']:
@@ -77,74 +77,74 @@ def rules(a, deduction_types):
                                       formula = formulas.modusPonensFormula))
 
 
-    ## AND/OR
-    #type = 'AndLink'
-    #for size in xrange(5):                
-        #args = [new_var() for i in xrange(size+1)]
-        #rules.append(Rule(T(type, args),
-                           #args,
-                           #type[:-4], 
-                           #formula = formulas.andSymmetricFormula))
+    # AND/OR
+    type = 'AndLink'
+    for size in xrange(5):                
+        args = [new_var() for i in xrange(size+1)]
+        rules.append(Rule(T(type, args),
+                           args,
+                           type[:-4], 
+                           formula = formulas.andSymmetricFormula))
     
-    #type = 'OrLink'
-    #for size in xrange(2):
-        #args = [new_var() for i in xrange(size+1)]
-        #rules.append(Rule(T(type, args),
-                           #args,
-                           #type[:-4], 
-                           #formula = formulas.orFormula))
+    type = 'OrLink'
+    for size in xrange(2):
+        args = [new_var() for i in xrange(size+1)]
+        rules.append(Rule(T(type, args),
+                           args,
+                           type[:-4], 
+                           formula = formulas.orFormula))
     
-    ## Adding a NOT
-    #rules.append(Rule(T('NotLink', 1),
-                       #[ Var(1) ],
-                       #name = 'Not', 
-                       #formula = formulas.notFormula))
+    # Adding a NOT
+    rules.append(Rule(T('NotLink', 1),
+                       [ Var(1) ],
+                       name = 'Not', 
+                       formula = formulas.notFormula))
     
-    ## Link conversion
-    #rules.append(Rule(T('InheritanceLink', 1, 2),
-                       #[ T('SubsetLink', 1, 2) ],
-                       #name = 'SubsetLink=>InheritanceLink', 
-                       #formula = formulas.ext2InhFormula))
+    # Link conversion
+    rules.append(Rule(T('InheritanceLink', 1, 2),
+                       [ T('SubsetLink', 1, 2) ],
+                       name = 'SubsetLink=>InheritanceLink', 
+                       formula = formulas.ext2InhFormula))
 
-    ## In planning, assume that an ExecutionLink (action) will be performed
-    #r = Rule(T('ExecutionLink', 1, 2),
-                       #[],
-                       #name = 'PerformAction',
-                       #tv = TruthValue(1.0,confidence_to_count(1.0)))
-    #rules.append(r)
+    # In planning, assume that an ExecutionLink (action) will be performed
+    r = Rule(T('ExecutionLink', 1, 2),
+                       [],
+                       name = 'PerformAction',
+                       tv = TruthValue(1.0,confidence_to_count(1.0)))
+    rules.append(r)
 
-##        # Producing ForAll/Bind/AverageLinks?
-##        for type in ['ForAllLink', 'BindLink', 'AverageLink']:
-##            rules.append(Rule(T(type, 1, 2),
-##                               [ Var(2) ],
-##                               name = type+' abstraction', 
-##                               formula = formulas.identityFormula))
+#        # Producing ForAll/Bind/AverageLinks?
+#        for type in ['ForAllLink', 'BindLink', 'AverageLink']:
+#            rules.append(Rule(T(type, 1, 2),
+#                               [ Var(2) ],
+#                               name = type+' abstraction', 
+#                               formula = formulas.identityFormula))
 
-    ## This may cause weirdness with things matching too eagerly...
-##       # Both of these rely on the policy that tree_from_atom replaces VariableNodes in the AtomSpace with the variables the tree class uses.
-##        fact = new_var()
-##        list_link = new_var()
-##        r = Rule(
-##                        fact,
-##                        [T('ForAllLink', list_link, fact )], 
-##                        name = 'ForAll'     
-##                    )
-##        r.tv = True
-##        rules.append(r)
+    # This may cause weirdness with things matching too eagerly...
+#       # Both of these rely on the policy that tree_from_atom replaces VariableNodes in the AtomSpace with the variables the tree class uses.
+#        fact = new_var()
+#        list_link = new_var()
+#        r = Rule(
+#                        fact,
+#                        [T('ForAllLink', list_link, fact )], 
+#                        name = 'ForAll'     
+#                    )
+#        r.tv = True
+#        rules.append(r)
 
-    #for atom in a.get_atoms_by_type(t.AverageLink):
-        ## out[0] is the ListLink of VariableNodes, out[1] is the expression
-        #tr = tree_from_atom(atom.out[1])
-        #r = Rule(tr, [], name='Average')
-        #r.tv = atom.tv
-        #rules.append(r)
+    for atom in a.get_atoms_by_type(t.AverageLink):
+        # out[0] is the ListLink of VariableNodes, out[1] is the expression
+        tr = tree_from_atom(atom.out[1])
+        r = Rule(tr, [], name='Average')
+        r.tv = atom.tv
+        rules.append(r)
 
-    #for atom in a.get_atoms_by_type(t.ForAllLink):
-        ## out[0] is the ListLink of VariableNodes, out[1] is the expression
-        #tr = tree_from_atom(atom.out[1])
-        #r = Rule(tr, [], name='ForAll')
-        #r.tv = atom.tv
-        #rules.append(r)
+    for atom in a.get_atoms_by_type(t.ForAllLink):
+        # out[0] is the ListLink of VariableNodes, out[1] is the expression
+        tr = tree_from_atom(atom.out[1])
+        r = Rule(tr, [], name='ForAll')
+        r.tv = atom.tv
+        rules.append(r)
 
     return rules
 

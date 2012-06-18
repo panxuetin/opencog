@@ -15,7 +15,7 @@ def analyze(chainer):
     sub_graph = Viz_Graph()
 
     infer.mark_search_memory(chainer.expr2pdn(chainer.results[0]),viz_space_graph)
-    infer.mark_search_space( viz_path_graph,sub_graph,chainer.expr2pdn(chainer.results[0]),None, True,False,True)
+    infer.mark_search_space( viz_path_graph,sub_graph,chainer.expr2pdn(chainer.results[0]),None, True,False,False)
 
     viz_path_graph.set_node_attr(str(chainer.expr2pdn(chainer.results[0])),color = "black")
     viz_space_graph.set_node_attr(str(chainer.expr2pdn(chainer.results[0])),color = "black")
@@ -161,9 +161,11 @@ class Inference_Analyze(object):
         self.related_axioms = Set()
         self.related_rules = Set()
         self.node_no = 1                   # manual mark the root
-        self.node_sub_no = 1
+        self.sub_node_no = 1
         self.num_dag = {}
-        self.multiple_nodes = []
+        self.sub_num_dag = { }
+        # node_no : [tree, the number of solution]
+        self.multiple_nodes = { }
 
     def mark_search_memory(self, dag, viz_graph):
         '''dag : DAG node '''
@@ -243,7 +245,7 @@ class Inference_Analyze(object):
                 if in_path and (arg.tv.count > 0 or type(arg.op) == tree.Tree):
                     # mark the prove node
                     generalized_app = dag
-                    self.node_sub_no += 1
+                    self.sub_node_no += 1
                     while  proof_node and generalized_app.trace.path_pre:
                             # mark in viz_graph
                             temp = generalized_app
@@ -268,16 +270,22 @@ class Inference_Analyze(object):
                         # tree
                         # inferenced or existent fact
                         # a goal could be proved in multiple ways
-                        if len([ son for son in arg.args if son.tv.count > 0]) > 1:
+                        branchs =  len([ son for son in arg.args if son.tv.count > 0])
+                        if branchs > 1:
                             viz_graph.set_node_attr(new_arg_id, color = "yellow")
                             sub_graph.set_node_attr(new_arg_id, color = "yellow")
-                            self.multiple_nodes.append(self.node_no)
+                            self.multiple_nodes[self.node_no] = [arg.op, branchs]
                     elif arg.op.goals:
                         # none axiom apps
                         sub_graph.set_node_attr(new_arg_id, shape = "box" )
                     else:
                         # axioms
                         sub_graph.set_node_attr(new_arg_id, shape = "septagon")
+
+                    try:
+                        self.sub_num_dag[arg_id] += 1
+                    except Exception:
+                        self.sub_num_dag[arg_id] = 1
                     # deep fist recursive create the search_space
                     self.mark_search_space(viz_graph,sub_graph, arg,  new_arg_id,True, simplify, proof_node)
                 else:
@@ -334,10 +342,19 @@ class Inference_Analyze(object):
         assert( t+1 == self.node_no)
 
         log.info("\n" )
-        log.info("****************** number of nodes in sub space tree :*************************")
+        log.info("****************** number of nodes in sub space tree: %s *************************"%(self.sub_node_no))
         # plus the target node( + 1)
-        log.info(format_log(1, False, str(self.node_sub_no)))
-        log.info("\n" )
-        log.info("****************** number of multiple nodes: %s; number of solution: %s  *************************"%(len(self.multiple_nodes),2**len(self.multiple_nodes)))
-        log.info(format_log(1, False, str(self.multiple_nodes)))
+        t = 0
+        for key, value in self.sub_num_dag.items():
+            log.info("%s --- %s"%(key,value) )
+            t+= value
+        assert( t+1 == self.sub_node_no)
 
+        log.info("\n" )
+        log.info("****************** number of multiple nodes: ?; number of solution: ?  *************************")
+        temp = { }
+        for no in self.multiple_nodes:
+            temp[str(self.multiple_nodes[no][0])] = self.multiple_nodes[no][1]
+        for key, value in temp.items():
+            log.info("node: %s ---- branchs: %s ---- appear: %s" % (key,value,self.sub_num_dag[key]))
+        #print temp

@@ -454,18 +454,18 @@ class DataAnalysisR(object):
 class ASpace_DataAnalysisR(DataAnalysisR):
     """docstring for Aspace_DataAnalysis"""
     def __init__(self, source,args):
-	super(ASpace_DataAnalysisR, self).__init__(source,args)
-	self.atomspace = source
+        super(ASpace_DataAnalysisR, self).__init__(source,args)
+        self.atomspace = source
 
     def _getLinks(self,type):
         """docstring for __getLinks"""
-	return  self.atomspace.get_atoms_by_type(type)
+        return  self.atomspace.get_atoms_by_type(type)
 
     def _nodesFromLink(self,link):
-	atoms = link.out
-	fakeAtoms = []
-	for atom in atoms:
-	    fakeAtoms.append(fake_from_real_Atom(atom))
-	return fakeAtoms
+        return link.out
+        #fakeAtoms = []
+        #for atom in atoms:
+            #fakeAtoms.append(fake_from_real_Atom(atom))
+        #return fakeAtoms
 	
 
