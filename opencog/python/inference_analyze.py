@@ -15,7 +15,7 @@ def analyze(chainer):
     sub_graph = Viz_Graph()
 
     infer.mark_search_memory(chainer.expr2pdn(chainer.results[0]),viz_space_graph)
-    infer.mark_search_space( viz_path_graph,sub_graph,chainer.expr2pdn(chainer.results[0]),None, True,False,False)
+    infer.mark_search_space( viz_path_graph,sub_graph,chainer.expr2pdn(chainer.results[0]),None, True,False,True)
 
     viz_path_graph.set_node_attr(str(chainer.expr2pdn(chainer.results[0])),color = "black")
     viz_space_graph.set_node_attr(str(chainer.expr2pdn(chainer.results[0])),color = "black")
