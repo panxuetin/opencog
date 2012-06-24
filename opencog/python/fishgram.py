@@ -434,36 +434,6 @@ class Fishgram:
                         print '\x1B[1;32m%.1f %s' % (surprise, ptn)
                         yield (ptn, embeddings)
     
-    #def surprise(self, ptn, embeddings):
-    #    conj = ptn.conj + ptn.seqs
-    #    c = len(conj)
-    #    assert c >= 2
-    #
-    #    num_variables = len(get_varlist(conj))
-    #    
-    #    #print 'incremental:', embeddings
-    #    embeddings = self.forest.lookup_embeddings(conj)
-    #    #print 'search:', embeddings
-    #    
-    #    Nconj = len(embeddings)*1.0
-    #    
-    #    Pconj = Nconj/self.total_possible_embeddings(conj,embeddings)
-    #    
-    #    P_independent = 1
-    #    for tr in conj:
-    #        Etr = self.forest.lookup_embeddings((tr,))
-    #        P_tr = len(Etr)*1.0 / self.total_possible_embeddings((tr,), Etr)
-    #        P_independent *= P_tr
-    #
-    #    P_independent = P_independent ** (1.0/len(conj))
-    #
-    #    #self.distribution(ptn, embeddings)
-    #
-    #    #surprise = NAB / (util.product(Nxs) * N**(c-1))
-    #    surprise = Pconj / P_independent
-    #    #print conj, surprise, P, P_independent, [Nx/N for Nx in Nxs], N
-    #    #surprise = math.log(surprise, 2)
-    #    return surprise
     
     def surprise(self, ptn):
         conj = ptn.conj + ptn.seqs
@@ -505,22 +475,6 @@ class Fishgram:
         
         return len(embs_notimes)*1.0
     
-    #def num_tuples(self, conj, embeddings):
-    #    #variables = get_varlist(conj)
-    #    
-    #    objvars = [var for var in get_varlist(conj) if
-    #               embeddings[0][var].get_type() == t.TimeNode]
-    #    
-    #    self.num_tuples_helper(objvars, embeddings)
-    #
-    #def num_tuples_helper(self, objvars, embeddings):
-    #    if len(objvars) == 0:
-    #        return 1
-    #    
-    #    count = 0
-    #    var = objvars[0]
-    #    possible_values = set(emb[var] for emb in objvars)
-        
 
     def total_possible_embeddings(self, conj, embeddings):
         N_objs = len(self.forest.all_objects)*1.0
@@ -609,15 +563,26 @@ class Fishgram:
             conclusion = seqs[-1]
             other = seqs[:-1]
             assert len(other)
-            if len(other) > 1:
+
+            # Remove all of the AtTimeLinks from inside the sequence - just leave
+            # the EvaluationLinks/ExecutionLinks. The AtTimeLinks are not
+            # required/allowed if you have SequentialAndLinks etc. This won't change
+            # the Pattern that Fishgram is storing - Fishgram's search does need
+            # the AtTimeLinks.            
+            conclusion_stripped = conclusion.args[1]
+            other_stripped = [attime.args[1] for attime in other]
+            
+            # There are several special cases to simplify the Link produced.
+            
+            if len(other_stripped) > 1:
                 # NOTE: this won't work if some of the things are simultaneous
-                initial = Tree('SequentialAndLink',other)
+                initial = Tree('SequentialAndLink',other_stripped)
             else:
-                initial = other[0]
+                initial = other_stripped[0]
             
             predimp = T     ('PredictiveImplicationLink',
                                 initial,
-                                conclusion
+                                conclusion_stripped
                             )
             
             if len(conj) > 0:
@@ -628,13 +593,15 @@ class Fishgram:
             else:
                 payload = predimp
             
-            vars = get_varlist( conj + seqs )
+            vars = get_varlist( conj + other_stripped + [conclusion_stripped] )
             assert len(vars)
             rule = T('AverageLink',
                      T('ListLink',vars),
                      payload
                     )
-            
+
+            # Calculate the frequency. Looking up embeddings only works if you keep the
+            # AtTimeLinks.
             premises = conj + other
             premises_embs = self.forest.lookup_embeddings(premises)
             
@@ -646,264 +613,6 @@ class Fishgram:
             a.tv = TruthValue(freq, len(embs))
             print a
 
-# The old approach for making causal ImplicationLinks. If you want to make general ImplicationLinks, you
-# should modify this code.
-
-#    def output_implications_for_last_layer(self, layers):
-#        if len(layers) < 2:
-#            return
-#        layer = layers[-1]
-#        prev_layer = layers[-2]
-#        for (conj, embs) in layer:
-#
-#            vars = get_varlist(conj)
-#            #print [str(var) for var in vars]
-#            
-#            assert all( [len(vars) == len(binding) for binding in embs] )
-#            
-#            for (premises, conclusion) in self._split_conj_into_rules(conj):
-#                
-#                # Fishgram won't produce conjunctions with dangling SeqAndLinks. And 
-#                # i.e. AtTime 1 eat;    SeqAnd 1 2
-#                # with 2 being a variable only used in the conclusion (and the whole conjunction), not in the premises.
-#                # The embedding count is undefined in this case.
-#                # Also, the count measure is not monotonic so if ordering were used you would sometimes miss things.
-#                
-#                # Also, in the magic-sequence approach, the layers will all be mixed up (as it adds an unspecified number of afterlinks as soon as it can.)
-##                try:
-##                    ce_premises = next(ce for ce in prev_layer if isomorphic_conjunctions(premises, ce[0])
-##                    premises_original, premises_embs = ce_premises
-##                
-###                        ce_conclusion = next(ce for ce in layers[0] if unify( (conclusion,) , ce[0], {}, True) != None)
-###                        conclusion_original, conclusion_embs = ce_conclusion
-##                except StopIteration:
-##                    #sys.stderr.write("\noutput_implications_for_last_layer: didn't create required subconjunction"+
-##                    #    " due to either pruning issues or dangling SeqAndLinks\n"+str(premises)+'\n'+str(conclusion)+'\n')
-##                    continue
-#
-##                print map(str, premises)
-##                print ce_premises[0]
-#                
-##                c_norm = normalize( (conj, emb), ce_conclusion )
-##                p_norm = normalize( (conj, emb), ce_premises )
-##                print p_norm, c_norm
-#
-#                # Use the embeddings lookup system (alternative approach)
-#                premises_embs = self.forest.lookup_embeddings(premises)
-#                embs = self.forest.lookup_embeddings(conj)
-#                
-##                premises_embs2 = self.find_exists_embeddings(premises_embs)
-##                embs2 = self.find_exists_embeddings(embs)
-#                premises_embs2 = premises_embs
-#                embs2 = embs
-#                # Can also measure probability of conclusion by itself
-#
-##                # This occurs if the premises contain an afterlink A->B where A is only mentioned in the conclusion.
-##                # We only want to create PredictiveImplications where the first thing is in the premises.
-##                if len(get_varlist(conj)) != len(premises_embs2[0]):
-##                    continue
-#
-#                count_conj = len(embs2)
-#                
-#                self.make_implication(premises, conclusion, len(premises_embs2), count_conj)
-#
-#    def make_implication(self, premises, conclusion, premises_support, conj_support):
-#        # Called the "confidence" in rule learning literature
-#        freq =  conj_support*1.0 / premises_support
-##                count_unconditional = len(conclusion_embs)
-##                surprise = conj_support / count_unconditional
-#        
-#        if freq > 0.00: # 0.05:
-#            assert len(premises)
-#            
-#            # Convert it into a Psi Rule. Note that this will remove variables corresponding to the TimeNodes, but
-#            # the embedding counts will still be equivalent.
-#            tmp = self.make_psi_rule(premises, conclusion)
-#            #tmp = (premises, conclusion)
-#            if tmp:
-#                (premises, conclusion) = tmp
-#                
-#                vars = get_varlist( premises+(conclusion,) )
-#                
-#                andLink = Tree('SequentialAndLink',
-#                                    list(premises)) # premises is a tuple remember
-#                
-#                #print andLink
-#
-#                qLink = T('ForAllLink', 
-#                                Tree('ListLink', vars), 
-#                                T('ImplicationLink',
-#                                    T('AndLink',        # Psi rule "meta-and"
-#                                        T('AndLink'),  # Psi rule context
-#                                        andLink),             # Psi rule action
-#                                    conclusion)
-#                                )
-#                a = atom_from_tree(qLink, self.atomspace)
-#                
-#                a.tv = TruthValue( freq , premises_support )
-#                a.out[1].tv = TruthValue( freq , premises_support ) # PSI hack
-#                #count = len(embs)
-#                #eval_a = atom_from_tree(evalLink, self.atomspace)
-#                #eval_a.tv = TruthValue(1, count)
-#                
-#                self.rules_output.append(qLink)
-#                
-#                print 'make_implication => %s <premises_support=%s>' % (a,premises_support)
-#        else:
-#            print 'freq = %s' % freq
-#        
-##        if not conj_support <= premises_support:
-##            print 'truth value glitch:', premises,'//', conclusion
-##            import pdb; pdb.set_trace()
-##        assert conj_support <= premises_support
-#
-#    def make_psi_rule(self, premises, conclusion):
-#        #print '\nmake_psi_rule <= \n %s \n %s' % (premises, conclusion)
-#        
-#        for template in self.causal_pattern_templates():
-#            ideal_premises = template.pattern[:-1]
-#            ideal_conclusion = template.pattern[-1]
-#
-#            #print 'template:', template
-#
-#            s2 = unify_conj(ideal_premises, premises, {})
-#            #print 'make_psi_rule: s2=%s' % (s2,)
-#            s3 = unify_conj((ideal_conclusion,), (conclusion,), s2)
-#            #print 'make_psi_rule: s3=%s' % (s3,)
-#            
-#            if s3 != None:
-#                #premises2 = [x for x in premises if not unify (seq_and_template, x, {})]
-#                actions_psi = [s3[action] for action in template.actions]
-#                # TODO should probably record the EvaluationLink in the increased predicate.
-#                goal_eval = s3[template.goal]
-#                
-#                premises2 = tuple(actions_psi)
-#
-#                return premises2, goal_eval
-#        return None
-#
-#    def causal_pattern_templates(self):
-#        a = self.atomspace.add
-#        t = types
-#        
-#        causal_pattern = namedtuple('causal', 'pattern actions goal')
-#        
-#        for action_seq_size in xrange(1, 6):
-#            times = [new_var() for x in xrange(action_seq_size+1)]
-#            actions = [new_var() for x in xrange(action_seq_size)]
-#            
-#            goal = new_var()
-#            
-#            template = []
-#            
-#            for step in xrange(action_seq_size):
-#                #next_step = step+1
-#                
-#                action_template = T('AtTimeLink', times[step],
-#                        T('EvaluationLink',
-#                            a(t.PredicateNode, name='actionDone'),
-#                            T('ListLink', 
-#                               actions[step]
-#                             )
-#                        )
-#                    )
-#                
-#                template += [action_template]
-#                
-#                # TODO This assumes the afterlinks are all transitive. But that's not actually required.
-#                # But sometimes if you have A -> B -> C the fishgram system will still generate the afterlink
-#                # from A -> C, so you should allow it either way.
-#                for next_step in times[step+1:]:
-#                    seq_and_template = T('SequentialAndLink', times[step], next_step)
-#                    template += [seq_and_template]
-#                
-#                #template += [action_template, seq_and_template]
-#
-#            increase_template = T('AtTimeLink',
-#                         times[-1],
-#                         T('EvaluationLink',
-#                                    a(t.PredicateNode, name='increased'),
-#                                    T('ListLink', goal)
-#                                    )
-#                         )
-#            
-#            template += [increase_template]
-#            
-#            #print 'causal_pattern_templates', template
-#            yield causal_pattern(pattern=tuple(template), actions=actions, goal=goal)
-
-# This is a simple "fake" approach. It just looks up causal patterns directly. The usual approach is to find all frequent
-# patterns. And then filter just the ones that are causal patterns. Commented out to reduce confusion, but it could be
-# useful sometimes. It's much faster than using the actual Fishgram.
-#    def make_all_psi_rules(self):
-#        for conj in self.lookup_causal_patterns():
-#            vars = get_varlist(conj)
-#            print "make_all_psi_rules: %s" % (pp(conj),)
-#            
-#            for (premises, conclusion) in self._split_conj_into_rules(conj):
-#                if not (len(get_varlist(conj)) == len(get_varlist(premises))):
-#                    continue
-#                
-#                # Filter it now since lookup_embeddings is slow
-#                if self.make_psi_rule(premises, conclusion) == None:
-#                    continue
-#   
-#                embs_conj = self.forest.lookup_embeddings(conj)
-#                embs_premises = self.forest.lookup_embeddings(premises)
-#   
-#                count_conj = len(self.find_exists_embeddings(embs_conj))
-#                count_premises = len(self.find_exists_embeddings(embs_premises))
-#                
-#                if count_conj > count_premises:
-#                    import pdb; pdb.set_trace()
-#                
-#                print "make_implication(premises=%s, conclusion=%s, count_premises=%s, count_conj=%s)" % (premises, conclusion, count_premises, count_conj)
-#                if count_premises > 0:
-#                    self.make_implication(premises, conclusion, count_premises, count_conj)
-#
-#    def lookup_causal_patterns(self):
-#        for template in self.causal_pattern_templates():
-##            ideal_premises = (action_template, seq_and_template)
-##            ideal_conclusion = increase_template
-#            
-#            #self.causality_template = (action_template, increase_template, seq_and_template)
-#            
-#            # Try to find suitable patterns and then use them.
-#            #print pp(self.causality_template)
-#            matches = find_matching_conjunctions(template.pattern, self.forest.tree_embeddings.keys())
-#            
-#            for m in matches:
-##                print pp(m.conj)
-##                print pp(m.subst)
-##                embs = self.forest.lookup_embeddings(m.conj)
-##                print pp(embs)
-#                yield m.conj
-#
-#    def _split_conj_into_rules(self, conj):
-#        seq_and_template = T('SequentialAndLink', new_var(), new_var()) # two TimeNodes
-#        after_links = tuple( x for x in conj if unify(seq_and_template, x, {}) != None )
-#        normal = tuple( x for x in conj if unify(seq_and_template, x, {}) == None )
-#        
-#        for i in xrange(0, len(normal)):
-#            conclusion = normal[i]
-#            premises = normal[:i] + normal[i+1:]
-#            
-#            # Let's say P implies Q. To keep things simple, P&Q must have the same number of variables as P.
-#            # In other words, the conclusion can't add extra variables. This would be equivalent to proving an
-#            # AverageLink (as the conclusion of the Implication).
-#            if (len(get_varlist(normal)) == len(get_varlist(premises+after_links))):
-#                yield (premises+after_links, conclusion)
-
-#    def replace(self, pattern, example, var):
-#        '''A simple function to replace one thing with another using unification. Not currently used.'''
-#        s = unify(pattern, example, {})
-#        if s != None:
-#            return s[Tree(var)]
-#        else:
-#            return example
-#    
-#    def none_filter(self, list):
-#        return [x for x in list if x != None]
 
     def find_exists_embeddings(self, embs):
         if not len(embs):
@@ -932,38 +641,6 @@ class Fishgram:
         
         return simplified_embs
 
-#    # Wait, we need count(  P(X,Y) ) / count( G(X,Y). Not equal to count( P(X) * count(Y in G))
-#    def normalize(self, big_conj_and_embeddings, small_conj_and_embeddings):
-#        """If you take some of the conditions (trees) from a conjunction, the result will sometimes
-#        only refer to some of the variables. In this case the embeddings stored for that sub-conjunction
-#        will only include objects mentioned by the smaller conjunction. This function normalizes the
-#        count of embeddings. Suppose you have F(X,Y) == G(X, Y) AND H(X). The count for H(X) will be
-#        too low and you really need the count of "H(X) for all X and Y". This function will multiply the count
-#        by the number of objects in Y."""""
-#        big_conj, big_embs = big_conj_and_embeddings
-#        small_conj, small_embs = small_conj_and_embeddings
-#        
-#        # Count the number of possibilities for each variable. (Only possibilities that actually occur.)
-#        numvars = len(big_embs[0])
-#        var_objs = [set() for i in xrange(numvars)]
-#        
-#        for i in xrange(0, len(numvars)):
-#            for emb in big_embs:
-#                obj = emb[i]
-#                var_objs[i].add(obj)
-#        
-#        var_numobjs = [len(objs) for objs in var_objs]
-#        
-#        varlist_big = sorted(get_varlist(big_conj))
-#        varlist_small = sorted(get_varlist(small_conj))
-#        missing_vars = [v for v in varlist_big if v not in varlist_small]
-#        
-#        # the counts of possible objects for each variable missing in the smaller conjunction.
-#        numobjs_missing = [var_numobjs[v] for v in missing_vars]
-#        
-#        implied_cases = reduce(op.times, numobjs_missing, 1)
-#        
-#        return len(small_embs) * implied_cases
 
 def notice_changes(atomspace):    
     tv_delta = 0.000001
@@ -1071,25 +748,6 @@ try:
                 self.fish.forest.extractForest()
                 print (self.fish.forest.all_trees)
     
-    #            
-    #            conj = (fish.forest.all_trees[0],)
-    #            fish.forest.lookup_embeddings(conj)
-    
-                #fish.forest.extractForest()
-                #time1, time2, time1_binding, time2_binding = new_var(), new_var(), new_var(), new_var()
-                #fish.forest.tree_embeddings[Tree('SequentialAndLink', time1, time2)] = [
-                #                                                    {time1: time1_binding, time2: time2_binding}]
-    #            for layer in fish.closed_bfs_layers():
-    #                for conj, embs in layer:
-    #                    print
-    #                    print pp(conj)
-    #                    #print pp(embs)
-    #                    lookup = pp( fish.forest.lookup_embeddings(conj) )
-    #                    for bt in lookup:
-    #                        print 'lookup:',  pp(bt)
-    #                    for binding in embs:
-    #                        bound_tree = bind_conj(conj, binding)
-    #                        print 'emb:',  pp(bound_tree)
             
             #fish.iterated_implications()
             self.fish.implications()

@@ -70,15 +70,15 @@ class Chainer:
         self.pd = dict()
 
         self.results = []
-
+        self.rules = []
         self.space = space
         self.planning_mode = planning_mode
         self.viz = PLNviz(space)
         self.viz.connect()
         self.setup_rules()
         self.trace = Trace_Chainer()
-
         self.bc_later = OrderedSet()
+        self.reach_app = False
 
         global _line
         _line = 1
@@ -90,8 +90,6 @@ class Chainer:
         try:
             
             #try:
-            tvs = self.get_tvs(target)
-            print "Existing target truth values:", map(str, tvs)
             #if len(tvs):
             #    raise NotImplementedError('Cannot revise multiple TruthValues, so no point in doing this search')
             
@@ -115,18 +113,6 @@ class Chainer:
                 self.bc_step()
                 nsteps -= 1
     
-                #msg = '%s goals remaining, %s Proof DAG Nodes' % (len(self.bc_later), len(self.pd))
-                #print msg
-    
-            #for res in self.results:
-                #print 'Inference trail:'
-                #trail = self.trail(res)
-                #self.print_tree(trail)
-
-            #log.debug("------------------bc_before :-------------------------")
-            #for expand in self.bc_before:
-                #log.debug(format_log(1,False, str(expand)))
-            #return self.results
             ret = []
             for tr in self.results:
                 atom = atom_from_tree(tr, self.space)
@@ -137,7 +123,6 @@ class Chainer:
         except Exception, e:
             import traceback, pdb
             #pdb.set_trace()
-            print traceback.format_exc(10)
             # Start the post-mortem debugger
             #pdb.pm()
             return []
@@ -156,6 +141,22 @@ class Chainer:
         # And when it does happen, often you will find all the goals for a clone of the app,
         # and not the original app.
         
+        def proved_by_brother_app(app):
+            """  
+             this could happen because of pushed all app with the same head(brothers) in the stack,
+             and some of brother may prove the head already
+             """ 
+            #return False
+            if self.head_dag(app).tv.count > 0:
+                return True
+        def proved_by_axiom(goal):
+            """
+            It work because of the excution order in function @bc_step
+            """
+            #return False
+            goal_dag = self.expr2pdn(goal)
+            if goal_dag.tv.count > 0:
+                return True
         assert self.bc_later
         self.trace.step_count += 1
 
@@ -164,7 +165,6 @@ class Chainer:
 
         log.debug(format_log(0, False, "\n" ))
         log.debug(format_log(0, True,"********** expanding \"%s\" **********"%(next_app)))
-
         head = self.expr2pdn(next_app.head.canonical())
         for arg in head.args:
             if arg.op == next_app :
@@ -173,20 +173,30 @@ class Chainer:
         if next_app.trace.path_pre:
             log.debug(format_log(0,False, "path_pre: %s" %next_app.trace.path_pre))
             log.debug(format_log(0, False,"path_axiom: %s"%next_app.trace.path_axiom))
+
+        if proved_by_brother_app(next_app):
+            return
         # This step will also call propogate_results and propogate_specialization,
         # so it will check for premises, compute the TV if possible, etc.
         self.find_axioms_for_rule_app(next_app)
-        
-        # it could uset inferenced fact knowledge
+
+        # it could used inferenced fact knowledge
         self.trace.begin_propagating = True 
+        if proved_by_brother_app(next_app):
+            return
         self.propogate_result(next_app)
+        #
         log.debug(format_log(0, True, "---- find rules -----" ))
         for goal in next_app.goals:
+            # if goal is proved with an axiom  then skip rules
+            # prevent proving a node(except the target) in mutiple way and repeating many times
+            # 
+            if proved_by_axiom(goal):
+               continue 
             apps = self.find_rule_applications(goal)
             for a in apps:
                 t = a.standardize_apart()
                 t.trace = a.trace
-
                 log.debug(format_log(6, True, "rule: "+ str(a)))
                 log.debug(format_log(10, True, "^^adding app: "+ str(t)))
                 self.add_app_if_good(t)
@@ -232,7 +242,11 @@ class Chainer:
         very_vague = any(goal.isomorphic(template) for template in self._very_vague_link_templates)
         return (self_implication(goal) or
                      very_vague)
-
+    def head_dag(self, app):
+        """ a tree dag could have multiple parents,
+            but an app dag could only have one parent
+        """
+        return self.expr2pdn(app.head.canonical())
     def reject_expression(self,expr):
         return self._app_is_stupid(expr) or expr.is_variable() or not self.check_domain_recursive(expr)
         
@@ -255,6 +269,9 @@ class Chainer:
         s = unify(template, expr, {})
         if s == None:
             return True
+        # Policy: don't allow the predicate to be a variable
+        if s[pred].is_variable():
+            return False
         pred_name = s[pred].op.name
         args_trees = s[argument_list].args
         if pred_name == 'neighbor':
@@ -305,9 +322,7 @@ class Chainer:
             app.tv = TruthValue(tv_tuple[0], tv_tuple[1])
             #atom_from_tree(app.head, self.space).tv = app.tv            
             assert app.tv.count > 0
-            
             self.set_tv(app, app.tv)
-            
             
             # make the app red, not only the expression
             self.viz.declareResult(str(app.canonical_tuple()))
@@ -348,12 +363,6 @@ class Chainer:
                 (status, axiom_app_pdn) = self.add_app_to_pd(axiom_app)
                 if status == 'CYCLE':
                     return None
-                
-                
-                # Neither of these options work with ForAllLinks...
-                #gvs = get_varlist(goal)
-                #goal_vars_mapped = [v for v in s.keys() if v in gvs]
-                #if len(goal_vars_mapped) == 0:
                 log.ident += 10
                 if len(s) == 0:
                     assert goal == axiom_app.head
@@ -424,6 +433,7 @@ class Chainer:
         log.ident += 3
         log.debug(format_log(log.ident, True, "## check premise: "+str(app)))
         if got_result:
+            self.reach_app = True
             self.compute_and_add_tv(app)
             if self.trace.begin_propagating:
                 self.trace.begin_propagating = False
@@ -548,7 +558,9 @@ class Chainer:
         a = self.app2pdn(app)
         assert not a is None
         assert isinstance(a, DAG)
+        # actually a.tv is useless except for tracing
         a.tv = tv
+        a.parents[0].tv = tv
 
     def add_app_to_pd(self,app):
         '''Add app to the Proof DAG. If it is already in the PD then return the existing PDN for that app.
@@ -597,7 +609,6 @@ class Chainer:
             self.app2pdn(rule)
 
     def setup_rules(self):
-        self.rules = []
         for r in rules.rules(self.space, self.deduction_types):
             self.add_rule(r)
 
@@ -976,7 +987,6 @@ class Viz_Graph(object):
         try:
             nx.write_dot(self._nx_graph, filename)
         except Exception, e:
-            print e
             raise e
     def clear(self):
         """docstring for clear"""

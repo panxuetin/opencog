@@ -213,8 +213,8 @@ def format_log(offset, dsp_suffix = True, *args):
     #_line+=1
     suffix = "" 
     if dsp_suffix:
-        #stack = inspect.stack()
-        #suffix = " -- %s %s" % (stack[1][2], stack[1][3])
+        stack = inspect.stack()
+        suffix = " -- %s %s" % (stack[1][2], stack[1][3])
         pass
     out =  ' ' * offset +  ' '.join(map(str, args)) + suffix
     return out
