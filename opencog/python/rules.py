@@ -49,12 +49,8 @@ def rules(a, deduction_types):
     # than having an array (and more versatile in general).
     # This version of the Rule calculates the neighborhood dynamically. The function path_rules()
     # uses the simpler but much slower approach of adding thousands of links to the AtomSpace in advance.
-    r = Rule(T('EvaluationLink',
-                a.add(t.PredicateNode,'neighbor'),
-                T('ListLink',
-                    Var(1), # a ConceptNode representing the coordinates in a tacky format
-                    Var(2)
-                )),
+
+    r = Rule(predicate_template(a.add(t.PredicateNode,'neighbor'), [Var(1), Var(2)]),
              [],
              name='Neighbors',
              match=match_neighbors)
@@ -91,12 +87,8 @@ def rules(a, deduction_types):
     # The first two variables are the numbers to be added, and the third variable is the result.
     # i.e. the last variable is the return-value for the '+' function. This is a common pattern in
     # Prolog.
-    r = Rule(T('EvaluationLink',
-               a.add(t.PredicateNode,'+'),
-               T('ListLink',
-                 Var(1),
-                 Var(2),
-                 Var(3))),
+
+    r = Rule(predicate_template(a.add(t.PredicateNode,'+'),[Var(1), Var(2), Var(3)]),
              [],
              name='PredicateEvaluation',
              match=match_predicate)
@@ -466,7 +458,7 @@ def match_axiom(space,target):
             if len(candidates) < len(smallest_set):
                 smallest_set = candidates
         
-        print target, len(smallest_set)
+        #print target, len(smallest_set)
 
     # Then the chainer will try to unify against every candidate
     candidate_trees = (tree_from_atom(atom) for atom in candidates)
@@ -486,7 +478,7 @@ def match_neighbors(space,target):
         return: 8 predicates including neighbors(8 neighbors)
     '''
     print 'match_neighbors',target
-    template = predicate_template(space.add(t.PredicateNode,'neighbor'),Var(1),Var(2))
+    template = predicate_template(space.add(t.PredicateNode,'neighbor'),[Var(1),Var(2)])
     s = unify(template, target, {})
     # cube1, the source
     cube1 = s[Var(1)]

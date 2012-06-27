@@ -141,15 +141,13 @@ class Chainer:
         # And when it does happen, often you will find all the goals for a clone of the app,
         # and not the original app.
         
-        def proved_by_brother_app(app):
+        def proved_app(app):
             """  
-             this could happen because of pushed all app with the same head(brothers) in the stack,
-             and some of brother may prove the head already
              """ 
             #return False
             if self.head_dag(app).tv.count > 0:
                 return True
-        def proved_by_axiom(goal):
+        def proved_goal(goal):
             """
             It work because of the excution order in function @bc_step
             """
@@ -174,24 +172,25 @@ class Chainer:
             log.debug(format_log(0,False, "path_pre: %s" %next_app.trace.path_pre))
             log.debug(format_log(0, False,"path_axiom: %s"%next_app.trace.path_axiom))
 
-        if proved_by_brother_app(next_app):
+        # this could happen because of pushed all app with the same head(brothers) in the stack,
+        # and some of brother may prove the head already
+        if proved_app(next_app):
             return
         # This step will also call propogate_results and propogate_specialization,
         # so it will check for premises, compute the TV if possible, etc.
         self.find_axioms_for_rule_app(next_app)
 
-        # it could used inferenced fact knowledge
         self.trace.begin_propagating = True 
-        if proved_by_brother_app(next_app):
+        if proved_app(next_app):
             return
+        # it could used inferenced fact knowledge
         self.propogate_result(next_app)
         #
         log.debug(format_log(0, True, "---- find rules -----" ))
         for goal in next_app.goals:
             # if goal is proved with an axiom  then skip rules
-            # prevent proving a node(except the target) in mutiple way and repeating many times
-            # 
-            if proved_by_axiom(goal):
+            # there may be some goal is proved in previous step, if not all of them.
+            if proved_goal(goal):
                continue 
             apps = self.find_rule_applications(goal)
             for a in apps:
@@ -411,6 +410,7 @@ class Chainer:
                     new_r = r.subst(s)
                     candidate_heads_tvs = new_r.match(self.space, goal)
                     for (h, tv) in candidate_heads_tvs:
+                        # r.head and h has the same form
                         s = unify(h, goal, {})
                         if s != None:
                             # Make a new version of the Rule for this Atom
@@ -421,7 +421,6 @@ class Chainer:
                             # new_rule = new_rule.subst(s)
                             if not tv is None:
                                 self.set_tv(axiom_app,tv)
-                            
                             found_axiom(axiom_app, s)
 
     def propogate_result(self, orig_app):
