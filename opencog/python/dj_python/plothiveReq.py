@@ -138,42 +138,42 @@ class GraphicR(object):
 	#print "valid link:"  + edge.type_name
 	return True
     def addEdge(self,edge,nodes):
-	try:
-	    i = 0
-	    for node in nodes:
-	    #
-		i += 1
-		self.edgesR.id2.append(nodes[i]._handle_value)
-		self.edgesR.id1.append(node._handle_value)
+        try:
+            i = 0
+            for node in nodes:
+            #
+            i += 1
+            self.edgesR.id2.append(nodes[i]._handle_value)
+            self.edgesR.id1.append(node._handle_value)
 
-		for arg in self.edgesArg:
-		#arguments: nodes + edges
-		    if edge.type_name == arg.type:
-			self.edgesR.color.append(arg.color)
-			self.edgesR.weight.append(arg.weight)
-			break
-		else:
-		#arguments: nodes
-		    for arg in self.edgesPsb:
-			if edge.type_name == arg.type:
-			    self.edgesR.color.append(arg.color)
-			    self.edgesR.weight.append(arg.weight)
-			    break
-		    else:
-		    #first time
-			if len(self.defCols) > self.colId:
-			    color = self.defCols[self.colId]
-			    self.colId += 1
-			else:
-			    color = self.DEFAULT_EDGE_COLOR
-			edge = EdgeArg(edge.type_name,color,self.DEFAULT_EDGE_WEIGHT)
-			self.edgesPsb.append(edge)
-			self.edgesR.color.append(edge.color)
-			self.edgesR.weight.append(edge.weight)
-	except Exception, e:
-	    #todo KeyError is right
-	    #else raise
-	    pass
+            for arg in self.edgesArg:
+            #arguments: nodes + edges
+                if edge.type_name == arg.type:
+                self.edgesR.color.append(arg.color)
+                self.edgesR.weight.append(arg.weight)
+                break
+            else:
+            #arguments: nodes
+                for arg in self.edgesPsb:
+                if edge.type_name == arg.type:
+                    self.edgesR.color.append(arg.color)
+                    self.edgesR.weight.append(arg.weight)
+                    break
+                else:
+                #first time
+                if len(self.defCols) > self.colId:
+                    color = self.defCols[self.colId]
+                    self.colId += 1
+                else:
+                    color = self.DEFAULT_EDGE_COLOR
+                edge = EdgeArg(edge.type_name,color,self.DEFAULT_EDGE_WEIGHT)
+                self.edgesPsb.append(edge)
+                self.edgesR.color.append(edge.color)
+                self.edgesR.weight.append(edge.weight)
+        except Exception, e:
+            #todo KeyError is right
+            #else raise
+            pass
 
 	
 class DataAnalysisR(object):

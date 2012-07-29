@@ -64,7 +64,7 @@ class Fishgram:
         self.min_frequency = 0.5
         self.atomspace = atomspace
         
-        self.max_per_layer = 100
+        self.max_per_layer = 200
         
         self.viz = PLNviz(atomspace)
         self.viz.connect()
@@ -72,8 +72,6 @@ class Fishgram:
         
         self.rules_output = []
         
-        self._is_running = False
-
     def run(self):
         '''The basic way to run Fishgram. It will find all the frequent conjunctions above min_frequency.'''
 
@@ -117,9 +115,6 @@ class Fishgram:
             for imp in self.rules_output:
                 print pp(imp)
             
-#            if time.time() - start > 120:
-#                print 'TIMEOUT'
-#                break
 
 # breadth-first search (to make it simpler!)
 # use the extension list.
@@ -137,12 +132,8 @@ class Fishgram:
         # Less efficient but may be easier to debug
         next_layer = list(next_layer_iter)
 
-        #for (ptn, embs) in self.prune_frequency(next_layer):
-        for (ptn, embs) in self.prune_surprise(next_layer):
-            #print '***************', conj, len(embs)
-            #self.viz.outputTreeNode(target=conj[-1], parent=conj[:-1], index=0)
-            #self.viz.outputTreeNode(target=list(conj), parent=list(conj[:-1]), index=0)
-            yield (ptn, embs)
+
+        return self.sort_surprise(next_layer)
 
     def closed_bfs_layers(self):
         '''Main function to run the breadth-first search. It yields results one layer at a time. A layer
@@ -161,10 +152,11 @@ class Fishgram:
         while len(prev_layer) > 0:
             # Mixing generator and list style because future results depend on previous results.
             # It's less efficient with memory but still allows returning results sooner.
-            new_layer = [ptn_embs for ptn_embs in self.closed_bfs_extend_layer(prev_layer)]
+            #new_layer = [ptn_embs for ptn_embs in self.closed_bfs_extend_layer(prev_layer)]
+            new_layer = self.closed_bfs_extend_layer(prev_layer)
             
             if len(new_layer):
-                
+
                 del new_layer[self.max_per_layer+1:]
                 
                 #conj_length = len(new_layer[0][0].conj)
@@ -172,8 +164,8 @@ class Fishgram:
                 #print '\x1B[1;32m# Conjunctions of size', conj_length,':', len(new_layer), 'pruned', pruned,'\x1B[0m'
                 print format_log( '\x1B[1;32m# Conjunctions of size', conj_length, ':', len(new_layer), '\x1B[0m')
 
-                for ptn, embs in new_layer:
-                    print format_log(ptn, len(embs))
+                #for ptn, embs in new_layer:
+                #    print format_log(ptn, len(embs))
 
                 yield new_layer
             
@@ -181,19 +173,21 @@ class Fishgram:
 
     # Helper functions for extensions_simple
     # Code to handle variables. It's not important to understand this (to understand fishgram).
-    def _create_new_variables(self, tr, embeddings):
+
+    def _create_new_variables_rel(self, tr):
         sa_mapping = {}
         tr = standardize_apart(tr, sa_mapping)
-        
-        rebound_embs = []
-        for s in embeddings:
-            s2 = {}
-            for (old_var, new_var) in sa_mapping.items():
-                obj = s[old_var]
-                s2[new_var] = obj
-            rebound_embs.append(s2)
-        
-        return tr, rebound_embs
+
+        return tr, sa_mapping
+
+    def _use_new_variables_in_binding(self, sa_mapping, binding):
+        s2 = {}
+        for (old_var, new_var) in sa_mapping.items():
+            obj = binding[old_var]
+            s2[new_var] = obj
+
+        return s2
+
 
     def _map_to_existing_variables(self, prev_binding, new_binding):
         # In this binding, a variable in the tree might fit an object that is already used.
@@ -266,16 +260,6 @@ class Fishgram:
 
             conj = ptn.conj + ptn.seqs
             
-#            num_variables = len(get_varlist(conj))
-#            if num_variables != 1:
-#                continue
-            
-            # Check for other equivalent ones. It'd be possible to reduce them (and increase efficiency) by ordering
-            # the extension of patterns. This would only work with a stable frequency measure though.
-            #clones = [c for c in conj2ptn_emblist.keys()
-            #           if isomorphic_conjunctions(conj, c) and c != conj]
-            #if len(clones):
-            #    continue
 
             tmp = canonical_trees(ptn.conj)
             canonical_conj = tuple(tmp) + ptn.seqs
@@ -312,27 +296,28 @@ class Fishgram:
             #print 'clonecheck time', time.time()-last_realtime, '#atoms #seqs',len(ptn.conj),len(ptn.seqs)
             
             entry=conj2ptn_emblist[canonical_conj]
-            #if not len(entry[1]):
-            #    print '====+>>', ptn.conj,
-            #    if len(ptn.seqs):
-            #        print '<++>>>', ptn.seqs
-            #    else:
-            #        print
-            #sys.stdout.write('.')
             
             embs = entry[1]
             if s not in entry[1]:
                 embs.append(s)
             conj2ptn_emblist[canonical_conj] = (ptn, embs)
 
-            # Faster, but causes a bug.
-#            canon = tuple(canonical_trees(conj))
-#            print 'conj', pp(conj)
-#            print 'canon', pp(canon)
-#            conj2emblist[canon].append(s)
-            #print 'extensions_simple', len(conj2emblist[canon])
             
         return conj2ptn_emblist.values()
+
+    def lookup_extending_rel_embeddings(self, prev_emb):
+        extensions = defaultdict(list)
+        for obj in prev_emb.values():
+            tree_embeddings_for_obj = self.forest.incoming[obj]
+            for tr_, embs_ in tree_embeddings_for_obj.items():
+                # add them into extensions
+                extensions[tr_]+= (s for s in embs_ if s not in extensions[tr_])
+
+        # you could also have an index for events being in the future
+        rels_bindingsets = extensions.items() + self.forest.event_embeddings.items()
+
+        return rels_bindingsets
+
 
     def find_extensions(self, prev_layer):
         '''Helper function for extensions_simple. It's a generator that finds all conjunctions (X,Y,Z) for (X,Y) in
@@ -342,31 +327,42 @@ class Fishgram:
         
         for (prev_ptn,  prev_embeddings) in prev_layer:
 
-            for tr_, embs_ in self.forest.tree_embeddings.items():
+            firstlayer = (prev_ptn.conj == () and prev_ptn.seqs == ())
 
-#                if prev_conj != () and tr_ < self.awkward[prev_conj]:
-#                    #print 'OUT_OF_ORDER', tr_
-#                    continue
-                
-                # Give the tree new variables. Rewrite the embeddings to match.
-                tr, rebound_embs = self._create_new_variables(tr_, embs_)
-                
-                # They all have the same 'link label' (tree) but may be in different places.
-                for s in rebound_embs:
-                    for e in prev_embeddings:
-                        # for each new var, if the object is in the previous embedding, then re-map them.
-                        
-                        tmp = self._map_to_existing_variables(e, s)
+
+            # They all have the same 'link label' (tree) but may be in different places.
+            for e in prev_embeddings:
+            # for each new var, if the object is in the previous embedding, then re-map them.
+
+                if firstlayer:
+                    rels_bindingsets = self.forest.tree_embeddings.items() + self.forest.event_embeddings.items()
+                else:
+                    rels_bindingsets = self.lookup_extending_rel_embeddings(e) + self.forest.event_embeddings.items()
+
+                for rel_, rel_embs in rels_bindingsets:
+
+                    rel, new_variables = self._create_new_variables_rel(rel_)
+
+                    for rel_binding in rel_embs:
+                        # Give the tree new variables. Rewrite the embeddings to match.
+                        #rel, rel_binding_new_vars = self._create_new_variables(rel_, rel_binding)
+
+                        rel_binding_with_new_vars = self._use_new_variables_in_binding(new_variables, rel_binding)
+
+
+
+
+                        tmp = self._map_to_existing_variables(e, rel_binding_with_new_vars)
                         if tmp == None:
                             continue
                         remapping, new_s = tmp
                         
-                        remapped_tree = subst(remapping, tr)
+                        remapped_tree = subst(remapping, rel)
                         
-                        if remapped_tree in prev_ptn.conj:
+                        if remapped_tree in prev_ptn.conj+prev_ptn.seqs:
                             continue
                         
-                        if tr_.op == 'AtTimeLink' and prev_ptn.seqs:
+                        if rel_.op == 'AtTimeLink' and prev_ptn.seqs:
                             after = self._after_existing_actions(prev_ptn.seqs,remapped_tree,new_s)
 
                         # There needs to be a connection to the existing pattern.
@@ -377,12 +373,12 @@ class Fishgram:
                         conj = prev_ptn.conj
                         seqs = prev_ptn.seqs
                         #import pdb; pdb.set_trace()
-                        
-                        firstlayer = (prev_ptn.conj == () and prev_ptn.seqs == ())
-                        if tr_.op != 'AtTimeLink':
+
+                        if rel_.op != 'AtTimeLink':
                             if len(remapping) or firstlayer:
                                 conj += (remapped_tree,)
                             else:
+                                print 'no connection:',prev_ptn,'-----',rel, e, rel_binding_with_new_vars
                                 continue
                         else:
                             if len(prev_ptn.seqs) == 0:
@@ -422,6 +418,34 @@ class Fishgram:
             #if normalized_frequency > self.min_frequency:
                 #print pp(conj), normalized_frequency
                 yield (ptn, embeddings)
+
+    def sort_surprise(self, layer):
+        # layer is a list of tuples
+        sorted_layer = []
+
+        ptn2surprise = {}
+
+        for (ptn, embeddings) in layer:
+            if len(embeddings) >= self.min_embeddings:
+                tup = ptn.conj+ptn.seqs
+
+                if len(ptn.conj) + len(ptn.seqs) < 2:
+                    sorted_layer.append((ptn,embeddings))
+                    ptn2surprise[tup] = float('+inf')
+                else:
+                    surp = self.surprise(ptn)
+                    ptn2surprise[tup] = surp
+                    if len(ptn.conj) > 0 and surp > 0.9: # and len(get_varlist(ptn.conj)) == 1 and len(ptn.seqs) == 0:
+                        #print '\x1B[1;32m%.1f %s' % (surp, ptn)
+
+                        sorted_layer.append((ptn,embeddings))
+
+        sorted_layer.sort(key=lambda (ptn,embeddings): ptn2surprise[ptn.conj+ptn.seqs], reverse=True)
+
+        for (ptn, embeddings) in sorted_layer:
+            print '\x1B[1;32m%.1f %s' % (ptn2surprise[ptn.conj+ptn.seqs], ptn)
+
+        return sorted_layer
 
     def prune_surprise(self, layer):
         for (ptn, embeddings) in layer:
@@ -475,6 +499,7 @@ class Fishgram:
         
         return len(embs_notimes)*1.0
     
+        
 
     def total_possible_embeddings(self, conj, embeddings):
         N_objs = len(self.forest.all_objects)*1.0
@@ -542,11 +567,6 @@ class Fishgram:
                 
                 print a
 
-#                for tr in conj:
-#                    s = {Tree(0):concept}
-#                    bound_tree = subst(s, tr)
-#                    #print bound_tree
-#                    print atom_from_tree(bound_tree, self.atomspace)
 
     def output_causal_implications_for_last_layer(self, layers):
         if len(layers) < 2:
@@ -738,9 +758,6 @@ try:
             except:            
                 self.fish = Fishgram(atomspace)
                 
-                #make_seq(atomspace)
-                # Using the magic evaluator now. But add a dummy link so that the extractForest will include this
-                #atomspace.add(t.SequentialAndLink, out=[atomspace.add(t.TimeNode, '0'), atomspace.add(t.TimeNode, '1')], tv=TruthValue(1, 1))
                 
                 # Detect timestamps where a DemandGoal got satisfied or frustrated
                 notice_changes(atomspace)
@@ -750,9 +767,11 @@ try:
     
             
             #fish.iterated_implications()
-            self.fish.implications()
-            #self.fish.run()
+            #self.fish.implications()
+            self.fish.run()
             print "Finished one Fishgram cycle"
+            print self.cycles
+
             
             #fish.make_all_psi_rules()
     
@@ -760,3 +779,4 @@ try:
 
 except NameError:
     pass
+

@@ -7,6 +7,7 @@ from tree import *
 from util import *
 
 from pprint import pprint
+from collections import defaultdict
 
 # to debug within the cogserver, try these, inside the relevant function:
 #import code; code.interact(local=locals())
@@ -22,6 +23,9 @@ class ForestExtractor:
         self.a = atomspace
         self.writer = writer
         
+        #self.attentional_focus = True
+        self.attentional_focus = False
+        
         # policy
         # Whether to create miner-friendly output, rather than human-friendly output.
         # Makes it output all object-nodes with the same label. May be more useful for visualisation anyway.
@@ -29,9 +33,9 @@ class ForestExtractor:
         # Only affects output
         self.compact_binary_links = True
         # Spatial relations are useful, but cause a big combinatorial explosion
-        self.unwanted_atoms = set(['proximity', 'near', 'next',
+        self.unwanted_atoms = set(['proximity', 'next', 'near',
             'beside', 'left_of', 'right_of', 'far', 'behind', 'in_front_of',
-            'between', 'touching', 'inside', 'outside', 'below', 'above',
+            'between', 'touching', 'outside', 'above', 'below', # 'inside',
             # Useless stuff. null means the object class isn't specified (something that was used in the
             # Multiverse world but not in the Unity world. Maybe it should be?
             'is_movable', 'is_noisy', 'null', 'id_null', 'Object',
@@ -46,7 +50,7 @@ class ForestExtractor:
             'night',
             'actionFailed','decreased',
             'food_bowl', # redundant with is_edible
-            'foodState','egg','dish',
+            #'foodState','egg','dish',
             # The can_do predicate is useful but should be in an AtTimeLink
             'can_do'])
         
@@ -60,14 +64,16 @@ class ForestExtractor:
         # NOTE: If you set it to 0 here, it will give unique variables to every tree. BUT it will then count every occurrence of
         # a tree as different (because of the different variables!)
         #self.i = 0
+
+        self.event_embeddings = defaultdict(list)
         
         # fishgram-specific experiments. Refactor later
         # map from unique tree to set of embeddings. An embedding is a set of bindings. Maybe store the corresponding link too.
-        self.tree_embeddings = {} 
+        self.tree_embeddings = defaultdict(list)
         
         # The incoming links (or rather trees/predicates) for each object.
-        # For each object, for each predsize, for each slot, the list of preds. (Indexes into self.all_trees)
-        self.incoming = {}
+        # For each object, a mapping from rel -> every embedding involving that object
+        self.incoming = defaultdict(lambda:defaultdict(list))
 
     class UnwantedAtomException(Exception):
         pass
@@ -96,6 +102,9 @@ class ForestExtractor:
         for link in initial_links:
                      #or x.type_name in ['EvaluationLink', 'InheritanceLink']]: # temporary hack
                      #or x.is_a(t.AndLink)]: # temporary hack
+            if self.attentional_focus and link.av['sti'] <= -10:
+                continue
+            
             if not self.include_tree(link): continue
             #print link
             
@@ -130,11 +139,16 @@ class ForestExtractor:
                         self.all_timestamps.add(obj)
                     
                 # fishgram-specific
-                if tree not in self.tree_embeddings:
-                    self.tree_embeddings[tree] = []
                 substitution = subst_from_binding(objects)
-                self.tree_embeddings[tree].append(substitution)
-                
+                if tree.op == 'AtTimeLink':
+                    self.event_embeddings[tree].append(substitution)
+                else:
+                    self.tree_embeddings[tree].append(substitution)
+                    for obj in objects:
+                        tree_embeddings_for_obj = self.incoming[obj]
+                        if substitution not in tree_embeddings_for_obj[tree]:
+                            tree_embeddings_for_obj[tree].append(substitution)
+
                 #size= len(objects)
                 #tree_id = len(self.all_trees) - 1
                 #for slot in xrange(size):
@@ -288,7 +302,9 @@ class GephiOutput:
     def stop(self):
         pass
 
-    def outputNodeVertex(self, a, label = None):
+    def outputNodeVertex(self, tr_a, label = None):
+        a = atom_from_tree(tr_a,self._as)
+        
         assert a.is_node()
         if label==None:
             label = '%s:%s' % (a.name, a.type_name)
@@ -307,7 +323,12 @@ class GephiOutput:
         if outgoing==None:
             outgoing = a.out
 
-        (out0, out1) = outgoing[0].h.value(), outgoing[1].h.value()       
+        out0_tr = outgoing[0]
+        out0 = atom_from_tree(out0_tr, self._as)
+        out1_tr = outgoing[1]
+        out1 = atom_from_tree(out1_tr, self._as)
+
+        (out0, out1) = out0.h.value(), out1.h.value()
      
         self.g.add_edge(str(a.h.value()), out0, out1, directed=True, label=label)
        
@@ -322,6 +343,7 @@ class GephiOutput:
         self.g.add_node(str(a.h.value()), label=label, **self.node_attributes)
    
     def outputLinkArgumentEdges(self,a, outgoing=None):
+        '''a is an Atom but outgoing is a list of Trees.'''
         #import code; code.interact(local=locals())
         #import ipdb; ipdb.set_trace()
         assert a.is_link()
@@ -331,7 +353,8 @@ class GephiOutput:
             outgoing = a.out
 
         for i in xrange(0, len(outgoing)):
-            outi = outgoing[i]
+            outi_tr = outgoing[i]
+            outi = atom_from_tree(outi_tr, self._as)
             id = str(a.h.value())+'->'+str(outi.h.value())
             self.g.add_edge(id, a.h.value(), outi.h.value(), directed = True,  label=str(i))
 

@@ -21,18 +21,24 @@ for line in fileinput.input(inplace = False):
 	G.node[child]['type_name']=child_name
 #AtomTypes_Graph = nx.DiGraph() 
 print "import networkx as nx" 
+print "from opencog.atomspace import types as t" 
 print "types_graph = nx.DiGraph()" 
+print "name_to_type = { }"
+print "type_to_name = { }"
+map_set = set()
+map_set2 = set()
 for node in G.nodes():
     for child in G.neighbors(node):
-	parent = G.node[node]['type_name']
-	child = G.node[child]['type_name']
-        #AtomTypes_Graph.add_edge(parent,child)
-	#template =  "M.node[%s]['type'] =  t.%s"
-	#parent_code = template %(parent,parent)
-	#child_code = template %(child,child)
-	print "types_graph.add_edge('%s','%s')" %(parent,child)
-	#AtomTypes_Graph.add_edge(parent,child)
+        parent = G.node[node]['type_name']
+        child = G.node[child]['type_name']
+        map_set.add('name_to_type["%s"] = t.%s'%(child,child))
+        map_set2.add('type_to_name[t.%s] = "%s"'%(child,child))
+        print "types_graph.add_edge('%s','%s')" %(parent,child)
 print "types_graph.remove_edge('Atom','Atom')" 
+for item in map_set:
+    print item
+for item in map_set2:
+    print item
 #AtomTypes_Graph.remove_edge('Atom','Atom')
 	
 #print "the total num of line is:%d" % num

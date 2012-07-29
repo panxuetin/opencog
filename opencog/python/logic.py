@@ -145,7 +145,9 @@ class Chainer:
             """  
              """ 
             #return False
-            if self.head_dag(app).tv.count > 0:
+            if planning_mode or self.head_dag(app).tv.count == 0:
+                return False
+            else:
                 return True
         def proved_goal(goal):
             """
@@ -174,15 +176,15 @@ class Chainer:
 
         # this could happen because of pushed all app with the same head(brothers) in the stack,
         # and some of brother may prove the head already
-        if proved_app(next_app):
-            return
+        #if proved_app(next_app):
+            #return
         # This step will also call propogate_results and propogate_specialization,
         # so it will check for premises, compute the TV if possible, etc.
         self.find_axioms_for_rule_app(next_app)
 
         self.trace.begin_propagating = True 
-        if proved_app(next_app):
-            return
+        #if proved_app(next_app):
+            #return
         # it could used inferenced fact knowledge
         self.propogate_result(next_app)
         #
@@ -190,8 +192,9 @@ class Chainer:
         for goal in next_app.goals:
             # if goal is proved with an axiom  then skip rules
             # there may be some goal is proved in previous step, if not all of them.
-            if proved_goal(goal):
-               continue 
+            # and the proving path to the goal is shorter than expanding it with rules.
+            #if proved_goal(goal):
+               #continue 
             apps = self.find_rule_applications(goal)
             for a in apps:
                 t = a.standardize_apart()
