@@ -15,6 +15,7 @@ from itertools import *
 from collections import namedtuple, defaultdict
 import sys
 import time
+from m_util import log
 import math
 
 from logic import PLNviz
@@ -54,6 +55,8 @@ class Pattern:
     
     def __str__(self):
         return '\x1B[1;37mPattern(\x1B[1;31m'+pp(self.conj)+' \x1B[1;34m'+pp(self.seqs)+'\x1B[1;37m)'
+    def __repr__(self):
+        return self.__str__()
 
 class Fishgram:
     def __init__(self,  atomspace):
@@ -86,13 +89,9 @@ class Fishgram:
         self.min_embeddings = 77
         
         while self.min_embeddings > 0:
-            print "support =", self.min_embeddings
+            #print "support =", self.min_embeddings
             self.implications()
             self.min_embeddings -= 5
-#        while self.min_frequency > 0.00000000001:
-#            print '\n\x1B[1;32mfreq =', self.min_frequency, '\x1B[0m'
-#            self.implications()
-#            self.min_frequency /= 2
 
     #import profiling
     #@profiling.profile_func()
@@ -104,16 +103,14 @@ class Fishgram:
         start = time.time()
         for layer in self.closed_bfs_layers():
             
-#            for conj, embs in layer:
-#                print pp(conj), len(embs) #, pp(embs)
             
             layers.append(layer)
             if len(layers) >= 2:
                 self.output_causal_implications_for_last_layer(layers)
             
-            print "All rules produced so far:"
-            for imp in self.rules_output:
-                print pp(imp)
+            #print "All rules produced so far:"
+            #for imp in self.rules_output:
+                #print pp(imp)
             
 
 # breadth-first search (to make it simpler!)
@@ -159,16 +156,13 @@ class Fishgram:
 
                 del new_layer[self.max_per_layer+1:]
                 
-                #conj_length = len(new_layer[0][0].conj)
-                conj_length = set(len(pe[0].conj+pe[0].seqs) for pe in new_layer)
-                #print '\x1B[1;32m# Conjunctions of size', conj_length,':', len(new_layer), 'pruned', pruned,'\x1B[0m'
-                print format_log( '\x1B[1;32m# Conjunctions of size', conj_length, ':', len(new_layer), '\x1B[0m')
+                #conj_length = set(len(pe[0].conj+pe[0].seqs) for pe in new_layer)
+                #print format_log( '\x1B[1;32m# Conjunctions of size', conj_length, ':', len(new_layer), '\x1B[0m')
 
-                #for ptn, embs in new_layer:
-                #    print format_log(ptn, len(embs))
 
                 yield new_layer
-            
+
+            log.debug(new_layer)
             prev_layer = new_layer
 
     # Helper functions for extensions_simple
@@ -255,7 +249,6 @@ class Fishgram:
         
         last_realtime = time.time()
         for (ptn, s) in self.find_extensions(prev_layer):
-            #print '...',time.time() - last_realtime
             last_realtime = time.time()
 
             conj = ptn.conj + ptn.seqs
@@ -273,7 +266,6 @@ class Fishgram:
                 # when you add two variables, it may break things too...
                 if len(tmp) >= 2 and tmp[-1] < tmp[-2]: continue
             else:
-                #print 'canonical_conj', canonical_conj
 
                 # Whether this conjunction is a reordering of an existing one. Currently the
                 # canonical form only makes variable names consistent, and not orders.
@@ -285,7 +277,6 @@ class Fishgram:
                          ][1:]
                 
                 #perms = permutated_canonical_tuples(conj)[1:]
-                #print '#perms', len(perms),
                 for permcanon in perms:
                     if permcanon in conj2ptn_emblist:
                         is_reordering = True
@@ -293,7 +284,6 @@ class Fishgram:
                 if is_reordering:
                     continue
             
-            #print 'clonecheck time', time.time()-last_realtime, '#atoms #seqs',len(ptn.conj),len(ptn.seqs)
             
             entry=conj2ptn_emblist[canonical_conj]
             
@@ -378,7 +368,7 @@ class Fishgram:
                             if len(remapping) or firstlayer:
                                 conj += (remapped_tree,)
                             else:
-                                print 'no connection:',prev_ptn,'-----',rel, e, rel_binding_with_new_vars
+                                #print 'no connection:',prev_ptn,'-----',rel, e, rel_binding_with_new_vars
                                 continue
                         else:
                             if len(prev_ptn.seqs) == 0:
@@ -394,7 +384,6 @@ class Fishgram:
                             else:
                                 continue
                         
-                        #print format_log('accepting an example for:',prev_ptn,'+',remapped_tree)
                         
                         remapped_ptn = Pattern(conj)
                         remapped_ptn.seqs = seqs
@@ -416,7 +405,6 @@ class Fishgram:
             normalized_frequency =  count / num_possible_objects ** num_variables
             if len(embeddings) >= self.min_embeddings and len(embeddings) <= self.max_embeddings:
             #if normalized_frequency > self.min_frequency:
-                #print pp(conj), normalized_frequency
                 yield (ptn, embeddings)
 
     def sort_surprise(self, layer):
@@ -436,14 +424,13 @@ class Fishgram:
                     surp = self.surprise(ptn)
                     ptn2surprise[tup] = surp
                     if len(ptn.conj) > 0 and surp > 0.9: # and len(get_varlist(ptn.conj)) == 1 and len(ptn.seqs) == 0:
-                        #print '\x1B[1;32m%.1f %s' % (surp, ptn)
 
                         sorted_layer.append((ptn,embeddings))
 
         sorted_layer.sort(key=lambda (ptn,embeddings): ptn2surprise[ptn.conj+ptn.seqs], reverse=True)
 
-        for (ptn, embeddings) in sorted_layer:
-            print '\x1B[1;32m%.1f %s' % (ptn2surprise[ptn.conj+ptn.seqs], ptn)
+        #for (ptn, embeddings) in sorted_layer:
+            #print '\x1B[1;32m%.1f %s' % (ptn2surprise[ptn.conj+ptn.seqs], ptn)
 
         return sorted_layer
 
@@ -455,22 +442,19 @@ class Fishgram:
                 else:
                     surprise = self.surprise(ptn)
                     if len(ptn.conj) > 0 and surprise > 0.9: # and len(get_varlist(ptn.conj)) == 1 and len(ptn.seqs) == 0:
-                        print '\x1B[1;32m%.1f %s' % (surprise, ptn)
+                        #print '\x1B[1;32m%.1f %s' % (surprise, ptn)
                         yield (ptn, embeddings)
     
     
     def surprise(self, ptn):
         conj = ptn.conj + ptn.seqs
 
-        #print 'incremental:', embeddings
         embeddings = self.forest.lookup_embeddings(conj)
-        #print 'search:', embeddings
         
         Nconj = len(embeddings)*1.0        
         Pconj = Nconj/self.total_possible_embeddings(conj,embeddings)
         #Pconj = self.num_obj_combinations(conj,embeddings)/self.total_possible_embeddings(conj,embeddings)
 
-        #print 'P) \x1B[1;32m%.5f %s' % (Pconj, ptn)
         
         P_independent = 1
         for tr in conj:
@@ -484,7 +468,6 @@ class Fishgram:
         #self.distribution(ptn, embeddings)
 
         surprise = Pconj / P_independent
-        #print conj, surprise, P, P_independent, [Nx/N for Nx in Nxs], N
         #surprise = math.log(surprise, 2)
         return surprise
     
@@ -509,7 +492,6 @@ class Fishgram:
         N_tuples = 1
         for var in get_varlist(conj):
             if var not in embeddings[0]:
-                #print 'ERROR', conj
                 return 100000000000000.0
             if embeddings[0][var].get_type() == t.TimeNode:
                 #N_tuples *= N_times
@@ -528,12 +510,11 @@ class Fishgram:
                 if (len(get_varlist(conj)) == 1):
                     concept = self.atomspace.add_node(t.ConceptNode, 'fishgram_'+str(id))
                     id+=1
-                    print concept
+                    #print concept
                     for tr in conj:
                         s = {Var(0):concept}
                         bound_tree = subst(s, tr)
-                        #print bound_tree
-                        print atom_from_tree(bound_tree, self.atomspace)
+                        #print atom_from_tree(bound_tree, self.atomspace)
 
     def outputPredicateNodes(self, layers):
         id = 9001
@@ -542,10 +523,8 @@ class Fishgram:
             for (conj, embs) in layer:
                 predicate = self.atomspace.add_node(t.PredicateNode, 'fishgram_'+str(id))
                 id+=1
-                #print predicate
                 
                 vars = get_varlist(conj)
-                #print [str(var) for var in vars]
 
                 evalLink = T('EvaluationLink',
                                     predicate, 
@@ -565,7 +544,7 @@ class Fishgram:
                 #eval_a = atom_from_tree(evalLink, self.atomspace)
                 #eval_a.tv = TruthValue(1, count)
                 
-                print a
+                #print a
 
 
     def output_causal_implications_for_last_layer(self, layers):
@@ -631,7 +610,7 @@ class Fishgram:
             self.rules_output.append(rule)
             
             a.tv = TruthValue(freq, len(embs))
-            print a
+            #print a
 
 
     def find_exists_embeddings(self, embs):
@@ -656,8 +635,8 @@ class Fishgram:
             simple_s = tuple( (var, obj) for (var, obj) in s.items() if obj.get_type() != t.TimeNode or var == first_time  )
             simplified_embs.add(simple_s)
         
-        if len(simplified_embs) != len(embs):
-            print '++find_exists_embeddings', embs, '=>', simplified_embs
+        #if len(simplified_embs) != len(embs):
+            #print '++find_exists_embeddings', embs, '=>', simplified_embs
         
         return simplified_embs
 
@@ -706,7 +685,7 @@ def notice_changes(atomspace):
             tv1 = atTime.tv.mean
             tv2 = atTime_next.tv.mean
             
-            print tv2-tv1
+            #print tv2-tv1
             
             if tv2 - tv1 > tv_delta:
                 # increased
@@ -732,7 +711,7 @@ def notice_changes(atomspace):
             a = atom_from_tree(res, atomspace)
             a.tv = tv
             
-            print str(a)
+            #print str(a)
             
             atTime.tv = TruthValue(0, 0)
 
@@ -745,7 +724,7 @@ try:
             times = atomspace.get_atoms_by_type(t.TimeNode)
             times = sorted(times, key= lambda t: int(t.name) )
             
-            print times[-1].name
+            #print times[-1].name
 
     class FishgramMindAgent(opencog.cogserver.MindAgent):
         def __init__(self):
@@ -763,14 +742,14 @@ try:
                 notice_changes(atomspace)
     
                 self.fish.forest.extractForest()
-                print (self.fish.forest.all_trees)
+                #print (self.fish.forest.all_trees)
     
             
             #fish.iterated_implications()
             #self.fish.implications()
             self.fish.run()
-            print "Finished one Fishgram cycle"
-            print self.cycles
+            #print "Finished one Fishgram cycle"
+            #print self.cycles
 
             
             #fish.make_all_psi_rules()
@@ -780,3 +759,20 @@ try:
 except NameError:
     pass
 
+def test_fishgram(atomspace):
+    '''docstring for test_fishgram''' 
+
+    a = atomspace
+    #log.debug("loading...")
+    #load_scm_file(a, "air.scm")
+    fish = Fishgram(a)
+    # Detect timestamps where a DemandGoal got satisfied or frustrated
+    notice_changes(a)
+
+    fish.forest.extractForest()
+    #print (fish.forest.all_trees)
+
+    
+    #fish.iterated_implications()
+    #self.fish.implications()
+    fish.run()

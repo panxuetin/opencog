@@ -31,7 +31,8 @@ def T(op, *args):
     assert type(op) != type(None)
     if len(args):
         if isinstance(op, Atom):
-            assert not op.is_a(types.Link)
+            #assert not op.is_a(types.Link)
+            assert op.is_a(types.Node)
             final_op = op.type_name
         else:
             final_op = op
@@ -161,6 +162,7 @@ class Data_Trace(object):
         self.visit_order = 0
         self.made_by_rule = False
         #self.tv = TruthValue(0,0)
+
 class DAG(Tree):
     def __init__(self,op,args):
         Tree.__init__(self,op,[])
@@ -207,6 +209,8 @@ class DAG(Tree):
             return True
         return any(p.any_path_up_contains(targets) for p in self.parents)
     
+# @return :1) tree leaf node of type num(variable) or node atom,
+#          2) tree rooted at link.type_name
 def tree_from_atom(atom, dic = {}):
     if atom.is_node():
         if atom.t in [types.VariableNode, types.FWVariableNode]:
@@ -430,22 +434,18 @@ def extend(s, var, val):
     return s2
     
 def subst(s, x):
-    """Substitute the substitution s into the expression x.
+    """Substitute the expression x with unification s.
     >>> subst({x: 42, y:0}, F(x) + y)
     (F(42) + 0)
     """
-#    if isinstance(x, Atom):
-#        return x
-#    elif x.is_variable(): 
-#        # Notice recursive substitutions. i.e. $1->$2, $2->$3
-#        # This recursion should also work for e.g. $1->foo($2), $2->bar
-#        return subst(s, s.get(x, x))
     assert isinstance(x, Tree)
     if x.is_variable():
+        # special leaf of variable, replace it with corresponding substitution
         value = s.get(x, x)
         assert isinstance(value, Tree)
         return value
     elif x.is_leaf(): 
+        # normal leaf
         return x
     else: 
         #return tuple([x[0]]+ [subst(s, arg) for arg in x[1:]])
@@ -458,6 +458,7 @@ def subst_conjunction(substitution, conjunction):
     return tuple(ret)
 
 def subst_from_binding(binding):
+    # maps from  var tree to related atom
     return dict([ (Tree(i), obj) for i, obj in enumerate(binding)])
 
 def binding_from_subst(subst, atomspace):

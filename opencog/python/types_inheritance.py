@@ -1,3 +1,9 @@
+##
+# @file types_inheritance.py
+# @brief 
+# @author Dingjie.Wang
+# @version 1.0
+# @date 2012-08-04
 import networkx as nx
 from opencog.atomspace import types as t
 types_graph = nx.DiGraph()

@@ -1,17 +1,17 @@
-from viz_graph import Viz_Graph, FakeAtom
+##
+# @file load_scm_file.py
+# @brief load data from scheme file to atomspace
+# @author Dingjie.Wang
+# @version 1.0
+# @date 2012-08-04
+from opencog.atomspace import types, TruthValue, AtomSpace
+from viz_graph import Viz_Graph
 from types_inheritance import name_to_type, is_a
-from opencog.atomspace import AtomSpace, Atom, types, TruthValue 
-from fishgram import Fishgram, notice_changes
-import fileinput                         
-import networkx as nx
-import atomspace_abserver
-import m_util
-a = AtomSpace();
+from m_util import log, replace_with_dict
+from m_adaptors import FakeAtom
 
-            
-def add_tree_to_atomspace(tree, root):
+def add_tree_to_atomspace(a, tree, root):
      ''' add nodes of a tree to atomspace in postorder ''' 
-     global a
      out = []
      fakeatom = tree.get_node_attr(root)['atom']
      if not tree.neighbors(root):
@@ -24,8 +24,8 @@ def add_tree_to_atomspace(tree, root):
                 # empty link
                 return a.add_link(fakeatom.type, [], fakeatom.tv).h
          except Exception, e:
-             print " **** error occurs when adding to atomspace ****" 
-             print e
+             log(" **** error occurs when adding to atomspace ****" )
+             log(str(e))
 
      ## an inner node in the tree(a link), constructing it's out 
      ## ordering children as the scheme file, as there are no paticular order in the @G.neighbors function
@@ -37,19 +37,28 @@ def add_tree_to_atomspace(tree, root):
          children.append(order_child[order])
      ## 
      for child in children:
-         out.append(add_tree_to_atomspace(tree, child))
+         out.append(add_tree_to_atomspace(a, tree, child))
      ## construct the link
      #print "adding %s + "%root + str(out)
      return a.add_link(fakeatom.type, out, fakeatom.tv).h
 
-def scheme_file_to_atomspace():
+def load_scm_file(a, filename):
+    log.debug("loading...")
     tree = Viz_Graph()
     ident_stack = []
     atom_stack = []
     root = None
     no_link = { }
     define_dict = { }
-    for line in fileinput.input(inplace = False):
+    try:
+        f = open(filename, "r")
+    except Exception, e:
+        log.debug(str(e))
+        f.close()
+        raise e
+    #for line in f.readlines():
+    for line_no, line in enumerate(f.readlines()):
+        # code...
         ## parase scheme file line by line
         ## parase "define" 
         temp = line.strip('\n ()')
@@ -61,7 +70,7 @@ def scheme_file_to_atomspace():
         if line.startswith('('):
             if tree.number_of_nodes() > 0:
             # deal with previous segment
-                add_tree_to_atomspace(tree, root)
+                add_tree_to_atomspace(a, tree, root)
                 tree.clear()
                 no_link.clear()
             # 
@@ -87,14 +96,14 @@ def scheme_file_to_atomspace():
                 second = elms[2]
                 second = second.split(')')[0]
                 second.replace
-                second = m_util.replace_with_dict(second, define_dict)
+                second = replace_with_dict(second, define_dict)
             except Exception:
                 second = None
 
             try:
                 third = elms[3]
                 third = third.split(')')[0]
-                third = m_util.replace_with_dict(third, define_dict)
+                third = replace_with_dict(third, define_dict)
             except Exception:
                 third = None
 
@@ -137,7 +146,7 @@ def scheme_file_to_atomspace():
                 try:
                     node = FakeAtom(name_to_type[t], name, stv, av)
                 except Exception, e:
-                    print "Unknown Atom type '%s' in line %s"% (t,fileinput.lineno())
+                    log.debug("Unknown Atom type '%s' in line %s"% (t,line_no))
                     raise e
                 tree.add_node(name, atom = node)
                 atom_stack.append(node)
@@ -151,7 +160,7 @@ def scheme_file_to_atomspace():
                 try:
                     link = FakeAtom(name_to_type[t], link_name, stv, av)
                 except Exception, e:
-                    print "Unknown Atom type '%s' in line %s"% (t,fileinput.lineno())
+                    log.debug("Unknown Atom type '%s' in line %s"% (t,line_no))
                     raise e
                 atom_stack.append(link)
                 tree.add_node(link_name, atom = link)
@@ -171,33 +180,25 @@ def scheme_file_to_atomspace():
                     except Exception:
                         tree.get_node_attr(atom_stack[i].name)['order'] = 0
                     order = tree.get_node_attr(atom_stack[i].name)['order']
-                    #print atom_stack[-1].name + str(order)
                     tree.set_edge_attr(atom_stack[i].name, atom_stack[-1].name, order = order)
                     break
 
     ## deal with the last segment
     if tree.number_of_nodes() > 0:
-        add_tree_to_atomspace(tree, root)
+        add_tree_to_atomspace(a, tree, root)
         tree.clear()
         no_link.clear()
-    print "loading sucessfully!" 
-    return a
-scheme_file_to_atomspace()
-fish = Fishgram(a)
+    log.debug("loaded sucessfully!" )
+    f.close()
 
-
-# Detect timestamps where a DemandGoal got satisfied or frustrated
-notice_changes(a)
-
-fish.forest.extractForest()
-print (fish.forest.all_trees)
-print "**************************************************************************************" 
-fish.run()
-print "Finished one Fishgram cycle"
-#abserver = atomspace_abserver.Atomspace_Abserver(a)
-#abserver.add_valid_edges()
-#abserver.write_dot("haha.dot")
-#for link in a.get_atoms_by_type(types.InheritanceLink):
-    #print "&&&&&&&&&&&&&&&&&&&&&&&&&&" 
-    #for out in a.get_outgoing(link.h):
-        #print a.get_atom_string(out.h)
+if __name__ == '__main__':
+    a = AtomSpace()
+    load_scm_file(a, "test.scm")
+    links = a.get_atoms_by_type(types.Link)
+    log.debug("********************************Links:")
+    for link in links:
+        log.debug(link.type_name)
+    log.debug("********************************Nodes:")
+    nodes = a.get_atoms_by_type(types.Node)
+    for node in nodes:
+        log.debug(node.name)

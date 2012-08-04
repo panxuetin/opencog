@@ -35,7 +35,6 @@ from time import time
 import exceptions
 
 t = types
-TRACE = True
 #def format_log(*args):
     #global _line    
     #out = '['+str(_line) + '] ' + ' '.join(map(str, args))

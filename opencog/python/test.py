@@ -21,11 +21,11 @@ target =  T('ImplicationLink', a, c)
 
 result = reason.bc(target,2000)
 
-print "^^^^^^^^^^^^^^^^^^^^66" 
-t = reason.expr2pdn(T(c))
-print str(t)
-for arg in t.args:
-    print str(arg)
+#print "^^^^^^^^^^^^^^^^^^^^66" 
+#t = reason.expr2pdn(T(c))
+#print str(t)
+#for arg in t.args:
+    #print str(arg)
 analyze(reason)
 
 # print 

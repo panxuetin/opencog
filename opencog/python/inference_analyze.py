@@ -23,9 +23,9 @@ def analyze(chainer):
     viz_space_graph.set_node_attr(str(chainer.expr2pdn(chainer.results[0])),color = "black")
     sub_graph.set_node_attr(str(chainer.expr2pdn(chainer.results[0])),color = "black")
 
-    viz_space_graph.write_dot('member_result.dot')
-    viz_path_graph.write_dot('search_result.dot')
-    sub_graph.write_dot("sub_graph.dot")
+    viz_space_graph.write('member_result.dot')
+    viz_path_graph.write('search_result.dot')
+    sub_graph.write("sub_graph.dot")
 
     #temp =  viz_path_graph.write_json(str(chainer.expr2pdn(chainer.results[0])),"target0" )
     #json = '''{
