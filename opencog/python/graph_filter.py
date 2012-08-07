@@ -11,7 +11,7 @@ import m_adaptors
 
 from pprint import pprint
 from collections import defaultdict
-from viz_graph import tree_to_graphic, Viz_Graph, trees_to_forest
+from viz_graph import tree_to_viz_graphic, Viz_Graph, trees_to_forest
 import viz_graph
 # to debug within the cogserver, try these, inside the relevant function:
 #import code; code.interact(local=locals())
@@ -266,6 +266,6 @@ class ForestExtractor:
         graph = Viz_Graph()
         viz_trees = map(m_adaptors.Viz_OpenCog_Tree_Adaptor, self.trees)
         forest = viz_graph.Tree("forest", viz_trees)
-        tree_to_graphic(forest, graph)
+        tree_to_viz_graphic(forest, graph)
         return graph
 

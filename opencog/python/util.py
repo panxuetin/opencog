@@ -331,3 +331,4 @@ def _dict_from_atom(a):
 def _tv_from_dict(d):
     stv_dict = d['simple']
     return TruthValue(stv_dict['str'], stv_dict['count'])
+

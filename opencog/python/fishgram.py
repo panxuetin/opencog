@@ -78,7 +78,9 @@ class Fishgram:
     def run(self):
         '''The basic way to run Fishgram. It will find all the frequent conjunctions above min_frequency.'''
 
-        return [layer for layer in self.closed_bfs_layers()]
+        # if return without "a", ipython would print this result
+        a = [layer for layer in self.closed_bfs_layers()]
+        return a
 
     def iterated_implications(self):
         """Find implications, starting with maximum support (i.e. maximum pruning in the search for
@@ -145,15 +147,22 @@ class Fishgram:
         empty_pattern = Pattern( () )
         empty_b = [{}]
         prev_layer = [(empty_pattern, empty_b)]
-
+        #import ipdb
+        #ipdb.set_trace()
+        #ff = open('fishgram.log','w')
         while len(prev_layer) > 0:
             # Mixing generator and list style because future results depend on previous results.
             # It's less efficient with memory but still allows returning results sooner.
             #new_layer = [ptn_embs for ptn_embs in self.closed_bfs_extend_layer(prev_layer)]
             new_layer = self.closed_bfs_extend_layer(prev_layer)
-            
+            #print "******"   + str(len(prev_layer))
             if len(new_layer):
 
+                log.debug("************************************************************")
+                #log.debug(new_layer)
+                pprint(new_layer)
+                #pprint(new_layer)
+                print "self.max_per_layer:%s" %(self.max_per_layer)
                 del new_layer[self.max_per_layer+1:]
                 
                 #conj_length = set(len(pe[0].conj+pe[0].seqs) for pe in new_layer)
@@ -162,7 +171,6 @@ class Fishgram:
 
                 yield new_layer
 
-            log.debug(new_layer)
             prev_layer = new_layer
 
     # Helper functions for extensions_simple
@@ -747,7 +755,11 @@ try:
             
             #fish.iterated_implications()
             #self.fish.implications()
-            self.fish.run()
+            print "*******************************************************************************************" 
+            print "runing Fishgram again......" 
+            print "*******************************************************************************************" 
+            result = self.fish.run()
+            pprint(result)
             #print "Finished one Fishgram cycle"
             #print self.cycles
 

@@ -29,14 +29,13 @@ class Viz_OpenCog_Tree_Adaptor(object):
 
 class FakeAtom(object):
     """docstring for FakeAtom"""
-    def __init__(self, type, name, tv = None, av = None):
-        self.type = type
+    def __init__(self, t, name, tv = None, av = None):
+        self.type = t
         self.name = name
         self.tv = tv
         self.av = av
         # @@ could just use attribute method
-        try:
-            self.type_name = type_to_name[type]         # a string
-        except Exception, e:
-            print "Unknown Atom type '%s' in line %s"%str(type)
-            raise e
+        self.type_name = type_to_name(t)
+
+__all__ = ["Viz_OpenCog_Tree_Adaptor", "FakeAtom" ]
+
