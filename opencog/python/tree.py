@@ -459,6 +459,7 @@ def subst_conjunction(substitution, conjunction):
 
 def subst_from_binding(binding):
     # maps from  var tree to related atom
+    # encode every atom with a variables, start from zero
     return dict([ (Tree(i), obj) for i, obj in enumerate(binding)])
 
 def binding_from_subst(subst, atomspace):
@@ -469,8 +470,9 @@ def bind_conj(conj, b):
     return subst_conjunction(subst_from_binding(b), conj)
 
 def standardize_apart(tr, dic=None):
-    """Replace all the variables in tree with new variables."""
-
+    """Replace all the variables in tree with new variables, which make sure variable cross trees is different.
+        dic: map from old node to new node
+    """
     if dic == None:
         dic = {}
 

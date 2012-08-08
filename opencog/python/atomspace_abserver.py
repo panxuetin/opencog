@@ -42,7 +42,7 @@ class Atomspace_Abserver(Graph_Abserver):
             #pprint(edges)
         log.debug("*******************************nodes:" )
         for type_name, nodes in nodes_info.iteritems():
-            log.debug(type_name + ": " + str(len(nodes)))
+            log.debug(str(len(nodes)),type_name)
             #pprint(nodes)
     
     def _get_edges(self,type):
@@ -106,11 +106,11 @@ if __name__ == '__main__':
     from load_scm_file import load_scm_file
     from pre_fishgram import output_atomspace
     a = AtomSpace()
-    load_scm_file(a, "test_load_scm_file_and_abserver.scm")
+    load_scm_file(a, "test_atomspace_abserver.scm")
     links = a.get_atoms_by_type(types.Link)
     output_atomspace(a,"space.log",True)
     abserver = Atomspace_Abserver(a)
-    #abserver.graph_info()
+    abserver.graph_info()
     abserver.filter_graph()
     abserver.write("test_atomspace_abserver.dot")
 

@@ -8,14 +8,23 @@
 
 import re
 import inspect
+from pprint import pprint
+def dict_sub(d, text):
+  """ Replace in 'text' non-overlapping occurences of REs whose patterns are keys
+  in dictionary 'd' by corresponding values (which must be constant strings: may
+  have named backreferences but not numeric ones). The keys must not contain
+  anonymous matching-groups.
+  Returns the new string.""" 
+  try:
+  # Create a regular expression  from the dictionary keys
+      regex = re.compile("|".join("(%s)" % k for k in d))
+      # Facilitate lookup from group number to value
+      lookup = dict((i+1, v) for i, v in enumerate(d.itervalues()))
 
-def replace_with_dict(s, d):
-    '''replace key words in a string with dictionary '''
-    try:
-        pattern = re.compile(r'\b(' + '|'.join(d.keys()) + r')\b')
-        return pattern.sub(lambda x: d[x.group()], s)
-    except Exception:
-        return s
+      # For each match, find which group matched and expand its value
+      return regex.sub(lambda mo: mo.expand(lookup[mo.lastindex]), text)
+  except Exception:
+      return text
 
 def format_log(offset, dsp_caller = True, *args):
     '''  '''
@@ -32,58 +41,84 @@ class Logger(object):
     INFO = 1
     WARNING = 2
     ERROR = 3
+    # colorful output
+    BLUE = '\033[94m'
+    GREEN = '\033[92m'
+    YELLOW = '\033[93m'
+    RED = '\033[91m'
+    COLOR_END = '\033[0m'
     def __init__(self, f = 'opencog-python.log'):
         try:
             self._file = open(f,'w')
         except IOError:
             print " error: can't open logging file %s " % f
-            #raise IOError
         self._filename = f
-        self.to_stdout = True
         self._levels = set()
+        self.offset = 0
         #
+        self.to_stdout = True
         self.to_file = True
-        self.ident = 0
         self.add_level(Logger.ERROR)
     
-    def debug(self,msg):
-
+    def debug(self,msg, head = "" ):
         try:
             if self.to_file and Logger.DEBUG in self._levels:
-                print >>self._file, "[DEBUG]:"  + str(msg)
-            if self.to_stdout and Logger.DEBUG in self._levels:
-                print "[DEBUG]:" +  str(msg)
-                #pprint("[DEBUG]:"  + str(msg))
+                temp = "[DEBUG]" + head + ":" + str(msg) if head else "[DEBUG]" + str(msg)
+                print >>self._file, temp
         except IOError:
-            print " error: can't write logging file %s " % self._filename
+            print  Logger.RED + " error: can't write logging file %s " % self._filename + Logger.COLOR_END
 
-    def info(self, msg):
+        if self.to_stdout and Logger.DEBUG in self._levels:
+            temp = "[DEBUG]" + head + ":" + str(msg) if head else "[DEBUG]" + str(msg)
+            print Logger.BLUE + temp + Logger.COLOR_END
+
+    def info(self, msg, head = "" ):
         try:
             if self.to_file and Logger.INFO in self._levels:
-                print >>self._file, "[INFO]:"  + str(msg)
-            if self.to_stdout and Logger.INFO in self._levels:
-                print "[INFO]:" +  str(msg)
+                temp = "[INFO]" + head + ":" + str(msg) if head else "[INFO]" + str(msg)
+                print >>self._file, temp
         except IOError:
-            print " error: can't write logging file %s " % self._filename
+            print  Logger.RED + " error: can't write logging file %s " % self._filename + Logger.COLOR_END
+
+        if self.to_stdout and Logger.INFO in self._levels:
+            temp = "[INFO]" + head + ":" + str(msg) if head else "[INFO]" + str(msg)
+            print Logger.GREEN + temp + Logger.COLOR_END
             
 
-    def warning(self,msg):
+    def warning(self,msg, head = "" ):
         try:
             if self.to_file and Logger.WARNING in self._levels:
-                print >>self._file, "[WARNING]:"  + str(msg)
-            if self.to_stdout and Logger.WARNING in self._levels:
-                print "[WARNING]:" +  str(msg)
+                temp = "[WARNING]" + head + ":" + str(msg) if head else "[WARNING]" + str(msg)
+                print >>self._file, temp
         except IOError:
-            print " error: can't write logging file %s " % self._filename
+            print  Logger.RED + " error: can't write logging file %s " % self._filename + Logger.COLOR_END
 
-    def error(self, msg):
+
+        if self.to_stdout and Logger.WARNING in self._levels:
+            temp = "[WARNING]" + head + ":" + str(msg) if head else "[WARNING]" + str(msg)
+            print Logger.YELLOW + temp + Logger.COLOR_END
+
+    def error(self, msg, head = "" ):
         try:
             if self.to_file and Logger.ERROR in self._levels:
-                print >>self._file, "[ERROR]:"  + str(msg)
-            if self.to_stdout and Logger.ERROR in self._levels:
-                print "[ERROR]:" +  str(msg)
+                temp = "[ERROR]" + head + ":" + str(msg) if head else "[ERROR]" + str(msg)
+                print >>self._file, temp
         except IOError:
-            print " error: can't write logging file %s " % self._filename
+            print  Logger.RED + " error: can't write logging file %s " % self._filename + Logger.COLOR_END
+
+        if self.to_stdout and Logger.ERROR in self._levels:
+            temp = "[ERROR]" + head + ":" + str(msg) if head else "[ERROR]" + str(msg)
+            print Logger.RED + temp + Logger.COLOR_END
+
+    def pprint(self, obj):
+        '''docstring for pprint()''' 
+        try:
+            if self.to_file:
+                pprint(obj, self._file)
+        except IOError:
+            print  Logger.RED + " error: can't write logging file %s " % self._filename + Logger.COLOR_END
+        if self.to_stdout:
+            pprint(obj)
 
     def flush(self):
         self._file.flush()

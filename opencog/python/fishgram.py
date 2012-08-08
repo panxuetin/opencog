@@ -15,13 +15,15 @@ from itertools import *
 from collections import namedtuple, defaultdict
 import sys
 import time
-from m_util import log
+from m_util import Logger
 import math
 
 from logic import PLNviz
 
 import gc
 import sys
+log = Logger("fishgram.log")
+log.add_level(Logger.DEBUG)
 
 # unit of timestamps is 0.01 second so multiply by 100
 interval = 100* 20
@@ -48,13 +50,16 @@ def pairwise(iterable):
 
 class Pattern:
     '''Store a basic pattern and other associated data for Fishgram.'''
+    # A pattern is a connected graph, that is to say, all of the expressions in it need to share variables.
     def __init__(self, conj):
         self.conj = conj
         self.seqs = ()
         self.embeddings = []
     
     def __str__(self):
-        return '\x1B[1;37mPattern(\x1B[1;31m'+pp(self.conj)+' \x1B[1;34m'+pp(self.seqs)+'\x1B[1;37m)'
+        #return 'Pattern('+pp(self.conj)+' '+pp(self.seqs)+')'
+        return 'Pattern['+pp(self.conj)+']'
+        #return '\x1B[1;37mPattern(\x1B[1;31m'+pp(self.conj)+' \x1B[1;34m'+pp(self.seqs)+'\x1B[1;37m)'
     def __repr__(self):
         return self.__str__()
 
@@ -102,7 +107,7 @@ class Fishgram:
         use them to create implication rules in a similar way to the APRIORI algorithm. The code uses the Python "yield"
         command, so it can start producing the rules before the search finishes. This is useful if the search (for conjunctions) is slow.'''
         layers = []
-        start = time.time()
+        #start = time.time()
         for layer in self.closed_bfs_layers():
             
             
@@ -143,13 +148,17 @@ class Fishgram:
         conjunctions in a layer may be different lengths. But only due to having more/less SeqAndLinks; they
         will have the same number of other links.'''
         #all_bindinglists = [(obj, ) for obj in self.forest.all_objects]
-        #prev_layer = [((), None )]
+
+        #first layer = [((), None )]
         empty_pattern = Pattern( () )
         empty_b = [{}]
         prev_layer = [(empty_pattern, empty_b)]
         #import ipdb
         #ipdb.set_trace()
         #ff = open('fishgram.log','w')
+
+        import ipdb
+        ipdb.set_trace()
         while len(prev_layer) > 0:
             # Mixing generator and list style because future results depend on previous results.
             # It's less efficient with memory but still allows returning results sooner.
@@ -158,11 +167,10 @@ class Fishgram:
             #print "******"   + str(len(prev_layer))
             if len(new_layer):
 
-                log.debug("************************************************************")
+                #log.debug("****************another layer**************************************")
                 #log.debug(new_layer)
-                pprint(new_layer)
+                #log.pprint(new_layer)
                 #pprint(new_layer)
-                print "self.max_per_layer:%s" %(self.max_per_layer)
                 del new_layer[self.max_per_layer+1:]
                 
                 #conj_length = set(len(pe[0].conj+pe[0].seqs) for pe in new_layer)
@@ -182,6 +190,13 @@ class Fishgram:
 
         return tr, sa_mapping
 
+    ##
+    # @brief 
+    #
+    # @param sa_mapping : var0 -> varxxxx
+    # @param binding:     var0 -> atom
+    #
+    # @return      varxxxxx -> atom
     def _use_new_variables_in_binding(self, sa_mapping, binding):
         s2 = {}
         for (old_var, new_var) in sa_mapping.items():
@@ -253,15 +268,9 @@ class Fishgram:
         def constructor():
             '''Just to make sure the default value is constructed separately each time'''
             return (None,[])
+        # a dict map ptn to element of layer: { ptn: (ptn, bindings)}
         conj2ptn_emblist = defaultdict( constructor )
-        
-        last_realtime = time.time()
         for (ptn, s) in self.find_extensions(prev_layer):
-            last_realtime = time.time()
-
-            conj = ptn.conj + ptn.seqs
-            
-
             tmp = canonical_trees(ptn.conj)
             canonical_conj = tuple(tmp) + ptn.seqs
             
@@ -273,34 +282,31 @@ class Fishgram:
                 # will compare a mixture of predicate names and variable names. Also
                 # when you add two variables, it may break things too...
                 if len(tmp) >= 2 and tmp[-1] < tmp[-2]: continue
-            else:
+            #@@C
+            #else:
+                ## Whether this conjunction is a reordering of an existing one. Currently the
+                ## canonical form only makes variable names consistent, and not orders.
+                #is_reordering = False
+                ##import pdb; pdb.set_trace()
+                #perms = [tuple(canonical_trees(perm)) + ptn.seqs
+                         #for perm in permutations(ptn.conj)
+                         #][1:]
+                ##perms = permutated_canonical_tuples(conj)[1:]
+                #for permcanon in perms:
+                    #if permcanon in conj2ptn_emblist:
+                        #is_reordering = True
+                #if is_reordering:
+                    #continue
 
-                # Whether this conjunction is a reordering of an existing one. Currently the
-                # canonical form only makes variable names consistent, and not orders.
-                is_reordering = False
-                
-                #import pdb; pdb.set_trace()
-                perms = [tuple(canonical_trees(perm)) + ptn.seqs
-                         for perm in permutations(ptn.conj)
-                         ][1:]
-                
-                #perms = permutated_canonical_tuples(conj)[1:]
-                for permcanon in perms:
-                    if permcanon in conj2ptn_emblist:
-                        is_reordering = True
-                
-                if is_reordering:
-                    continue
-            
-            
+            # update bindings if pattern exist, and add new pattern and related bindings
             entry=conj2ptn_emblist[canonical_conj]
-            
+            # collections of s
             embs = entry[1]
-            if s not in entry[1]:
+            if s not in embs:
                 embs.append(s)
+            # a dict with ptn as key
             conj2ptn_emblist[canonical_conj] = (ptn, embs)
-
-            
+        #
         return conj2ptn_emblist.values()
 
     def lookup_extending_rel_embeddings(self, prev_emb):
@@ -322,47 +328,38 @@ class Fishgram:
         the previous layer. It returns a series of (conjunction, substitution) pairs. Where each substitution is
         one way to produce an atom(s) in the AtomSpace by replacing variables in the conjunction. The conjunctions
         will often appear more than once.'''
-        
+        print "**************************************** layer ************************************************" 
         for (prev_ptn,  prev_embeddings) in prev_layer:
-
             firstlayer = (prev_ptn.conj == () and prev_ptn.seqs == ())
-
-
             # They all have the same 'link label' (tree) but may be in different places.
             for e in prev_embeddings:
             # for each new var, if the object is in the previous embedding, then re-map them.
-
                 if firstlayer:
+                    # empty pattern
+                    # [(tree, bindings)]
                     rels_bindingsets = self.forest.tree_embeddings.items() + self.forest.event_embeddings.items()
                 else:
                     rels_bindingsets = self.lookup_extending_rel_embeddings(e) + self.forest.event_embeddings.items()
-
                 for rel_, rel_embs in rels_bindingsets:
-
+                    # rel: standardize tree (substitued trees)
+                    # new_variables: var0 -> varxxxxx      old to new
+                    # rel_embs: var0 -> atom     new to old
+                    # rel_ : substitued tree (related atom substitued not variable)
                     rel, new_variables = self._create_new_variables_rel(rel_)
-
                     for rel_binding in rel_embs:
                         # Give the tree new variables. Rewrite the embeddings to match.
-                        #rel, rel_binding_new_vars = self._create_new_variables(rel_, rel_binding)
-
+                        # varxxxxx -> atom
                         rel_binding_with_new_vars = self._use_new_variables_in_binding(new_variables, rel_binding)
-
-
-
 
                         tmp = self._map_to_existing_variables(e, rel_binding_with_new_vars)
                         if tmp == None:
                             continue
                         remapping, new_s = tmp
-                        
                         remapped_tree = subst(remapping, rel)
-                        
                         if remapped_tree in prev_ptn.conj+prev_ptn.seqs:
                             continue
-                        
                         if rel_.op == 'AtTimeLink' and prev_ptn.seqs:
                             after = self._after_existing_actions(prev_ptn.seqs,remapped_tree,new_s)
-
                         # There needs to be a connection to the existing pattern.
                         # A connection can be one or both of: reusing a variable (for an object or timenode);
                         # or the latest action being shortly after the existing ones. The first action must
@@ -386,18 +383,18 @@ class Fishgram:
                                 # seqs will always contain an exact sequence, so you can't refer to other actions involving the
                                 # same object(s) but at a different time...
                                 accept = after
-                            
                             if accept:
                                 seqs += (remapped_tree,)
                             else:
                                 continue
-                        
-                        
                         remapped_ptn = Pattern(conj)
                         remapped_ptn.seqs = seqs
-
                         self.viz.outputTreeNode(target=list(remapped_ptn.conj+remapped_ptn.seqs),
                                                 parent=list(prev_ptn.conj+prev_ptn.seqs), index=0)
+
+                        print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" 
+                        log.debug(remapped_ptn,"ptn")
+                        log.debug(new_s,"s")
 
                         yield (remapped_ptn, new_s)
 
@@ -753,11 +750,11 @@ try:
                 #print (self.fish.forest.all_trees)
     
             
-            #fish.iterated_implications()
-            #self.fish.implications()
-            print "*******************************************************************************************" 
-            print "runing Fishgram again......" 
-            print "*******************************************************************************************" 
+            ##fish.iterated_implications()
+            ##self.fish.implications()
+            #print "*******************************************************************************************" 
+            #print "runing Fishgram again......" 
+            #print "*******************************************************************************************" 
             result = self.fish.run()
             pprint(result)
             #print "Finished one Fishgram cycle"

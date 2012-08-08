@@ -70,13 +70,13 @@ class ForestExtractor:
         # a tree as different (because of the different variables!)
         # use this number seq to replace related atoms in trees
         #self.i = 0
-        # substitution of trees with "AtTimeLink" as root
+        # substitution of trees which rooted "AtTimeLink" 
         self.event_embeddings = defaultdict(list)
         
         # map from unique tree to set of embeddings.
         # An @embedding is a set of bindings. Maybe store the corresponding link too.
         # @@!
-        # substitution of trees with None "AtTimeLink" as root
+        # substitution of trees which rooted "AtTimeLink"
         self.tree_embeddings = defaultdict(list)
         
         # The incoming links (or rather trees/predicates) for each object.
@@ -88,6 +88,7 @@ class ForestExtractor:
 
     ##
     # @brief :extract a tree root at atom, some replacement happen here
+    #         numbers of atom in the tree is more than which in objects
     #
     # @param atom : the root of the tree
     # @param objects :the other return value
@@ -152,7 +153,7 @@ class ForestExtractor:
                     self.event_embeddings[tree].append(substitution)
                 else:
                     self.tree_embeddings[tree].append(substitution)
-                    # @@? below code is useless
+                    # @@? code below is useless
                     for obj in objects:
                         tree_embeddings_for_obj = self.incoming[obj]
                         if substitution not in tree_embeddings_for_obj[tree]:
