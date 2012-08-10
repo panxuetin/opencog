@@ -153,9 +153,9 @@ class ForestExtractor:
                     self.event_embeddings[tree].append(substitution)
                 else:
                     self.tree_embeddings[tree].append(substitution)
-                    # @@? code below is useless
                     for obj in objects:
                         tree_embeddings_for_obj = self.incoming[obj]
+                        ## @todo could replace with a set
                         if substitution not in tree_embeddings_for_obj[tree]:
                             tree_embeddings_for_obj[tree].append(substitution)
 

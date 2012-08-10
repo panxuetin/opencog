@@ -120,6 +120,8 @@ class ForestExtractor:
         # @@!
         initial_links = [x for x in self.a.get_atoms_by_type(t.Link) if (x.tv.mean > 0.5 and x.tv.confidence > 0)]
         
+        #import ipdb
+        #ipdb.set_trace()
         for link in initial_links:
                      #or x.type_name in ['EvaluationLink', 'InheritanceLink']]: # temporary hack
                      #or x.is_a(t.AndLink)]: # temporary hack
@@ -156,7 +158,6 @@ class ForestExtractor:
                     self.event_embeddings[tree].append(substitution)
                 else:
                     self.tree_embeddings[tree].append(substitution)
-                    # @@? below code is useless
                     for obj in objects:
                         tree_embeddings_for_obj = self.incoming[obj]
                         if substitution not in tree_embeddings_for_obj[tree]:

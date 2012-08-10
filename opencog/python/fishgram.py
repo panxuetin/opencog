@@ -330,16 +330,19 @@ class Fishgram:
     #
     # @param prev_emb: an group of bindings
     #
-    # @return 
+    # @return (tree, [subgroup1, subgroup2, ...]), ...
     def lookup_extending_rel_embeddings(self, prev_emb):
         extensions = defaultdict(list)
         for obj in prev_emb.values():
             tree_embeddings_for_obj = self.forest.incoming[obj]
             for tr_, embs_ in tree_embeddings_for_obj.items():
                 # add them into extensions
+                # @@? s would never in extensions[tr_]
                 extensions[tr_]+= (s for s in embs_ if s not in extensions[tr_])
 
         # you could also have an index for events being in the future
+        # extensions: {tree: [subgroup1, subgroup2, ...], ...}
+        # event_embeddings: {tree: [subgroup1, subgroup2, ...], ...}
         rels_bindingsets = extensions.items() + self.forest.event_embeddings.items()
 
         return rels_bindingsets
@@ -364,7 +367,7 @@ class Fishgram:
                 else:
                     # @@! extend the trees
                     rels_bindingsets = self.lookup_extending_rel_embeddings(e) + self.forest.event_embeddings.items()
-                # rebinding tree by tree
+                ## rebinding extended trees, one  by one
                 for rel_, rel_embs in rels_bindingsets:
                     # rel: standardize substitued trees (make the substitued tree unique)
                     # rel_ : substitued tree (related atom substitued with variable)
@@ -372,7 +375,7 @@ class Fishgram:
                     # prev_embeddings: [binding0, binding1] groups of binding
                     # e: a specific group of binding 
                     rel, new_variables = self._create_new_variables_rel(rel_)
-                    # rebinding node by node
+                    ## rebinding tree node by node
                     for rel_binding in rel_embs:
                         # Give the tree new variables. Rewrite the embeddings to match.
                         # rel_binding: {var0 -> atom0, ...}, one group of binding
@@ -387,9 +390,9 @@ class Fishgram:
                         # remapping: {new_var -> old_var, ...}
                         # new_s: {old_mapping, new_mapping }
                         remapping, new_s = tmp
-                        # rebinding the new find trees with old binding and compare it with old pattern
+                        ## rebinding the new find trees with old binding and compare it with old pattern
                         remapped_tree = subst(remapping, rel)
-                        # @@!
+                        ##
                         if remapped_tree in prev_ptn.conj+prev_ptn.seqs:
                             continue
                         # remapped_tree is extended tree at this point
@@ -400,6 +403,7 @@ class Fishgram:
                         # or the latest action being shortly after the existing ones. The first action must
                         # be connected to an existing object, i.e. it's not after anything but there is a
                         # remapping.
+                        ## monotonous
                         conj = prev_ptn.conj
                         seqs = prev_ptn.seqs
                         #import pdb; pdb.set_trace()
