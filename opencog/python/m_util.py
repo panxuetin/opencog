@@ -9,6 +9,7 @@
 import re
 import inspect
 from pprint import pprint
+
 def dict_sub(d, text):
   """ Replace in 'text' non-overlapping occurences of REs whose patterns are keys
   in dictionary 'd' by corresponding values (which must be constant strings: may
@@ -26,6 +27,7 @@ def dict_sub(d, text):
   except Exception:
       return text
 
+# --------------------------------------------------------------------------------------------------------------
 def format_log(offset, dsp_caller = True, *args):
     '''  '''
     caller = "" 
@@ -47,17 +49,18 @@ class Logger(object):
     YELLOW = '\033[93m'
     RED = '\033[91m'
     COLOR_END = '\033[0m'
-    def __init__(self, f = 'opencog-python.log'):
+    def __init__(self, f):
+        # open logging file
         try:
             self._file = open(f,'w')
         except IOError:
             print " error: can't open logging file %s " % f
         self._filename = f
-        self._levels = set()
+        # default setting
         self.offset = 0
-        #
         self.to_stdout = True
         self.to_file = True
+        self._levels = set()
         self.add_level(Logger.ERROR)
     
     def debug(self,msg, head = "" ):
@@ -110,14 +113,16 @@ class Logger(object):
             temp = "[ERROR]" + head + ":" + str(msg) if head else "[ERROR]" + str(msg)
             print Logger.RED + temp + Logger.COLOR_END
 
-    def pprint(self, obj):
+    def pprint(self, obj, head = "" ):
         '''docstring for pprint()''' 
         try:
             if self.to_file:
+                print head
                 pprint(obj, self._file)
         except IOError:
             print  Logger.RED + " error: can't write logging file %s " % self._filename + Logger.COLOR_END
         if self.to_stdout:
+            print head
             pprint(obj)
 
     def flush(self):
@@ -131,6 +136,29 @@ class Logger(object):
     def add_level(self, level):
         self._levels.add(level)
         '''docstring for add_level''' 
-log = Logger()
-#log.add_level(Logger.ERROR)
-__all__ = ["log", "Logger", "replace_with_dict"]
+# --------------------------------------------------------------------------------------------------------------
+from datetime import datetime
+
+class Simple_Time_Interval(object):
+    """ help to make a rough estimate about the time interval of two time points in seconds"""
+    def __init__(self):
+        self.start_time_stamp = None
+        self.end_time_stamp = None
+        # in seonds
+        self.interval_time_stamp = None
+
+    def start(self):
+        self.start_time_stamp = datetime.now()
+
+    def end(self):
+        self.end_time_stamp = datetime.now()
+
+    def interval(self):
+        ''' return interval in seconds''' 
+        self.interval_time_stamp = (self.end_time_stamp - self.start_time_stamp).seconds
+        return self.interval_time_stamp
+    
+# --------------------------------------------------------------------------------------------------------------
+log = Logger("default.log")
+time_interval = Simple_Time_Interval()
+__all__ = ["log", "time_interval", "Logger", "replace_with_dict"]

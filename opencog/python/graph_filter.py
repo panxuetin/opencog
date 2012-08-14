@@ -81,6 +81,8 @@ class ForestExtractor:
         
         # The incoming links (or rather trees/predicates) for each object.
         # For each object, a mapping from rel -> every embedding involving that object
+        # {obj1:{tree1:[binding_group1, binding_group2, ...], tree2:[], ... }, obj2:{...}}
+        # trees in self.trees_embeddings
         self.incoming = defaultdict(lambda:defaultdict(list))
 
     class UnwantedAtomException(Exception):
@@ -121,16 +123,21 @@ class ForestExtractor:
         initial_links = [x for x in self.a.get_atoms_by_type(t.Link) if (x.tv.mean > 0.5 and x.tv.confidence > 0)]
         
         for link in initial_links:
-            # @@! filter out some type of links as the root of a tree 
+            ##  @@! filter out some type of links as the root of a tree 
             if not self.include_tree(link): continue
             # pathfinding related atoms
             objects = []            
             self.i = 0
             try:
+
+                # 1) tree leaf node of type Var(int tree node) or node atom, inner node as string
+                # 2) tree rooted at link.type_name
                 tree = self.extractTree(link, objects)
                 log.debug(str(tree))
             except(self.UnwantedAtomException):
+                # skip the whole tree!
                 continue
+            ## end of filter
             # fishgram wants objects as trees for consistency, but
             objects = tuple(map(Tree,objects))
             
@@ -164,6 +171,7 @@ class ForestExtractor:
         # Make all bound trees. Enables using lookup_embeddings
         # @@? integrate to above
         # restore to the original tree
+        # replace Var to atom, self.all_bound_trees is actually not a tree, just like @T, as it contain atom!
         self.all_bound_trees = [subst(subst_from_binding(b), tr) for tr, b in zip(self.trees, self.bindings)]    
     
         #pprint({tr:len(embs) for (tr, embs) in self.tree_embeddings.items()})
@@ -270,3 +278,37 @@ class ForestExtractor:
         tree_to_viz_graphic(forest, graph)
         return graph
 
+    #def forest_to_graph(self):
+        #'''docstring for forest_to_graph''' 
+        #a = AtomSpace()
+        ##graph = viz_graph.Viz_Graph()
+        ##viz_trees = map(m_adaptors.Viz_OpenCog_Tree_Adaptor, self.all_bound_trees)
+        ##forest = viz_graph.Tree("forest", viz_trees)
+        ##viz_graph.tree_to_viz_graphic(forest, graph)
+        ##graph.write("forest.dot")
+        ##graph.clear()
+        ##import ipdb
+        ##ipdb.set_trace()
+        #try:
+            #for tree in self.all_bound_trees:
+                #log.debug(str(tree))
+                ##add_tree_to_atomspace(tree,a)
+            ##from atomspace_abserver import Atomspace_Abserver
+            ##print " abserver...." 
+            ##abserver = Atomspace_Abserver(a)
+            ##abserver.graph_info()
+            ##print " filter_graph...." 
+            ##graph = abserver.filter_graph()
+            ##print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^$$^" 
+            ##num = 0
+            ##for node in graph._nx_graph.nodes():
+                ##if node.startswith("EvaluationLink"):
+                    ##num += 1
+                    ##print node
+            ##print num
+            ##print " writing dot" 
+            ##abserver.write("atomspace.dot")
+        #except Exception, e:
+            #print e
+
+        ##return graph

@@ -6,7 +6,7 @@ from types_inheritance import types_graph, name_to_type, is_a
 from collections import defaultdict
 from m_util import log, Logger
 from m_adaptors import FakeAtom
-log.add_level(Logger.DEBUG)
+log.add_level(Logger.INFO)
 log.use_stdout(True)
 
     
@@ -36,13 +36,13 @@ class Atomspace_Abserver(Graph_Abserver):
                         for i, node in enumerate(nodes):
                             if is_a(node.type_name, "Node"):
                                 nodes_info[node.type_name].add(node.name)
-        log.debug("*******************************edges:" )
+        log.info("*******************************edges:" )
         for type_name, num in edges_info.iteritems():
-            log.debug( type_name + ":  " + str(num))
+            log.info( type_name + ":  " + str(num))
             #pprint(edges)
-        log.debug("*******************************nodes:" )
+        log.info("*******************************nodes:" )
         for type_name, nodes in nodes_info.iteritems():
-            log.debug(str(len(nodes)),type_name)
+            log.info(str(len(nodes)),type_name)
             #pprint(nodes)
     
     def _get_edges(self,type):
@@ -79,11 +79,11 @@ class Atomspace_Abserver(Graph_Abserver):
                 if len(nodes) > 0:
                     if self.valid_edge(link,nodes):
                         # make the linkname uniqueness
-                        link_name = link.type_name + str(link.h.value())
+                        link_name = link.type_name + "[%s]"% str(link.h.value())
                         #print link_name
                         for i, node in enumerate(nodes):
                             if is_a(node.type_name, "Link"):
-                               node_name = node.type_name + str(node.h.value())
+                               node_name = node.type_name + "[%s]"% str(node.h.value())
                                #print "***%s" % node_name
                             else:
                                 node_name = node.name

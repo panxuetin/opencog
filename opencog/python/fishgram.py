@@ -7,7 +7,10 @@ except ImportError:
     from atomspace_remote import AtomSpace, types, Atom, TruthValue, types as t
     
 from tree import *
-import adaptors
+try:
+    reload(adaptors)
+except Exception, e:
+    import adaptors
 from pprint import pprint
 from util import *
 import util
@@ -23,9 +26,10 @@ from logic import PLNviz
 import gc
 import sys
 log = Logger("fishgram.log")
-log.add_level(Logger.DEBUG)
+#log.add_level(Logger.DEBUG)
 
 # unit of timestamps is 0.01 second so multiply by 100
+# time interval that two events was supposed to be in the same sequent
 interval = 100* 20
 
 def format_log(*args):
@@ -64,6 +68,21 @@ class Pattern:
         #return '\x1B[1;37mPattern(\x1B[1;31m'+pp(self.conj)+' \x1B[1;34m'+pp(self.seqs)+'\x1B[1;37m)'
     def __repr__(self):
         return self.__str__()
+
+    ##
+    # @brief :given all groups of bindings, return all @ptn instance which is a list of tree instance
+    #
+    # @param embs : all groups of binding in the pattern
+    #
+    # @return :list to list of tree instance
+    def ptn_instances(self, embs):
+        '''docstring for instance_ptns''' 
+        result = []
+        for emb in embs:
+            # ptn_instance is conjunctions of trees[tree1, tree2, ...]
+            ptn_instance = [subst(emb, tree) for tree in self.conj + self.seqs]
+            result.append(ptn_instance)
+        return result
 
 class Fishgram:
     def __init__(self,  atomspace):
@@ -159,8 +178,6 @@ class Fishgram:
         #ipdb.set_trace()
         #ff = open('fishgram.log','w')
 
-        import ipdb
-        ipdb.set_trace()
         while len(prev_layer) > 0:
             # Mixing generator and list style because future results depend on previous results.
             # It's less efficient with memory but still allows returning results sooner.
@@ -168,24 +185,31 @@ class Fishgram:
             new_layer = self.closed_bfs_extend_layer(prev_layer)
             #print "******"   + str(len(prev_layer))
             if len(new_layer):
-
-                #log.debug("****************another layer**************************************")
+                log.info("****************another layer**************************************")
                 #log.debug(new_layer)
                 #log.pprint(new_layer)
                 #pprint(new_layer)
                 del new_layer[self.max_per_layer+1:]
-                
-                #conj_length = set(len(pe[0].conj+pe[0].seqs) for pe in new_layer)
-                #print format_log( '\x1B[1;32m# Conjunctions of size', conj_length, ':', len(new_layer), '\x1B[0m')
-
-
+                conj_length = set(len(pe[0].conj+pe[0].seqs) for pe in new_layer)
+                #log.pprint(new_layer)
+                # check every tree in every pattern of every layer is right
+                log.info(' Conjunctions of size%s:%s'%(conj_length, len(new_layer)))
                 yield new_layer
-
             prev_layer = new_layer
+
+    def if_right(self, new_layer):
+        '''docstring for if_right''' 
+        for item in new_layer:
+            for ptn_instance in item[0].ptn_instances(item[1]):
+                for tree in ptn_instance:
+                    if not self.forest.if_right(tree):
+                        log.debug("^^^^")
+                        log.debug(str(tree))
+                        import ipdb
+                        ipdb.set_trace()
 
     # Helper functions for extensions_simple
     # Code to handle variables. It's not important to understand this (to understand fishgram).
-
     def _create_new_variables_rel(self, tr):
         sa_mapping = {}
         tr = standardize_apart(tr, sa_mapping)
@@ -212,45 +236,50 @@ class Fishgram:
     # @brief 
     #
     # @param prev_binding: {var -> atom, ...}
-    # @param new_binding   new_var -> atom; if atom is not in prev_binding, then it's from extensions 
+    # @param new_binding   {new_var -> atom, ...}; if atom is not in prev_binding, then it's from extensions 
     #                      ,otherwise is a remapping
     #
     # @return: remapping{ new_var -> old_var }, {new_mapping, old_mapping} 
     def _map_to_existing_variables(self, prev_binding, new_binding):
         # In this binding, a variable in the tree might fit an object that is already used.
-        # @@C
-        assert len(new_binding) <= 1
         new_vars = [var for var in new_binding if var not in prev_binding]
         remapping = {}
         new_s = dict(prev_binding)
         for var in new_vars:
             obj = new_binding[var]
             tmp = [(o, v) for (v, o) in prev_binding.items() if o == obj]
-            assert len(tmp) < 2
             if len(tmp) == 1:
                 # remapping
                 # @@? could write better
                 _, existing_variable = tmp[0]
+                # @@! when the new tree did not have the same atom as old @e, there would be no remapping
+                # that is trees from original
                 remapping[var] = existing_variable
             else:
                 # If it is not a redundant var, then add it to the new binding.
                 # from extensions
                 new_s[var] = obj
 
-            # Never allow links that point to the same object twice
             tmp = [(o, v) for (v, o) in new_binding.items() if o == obj]
-            # @@? would never happen
             if len(tmp) > 1:
+                # @@! two var point to the same obj
                 return None
         
         return remapping, new_s
 
+    ##
+    # @brief 
+    #
+    # @param prev_seqs
+    # @param tr :extended or new original tree
+    # @param new_embedding : embeddings
+    #
+    # @return 
     def _after_existing_actions(self,prev_seqs, tr, new_embedding):
         assert isinstance(prev_seqs, tuple)
         assert isinstance(tr, Tree)
         assert isinstance(new_embedding, dict)
         assert tr.op == 'AtTimeLink'
-        
         # Only add times at the end of the sequence
         newly_added_var = tr.args[0]
         newly_added_timestamp = int(new_embedding[newly_added_var].op.name)
@@ -259,10 +288,13 @@ class Fishgram:
         previous_latest_timestamp = int(new_embedding[previous_latest_time_var].op.name)
         
         if 0 < newly_added_timestamp - previous_latest_timestamp <= interval:
+            # after
             return True
         
         if (newly_added_timestamp == previous_latest_timestamp and
             prev_seqs[-1] != tr):
+            # the same time, but not the same tree
+            # @bug, pre previous may == tr, so there may exist same trees in ptn.seq
             return True
         
         return False
@@ -316,7 +348,7 @@ class Fishgram:
 
             # update bindings if pattern exist, and add new pattern and related bindings
             entry=conj2ptn_emblist[canonical_conj]
-            # collections of s
+            # collect each binding of ptn
             embs = entry[1]
             if s not in embs:
                 embs.append(s)
@@ -326,25 +358,33 @@ class Fishgram:
         return conj2ptn_emblist.values()
 
     ##
-    # @brief 
+    # @brief find trees have at least one common atom with @e plus some original event_trees
     #
-    # @param prev_emb: an group of bindings
+    # @param prev_emb: an group of binding of a tree
     #
     # @return (tree, [subgroup1, subgroup2, ...]), ...
     def lookup_extending_rel_embeddings(self, prev_emb):
         extensions = defaultdict(list)
         for obj in prev_emb.values():
+            # forest.incoming: {obj1:{tree1:[binding_group1, binding_group2, ...], tree2:[], ... }, obj2:{...}}
+            # tree_embeddings_for_obj: trees including @obj-----{tree1:[], tree2:[] }
             tree_embeddings_for_obj = self.forest.incoming[obj]
             for tr_, embs_ in tree_embeddings_for_obj.items():
                 # add them into extensions
                 # @@? s would never in extensions[tr_]
+                #log.debug("^^^^^^^^^^^^^^^^^^^^^^^^^^^^" )
+                #log.debug(embs_,"embs_")
+                #log.debug(extensions[tr_],"extensions[tr_]:" )
+                # when two tree have the same structure, but different b
                 extensions[tr_]+= (s for s in embs_ if s not in extensions[tr_])
+                pass
+                #assert embs_ == extensions[tr_]
+            # @@C
 
         # you could also have an index for events being in the future
         # extensions: {tree: [subgroup1, subgroup2, ...], ...}
         # event_embeddings: {tree: [subgroup1, subgroup2, ...], ...}
         rels_bindingsets = extensions.items() + self.forest.event_embeddings.items()
-
         return rels_bindingsets
 
 
@@ -353,10 +393,11 @@ class Fishgram:
         the previous layer. It returns a series of (conjunction, substitution) pairs. Where each substitution is
         one way to produce an atom(s) in the AtomSpace by replacing variables in the conjunction. The conjunctions
         will often appear more than once.'''
-        print "**************************************** layer ************************************************" 
+        log.debug("**************************************** layer ************************************************" )
         for (prev_ptn,  prev_embeddings) in prev_layer:
             firstlayer = (prev_ptn.conj == () and prev_ptn.seqs == ())
-            # They all have the same 'link label' (tree) but may be in different places.
+            # prev_embeddings: [binding0, binding1] groups of binding
+            # e: a specific group of binding 
             # extend instance by instance
             for e in prev_embeddings:
             # for each new var, if the object is in the previous embedding, then re-map them.
@@ -366,36 +407,37 @@ class Fishgram:
                     rels_bindingsets = self.forest.tree_embeddings.items() + self.forest.event_embeddings.items()
                 else:
                     # @@! extend the trees
+                    ## with e, imported new potenial bigger tree
                     rels_bindingsets = self.lookup_extending_rel_embeddings(e) + self.forest.event_embeddings.items()
-                ## rebinding extended trees, one  by one
+                ## rebinding extended trees class, one  by one
                 for rel_, rel_embs in rels_bindingsets:
                     # rel: standardize substitued trees (make the substitued tree unique)
                     # rel_ : substitued tree (related atom substitued with variable)
                     # rel_embs: [{var0 -> atom0,... }, ...]   groups of binding
-                    # prev_embeddings: [binding0, binding1] groups of binding
-                    # e: a specific group of binding 
+                    # new_variables: {var0 -> varxxxxx, ...}      old to new
                     rel, new_variables = self._create_new_variables_rel(rel_)
-                    ## rebinding tree node by node
+                    ## rebinding tree instance by instance
+                    # rel_binding: {var0 -> atom0, ...}, one group of binding
                     for rel_binding in rel_embs:
                         # Give the tree new variables. Rewrite the embeddings to match.
-                        # rel_binding: {var0 -> atom0, ...}, one group of binding
-                        # new_variables: {var0 -> varxxxxx, ...}      old to new
                         # rel_binding_with_new_vars: {varxxxxx -> atom0, ...}
                         rel_binding_with_new_vars = self._use_new_variables_in_binding(new_variables, rel_binding)
                         # second binding -> previous binding( var_new -> var_old ), previous bindings(e)
                         tmp = self._map_to_existing_variables(e, rel_binding_with_new_vars)
                         if tmp == None:
-                            # @@? would never happened, see @_map_to_existing_variables
+                            # when two vars binding to the same atom in rel_binding
+                            # @@! in a extended tree, there could be two different var binding to the same atom
+                            # @bug
                             continue
                         # remapping: {new_var -> old_var, ...}
-                        # new_s: {old_mapping, new_mapping }
+                        # new_s: {old_mapping, attended mapping } (var-> atom)
                         remapping, new_s = tmp
                         ## rebinding the new find trees with old binding and compare it with old pattern
                         remapped_tree = subst(remapping, rel)
                         ##
                         if remapped_tree in prev_ptn.conj+prev_ptn.seqs:
                             continue
-                        # remapped_tree is extended tree at this point
+                        # remapped_tree is extended tree at this point, or new original tree
                         if rel_.op == 'AtTimeLink' and prev_ptn.seqs:
                             after = self._after_existing_actions(prev_ptn.seqs,remapped_tree,new_s)
                         # There needs to be a connection to the existing pattern.
@@ -416,8 +458,7 @@ class Fishgram:
                                 continue
                         else:
                             if len(prev_ptn.seqs) == 0:
-                                # first time or find extended tree
-                                # when previous seqs is empty, and remapping happen, or for the first time
+                                # when len(remapping)==0, implys the new tree share the same atom with pre_ptn.conj
                                 accept = ( len(remapping) or firstlayer)
                             else:
                                 # Note: 'after' means the new timestamp is greater than OR EQUAL TO the existing one.
@@ -430,13 +471,11 @@ class Fishgram:
                                 continue
                         remapped_ptn = Pattern(conj)
                         remapped_ptn.seqs = seqs
-                        self.viz.outputTreeNode(target=list(remapped_ptn.conj+remapped_ptn.seqs),
-                                                parent=list(prev_ptn.conj+prev_ptn.seqs), index=0)
 
-                        #print "^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" 
+                        #log.debug("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" )
                         #log.debug(remapped_ptn,"ptn")
                         #log.debug(new_s,"s")
-
+                        ## throw bigger tree and it's binding one by one
                         yield (remapped_ptn, new_s)
 
     def prune_frequency(self, layer):

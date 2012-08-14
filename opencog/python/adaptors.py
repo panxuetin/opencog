@@ -33,7 +33,6 @@ class ForestExtractor:
         # Only affects output
         self.compact_binary_links = True
         # Spatial relations are useful, but cause a big combinatorial explosion
-        # @@!
         self.unwanted_atoms = set(['proximity', 'next', 'near',
             'beside', 'left_of', 'right_of', 'far', 'behind', 'in_front_of',
             'between', 'touching', 'outside', 'above', 'below', # 'inside',
@@ -56,18 +55,11 @@ class ForestExtractor:
             'can_do'])
         
         # state
-        # @@!only useful for pathfinding visualization!
-        # none TimeNode in elements of self.bindings
-        self.all_objects  = set()
-        # TimeNode in elements of self.bindings
+        self.all_objects  = set()# all objects in the AtomSpace
         self.all_timestamps = set()
-        # related trees, trees include pathfinding related atoms
         self.all_trees = []
-        # root(link) of related trees
         self.all_trees_atoms = []
-        # path finding related atom list( a list to list )
         self.bindings = []
-        # @@! 
         # variable counter
         # NOTE: If you set it to 0 here, it will give unique variables to every tree. BUT it will then count every occurrence of
         # a tree as different (because of the different variables!)
@@ -77,7 +69,6 @@ class ForestExtractor:
         
         # fishgram-specific experiments. Refactor later
         # map from unique tree to set of embeddings. An embedding is a set of bindings. Maybe store the corresponding link too.
-        # @@!
         self.tree_embeddings = defaultdict(list)
         
         # The incoming links (or rather trees/predicates) for each object.
@@ -87,27 +78,16 @@ class ForestExtractor:
     class UnwantedAtomException(Exception):
         pass
 
-    ##
-    # @brief :extract a tree root at atom, some replacement happen here
-    #
-    # @param atom : the root of the tree
-    # @param objects :the other return value
-    #
-    # @return :1) tree leaf node of type variable or node atom,
-    #          2) tree rooted at link.type_name
     def extractTree(self,  atom, objects):
         if not self.include_atom(atom):
             raise self.UnwantedAtomException
         elif self.is_object(atom):
-            # used for path finding
             objects.append(atom)
             self.i+=1
-            # @@! used variable replace some type of atom
             return Var(self.i-1)
         elif self.is_action_instance(atom):
             #print 'is_action_instance', atom
             # this is moderatly tacky, but doing anything different would require lots of changes...
-            # @@! used empty ListLink replace action atom
             return Tree('ListLink', [])
         elif atom.is_node():
             return Tree(atom)
@@ -117,41 +97,47 @@ class ForestExtractor:
 
     def extractForest(self):
         # TODO >0.5 for a fuzzy link means it's true, but probabilistic links may work differently        
-        # @@!
         initial_links = [x for x in self.a.get_atoms_by_type(t.Link) if (x.tv.mean > 0.5 and x.tv.confidence > 0)]
         
-        #import ipdb
-        #ipdb.set_trace()
         for link in initial_links:
                      #or x.type_name in ['EvaluationLink', 'InheritanceLink']]: # temporary hack
                      #or x.is_a(t.AndLink)]: # temporary hack
             if self.attentional_focus and link.av['sti'] <= -10:
                 continue
-            # @@! filter out some type of links as the root of a tree 
+            
             if not self.include_tree(link): continue
-            # pathfinding related atoms
+            #print link
+            
             objects = []            
+            #print self.extractTree(link, objects),  objects, self.i
             self.i = 0
             try:
                 tree = self.extractTree(link, objects)
+                #print tree
             except(self.UnwantedAtomException):
+                #print 'UnwantedAtomException'
                 continue
             # fishgram wants objects as trees for consistency, but
+            # gephi output class wants atoms...
             objects = tuple(map(Tree,objects))
             
+            #print tree,  [str(o) for o in objects]
+            
             # policy - throw out trees with no objects
-            # @@!
             if len(objects):
                 self.all_trees.append(tree)
                 self.all_trees_atoms.append(link)
+                
+                
                 self.bindings.append(objects)
-
+                
                 for obj in objects:
                     if obj.get_type() != t.TimeNode:
+                    #if obj.t != t.TimeNode:
                         self.all_objects.add(obj)
                     else:
                         self.all_timestamps.add(obj)
-
+                    
                 # fishgram-specific
                 substitution = subst_from_binding(objects)
                 if tree.op == 'AtTimeLink':
@@ -163,13 +149,25 @@ class ForestExtractor:
                         if substitution not in tree_embeddings_for_obj[tree]:
                             tree_embeddings_for_obj[tree].append(substitution)
 
+                #size= len(objects)
+                #tree_id = len(self.all_trees) - 1
+                #for slot in xrange(size):
+                #    obj = objects[slot]
+                #    
+                #    if obj not in self.incoming:
+                #        self.incoming[obj] = {}
+                #    if size not in self.incoming[obj]:
+                #        self.incoming[obj][size] = {}
+                #    if slot not in self.incoming[obj][size]:
+                #        self.incoming[obj][size][slot] = []
+                #    self.incoming[obj][size][slot].append(tree_id)
         
         # Make all bound trees. Enables using lookup_embeddings
         self.all_bound_trees = [subst(subst_from_binding(b), tr) for tr, b in zip(self.all_trees, self.bindings)]    
     
-        #pprint({tr:len(embs) for (tr, embs) in self.tree_embeddings.items()})
+        pprint({tr:len(embs) for (tr, embs) in self.tree_embeddings.items()})
         
-        #print self.all_objects, self.all_timestamps
+        print self.all_objects, self.all_timestamps
 
     def output_tree(self, atom,  tree,  bindings):
         vertex_name = str(tree)
@@ -236,9 +234,9 @@ class ForestExtractor:
         ## Policy: Only do objects not times
         #if link.is_a(t.AtTimeLink):
         #    return False
+
         # TODO check the TruthValue the same way as you would for other links.
         # work around hacks in other modules
-        # @@! filter out some type of links as the root of a tree
         if any([i.is_a(t.AtTimeLink) for i in link.incoming]):
             return False
         if link.is_a(t.ExecutionLink) or link.is_a(t.ForAllLink) or link.is_a(t.AndLink):

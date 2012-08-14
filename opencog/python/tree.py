@@ -24,17 +24,19 @@ def T(op, *args):
     # into Trees (BUT NOT RECURSIVELY!). Just using the Tree constructor directly would
     # be more appropriate if you need efficiency or want to use the Trees to represent
     # something beside Atoms.
-    
+
     if len(args) and isinstance(args[0], list):
         args = args[0]
     # Transparently record Links as strings rather than Handles
     assert type(op) != type(None)
     if len(args):
         if isinstance(op, Atom):
-            #assert not op.is_a(types.Link)
+            # @@?
+            # should be assert op.is_a(types.Link)
             assert op.is_a(types.Node)
             final_op = op.type_name
         else:
+            # @@! atom node, not a serious tree
             final_op = op
         final_args = [coerce_tree(x) for x in args]
     else:
@@ -239,6 +241,7 @@ def atom_from_tree(tree, a):
     else:
         out = [atom_from_tree(x, a) for x in tree.args]
         return a.add(get_type(tree.op), out=out)
+
 
 def find(template, atoms):
     return [a for a in atoms if unify(tree_from_atom(a), template, {}) != None]
@@ -458,6 +461,7 @@ def subst_conjunction(substitution, conjunction):
     return tuple(ret)
 
 def subst_from_binding(binding):
+    ''' binding: atom list '''
     # maps from  var tree to related atom
     # encode every atom with a variables, start from zero
     return dict([ (Tree(i), obj) for i, obj in enumerate(binding)])
