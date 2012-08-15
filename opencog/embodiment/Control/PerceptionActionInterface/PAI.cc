@@ -131,6 +131,8 @@ PAI::PAI(AtomSpace& _atomSpace, ActionPlanSender& _actionSender,
 
     enableCollectActions = config().get_bool("ENABLE_ACTION_COLLECT");
 
+
+
 }
 
 PAI::~PAI()
@@ -2533,6 +2535,7 @@ void PAI::processMapInfo(DOMElement* element, HandleSeq &toUpdateHandles, bool u
         return;
     }
 
+    XMLString::transcode(IS_FIRST_TIME_PERCEPT_WORLD, tag, PAIUtils::MAX_TAG_LENGTH);
     char* isFirstPercept = XMLString::transcode(element->getAttribute(tag));
     string isFirstPerceptStr(isFirstPercept);
     bool isFirstPerceptWorld;
@@ -3559,6 +3562,27 @@ Handle PAI::removeEntityFromAtomSpace(const MapInfo& mapinfo, unsigned long time
     return objectNode;
 }
 
+int roundDoubleToInt(double x)
+ {
+     int inter = (int)x;
+     if (x > 0)
+     {
+         double d = x - inter;
+         if (d > 0.51)
+             return (inter + 1);
+         else
+             return inter;
+     }
+     else
+     {
+         double d = inter - x;
+         if (d > 0.51)
+             return (inter - 1);
+         else
+             return inter;
+     }
+ }
+
 bool PAI::addSpacePredicates( Handle objectNode, const MapInfo& mapinfo, unsigned long timestamp,bool isFirstTimePercept)
 {
     std::string objectName = atomSpace.getName(objectNode);
@@ -3587,8 +3611,8 @@ bool PAI::addSpacePredicates( Handle objectNode, const MapInfo& mapinfo, unsigne
         // If the object is the Pet, save its radius for new space maps
         if (isSelfObject) {
             unsigned int agentRadius = sqrt(length * length + width * width) / 2;
-            atomSpace.getSpaceServer().setAgentRadius((unsigned int)agentRadius);
-            atomSpace.getSpaceServer().setAgentHeight((unsigned int)height);
+            atomSpace.getSpaceServer().setAgentRadius(agentRadius);
+            atomSpace.getSpaceServer().setAgentHeight(roundDoubleToInt(height) );
         }
     } else {
         // Get the length, width and height of the object
@@ -3657,10 +3681,12 @@ bool PAI::addSpacePredicates( Handle objectNode, const MapInfo& mapinfo, unsigne
     std::string material = getStringProperty(getPropertyMap(mapinfo), MATERIAL_ATTRIBUTE);
 
     // Space server insertion
-    return atomSpace.getSpaceServer().addSpaceInfo(objectNode, timestamp, (int)position.x, (int)position.y, (int)position.z,
-                                    (int)length, (int)width, (int)height, rotation.yaw, isObstacle, entityClass,objectName,material);
+    // round up these values
+    return atomSpace.getSpaceServer().addSpaceInfo(objectNode, timestamp, roundDoubleToInt(position.x), roundDoubleToInt(position.y), roundDoubleToInt(position.z),
+                                    roundDoubleToInt(length), roundDoubleToInt(width), roundDoubleToInt(height), rotation.yaw, isObstacle, entityClass,objectName,material);
 
 }
+
 
 void PAI::addEntityProperties(Handle objectNode, bool isSelfObject, const MapInfo& mapinfo)
 {

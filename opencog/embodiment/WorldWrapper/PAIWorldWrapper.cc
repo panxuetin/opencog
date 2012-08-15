@@ -32,7 +32,7 @@
 
 #include <opencog/atomspace/Node.h>
 
-#include <opencog/spatial/HPASearch.h>
+#include <opencog/spatial/3DSpaceMap/Pathfinder3D.h>
 #include <opencog/spatial/TangentBug.h>
 #include <opencog/spatial/AStarController.h>
 #include <opencog/spatial/AStar3DController.h>
@@ -181,7 +181,7 @@ throw (ComboException, AssertionException, std::bad_exception)
                 if (sm.containsObject(targetHandle))
                 {
                     if (!build_goto_plan(targetHandle, Handle::UNDEFINED, walkSpeed ))
-
+                    {
                         if (_hasPlanFailed) {
                             logger().error("PAIWorldWrapper - Failed to create a goto plan to the goal.");
                             throw ComboException(TRACE_INFO, "PAIWorldWrapper - %s.", "Failed to create a goto plan to the goal");
@@ -193,6 +193,7 @@ throw (ComboException, AssertionException, std::bad_exception)
                         } // else
                         MAIN_LOGGER_ACTION_PLAN_FAILED;
                         return false;
+                    }
 
                 }
                 else
@@ -599,58 +600,18 @@ void PAIWorldWrapper::getWaypoints( const spatial::Point& startPoint,
 */
 
 void PAIWorldWrapper::get3DWaypoints( const SpaceServer::SpaceMapPoint& startPoint,
-        const SpaceServer::SpaceMapPoint& endPoint, std::vector<SpaceServer::SpaceMapPoint>& actions )
+        const SpaceServer::SpaceMapPoint& endPoint, std::vector<SpaceServer::SpaceMapPoint>& actions,SpaceServer::SpaceMap& sm )
 {
-
-//    struct timeval timer_start, timer_end;
-//    time_t elapsed_time = 0;
-//    const SpaceServer::SpaceMap& sm = pai.getAtomSpace().getSpaceServer().getLatestMap();
-//    double maxDeltaHeight = opencog::config().get_double("ASTAR3D_DELTA_HEIGHT");
-
-//    gettimeofday(&timer_start, NULL);
-//    /*
-//    printf("Start A* 3D navigation. Delta height for each node: %.2f\n", maxDeltaHeight);
-//    */
-//printf("Original start point (%lf, %lf, %lf); goal point (%lf, %lf, %lf).\n",
-//        startPoint.get<0>(), startPoint.get<1>(), startPoint.get<2>(),
-//        endPoint.get<0>(), endPoint.get<1>(), endPoint.get<2>());
-
-//    spatial::Point3D correctedEndPoint = sm.getNearestFree3DPoint(endPoint, config().get_double("ASTAR3D_DELTA_HEIGHT"));
-
-//printf("Corrected goal point (%lf, %lf, %lf).\n", correctedEndPoint.get<0>(), correctedEndPoint.get<1>(), correctedEndPoint.get<2>());
-
-//    spatial::AStar3DController AStar3D;
-//    SpaceServer::SpaceMap *map = const_cast<SpaceServer::SpaceMap*>(&sm);
-//    AStar3D.setMap( map );
-
-//    spatial::LSMap3DSearchNode petNode = spatial::LSMap3DSearchNode(sm.snap(spatial::Point(startPoint.get<0>(),
-//                                                                            startPoint.get<1>())),
-//                                                                    maxDeltaHeight);
-//    petNode.z = startPoint.get<2>();
-//    spatial::LSMap3DSearchNode goalNode = spatial::LSMap3DSearchNode(sm.snap(spatial::Point(correctedEndPoint.get<0>(),
-//                                                                                            correctedEndPoint.get<1>())),
-//                                                                     maxDeltaHeight);
-//    goalNode.z = correctedEndPoint.get<2>();
-
-//    AStar3D.setStartAndGoalStates(petNode, goalNode);
-
-//    //finally, run AStar
-//    _hasPlanFailed = (AStar3D.findPath() != spatial::AStarSearch<spatial::LSMap3DSearchNode>::SEARCH_STATE_SUCCEEDED);
-//    actions = AStar3D.getShortestCalculatedPath( );
-
-//    logger().debug("PAIWorldWrapper - AStar result %s.", !_hasPlanFailed ? "true" : "false");
-
-//    gettimeofday(&timer_end, NULL);
-//    elapsed_time += ((timer_end.tv_sec - timer_start.tv_sec) * 1000000) +
-//                   (timer_end.tv_usec - timer_start.tv_usec);
-    
-//    printf("PAIWorldWrapper - pathfinding [ASTAR3D]: consuming %f seconds.\n",
-//           1.0 * elapsed_time/1000000);
-//    printf("Path found:");
-//    foreach (spatial::Point3D& point, actions) {
-//        printf("=> <%.3f, %.3f, %.3f> ", point.get<0>(), point.get<1>(), point.get<2>());
-//    }
-//    printf("\n");
+    if (spatial::Pathfinder3D::AStar3DPathFinder(&sm,startPoint,endPoint,actions))
+    {
+        printf("Pathfinding successfully! From (%d,%d,%d) to (%d, %d, %d)",
+               startPoint.x,startPoint.y,startPoint.z,endPoint.x, endPoint.y,endPoint.z);
+    }
+    else
+    {
+        printf("Pathfinding failed! From (%d,%d,%d) to (%d, %d, %d)",
+               startPoint.x,startPoint.y,startPoint.z,endPoint.x, endPoint.y,endPoint.z);
+    }
 
 }
 
@@ -711,55 +672,56 @@ bool PAIWorldWrapper::createWalkPlanAction( std::vector<spatial::Point>& actions
 bool PAIWorldWrapper::createNavigationPlanAction( std::vector<SpaceServer::SpaceMapPoint>& actions, bool useExistingId, Handle toNudge, float customSpeed )
 {
 
-//    if ( actions.empty( ) ) {
-//        // we're done. No need to create any navigation actions
-//        logger().debug("PAIWorldWrapper - Zero actions from AStar3D.");
-//        return false;
-//    }
+    // the first pos in actions vector is the begin pos, so there should be at least 2 elements in this vector
+    if ( actions.size() < 2 ) {
+        // we're done. No need to create any navigation actions
+        logger().debug("PAIWorldWrapper - Zero actions from AStar3D.");
+        return false;
+    }
 
-//    // --------------------------------------------------------------------
-//    // transform to a sequence of navigation commands
-//    // --------------------------------------------------------------------
+    // --------------------------------------------------------------------
+    // transform to a sequence of navigation commands
+    // --------------------------------------------------------------------
 
-//    if (!useExistingId ) {
-//        planID = pai.createActionPlan( );
-//    } // if
-//    vector<SpaceServer::SpaceMapPoint>::iterator it_point = actions.begin();
+    if (!useExistingId ) {
+        planID = pai.createActionPlan( );
+    } // if
+    vector<SpaceServer::SpaceMapPoint>::iterator it_point = actions.begin();
+    it_point ++;
 
-//    while (it_point != actions.end()) {
-//        PetAction action;
+    while (it_point != actions.end()) {
+        PetAction action;
 
-//            action = PetAction(ActionType::WALK());
-//            action.addParameter(ActionParameter("target",
-//                                                ActionParamType::VECTOR(),
-//                                                Vector(it_point->get<0>(),
-//                                                       it_point->get<1>(),
-//                                                       it_point->get<2>())));
+        // The agent need to jump when this pos is higher than last pos
+        if (((SpaceServer::SpaceMapPoint)(*(it_point))).z > ((SpaceServer::SpaceMapPoint)(*(it_point-1))).z )
+        {
+            action = PetAction(ActionType::JUMP_TOWARD());
+            action.addParameter(ActionParameter("direction",
+                                                ActionParamType::VECTOR(),
+                                                Vector(((SpaceServer::SpaceMapPoint)(*it_point)).x,
+                                                       ((SpaceServer::SpaceMapPoint)(*it_point)).y,
+                                                       ((SpaceServer::SpaceMapPoint)(*it_point)).z )));
+        }
+        else
+        {
+            action = PetAction(ActionType::WALK());
+            action.addParameter(ActionParameter("target",
+                                                ActionParamType::VECTOR(),
+                                                Vector(((SpaceServer::SpaceMapPoint)(*it_point)).x,
+                                                       ((SpaceServer::SpaceMapPoint)(*it_point)).y,
+                                                       ((SpaceServer::SpaceMapPoint)(*it_point)).z )));
 
-//            float speed = ( customSpeed != 0 ) ?
-//                    customSpeed : pai.getAvatarInterface().computeWalkingSpeed();
-//            logger().debug("PAIWorldWrapper::createNavigationPlanAction customSpeed[%f] finalSpeed[%f]",
-//                    customSpeed, speed );
-//            action.addParameter(ActionParameter("speed", ActionParamType::FLOAT(),
-//                    lexical_cast<string>( speed) ) );
+            float speed = ( customSpeed != 0 ) ?
+                    customSpeed : pai.getAvatarInterface().computeWalkingSpeed();
+            logger().debug("PAIWorldWrapper::createNavigationPlanAction customSpeed[%f] finalSpeed[%f]",
+                    customSpeed, speed );
+            action.addParameter(ActionParameter("speed", ActionParamType::FLOAT(),
+                    lexical_cast<string>( speed) ) );
 
-//            pai.addAction( planID, action );
-
-//            // The agent need to jump only when the delta height is larger than
-//            // a threshold, which is the minimum delta height used in AStar 3D
-//            // pathfinding.
-//            if (std::abs(it_point->get<2>()) > 0.1) {
-//                action = PetAction(ActionType::JUMP_TOWARD());
-//                action.addParameter(ActionParameter("direction",
-//                                                    ActionParamType::VECTOR(),
-//                                                    Vector((it_point+1)->get<0>(),
-//                                                           (it_point+1)->get<1>(),
-//                                                           (it_point)->get<2>())));
-//                pai.addAction( planID, action );
-//            }
-
-//        it_point++;
-//    } // while
+        }
+        pai.addAction( planID, action );
+        it_point++;
+    } // while
 
     return true;
 }
@@ -801,7 +763,7 @@ bool PAIWorldWrapper::build_goto_plan(Handle goalHandle,
 
     if (targetCenterPosition != spatial::BlockVector::ZERO)
     {
-        endPoint = spaceMap.getNearFreePointAtDistance(startPoint, SpaceServer::SpaceMap::AccessDistance, direction );
+        endPoint = spaceMap.getNearFreePointAtDistance(targetCenterPosition, SpaceServer::SpaceMap::AccessDistance, direction );
     }else
     {
         endPoint = spatial::BlockVector::ZERO;
@@ -826,7 +788,7 @@ bool PAIWorldWrapper::build_goto_plan(Handle goalHandle,
     {
         std::vector<SpaceServer::SpaceMapPoint> actions;
 
-        get3DWaypoints( startPoint, endPoint, actions );
+        get3DWaypoints( startPoint, endPoint, actions ,(SpaceServer::SpaceMap&)spaceMap);
 
         float speed = ( walkSpeed != 0 ) ?
                 walkSpeed : pai.getAvatarInterface().computeWalkingSpeed();
