@@ -401,7 +401,7 @@ class Fishgram:
                     # [(tree, [binding group1, binding group2, ...]), ...], from original, if there is a bug in atomspace
                     # [(tree, set([binding group1, binding group2, ...])), ...], from extend and none atomspace bug original tree
                     # there may exist two var point to the same atom in the same binding group, if exist, it will
-                    # be ignore later, which is actually a bug
+                    # be ignored later, which is actually a bug
                     # trees share at least one commmon atom (@related tree), and from original event.(@potential trees)
                     rels_bindingsets = self.lookup_extending_rel_embeddings(e) + self.forest.event_embeddings.items()
                 ## for each prototype in potential trees
@@ -433,7 +433,7 @@ class Fishgram:
                         if remapped_tree in prev_ptn.conj+prev_ptn.seqs:
                             continue
                         # remapped_tree is extended tree prototype at this point, or new original tree prototype
-                        # but it's new anyway 
+                        # but it's new anyway, and may not share the same atom if len(remapping) == 0 
                         if rel_.op == 'AtTimeLink' and prev_ptn.seqs:
                             after = self._after_existing_actions(prev_ptn.seqs,remapped_tree,new_s)
                         # There needs to be a connection to the existing pattern.
@@ -457,8 +457,7 @@ class Fishgram:
                                 accept = ( len(remapping) or firstlayer)
                             else:
                                 # Note: 'after' means the new timestamp is greater than OR EQUAL TO the existing one.
-                                # seqs will always contain an exact sequence, so you can't refer to other actions involving the
-                                # same object(s) but at a different time...
+                                # @@! event don't have to share the same atom!
                                 accept = after
                             if accept:
                                 seqs += (remapped_tree,)
