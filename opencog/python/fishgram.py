@@ -402,16 +402,16 @@ class Fishgram:
                     # [(tree, set([binding group1, binding group2, ...])), ...], from extend and none atomspace bug original tree
                     # there may exist two var point to the same atom in the same binding group, if exist, it will
                     # be ignore later, which is actually a bug
-                    # trees share at least one commmon atom, or from original event
+                    # trees share at least one commmon atom (@related tree), and from original event.(@potential trees)
                     rels_bindingsets = self.lookup_extending_rel_embeddings(e) + self.forest.event_embeddings.items()
-                ## rebinding extended trees prototype, one  by one
+                ## for each prototype in potential trees
                 for rel_, rel_embs in rels_bindingsets:
                     # rel: standardize substitued trees (make the substitued tree unique)
                     # rel_ : substitued tree (related atom substitued with variable)
                     # rel_embs: [{var0 -> Tree(atom0),... }, ...]   groups of binding
                     # new_variables: {var0 -> varxxxxx, ...}      old to new
                     rel, new_variables = self._create_new_variables_rel(rel_)
-                    ## rebinding tree instance by instance
+                    ## for each tree instance in tree prototype
                     # rel_binding: {var0 -> atom0, ...}, one group of binding, there may exist two var point to the same atom
                     for rel_binding in rel_embs:
                         # Give the tree new variables. Rewrite the embeddings to match.
