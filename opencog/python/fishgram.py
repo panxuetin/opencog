@@ -415,16 +415,16 @@ class Fishgram:
                     # rel_binding: {var0 -> atom0, ...}, one group of binding, there may exist two var point to the same atom
                     for rel_binding in rel_embs:
                         # Give the tree new variables. Rewrite the embeddings to match.
-                        # rel_binding_with_new_vars: {varxxxxx -> atom0, ...}
+                        # rel_binding_with_new_vars: {varxxxxx -> atom0, ...}, there may exist two var point to the same atom
                         rel_binding_with_new_vars = self._use_new_variables_in_binding(new_variables, rel_binding)
-                        # second binding -> previous binding( var_new -> var_old ), previous bindings(e)
+                        # second binding -> previous binding( varxxxx -> var_e ), previous bindings(e)
                         tmp = self._map_to_existing_variables(e, rel_binding_with_new_vars)
                         if tmp == None:
                             # when two vars binding to the same atom in rel_binding
                             # @@! in a extended tree, there could be two different var binding to the same atom
                             # @bug ignore it is actually a bug, but it assert that bindings in a group of ptn is a set
                             continue
-                        # remapping: {new_var -> old_var, ...}
+                        # remapping: {varxxxx -> var_e, ...}
                         # new_s: {set(old_mapping, attended mapping)} (var-> atom)
                         remapping, new_s = tmp
                         ## rebinding the new find trees with old binding and compare it with old pattern
