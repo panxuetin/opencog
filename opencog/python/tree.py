@@ -10,6 +10,7 @@ from itertools import permutations
 from util import *
 
 from collections import namedtuple
+from m_util import hs_dict
 
 def coerce_tree(x):
     assert type(x) != type(None)
@@ -464,7 +465,7 @@ def subst_from_binding(binding):
     ''' binding: atom list '''
     # maps from  var tree to related atom
     # encode every atom with a variables, start from zero
-    return dict([ (Tree(i), obj) for i, obj in enumerate(binding)])
+    return hs_dict([ (Tree(i), obj) for i, obj in enumerate(binding)])
 
 def binding_from_subst(subst, atomspace):
     #return [ atom_from_tree(obj_tree, atomspace) for (var, obj_tree) in sorted(subst.items()) ]

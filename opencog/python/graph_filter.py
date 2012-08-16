@@ -52,7 +52,8 @@ class ForestExtractor:
         
         # state
         # @@!only useful for pathfinding visualization!
-        # related trees which include pathfinding related atoms(which are replaced by variables)
+        # related tree shape which include pathfinding related atoms(which are replaced by variables)
+        # not unique whether if there is a bug in atomspace
         self.trees = []
         # root(link) of related trees
         self.root_of_trees = []
@@ -70,7 +71,10 @@ class ForestExtractor:
         # a tree as different (because of the different variables!)
         # use this number seq to replace related atoms in trees
         #self.i = 0
+
         # substitution of trees which rooted "AtTimeLink" 
+        # { tree: [{var: atom, ...}, ...], ...}
+        # binding groups in a specfic tree is not unique!
         self.event_embeddings = defaultdict(list)
         
         # map from unique tree to set of embeddings.
@@ -83,7 +87,8 @@ class ForestExtractor:
         # For each object, a mapping from rel -> every embedding involving that object
         # {obj1:{tree1:[binding_group1, binding_group2, ...], tree2:[], ... }, obj2:{...}}
         # trees in self.trees_embeddings
-        self.incoming = defaultdict(lambda:defaultdict(list))
+        # binding groups in a specfic tree is unique
+        self.incoming = defaultdict(lambda:defaultdict(set))
 
     class UnwantedAtomException(Exception):
         pass
@@ -102,7 +107,7 @@ class ForestExtractor:
             raise self.UnwantedAtomException
         elif self.is_object(atom):
             # used for path finding
-            objects.append(atom)
+            objects.append(Tree(atom))
             self.i+=1
             # @@! used variable replace some type of atom
             return Var(self.i-1)
@@ -138,12 +143,12 @@ class ForestExtractor:
                 # skip the whole tree!
                 continue
             ## end of filter
-            # fishgram wants objects as trees for consistency, but
-            objects = tuple(map(Tree,objects))
             
             # policy - throw out trees with no objects
             # @@!
             if len(objects):
+                # @@! could got two same tree instances!
+                # which make repeated embeddings
                 self.trees.append(tree)
                 self.root_of_trees.append(link)
                 self.bindings.append(objects)
@@ -161,10 +166,7 @@ class ForestExtractor:
                 else:
                     self.tree_embeddings[tree].append(substitution)
                     for obj in objects:
-                        tree_embeddings_for_obj = self.incoming[obj]
-                        ## @todo could replace with a set
-                        if substitution not in tree_embeddings_for_obj[tree]:
-                            tree_embeddings_for_obj[tree].append(substitution)
+                        self.incoming[obj][tree].add(substitution)
 
 
         
@@ -178,6 +180,20 @@ class ForestExtractor:
         
         #print self.all_objects, self.all_timestamps
 
+    def if_right(self, tree):
+        '''docstring for if_right''' 
+        return tree in self.all_bound_trees
+
+    def data_after_filter(self):
+        log.info("***************************tree and bindings*******************************************" )
+        for item in self.event_embeddings.items():
+            log.pprint(item)
+        for item in self.tree_embeddings.items():
+            log.pprint(item)
+        log.info("***************************tree instance*************************************************")
+        for tree in self.all_bound_trees:
+            log.info(str(tree))
+        log.flush()
 
     def is_object(self, atom):
         ''' return :if atom is a specfic to pathfinding '''

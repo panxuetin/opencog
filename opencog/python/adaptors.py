@@ -8,13 +8,15 @@ from util import *
 
 from pprint import pprint
 from collections import defaultdict
+from m_util import hs_dict, Logger
 
 # to debug within the cogserver, try these, inside the relevant function:
 #import code; code.interact(local=locals())
 #import ipdb; ipdb.set_trace()
-
 t = types
-
+#log = Logger("forest.log")
+#log.add_level(Logger.INFO)
+#log.add_level(Logger.DEBUG)
 class ForestExtractor:
     """Extracts a forest of trees, where each tree is a Link (and children) that are true in the AtomSpace.
     The trees may share some of the same Nodes. This is used as a preprocessor for Fishgram. It makes a huge
@@ -73,16 +75,27 @@ class ForestExtractor:
         
         # The incoming links (or rather trees/predicates) for each object.
         # For each object, a mapping from rel -> every embedding involving that object
-        self.incoming = defaultdict(lambda:defaultdict(list))
+        self.incoming = defaultdict(lambda:defaultdict(set))
 
     class UnwantedAtomException(Exception):
         pass
+
+    def data_after_filter(self):
+        log.info("***************************tree and bindings*******************************************" )
+        for item in self.event_embeddings.items():
+            log.pprint(item)
+        for item in self.tree_embeddings.items():
+            log.pprint(item)
+        log.info("***************************tree instance*************************************************")
+        for tree in self.all_bound_trees:
+            log.info(str(tree))
+        log.flush()
 
     def extractTree(self,  atom, objects):
         if not self.include_atom(atom):
             raise self.UnwantedAtomException
         elif self.is_object(atom):
-            objects.append(atom)
+            objects.append(Tree(atom))
             self.i+=1
             return Var(self.i-1)
         elif self.is_action_instance(atom):
@@ -109,7 +122,6 @@ class ForestExtractor:
             #print link
             
             objects = []            
-            #print self.extractTree(link, objects),  objects, self.i
             self.i = 0
             try:
                 tree = self.extractTree(link, objects)
@@ -117,20 +129,14 @@ class ForestExtractor:
             except(self.UnwantedAtomException):
                 #print 'UnwantedAtomException'
                 continue
-            # fishgram wants objects as trees for consistency, but
-            # gephi output class wants atoms...
-            objects = tuple(map(Tree,objects))
-            
-            #print tree,  [str(o) for o in objects]
             
             # policy - throw out trees with no objects
             if len(objects):
+                # @@! could got two same tree instances!
+                # which make repeated embeddings
                 self.all_trees.append(tree)
                 self.all_trees_atoms.append(link)
-                
-                
                 self.bindings.append(objects)
-                
                 for obj in objects:
                     if obj.get_type() != t.TimeNode:
                     #if obj.t != t.TimeNode:
@@ -145,9 +151,7 @@ class ForestExtractor:
                 else:
                     self.tree_embeddings[tree].append(substitution)
                     for obj in objects:
-                        tree_embeddings_for_obj = self.incoming[obj]
-                        if substitution not in tree_embeddings_for_obj[tree]:
-                            tree_embeddings_for_obj[tree].append(substitution)
+                        self.incoming[obj][tree].add(substitution)
 
                 #size= len(objects)
                 #tree_id = len(self.all_trees) - 1
@@ -164,10 +168,14 @@ class ForestExtractor:
         
         # Make all bound trees. Enables using lookup_embeddings
         self.all_bound_trees = [subst(subst_from_binding(b), tr) for tr, b in zip(self.all_trees, self.bindings)]    
-    
-        pprint({tr:len(embs) for (tr, embs) in self.tree_embeddings.items()})
-        
-        print self.all_objects, self.all_timestamps
+        #pprint({tr:len(embs) for (tr, embs) in self.tree_embeddings.items()})
+        #print self.all_objects, self.all_timestamps
+        #self.data_after_filter()
+
+    def if_right(self, tree):
+        '''docstring for if_right''' 
+        return tree in self.all_bound_trees
+
 
     def output_tree(self, atom,  tree,  bindings):
         vertex_name = str(tree)
