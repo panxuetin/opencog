@@ -157,8 +157,9 @@ class Fishgram:
         # Less efficient but may be easier to debug
         next_layer = list(next_layer_iter)
 
-
+        ## @@c
         return self.sort_surprise(next_layer)
+        #return next_layer
 
     def closed_bfs_layers(self):
         '''Main function to run the breadth-first search. It yields results one layer at a time. A layer
@@ -177,7 +178,7 @@ class Fishgram:
         #import ipdb
         #ipdb.set_trace()
         #ff = open('fishgram.log','w')
-
+        
         while len(prev_layer) > 0:
             # Mixing generator and list style because future results depend on previous results.
             # It's less efficient with memory but still allows returning results sooner.
@@ -185,12 +186,12 @@ class Fishgram:
             new_layer = self.closed_bfs_extend_layer(prev_layer)
             #print "******"   + str(len(prev_layer))
             if len(new_layer):
-                log.info("****************layer prototype**************************************")
+                #log.info("****************layer prototype**************************************")
                 # @bug
                 del new_layer[self.max_per_layer+1:]
                 conj_length = set(len(pe[0].conj+pe[0].seqs) for pe in new_layer)
-                log.pprint(new_layer)
-                log.info("****************layer instance**************************************")
+                #log.pprint(new_layer)
+                #log.info("****************layer instance**************************************")
                 self.if_right(new_layer)
                 # check every tree in every pattern of every layer is right
                 log.info(' Conjunctions of size%s:%s'%(conj_length, len(new_layer)))
@@ -200,13 +201,18 @@ class Fishgram:
 
     def if_right(self, new_layer):
         '''docstring for if_right''' 
+        total = 0
         for item in new_layer:
             for ptn_instance in item[0].ptn_instances(item[1]):
+                # print pattern instance
+                total += 1
                 log.pprint(ptn_instance)
+                # check the tree
                 for tree in ptn_instance:
                     if not self.forest.if_right(tree):
                         import ipdb
                         ipdb.set_trace()
+        log.info("******************************** %s pattern instance finded@***********************"% total)
 
     # Helper functions for extensions_simple
     # Code to handle variables. It's not important to understand this (to understand fishgram).
@@ -231,6 +237,49 @@ class Fishgram:
 
         return s2
 
+    ##
+    # @brief 
+    #
+    # @param prev_binding: {var -> atom, ...}
+    # @param new_binding   {new_var -> atom, ...}; if atom is not in prev_binding, then it's from extensions 
+    #                      ,otherwise is a remapping
+    #
+    # @return: remapping{ new_var -> old_var }, {new_mapping, old_mapping} 
+    def _dj_map_to_existing_variables(self, orignal_tree, original_binding, ptn_binding):
+        remapping = { }
+        new_ptn_binding = dict(ptn_binding)
+        share_atoms = False
+        ## @todo iteritems
+        for var_orig, atom_orig in original_binding.items():
+            # 
+            for var_ptn, atom_ptn in ptn_binding.items():
+                # share the same atom
+                if atom_orig == atom_ptn:
+                    # with different binding var 
+                    # so @remapping the original tree with ptn_binding
+                    if var_orig != var_ptn:
+                        remapping[var_orig] = var_ptn
+                    share_atoms = True
+                    break
+            else:
+            # new atom
+                if var_orig in ptn_binding.keys():
+                    # share the same var, with different atom
+                    # so remapping
+                    var_new_atom = new_var()
+                    remapping[var_orig] = var_new_atom
+                    new_ptn_binding[var_new_atom] = atom_orig
+                else:
+                    # add var and atom pair from original to pattern
+                    new_ptn_binding[var_orig] = atom_orig
+
+        if remapping:
+            ptn_binding_tree = subst(remapping, orignal_tree) 
+            #self.if_tree_right(ptn_binding_tree, new_ptn_binding)
+            return ptn_binding_tree, new_ptn_binding, share_atoms
+        else:
+            #self.if_tree_right(ptn_binding_tree, new_ptn_binding)
+            return orignal_tree, new_ptn_binding, share_atoms
 
     ##
     # @brief 
@@ -260,10 +309,10 @@ class Fishgram:
             else:
                 # from extensions
                 new_s[new_var] = obj
-            tmp = [(o, v) for (v, o) in new_binding.items() if o == obj]
-            if len(tmp) > 1:
-                # @@! two var point to the same obj, from original trees
-                return None
+            #tmp = [(o, v) for (v, o) in new_binding.items() if o == obj]
+            #if len(tmp) > 1:
+                ## @@! two var point to the same obj, from original trees
+                #return None
         
         return remapping, new_s
 
@@ -314,6 +363,7 @@ class Fishgram:
         # a dict map ptn to element of layer: { ptn: (ptn, bindings)}
         conj2ptn_emblist = defaultdict( constructor )
         for (ptn, s) in self.find_extensions(prev_layer):
+        #for (ptn, s) in self.dj_find_extensions(prev_layer):
             tmp = canonical_trees(ptn.conj)
             canonical_conj = tuple(tmp) + ptn.seqs
             
@@ -414,19 +464,14 @@ class Fishgram:
                     ## for each tree instance in tree prototype
                     # rel_binding: {var0 -> atom0, ...}, one group of binding, there may exist two var point to the same atom
                     for rel_binding in rel_embs:
+
                         # Give the tree new variables. Rewrite the embeddings to match.
                         # rel_binding_with_new_vars: {varxxxxx -> atom0, ...}, there may exist two var point to the same atom
                         rel_binding_with_new_vars = self._use_new_variables_in_binding(new_variables, rel_binding)
                         # second binding -> previous binding( varxxxx -> var_e ), previous bindings(e)
-                        tmp = self._map_to_existing_variables(e, rel_binding_with_new_vars)
-                        if tmp == None:
-                            # when two vars binding to the same atom in rel_binding
-                            # @@! in a extended tree, there could be two different var binding to the same atom
-                            # @bug ignore it is actually a bug, but it assert that bindings in a group of ptn is a set
-                            continue
+                        remapping, new_s  = self._map_to_existing_variables(e, rel_binding_with_new_vars)
                         # remapping: {varxxxx -> var_e, ...}
                         # new_s: {set(old_mapping, attended mapping)} (var-> atom)
-                        remapping, new_s = tmp
                         ## rebinding the new find trees with old binding and compare it with old pattern
                         remapped_tree = subst(remapping, rel)
                         ##
@@ -465,11 +510,13 @@ class Fishgram:
                                 continue
                         remapped_ptn = Pattern(conj)
                         remapped_ptn.seqs = seqs
-
-                        #log.debug("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^" )
-                        #log.debug(remapped_ptn,"ptn")
-                        #log.debug(new_s,"s")
-                        ## throw bigger tree and it's binding one by one
+                        a = self.dj_sub(rel_, rel_binding, e, prev_ptn, firstlayer)
+                        assert a
+                        if a[0].ptn_instances([a[1]]) != remapped_ptn.ptn_instances([new_s]):
+                            import ipdb
+                            ipdb.set_trace()
+                        else:
+                            print str(remapped_ptn) + "***the same" 
                         yield (remapped_ptn, new_s)
 
     def prune_frequency(self, layer):
@@ -489,13 +536,10 @@ class Fishgram:
     def sort_surprise(self, layer):
         # layer is a list of tuples
         sorted_layer = []
-
         ptn2surprise = {}
-
         for (ptn, embeddings) in layer:
             if len(embeddings) >= self.min_embeddings:
                 tup = ptn.conj+ptn.seqs
-
                 if len(ptn.conj) + len(ptn.seqs) < 2:
                     sorted_layer.append((ptn,embeddings))
                     ptn2surprise[tup] = float('+inf')
@@ -524,30 +568,119 @@ class Fishgram:
                         #print '\x1B[1;32m%.1f %s' % (surprise, ptn)
                         yield (ptn, embeddings)
     
-    
+    def dj_find_extensions(self, prev_layer):
+        '''Helper function for extensions_simple. It's a generator that finds all conjunctions (X,Y,Z) for (X,Y) in
+        the previous layer. It returns a series of (conjunction, substitution) pairs. Where each substitution is
+        one way to produce an atom(s) in the AtomSpace by replacing variables in the conjunction. The conjunctions
+        will often appear more than once.'''
+        log.debug("**************************************** layer ************************************************" )
+        # prev_embeddings: set([set(binding group1), set(binding group2), ...]) from extend and none bug original
+        for (prev_ptn,  prev_embeddings) in prev_layer:
+            firstlayer = (prev_ptn.conj == () and prev_ptn.seqs == ())
+            # prev_embeddings: set([set(binding_set0), binding_set1]) groups of binding
+            # e: a specific group of binding 
+            # extend instance by instance
+            for e in prev_embeddings:
+            # for each new var, if the object is in the previous embedding, then re-map them.
+                if firstlayer:
+                    # empty pattern
+                    rels_bindingsets = self.forest.tree_embeddings.items() + self.forest.event_embeddings.items()
+                else:
+                    # @@! extend the trees
+                    # [(tree, [binding group1, binding group2, ...]), ...], from original, if there is a bug in atomspace
+                    # [(tree, set([binding group1, binding group2, ...])), ...], from extend and none atomspace bug original tree
+                    # trees share at least one commmon atom (@related tree), and from original event.(@potential trees)
+                    rels_bindingsets = self.lookup_extending_rel_embeddings(e) + self.forest.event_embeddings.items()
+                ## for each prototype in potential trees
+                for rel_, rel_embs in rels_bindingsets:
+                    # rel: standardize substitued trees (make the substitued tree unique)
+                    # rel_ : substitued tree (related atom substitued with variable)
+                    # rel_embs: [{var0 -> Tree(atom0),... }, ...]   groups of binding
+                    # new_variables: {var0 -> varxxxxx, ...}      old to new
+                    #@@rel, new_variables = self._create_new_variables_rel(rel_)
+                    ## for each tree instance in tree prototype
+                    # rel_binding: {var0 -> atom0, ...}, one group of binding, there may exist two var point to the same atom
+                    for rel_binding in rel_embs:
+                        # @@! here is why we need pre deal
+
+                        # Give the tree new variables. Rewrite the embeddings to match.
+                        # rel_binding_with_new_vars: {varxxxxx -> atom0, ...}, there may exist two var point to the same atom
+                        #@@rel_binding_with_new_vars = self._use_new_variables_in_binding(new_variables, rel_binding)
+                        # second binding -> previous binding( varxxxx -> var_e ), previous bindings(e)
+                        ptn_binding_tree, new_ptn_binding, share_atoms = self._dj_map_to_existing_variables(rel_, rel_binding, e)
+                        if ptn_binding_tree in prev_ptn.conj+prev_ptn.seqs:
+                            continue
+                        # remapped_tree is extended tree prototype at this point, or new original tree prototype
+                        # but it's new anyway, and may not share the same atom if len(remapping) == 0 
+                        if rel_.op == 'AtTimeLink' and prev_ptn.seqs:
+                            # 'after' means the new timestamp is greater than OR EQUAL TO the existing one.
+                            # @@! event don't have to share the same atom!
+                            after = self._after_existing_actions(prev_ptn.seqs,ptn_binding_tree,new_ptn_binding)
+                        ## monotonous
+                        conj = prev_ptn.conj
+                        seqs = prev_ptn.seqs
+                        if rel_.op != 'AtTimeLink':
+                            if share_atoms or firstlayer:
+                                # add extended tree 
+                                conj += (ptn_binding_tree,)
+                            else:
+                                continue
+                        else:
+                            if len(prev_ptn.seqs) == 0:
+                                accept = ( share_atoms or firstlayer)
+                            else:
+                                accept = after
+                            if accept:
+                                seqs += (ptn_binding_tree,)
+                            else:
+                                continue
+                        remapped_ptn = Pattern(conj)
+                        remapped_ptn.seqs = seqs
+                        #self.if_right(remapped_ptn, new_ptn_binding)
+                        yield (remapped_ptn, new_ptn_binding)
+    def dj_sub(self, rel_,rel_binding, e , prev_ptn, firstlayer):
+        '''docstring for fname''' 
+        ptn_binding_tree, new_ptn_binding, share_atoms = self._dj_map_to_existing_variables(rel_, rel_binding, e)
+        if ptn_binding_tree in prev_ptn.conj+prev_ptn.seqs:
+            return None
+        # remapped_tree is extended tree prototype at this point, or new original tree prototype
+        # but it's new anyway, and may not share the same atom if len(remapping) == 0 
+        if rel_.op == 'AtTimeLink' and prev_ptn.seqs:
+            # 'after' means the new timestamp is greater than OR EQUAL TO the existing one.
+            # @@! event don't have to share the same atom!
+            after = self._after_existing_actions(prev_ptn.seqs,ptn_binding_tree,new_ptn_binding)
+        ## monotonous
+        conj = prev_ptn.conj
+        seqs = prev_ptn.seqs
+        if rel_.op != 'AtTimeLink':
+            if share_atoms or firstlayer:
+                # add extended tree 
+                conj += (ptn_binding_tree,)
+            else:
+                return None
+        else:
+            if len(prev_ptn.seqs) == 0:
+                accept = ( share_atoms or firstlayer)
+            else:
+                accept = after
+            if accept:
+                seqs += (ptn_binding_tree,)
+            else:
+                return None
+        remapped_ptn = Pattern(conj)
+        remapped_ptn.seqs = seqs
+        return remapped_ptn, new_ptn_binding
     def surprise(self, ptn):
         conj = ptn.conj + ptn.seqs
-
         embeddings = self.forest.lookup_embeddings(conj)
-        
         Nconj = len(embeddings)*1.0        
         Pconj = Nconj/self.total_possible_embeddings(conj,embeddings)
-        #Pconj = self.num_obj_combinations(conj,embeddings)/self.total_possible_embeddings(conj,embeddings)
-
-        
         P_independent = 1
         for tr in conj:
             Etr = self.forest.lookup_embeddings((tr,))
             P_tr = len(Etr)*1.0 / self.total_possible_embeddings((tr,), Etr)
-            #P_tr = self.num_obj_combinations((tr,), Etr)/self.total_possible_embeddings((tr,), Etr)
             P_independent *= P_tr
-
-        #P_independent = P_independent ** (1.0/len(conj))
-
-        #self.distribution(ptn, embeddings)
-
         surprise = Pconj / P_independent
-        #surprise = math.log(surprise, 2)
         return surprise
     
     def num_obj_combinations(self, conj, embeddings):

@@ -231,15 +231,13 @@ def test_load_scm_file():
         f_l = open('diff_log', 'r')
         f_server = open('diff_log_server', 'r')
         # 
-        from_scm = { }
+        from_scm = set()
         for line in f_l.readlines():
-            from_scm[line]=1
+            from_scm.add(line)
         # compare it with output of atomspace load with cogserver
         for i,line in enumerate(f_server.readlines()):
-            try:
-                from_scm[line]
-            except KeyError:
-                log.error("test failed:**%s**!"%line)
+            if line not in from_scm:
+                log.error("line %s failed:**%s**!"%(i,line))
     except IOError,e:
         log.error(str(e))
         raise e

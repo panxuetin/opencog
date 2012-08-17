@@ -437,6 +437,13 @@ def extend(s, var, val):
     s2[var] = val
     return s2
     
+##
+# @brief 
+#
+# @param s: {source: target }
+# @param x
+#
+# @return 
 def subst(s, x):
     """Substitute the expression x with unification s.
     >>> subst({x: 42, y:0}, F(x) + y)
@@ -484,12 +491,7 @@ def standardize_apart(tr, dic=None):
     if isinstance(tr, tuple):
         return tuple([standardize_apart(a, dic) for a in tr])
     elif tr.is_variable():
-        if tr in dic:
-            return dic[tr]
-        else:
-            v = new_var()
-            dic[tr] = v
-            return v
+        return dic.setdefault(tr, new_var())
     else:
         return Tree(tr.op, [standardize_apart(a, dic) for a in tr.args])
 

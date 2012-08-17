@@ -14,9 +14,11 @@ from m_util import hs_dict, Logger
 #import code; code.interact(local=locals())
 #import ipdb; ipdb.set_trace()
 t = types
-#log = Logger("forest.log")
-#log.add_level(Logger.INFO)
-#log.add_level(Logger.DEBUG)
+log = Logger("forest.log")
+log.add_level(Logger.INFO)
+log.add_level(Logger.DEBUG)
+
+
 class ForestExtractor:
     """Extracts a forest of trees, where each tree is a Link (and children) that are true in the AtomSpace.
     The trees may share some of the same Nodes. This is used as a preprocessor for Fishgram. It makes a huge
@@ -62,6 +64,12 @@ class ForestExtractor:
         self.all_trees = []
         self.all_trees_atoms = []
         self.bindings = []
+        self.substitutions = []
+        self._new_var_counter = 0
+        self.tree_old_tree_new = { }
+        self.tree_var_old_var_new = { }
+        # to test result 
+        #self.test_trees = []
         # variable counter
         # NOTE: If you set it to 0 here, it will give unique variables to every tree. BUT it will then count every occurrence of
         # a tree as different (because of the different variables!)
@@ -91,13 +99,15 @@ class ForestExtractor:
             log.info(str(tree))
         log.flush()
 
-    def extractTree(self,  atom, objects):
+    def new_var(self):
+        self._new_var_counter += 1
+        return Tree(self._new_var_counter)
+
+    def test_extractForest(self, atom):
         if not self.include_atom(atom):
             raise self.UnwantedAtomException
         elif self.is_object(atom):
-            objects.append(Tree(atom))
-            self.i+=1
-            return Var(self.i-1)
+            return Tree(atom)
         elif self.is_action_instance(atom):
             #print 'is_action_instance', atom
             # this is moderatly tacky, but doing anything different would require lots of changes...
@@ -105,7 +115,24 @@ class ForestExtractor:
         elif atom.is_node():
             return Tree(atom)
         else:
-            args = [self.extractTree(x,  objects) for x in atom.out]
+            args = [self.test_extractForest(x) for x in atom.out]
+            return Tree(atom.type_name, args)
+
+    def extractTree(self,  atom, objects, substitution):
+        if not self.include_atom(atom):
+            raise self.UnwantedAtomException
+        elif self.is_object(atom):
+            tree_atom = Tree(atom)
+            objects.append(tree_atom)
+            return substitution.setdefault(tree_atom, self.new_var())
+        elif self.is_action_instance(atom):
+            #print 'is_action_instance', atom
+            # this is moderatly tacky, but doing anything different would require lots of changes...
+            return Tree('ListLink', [])
+        elif atom.is_node():
+            return Tree(atom)
+        else:
+            args = [self.extractTree(x,  objects, substitution) for x in atom.out]
             return Tree(atom.type_name, args)
 
     def extractForest(self):
@@ -123,9 +150,11 @@ class ForestExtractor:
             
             objects = []            
             self.i = 0
+            substitution = { }
+            self._new_var_counter = -1
             try:
-                tree = self.extractTree(link, objects)
-                #print tree
+                tree = self.extractTree(link, objects, substitution)
+                #test_tree = self.test_extractForest(link)
             except(self.UnwantedAtomException):
                 #print 'UnwantedAtomException'
                 continue
@@ -134,43 +163,116 @@ class ForestExtractor:
             if len(objects):
                 # @@! could got two same tree instances!
                 # which make repeated embeddings
+                temp = set(objects)
+                if len(temp) < len(objects):
+                    # have repeated atoms
+                    continue
                 self.all_trees.append(tree)
                 self.all_trees_atoms.append(link)
                 self.bindings.append(objects)
+                #self.test_trees.append(test_tree)
                 for obj in objects:
                     if obj.get_type() != t.TimeNode:
-                    #if obj.t != t.TimeNode:
                         self.all_objects.add(obj)
                     else:
                         self.all_timestamps.add(obj)
                     
-                # fishgram-specific
-                substitution = subst_from_binding(objects)
+                sub = hs_dict((var, tree_atom) for tree_atom, var in substitution.iteritems())
+                self.substitutions.append(sub)
                 if tree.op == 'AtTimeLink':
-                    self.event_embeddings[tree].append(substitution)
+                    self.event_embeddings[tree].append(sub)
                 else:
-                    self.tree_embeddings[tree].append(substitution)
+                    self.tree_embeddings[tree].append(sub)
                     for obj in objects:
-                        self.incoming[obj][tree].add(substitution)
+                        self.incoming[obj][tree].add(sub)
 
-                #size= len(objects)
-                #tree_id = len(self.all_trees) - 1
-                #for slot in xrange(size):
-                #    obj = objects[slot]
-                #    
-                #    if obj not in self.incoming:
-                #        self.incoming[obj] = {}
-                #    if size not in self.incoming[obj]:
-                #        self.incoming[obj][size] = {}
-                #    if slot not in self.incoming[obj][size]:
-                #        self.incoming[obj][size][slot] = []
-                #    self.incoming[obj][size][slot].append(tree_id)
         
         # Make all bound trees. Enables using lookup_embeddings
-        self.all_bound_trees = [subst(subst_from_binding(b), tr) for tr, b in zip(self.all_trees, self.bindings)]    
-        #pprint({tr:len(embs) for (tr, embs) in self.tree_embeddings.items()})
-        #print self.all_objects, self.all_timestamps
-        #self.data_after_filter()
+        self.all_bound_trees = [subst(subs, tr) for tr, subs in zip(self.all_trees, self.substitutions)]    
+        ## test_result
+        #for tree in self.test_trees:
+            #assert tree in self.all_bound_trees
+
+
+
+        self.data_after_filter()
+        log.flush()
+
+    def extract_standard_Forest(self):
+        # TODO >0.5 for a fuzzy link means it's true, but probabilistic links may work differently        
+        initial_links = [x for x in self.a.get_atoms_by_type(t.Link) if (x.tv.mean > 0.5 and x.tv.confidence > 0)]
+        
+        for link in initial_links:
+                     #or x.type_name in ['EvaluationLink', 'InheritanceLink']]: # temporary hack
+                     #or x.is_a(t.AndLink)]: # temporary hack
+            if self.attentional_focus and link.av['sti'] <= -10:
+                continue
+            
+            if not self.include_tree(link): continue
+            #print link
+             
+            objects = []            
+            self.i = 0
+            # atom -> var_old
+            substitution = { }
+            self._new_var_counter = -1
+            try:
+                tree = self.extractTree(link, objects, substitution)
+                #test_tree = self.test_extractForest(link)
+            except(self.UnwantedAtomException):
+                #print 'UnwantedAtomException'
+                continue
+            
+            # policy - throw out trees with no objects
+            if len(objects):
+                # filter tree have repeated atoms
+                if len(set(objects)) < len(objects):
+                    continue
+                # @@! could got two same tree instances!
+                # which make repeated embeddings
+                self.all_trees_atoms.append(link)
+                self.bindings.append(objects)
+                #self.test_trees.append(test_tree)
+                for obj in objects:
+                    if obj.get_type() != t.TimeNode:
+                        self.all_objects.add(obj)
+                    else:
+                        self.all_timestamps.add(obj)
+
+                # var_old -> var_new
+                var_old_var_new = {}
+                try:
+                    new_tree = self.tree_old_tree_new[tree]
+                    var_old_var_new = self.tree_var_old_var_new[tree]
+                except KeyError:
+                    new_tree = standardize_apart(tree, var_old_var_new)
+                    self.tree_old_tree_new[tree] = new_tree
+                    self.tree_var_old_var_new[tree] = var_old_var_new
+                # var_new -> atom
+                ## @todo improve hs_dict
+                _var_new_tree_atom = { }
+                for tree_atom, var_old in substitution.iteritems():
+                    _var_new_tree_atom[ var_old_var_new[var_old]] = tree_atom
+                var_new_tree_atom = hs_dict(_var_new_tree_atom)
+                
+                self.all_trees.append(new_tree)
+                self.substitutions.append(var_new_tree_atom)
+                # var_old -> var_new
+                if new_tree.op == 'AtTimeLink':
+                    self.event_embeddings[new_tree].append(var_new_tree_atom)
+                else:
+                    self.tree_embeddings[new_tree].append(var_new_tree_atom)
+                    for obj in objects:
+                        self.incoming[obj][new_tree].add(var_new_tree_atom)
+
+        
+        # Make all bound trees. Enables using lookup_embeddings
+        self.all_bound_trees = [subst(subs, tr) for tr, subs in zip(self.all_trees, self.substitutions)]    
+        ## test_result
+        #for tree in self.all_bound_trees:
+            #assert tree in self.test_trees
+        self.data_after_filter()
+        log.flush()
 
     def if_right(self, tree):
         '''docstring for if_right''' 

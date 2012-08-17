@@ -184,6 +184,7 @@ class ForestExtractor:
         '''docstring for if_right''' 
         return tree in self.all_bound_trees
 
+
     def data_after_filter(self):
         log.info("***************************tree and bindings*******************************************" )
         for item in self.event_embeddings.items():
@@ -194,7 +195,6 @@ class ForestExtractor:
         for tree in self.all_bound_trees:
             log.info(str(tree))
         log.flush()
-
     def is_object(self, atom):
         ''' return :if atom is a specfic to pathfinding '''
         # only useful for pathfinding visualization!

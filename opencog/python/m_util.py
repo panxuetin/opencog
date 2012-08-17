@@ -30,7 +30,7 @@ def dict_sub(d, text):
 class hs_dict(dict):
     """hashable dict 
     @attention: should not be modified after added to a set or dict!"""
-    def __init__(self, arg):
+    def __init__(self, arg = None):
         super(hs_dict, self).__init__(arg)
         self._hash = None
         #self._dict = { }
@@ -163,6 +163,8 @@ class Logger(object):
     def add_level(self, level):
         self._levels.add(level)
         '''docstring for add_level''' 
+
+log = Logger("default.log")
 # --------------------------------------------------------------------------------------------------------------
 from datetime import datetime
 
@@ -184,8 +186,26 @@ class Simple_Time_Interval(object):
         ''' return interval in seconds''' 
         self.interval_time_stamp = (self.end_time_stamp - self.start_time_stamp).seconds
         return self.interval_time_stamp
-    
-# --------------------------------------------------------------------------------------------------------------
-log = Logger("default.log")
+
 time_interval = Simple_Time_Interval()
+# --------------------------------------------------------------------------------------------------------------
+
+def rough_compare_files(s_filename, t_filename):
+    ''' roughly estimate if two files is the same consider lines in random order''' 
+    print s_filename + " not including:" 
+    try:
+        s_file = open(s_filename, 'r')
+        t_file = open(t_filename, 'r')
+        # 
+        source = set()
+        for line in s_file.readlines():
+            source.add(line)
+        # compare it with output of atomspace load with cogserver
+        for i,line in enumerate(t_file.readlines()):
+            if line not in source:
+                print "line %s failed: %s"%(i+1,line)
+    except IOError,e:
+        print e
+        raise e
+# --------------------------------------------------------------------------------------------------------------
 __all__ = ["log", "time_interval", "Logger", "dict_sub","hs_dict","format_log"]
