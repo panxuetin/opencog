@@ -64,8 +64,8 @@ class Tree (object):
     def __str__(self):
         if self.is_leaf():
             if isinstance(self.op, Atom):
-                #return self.op.name+':'+self.op.type_name
-                return self.op.name
+                return self.op.name+':'+self.op.type_name
+                #return self.op.name
             else:
                 return '$'+str(self.op)
         else:

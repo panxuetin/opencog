@@ -161,12 +161,7 @@ class ForestExtractor:
             
             # policy - throw out trees with no objects
             if len(objects):
-                # @@! could got two same tree instances!
-                # which make repeated embeddings
-                temp = set(objects)
-                if len(temp) < len(objects):
-                    # have repeated atoms
-                    continue
+
                 self.all_trees.append(tree)
                 self.all_trees_atoms.append(link)
                 self.bindings.append(objects)
@@ -189,6 +184,8 @@ class ForestExtractor:
         
         # Make all bound trees. Enables using lookup_embeddings
         self.all_bound_trees = [subst(subs, tr) for tr, subs in zip(self.all_trees, self.substitutions)]    
+        if len(set(self.tree_embeddings)) < len(self.tree_embeddings) or len(set(self.event_embeddings)) < len(self.event_embeddings):
+            assert False
         ## test_result
         #for tree in self.test_trees:
             #assert tree in self.all_bound_trees
@@ -225,11 +222,8 @@ class ForestExtractor:
             
             # policy - throw out trees with no objects
             if len(objects):
-                # filter tree have repeated atoms
-                if len(set(objects)) < len(objects):
-                    continue
-                # @@! could got two same tree instances!
-                # which make repeated embeddings
+                #if len(set(objects)) < len(objects):
+                    #continue
                 self.all_trees_atoms.append(link)
                 self.bindings.append(objects)
                 #self.test_trees.append(test_tree)
@@ -274,8 +268,8 @@ class ForestExtractor:
         self.data_after_filter()
         log.flush()
 
-    def if_right(self, tree):
-        '''docstring for if_right''' 
+    def valid_tree(self, tree):
+        ''' determine if a tree is in the filtered atomspace''' 
         return tree in self.all_bound_trees
 
 
