@@ -70,6 +70,10 @@ class Tree (object):
                 return '$'+str(self.op)
         else:
             return '(' + str(self.op) + ' '+ ' '.join(map(str, self.args)) + ')'
+    #def __deepcopy__(self):
+        #'''docstring for __deepcopy__''' 
+        #if self.is_leaf():
+            #return kkk
 
     # TODO add doctests
     def __repr__(self):

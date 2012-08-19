@@ -6,26 +6,27 @@ try:
 except ImportError:
     from atomspace_remote import AtomSpace, types, Atom, TruthValue, types as t
     
-from tree import *
-try:
-    reload(adaptors)
-except Exception, e:
-    import adaptors
+import adaptors
+# help ipython find the change immediately
+reload(adaptors)
 from pprint import pprint
 from util import *
 import util
 from itertools import *
 from collections import namedtuple, defaultdict
+from copy import deepcopy
 import sys
 import time
-from m_util import Logger
+import m_util
 import math
 
 from logic import PLNviz
 
+from m_util import *
 import gc
 import sys
-log = Logger("fishgram.log")
+log = Logger("dj_fishgram.log")
+log.to_file = False
 log.add_level(Logger.INFO)
 
 # unit of timestamps is 0.01 second so multiply by 100
@@ -98,6 +99,7 @@ class Fishgram:
         self.viz = PLNviz(atomspace)
         self.viz.connect()
         self.viz.outputTreeNode(target=[], parent=None, index=0)
+        self._var = -1
         
         self.rules_output = []
         
@@ -175,9 +177,6 @@ class Fishgram:
         empty_pattern = Pattern( () )
         empty_b = [{}]
         prev_layer = [(empty_pattern, empty_b)]
-        #import ipdb
-        #ipdb.set_trace()
-        #ff = open('fishgram.log','w')
         
         while len(prev_layer) > 0:
             # Mixing generator and list style because future results depend on previous results.
@@ -185,16 +184,18 @@ class Fishgram:
             new_layer = self.closed_bfs_extend_layer(prev_layer)
             if len(new_layer):
                 del new_layer[self.max_per_layer+1:]
-                conj_length = set(len(pe[0].conj+pe[0].seqs) for pe in new_layer)
-                #log.info("****************layer prototype**************************************")
-                #log.pprint(new_layer)
+                #conj_length = set(len(pe[0].conj+pe[0].seqs) for pe in new_layer)
+                conj_length = len(new_layer[0][0].conj) + len(new_layer[0][0].seqs)
+                log.info("****************layer prototype**************************************")
+                log.pprint(new_layer)
                 #log.info("****************layer instance**************************************")
                 #self.print_layer_instance(new_layer)
                 # check every tree in every pattern of every layer is right
-                log.info(' Conjunctions of size%s:%s'%(conj_length, len(new_layer)))
+                log.info(' Conjunctions of size%s, with %s patterns'%(conj_length, len(new_layer)))
                 yield new_layer
             prev_layer = new_layer
         log.flush()
+
 
     def print_layer_instance(self, new_layer):
         '''docstring for if_right''' 
@@ -347,8 +348,6 @@ class Fishgram:
                 # will compare a mixture of predicate names and variable names. Also
                 # when you add two variables, it may break things too...
                 if len(tmp) >= 2 and tmp[-1] < tmp[-2]:
-                    #import ipdb
-                    #ipdb.set_trace()
                     continue
             #@@C
             #else:
@@ -423,14 +422,13 @@ class Fishgram:
         for (ptn, embeddings) in layer:
             if len(embeddings) >= self.min_embeddings:
                 tup = ptn.conj+ptn.seqs
-                if len(ptn.conj) + len(ptn.seqs) < 2:
+                if len(tup) < 2:
                     sorted_layer.append((ptn,embeddings))
                     ptn2surprise[tup] = float('+inf')
                 else:
-                    surp = self.surprise(ptn)
+                    surp = self.surprise(ptn, embeddings)
                     ptn2surprise[tup] = surp
                     if len(ptn.conj) > 0 and surp > 0.9: # and len(get_varlist(ptn.conj)) == 1 and len(ptn.seqs) == 0:
-
                         sorted_layer.append((ptn,embeddings))
 
         sorted_layer.sort(key=lambda (ptn,embeddings): ptn2surprise[ptn.conj+ptn.seqs], reverse=True)
@@ -470,7 +468,6 @@ class Fishgram:
                     rels_bindingsets = self.forest.tree_embeddings.items() + self.forest.event_embeddings.items()
                 else:
                     # @@! extend the trees
-                    # [(tree, [binding group1, binding group2, ...]), ...], from original, if there is a bug in atomspace
                     # [(tree, set([binding group1, binding group2, ...])), ...], from extend and none atomspace bug original tree
                     # trees share at least one commmon atom (@related tree), and from original event.(@potential trees)
                     rels_bindingsets = self.lookup_extending_rel_embeddings(e) + self.forest.event_embeddings.items()
@@ -481,7 +478,7 @@ class Fishgram:
                     ## for each tree instance in tree prototype
                     # rel_binding: {var0 -> atom0, ...}, one group of binding, there may exist two var point to the same atom
                     for rel_binding in rel_embs:
-                        # @@! here is why we need pre deal
+                        # @@! standardize_apart forest may be more efficiency (here)
                         # Give the tree new variables. Rewrite the embeddings to match.
                         ptn_binding_tree, new_ptn_binding, share_atoms = self.tree_with_ptn_binding(tree_in_forest, rel_binding, e)
                         if ptn_binding_tree in prev_ptn.conj+prev_ptn.seqs:
@@ -514,15 +511,24 @@ class Fishgram:
                         remapped_ptn.seqs = seqs
                         #self.if_right(remapped_ptn, new_ptn_binding)
                         yield (remapped_ptn, new_ptn_binding)
-    def surprise(self, ptn):
+    def surprise(self, ptn, embeddings):
+        #import ipdb
+        #ipdb.set_trace()
         conj = ptn.conj + ptn.seqs
-        embeddings = self.forest.lookup_embeddings(conj)
+        # the number of true
         Nconj = len(embeddings)*1.0        
         Pconj = Nconj/self.total_possible_embeddings(conj,embeddings)
         P_independent = 1
         for tr in conj:
-            Etr = self.forest.lookup_embeddings((tr,))
-            P_tr = len(Etr)*1.0 / self.total_possible_embeddings((tr,), Etr)
+            # all  instance of tree prototype tr
+            #Etr = self.forest.lookup_embeddings((tr,))
+            self._var = -1
+            _tr = self.standardize_apart(tr,{})
+            Etr = self.forest.event_embeddings[_tr]
+            if not Etr:
+                Etr = self.forest.tree_embeddings[_tr]
+            # num of tree intances / all possible binding
+            P_tr = len(Etr)*1.0 / self.total_possible_embeddings((_tr,), Etr)
             P_independent *= P_tr
         surprise = Pconj / P_independent
         return surprise
@@ -540,24 +546,39 @@ class Fishgram:
     
         
 
-    def total_possible_embeddings(self, conj, embeddings):
+    def total_possible_embeddings(self, ptn, embeddings):
+        ''' return ( nums of all possible none timenode)^ none timenode binding var  '''
+        # length of all pathfinding related  nont timenode atoms set
         N_objs = len(self.forest.all_objects)*1.0
-        N_times = len(self.forest.all_timestamps)*1.0
-        
         # The number of possible embeddings for that combination of object-variables and time-variables
         N_tuples = 1
-        for var in get_varlist(conj):
-            if var not in embeddings[0]:
-                return 100000000000000.0
-            if embeddings[0][var].get_type() == t.TimeNode:
+        tmp = embeddings[0]
+        for var in get_varlist(ptn):
+            if var not in tmp:
+                # none biding variable
+                continue
+            if tmp[var].get_type() == t.TimeNode:
                 #N_tuples *= N_times
-                pass
+                continue
             else:
                 N_tuples *= N_objs
         
         return N_tuples*1.0
 
+    def standardize_apart(self, tr, dic={}):
+        """Replace all the variables in tree with new variables, which make sure variable cross trees is different.
+            dic: map from old node to new node
+        """
+
+        if tr.is_variable():
+            return dic.setdefault(tr, self.new_var())
+        else:
+            return Tree(tr.op, [self.standardize_apart(a, dic) for a in tr.args])
     
+    def new_var(self):
+        self._var += 1
+        return Tree(self._var)
+
     def outputConceptNodes(self, layers):
         id = 1001
         

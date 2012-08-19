@@ -76,12 +76,13 @@ class Logger(object):
     YELLOW = '\033[93m'
     RED = '\033[91m'
     COLOR_END = '\033[0m'
-    def __init__(self, f):
+    def __init__(self, f = None):
         # open logging file
-        try:
-            self._file = open(f,'w')
-        except IOError:
-            print " error: can't open logging file %s " % f
+        if f:
+            try:
+                self._file = open(f,'w')
+            except IOError:
+                print " error: can't open logging file %s " % f
         self._filename = f
         # default setting
         self.offset = 0
@@ -144,12 +145,12 @@ class Logger(object):
         '''docstring for pprint()''' 
         try:
             if self.to_file:
-                print head
+                #print head
                 pprint(obj, self._file)
         except IOError:
             print  Logger.RED + " error: can't write logging file %s " % self._filename + Logger.COLOR_END
         if self.to_stdout:
-            print str(head)
+            #print str(head)
             pprint(obj)
 
     def flush(self):

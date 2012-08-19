@@ -74,7 +74,7 @@ class ForestExtractor:
         # NOTE: If you set it to 0 here, it will give unique variables to every tree. BUT it will then count every occurrence of
         # a tree as different (because of the different variables!)
         #self.i = 0
-
+        ## @todo use set would be better
         self.event_embeddings = defaultdict(list)
         
         # fishgram-specific experiments. Refactor later
@@ -88,7 +88,7 @@ class ForestExtractor:
     class UnwantedAtomException(Exception):
         pass
 
-    def data_after_filter(self):
+    def print_data_after_filter(self):
         log.info("***************************tree and bindings*******************************************" )
         for item in self.event_embeddings.items():
             log.pprint(item)
@@ -138,7 +138,6 @@ class ForestExtractor:
     def extractForest(self):
         # TODO >0.5 for a fuzzy link means it's true, but probabilistic links may work differently        
         initial_links = [x for x in self.a.get_atoms_by_type(t.Link) if (x.tv.mean > 0.5 and x.tv.confidence > 0)]
-        
         for link in initial_links:
                      #or x.type_name in ['EvaluationLink', 'InheritanceLink']]: # temporary hack
                      #or x.is_a(t.AndLink)]: # temporary hack
@@ -173,26 +172,25 @@ class ForestExtractor:
                         self.all_timestamps.add(obj)
                     
                 sub = hs_dict((var, tree_atom) for tree_atom, var in substitution.iteritems())
+
                 self.substitutions.append(sub)
                 if tree.op == 'AtTimeLink':
+                    #assert sub not in self.event_embeddings[tree]
                     self.event_embeddings[tree].append(sub)
                 else:
+                    #assert sub not in self.tree_embeddings[tree]
                     self.tree_embeddings[tree].append(sub)
                     for obj in objects:
+                        #assert sub not in self.incoming[obj][tree]
                         self.incoming[obj][tree].add(sub)
 
         
         # Make all bound trees. Enables using lookup_embeddings
         self.all_bound_trees = [subst(subs, tr) for tr, subs in zip(self.all_trees, self.substitutions)]    
-        if len(set(self.tree_embeddings)) < len(self.tree_embeddings) or len(set(self.event_embeddings)) < len(self.event_embeddings):
-            assert False
-        ## test_result
-        #for tree in self.test_trees:
-            #assert tree in self.all_bound_trees
+        #if len(set(self.tree_embeddings)) < len(self.tree_embeddings) or len(set(self.event_embeddings)) < len(self.event_embeddings):
+            #assert False
 
-
-
-        self.data_after_filter()
+        #self.print_data_after_filter()
         log.flush()
 
     def extract_standard_Forest(self):
@@ -265,7 +263,7 @@ class ForestExtractor:
         ## test_result
         #for tree in self.all_bound_trees:
             #assert tree in self.test_trees
-        self.data_after_filter()
+        self.print_data_after_filter()
         log.flush()
 
     def valid_tree(self, tree):
@@ -360,8 +358,16 @@ class ForestExtractor:
 
         return self.lookup_embeddings_helper(conj, (), {}, self.all_bound_trees)
 
+    ##
+    # @brief : look up embeddings of tree prototype @conj
+    #
+    # @param conj :tree prototypes in a pattern
+    # @param bound_conj_so_far
+    # @param s
+    # @param all_bound_trees
+    #
+    # @return 
     def lookup_embeddings_helper(self, conj, bound_conj_so_far, s, all_bound_trees):
-
         if len(conj) == 0:
             return [s]
 
@@ -372,10 +378,10 @@ class ForestExtractor:
         substs = []
         matching_bound_trees = []
 
+        # find embeddings of first tree prototype
         for bound_tr in all_bound_trees:
             s2 = unify(tr, bound_tr, s)
             if s2 != None:
-                #s2_notimes = { var:obj for (var,obj) in s2.items() if obj.get_type() != t.TimeNode }
                 substs.append( s2 )
                 matching_bound_trees.append(bound_tr)
 
