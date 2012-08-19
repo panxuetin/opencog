@@ -14,7 +14,7 @@ from m_util import hs_dict, Logger
 #import code; code.interact(local=locals())
 #import ipdb; ipdb.set_trace()
 t = types
-log = Logger("forest.log")
+log = Logger("dj_forest.log")
 log.add_level(Logger.INFO)
 log.add_level(Logger.DEBUG)
 
@@ -89,11 +89,11 @@ class ForestExtractor:
         pass
 
     def print_data_after_filter(self):
-        log.info("***************************tree and bindings*******************************************" )
-        for item in self.event_embeddings.items():
-            log.pprint(item)
-        for item in self.tree_embeddings.items():
-            log.pprint(item)
+        #log.info("***************************tree and bindings*******************************************" )
+        #for item in self.event_embeddings.items():
+            #log.pprint(item)
+        #for item in self.tree_embeddings.items():
+            #log.pprint(item)
         log.info("***************************tree instance*************************************************")
         for tree in self.all_bound_trees:
             log.info(str(tree))

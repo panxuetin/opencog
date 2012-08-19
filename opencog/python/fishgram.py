@@ -26,7 +26,7 @@ from m_util import *
 import gc
 import sys
 log = Logger("dj_fishgram.log")
-log.to_file = False
+#log.to_file = False
 log.add_level(Logger.INFO)
 
 # unit of timestamps is 0.01 second so multiply by 100
