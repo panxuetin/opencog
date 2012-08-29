@@ -12,6 +12,9 @@ log.use_stdout(True)
     
 #from opencog.atomspace import Atom, types
 class Atomspace_Abserver(Graph_Abserver):
+    ''' @bug: when link B have two same children ---- link A, then only one link A is given in the picture
+              It happened rarely and  you could discover it when look the edge order(in the picture) carefully.
+    '''
     """ attention: not including isolate concpet node and empty link"""
     def __init__(self, a, e_types = ["Link"], n_types = ["Node", "Link"], inheritance = True):
         super(Atomspace_Abserver, self).__init__(a, e_types, n_types, inheritance)
@@ -86,7 +89,7 @@ class Atomspace_Abserver(Graph_Abserver):
                                node_name = node.type_name + "[%s]"% str(node.h.value())
                                #print "***%s" % node_name
                             else:
-                                node_name = node.name
+                                node_name = self.graph.unique_id(node.name)
                                 #print "^^%s" % node_name
                             #print "%s -> %s" %(link_name,node_name)
                             self.graph.add_edge(link_name,node_name)
@@ -104,11 +107,8 @@ class Atomspace_Abserver(Graph_Abserver):
 
 if __name__ == '__main__':
     from load_scm_file import load_scm_file
-    from pre_fishgram import output_atomspace
     a = AtomSpace()
-    load_scm_file(a, "test_atomspace_abserver.scm")
-    links = a.get_atoms_by_type(types.Link)
-    output_atomspace(a,"space.log",True)
+    load_scm_file(a, "./test/test_atomspace_abserver.scm")
     abserver = Atomspace_Abserver(a)
     abserver.graph_info()
     abserver.filter_graph()

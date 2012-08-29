@@ -10,7 +10,8 @@ import re
 import inspect
 from pprint import pprint
 
-def dict_sub(d, text):
+# --------------------------------------------------------------------------------------------------------------
+def dict_sub(text, d):
   """ Replace in 'text' non-overlapping occurences of REs whose patterns are keys
   in dictionary 'd' by corresponding values (which must be constant strings: may
   have named backreferences but not numeric ones). The keys must not contain
@@ -193,10 +194,12 @@ time_interval = Simple_Time_Interval()
 
 def rough_compare_files(s_filename, t_filename):
     ''' roughly estimate if two files is the same consider lines in random order''' 
-    print s_filename + " not including:" 
     try:
         s_file = open(s_filename, 'r')
         t_file = open(t_filename, 'r')
+        diff_file = open("diff.log", 'w')
+        print s_filename + " not including:" 
+        print >> diff_file, s_filename + " not including:" 
         # 
         source = set()
         for line in s_file.readlines():
@@ -205,8 +208,14 @@ def rough_compare_files(s_filename, t_filename):
         for i,line in enumerate(t_file.readlines()):
             if line not in source:
                 print "line %s failed: %s"%(i+1,line)
+                print >> diff_file, "line %s failed: %s"%(i+1,line)
     except IOError,e:
         print e
+        print >> diff_file, e
         raise e
+    finally:
+        s_file.close()
+        t_file.close()
+        diff_file.close()
 # --------------------------------------------------------------------------------------------------------------
 __all__ = ["log", "time_interval", "Logger", "dict_sub","hs_dict","format_log"]

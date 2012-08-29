@@ -214,6 +214,10 @@ class Viz_Graph(object):
             node = node + "[%s]" % str(no_node)
         return node
 
+    def reset_unique(self):
+        '''docstring for reset_unique_no''' 
+        self.no_nodes.clear()
+
     def add_node(self, node_id, **attr):
         self._nx_graph.add_node(str(node_id))
         for key, value in attr.items():
@@ -288,6 +292,7 @@ class Viz_Graph(object):
     def clear(self):
         """docstring for clear"""
         self._nx_graph.clear()
+        self.reset_unique()
 
 class Graph_Abserver(object):
     """ abstract class that help to abserve the graph according to the given filter imfo"""
