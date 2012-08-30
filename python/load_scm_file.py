@@ -9,7 +9,7 @@ from viz_graph import Viz_Graph
 from types_inheritance import name_type_dict, is_a
 from m_util import Logger, dict_sub
 from m_adaptors import FakeAtom, output_atomspace
-import atomspace_abserver
+#import atomspace_abserver
 from m_util import rough_compare_files
 log = Logger("diff")
 log.to_file = True
@@ -225,10 +225,13 @@ def test_load_scm_file():
     load_scm_file(a, "./test/scm/test_load_scm_file.scm")
     #load_scm_file(a, "./air.scm")
     # output atomspace  to file "diff_log" 
-    #output_atomspace(a, "py_atomspace.log" )
+    output_atomspace(a, "py_atomspace.log" )
     # compare output with output of atomspace loaded with cogserver
-    rough_compare_files("py_atomspace.log", "server_atomspace.log")
-    rough_compare_files("server_atomspace.log", "py_atomspace.log")
+    if rough_compare_files("py_atomspace.log", "./test/log/server_atomspace.log") and rough_compare_files("./test/log/server_atomspace.log", "py_atomspace.log"):
+        log.info("test passed!")
+    else:
+        log.info("test failed!")
+        
 
     #abserver = atomspace_abserver.Atomspace_Abserver(a)
     #abserver.graph_info()

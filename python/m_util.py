@@ -211,11 +211,12 @@ def rough_compare_files(s_filename, t_filename):
                 print >> diff_file, "line %s failed: %s"%(i+1,line)
     except IOError,e:
         print e
-        print >> diff_file, e
-        raise e
-    finally:
-        s_file.close()
-        t_file.close()
-        diff_file.close()
+        #print >> diff_file, e
+        #s_file.close()
+        #t_file.close()
+        #diff_file.close()
+        return False
+    else:
+        return True
 # --------------------------------------------------------------------------------------------------------------
 __all__ = ["log", "time_interval", "Logger", "dict_sub","hs_dict","format_log"]
