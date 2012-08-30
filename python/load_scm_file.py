@@ -222,8 +222,8 @@ def test_load_scm_file():
 
     # load a scm file 
     a = AtomSpace()
-    #load_scm_file(a, "./test/test_load_scm_file.scm")
-    load_scm_file(a, "./air.scm")
+    load_scm_file(a, "./test/scm/test_load_scm_file.scm")
+    #load_scm_file(a, "./air.scm")
     # output atomspace  to file "diff_log" 
     #output_atomspace(a, "py_atomspace.log" )
     # compare output with output of atomspace loaded with cogserver

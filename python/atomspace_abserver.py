@@ -108,7 +108,7 @@ class Atomspace_Abserver(Graph_Abserver):
 if __name__ == '__main__':
     from load_scm_file import load_scm_file
     a = AtomSpace()
-    load_scm_file(a, "./test/test_atomspace_abserver.scm")
+    load_scm_file(a, "./test/scm/test_atomspace_abserver.scm")
     abserver = Atomspace_Abserver(a)
     abserver.graph_info()
     abserver.filter_graph()
