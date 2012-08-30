@@ -1,0 +1,3330 @@
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_23_99,block> 1 0.00124844]-------link handle:20058
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_23_99:17621
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_23_99,Object> 1 0.00124844]-------link handle:20057
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_23_99:17621
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change27,state_change> 0.0 0.0]-------link handle:20056
+[DEBUG]:state_change27:6706
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <state_change47,$var_prototype> 0.0 0.0]-------link handle:6168
+[DEBUG]:state_change47:6167
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_23_99,Object> 1 0.00124844]-------link handle:20055
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_23_99:20054
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_10_104,object> 0.0 0.0]-------link handle:20053
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_10_104:18056
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_9_104,block> 1 0.00124844]-------link handle:20052
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_9_104:18048
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <state_change5,$var_prototype> 0.0 0.0]-------link handle:6164
+[DEBUG]:state_change5:6163
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_9_104,Object> 1 0.00124844]-------link handle:20051
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_9_104:18048
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_9_104,Object> 1 0.00124844]-------link handle:20050
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_9_104:20049
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_-21226,Battery> 1 0.00124844]-------link handle:20048
+[DEBUG]:id_-21226:2586
+[DEBUG]:Battery:19607
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_23_99,object> 0.0 0.0]-------link handle:20047
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_23_99:17621
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_-21226,Object> 1 0.00124844]-------link handle:20046
+[DEBUG]:id_-21226:2586
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_-21226,Object> 1 0.00124844]-------link handle:20045
+[DEBUG]:id_-21226:20044
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_22_99,block> 1 0.00124844]-------link handle:20043
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_22_99:17614
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_22_99,Object> 1 0.00124844]-------link handle:20042
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_22_99:17614
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_22_99,Object> 1 0.00124844]-------link handle:20041
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_22_99:20040
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change42,$var_prototype> 0.0 0.0]-------link handle:6152
+[DEBUG]:state_change42:6151
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_9_104,object> 0.0 0.0]-------link handle:20039
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_9_104:18048
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_8_99,block> 1 0.00124844]-------link handle:20038
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_8_99:18041
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_8_99,Object> 1 0.00124844]-------link handle:20037
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_8_99:18041
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change24,state_change> 0.0 0.0]-------link handle:20036
+[DEBUG]:state_change24:6636
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_22_99,object> 0.0 0.0]-------link handle:20035
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_22_99:17614
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_8_99,Object> 1 0.00124844]-------link handle:20034
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_8_99:20033
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_-21226,food_bowl> 1 0.00124844]-------link handle:20032
+[DEBUG]:id_-21226:2586
+[DEBUG]:food_bowl:19770
+[DEBUG]:[InheritanceLink <state_change57,state_change> 0.0 0.0]-------link handle:20031
+[DEBUG]:state_change57:6714
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_15_103,block> 1 0.00124844]-------link handle:20030
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_15_103:17607
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_15_103,Object> 1 0.00124844]-------link handle:20029
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_15_103:17607
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change34,state_change> 0.0 0.0]-------link handle:20028
+[DEBUG]:state_change34:6063
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_15_103,Object> 1 0.00124844]-------link handle:20027
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_15_103:20026
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_-21226,object> 0.0 0.0]-------link handle:20025
+[DEBUG]:id_-21226:2586
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_8_99,object> 0.0 0.0]-------link handle:20024
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_8_99:18041
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_7_99,block> 1 0.00124844]-------link handle:20023
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_7_99:18034
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_7_99,Object> 1 0.00124844]-------link handle:20022
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_7_99:18034
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_15_103,object> 0.0 0.0]-------link handle:20021
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_15_103:17607
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_7_99,Object> 1 0.00124844]-------link handle:20020
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_7_99:20019
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change16,$var_prototype> 0.0 0.0]-------link handle:6132
+[DEBUG]:state_change16:6131
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change74,state_change> 0.0 0.0]-------link handle:20018
+[DEBUG]:state_change74:5655
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_14_99,block> 1 0.00124844]-------link handle:20017
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_14_99:17600
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_14_99,Object> 1 0.00124844]-------link handle:20016
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_14_99:17600
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_14_99,Object> 1 0.00124844]-------link handle:20015
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_14_99:20014
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move28,$var_prototype> 0.0 0.0]-------link handle:6128
+[DEBUG]:move28:6127
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <appear:result-state,result-state> 0.0 0.0]-------link handle:20013
+[DEBUG]:appear:result-state:20012
+[DEBUG]:result-state:19866
+[DEBUG]:[InheritanceLink <appear:target,target> 0.0 0.0]-------link handle:20011
+[DEBUG]:appear:target:20010
+[DEBUG]:target:19859
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_7_99,object> 0.0 0.0]-------link handle:20009
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_7_99:18034
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <appear:actor,actor> 0.0 0.0]-------link handle:20008
+[DEBUG]:appear:actor:20007
+[DEBUG]:actor:19854
+[DEBUG]:[InheritanceLink <state_change21,$var_prototype> 0.0 0.0]-------link handle:6120
+[DEBUG]:state_change21:6119
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <appear1,appear> 0.0 0.0]-------link handle:20006
+[DEBUG]:appear1:5701
+[DEBUG]:appear:19746
+[DEBUG]:[InheritanceLink <state_change31,state_change> 0.0 0.0]-------link handle:20005
+[DEBUG]:state_change31:5941
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_6_99,block> 1 0.00124844]-------link handle:20004
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_6_99:18027
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_6_99,Object> 1 0.00124844]-------link handle:20003
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_6_99:18027
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change66,$var_prototype> 0.0 0.0]-------link handle:6116
+[DEBUG]:state_change66:6115
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_14_99,object> 0.0 0.0]-------link handle:20002
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_14_99:17600
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_6_99,Object> 1 0.00124844]-------link handle:20001
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_6_99:20000
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_13_105,block> 1 0.00124844]-------link handle:19999
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_13_105:17593
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <state_change44,$var_prototype> 0.0 0.0]-------link handle:6112
+[DEBUG]:state_change44:6111
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_13_105,Object> 1 0.00124844]-------link handle:19998
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_13_105:17593
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_13_105,Object> 1 0.00124844]-------link handle:19997
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_13_105:19996
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <disappear2,disappear> 0.0 0.0]-------link handle:19995
+[DEBUG]:disappear2:5627
+[DEBUG]:disappear:19849
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_6_99,object> 0.0 0.0]-------link handle:19994
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_6_99:18027
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <move32,move> 0.0 0.0]-------link handle:19993
+[DEBUG]:move32:6250
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_5_103,block> 1 0.00124844]-------link handle:19992
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_5_103:18020
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_5_103,Object> 1 0.00124844]-------link handle:19991
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_5_103:18020
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move9,move> 0.0 0.0]-------link handle:19990
+[DEBUG]:move9:6013
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_13_105,object> 0.0 0.0]-------link handle:19989
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_13_105:17593
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_5_103,Object> 1 0.00124844]-------link handle:19988
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_5_103:19987
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_12_106,block> 1 0.00124844]-------link handle:19986
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_12_106:17586
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_12_106,Object> 1 0.00124844]-------link handle:19985
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_12_106:17586
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_12_106,Object> 1 0.00124844]-------link handle:19984
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_12_106:19983
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move15,$var_prototype> 0.0 0.0]-------link handle:6096
+[DEBUG]:move15:6095
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change26,state_change> 0.0 0.0]-------link handle:19982
+[DEBUG]:state_change26:6226
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <spawn_object:result-state,result-state> 0.0 0.0]-------link handle:19981
+[DEBUG]:spawn_object:result-state:19980
+[DEBUG]:result-state:19866
+[DEBUG]:[InheritanceLink <state_change35,$var_prototype> 0.0 0.0]-------link handle:6092
+[DEBUG]:state_change35:6091
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_5_103,object> 0.0 0.0]-------link handle:19979
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_5_103:18020
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <spawn_object:target,target> 0.0 0.0]-------link handle:19978
+[DEBUG]:spawn_object:target:19977
+[DEBUG]:target:19859
+[DEBUG]:[InheritanceLink <state_change66,state_change> 0.0 0.0]-------link handle:19976
+[DEBUG]:state_change66:6115
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <move27,$var_prototype> 0.0 0.0]-------link handle:6088
+[DEBUG]:move27:6087
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_23_99,block> 1 0.00124844]-------link handle:19975
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_23_99:18013
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <spawn_object:actor,actor> 0.0 0.0]-------link handle:19974
+[DEBUG]:spawn_object:actor:19973
+[DEBUG]:actor:19854
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_23_99,Object> 1 0.00124844]-------link handle:19972
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_23_99:18013
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move16,$var_prototype> 0.0 0.0]-------link handle:6084
+[DEBUG]:move16:6083
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <spawn_object6,spawn_object> 0.0 0.0]-------link handle:19971
+[DEBUG]:spawn_object6:6902
+[DEBUG]:spawn_object:19721
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_12_106,object> 0.0 0.0]-------link handle:19970
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_12_106:17586
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_23_99,Object> 1 0.00124844]-------link handle:19969
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_23_99:19968
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move26,$var_prototype> 0.0 0.0]-------link handle:6080
+[DEBUG]:move26:6079
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change19,state_change> 0.0 0.0]-------link handle:19967
+[DEBUG]:state_change19:5884
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_11_107,block> 1 0.00124844]-------link handle:19966
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_11_107:17579
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_11_107,Object> 1 0.00124844]-------link handle:19965
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_11_107:17579
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_11_107,Object> 1 0.00124844]-------link handle:19964
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_11_107:19963
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_23_99,object> 0.0 0.0]-------link handle:19962
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_23_99:18013
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_22_99,block> 1 0.00124844]-------link handle:19961
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_22_99:18006
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_22_99,Object> 1 0.00124844]-------link handle:19960
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_22_99:18006
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_11_107,object> 0.0 0.0]-------link handle:19959
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_11_107:17579
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_22_99,Object> 1 0.00124844]-------link handle:19958
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_22_99:19957
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_10_108,block> 1 0.00124844]-------link handle:19956
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_10_108:17572
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_10_108,Object> 1 0.00124844]-------link handle:19955
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_10_108:17572
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_10_108,Object> 1 0.00124844]-------link handle:19954
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_10_108:19953
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_22_99,object> 0.0 0.0]-------link handle:19952
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_22_99:18006
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change34,$var_prototype> 0.0 0.0]-------link handle:6064
+[DEBUG]:state_change34:6063
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_15_103,block> 1 0.00124844]-------link handle:19951
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_15_103:17999
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_15_103,Object> 1 0.00124844]-------link handle:19950
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_15_103:17999
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_10_108,object> 0.0 0.0]-------link handle:19949
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_10_108:17572
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_15_103,Object> 1 0.00124844]-------link handle:19948
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_15_103:19947
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move24,$var_prototype> 0.0 0.0]-------link handle:6060
+[DEBUG]:move24:6059
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change41,state_change> 0.0 0.0]-------link handle:19946
+[DEBUG]:state_change41:6483
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_9_107,block> 1 0.00124844]-------link handle:19945
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_9_107:17565
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_9_107,Object> 1 0.00124844]-------link handle:19944
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_9_107:17565
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_9_107,Object> 1 0.00124844]-------link handle:19943
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_9_107:19942
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move27,move> 0.0 0.0]-------link handle:19941
+[DEBUG]:move27:6087
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_15_103,object> 0.0 0.0]-------link handle:19940
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_15_103:17999
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_14_99,block> 1 0.00124844]-------link handle:19939
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_14_99:17992
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_14_99,Object> 1 0.00124844]-------link handle:19938
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_14_99:17992
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_9_107,object> 0.0 0.0]-------link handle:19937
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_9_107:17565
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_14_99,Object> 1 0.00124844]-------link handle:19936
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_14_99:19935
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_8_106,block> 1 0.00124844]-------link handle:19934
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_8_106:17558
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <$frameColorPredicateNode,#Color:Color> 0.0 0.0]-------link handle:6046
+[DEBUG]:$frameColorPredicateNode:6038
+[DEBUG]:#Color:Color:6045
+[DEBUG]:[InheritanceLink <move:result-state,result-state> 0.0 0.0]-------link handle:19933
+[DEBUG]:move:result-state:19932
+[DEBUG]:result-state:19866
+[DEBUG]:[InheritanceLink <$frameEntityPredicateNode,#Color:Entity> 0.0 0.0]-------link handle:6044
+[DEBUG]:$frameEntityPredicateNode:6036
+[DEBUG]:#Color:Entity:6043
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_8_106,Object> 1 0.00124844]-------link handle:19931
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_8_106:17558
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_8_106,Object> 1 0.00124844]-------link handle:19930
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_8_106:19929
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <$framePredicateNode,#Color> 0.0 0.0]-------link handle:6042
+[DEBUG]:$framePredicateNode:6034
+[DEBUG]:#Color:6041
+[DEBUG]:[InheritanceLink <move:endPosition,endPosition> 0.0 0.0]-------link handle:19928
+[DEBUG]:move:endPosition:19926
+[DEBUG]:endPosition:19927
+[DEBUG]:[InheritanceLink <state_change56,state_change> 0.0 0.0]-------link handle:19925
+[DEBUG]:state_change56:5945
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <move:startPosition,startPosition> 0.0 0.0]-------link handle:19924
+[DEBUG]:move:startPosition:19922
+[DEBUG]:startPosition:19923
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_14_99,object> 0.0 0.0]-------link handle:19921
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_14_99:17992
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_13_105,block> 1 0.00124844]-------link handle:19920
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_13_105:17985
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <move:target,target> 0.0 0.0]-------link handle:19919
+[DEBUG]:move:target:19918
+[DEBUG]:target:19859
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_13_105,Object> 1 0.00124844]-------link handle:19917
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_13_105:17985
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_8_106,object> 0.0 0.0]-------link handle:19916
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_8_106:17558
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_13_105,Object> 1 0.00124844]-------link handle:19915
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_13_105:19914
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move:actor,actor> 0.0 0.0]-------link handle:19913
+[DEBUG]:move:actor:19912
+[DEBUG]:actor:19854
+[DEBUG]:[InheritanceLink <move1,move> 0.0 0.0]-------link handle:19911
+[DEBUG]:move1:6702
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_7_105,block> 1 0.00124844]-------link handle:19910
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_7_105:17551
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <state_change8,$var_prototype> 0.0 0.0]-------link handle:6022
+[DEBUG]:state_change8:6021
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_7_105,Object> 1 0.00124844]-------link handle:19909
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_7_105:17551
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_7_105,Object> 1 0.00124844]-------link handle:19908
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_7_105:19907
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change61,state_change> 0.0 0.0]-------link handle:19906
+[DEBUG]:state_change61:5748
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_13_105,object> 0.0 0.0]-------link handle:19905
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_13_105:17985
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_12_106,block> 1 0.00124844]-------link handle:19904
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_12_106:17978
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_12_106,Object> 1 0.00124844]-------link handle:19903
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_12_106:17978
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_7_105,object> 0.0 0.0]-------link handle:19902
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_7_105:17551
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <move9,$var_prototype> 0.0 0.0]-------link handle:6014
+[DEBUG]:move9:6013
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_12_106,Object> 1 0.00124844]-------link handle:19901
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_12_106:19900
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_6_99,block> 1 0.00124844]-------link handle:19899
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_6_99:17544
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_6_99,Object> 1 0.00124844]-------link handle:19898
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_6_99:17544
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_6_99,Object> 1 0.00124844]-------link handle:19897
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_6_99:19896
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change2,state_change> 0.0 0.0]-------link handle:19895
+[DEBUG]:state_change2:6561
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_12_106,object> 0.0 0.0]-------link handle:19894
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_12_106:17978
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <move34,move> 0.0 0.0]-------link handle:19893
+[DEBUG]:move34:6886
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_11_107,block> 1 0.00124844]-------link handle:19892
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_11_107:17971
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_11_107,Object> 1 0.00124844]-------link handle:19891
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_11_107:17971
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_6_99,object> 0.0 0.0]-------link handle:19890
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_6_99:17544
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change69,$var_prototype> 0.0 0.0]-------link handle:6002
+[DEBUG]:state_change69:6001
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_11_107,Object> 1 0.00124844]-------link handle:19889
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_11_107:19888
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_5_103,block> 1 0.00124844]-------link handle:19887
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_5_103:17537
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_5_103,Object> 1 0.00124844]-------link handle:19886
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_5_103:17537
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_5_103,Object> 1 0.00124844]-------link handle:19885
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_5_103:19884
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_11_107,object> 0.0 0.0]-------link handle:19883
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_11_107:17971
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_10_108,block> 1 0.00124844]-------link handle:19882
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_10_108:17964
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <state_change58,$var_prototype> 0.0 0.0]-------link handle:5994
+[DEBUG]:state_change58:5993
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <move19,move> 0.0 0.0]-------link handle:19881
+[DEBUG]:move19:5981
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <state_change70,state_change> 0.0 0.0]-------link handle:19880
+[DEBUG]:state_change70:6838
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_10_108,Object> 1 0.00124844]-------link handle:19879
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_10_108:17964
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_9_5_103,object> 0.0 0.0]-------link handle:19878
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_9_5_103:17537
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_10_108,Object> 1 0.00124844]-------link handle:19877
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_10_108:19876
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_23_99,block> 1 0.00124844]-------link handle:19875
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_23_99:17530
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_23_99,Object> 1 0.00124844]-------link handle:19874
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_23_99:17530
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_23_99,Object> 1 0.00124844]-------link handle:19873
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_23_99:19872
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_10_108,object> 0.0 0.0]-------link handle:19871
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_10_108:17964
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_9_107,block> 1 0.00124844]-------link handle:19870
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_9_107:17957
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <move19,$var_prototype> 0.0 0.0]-------link handle:5982
+[DEBUG]:move19:5981
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_9_107,Object> 1 0.00124844]-------link handle:19869
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_9_107:17957
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change40,state_change> 0.0 0.0]-------link handle:19868
+[DEBUG]:state_change40:5868
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <disappear:result-state,result-state> 0.0 0.0]-------link handle:19867
+[DEBUG]:disappear:result-state:19865
+[DEBUG]:result-state:19866
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_9_107,Object> 1 0.00124844]-------link handle:19864
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_9_107:19863
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change5,state_change> 0.0 0.0]-------link handle:19862
+[DEBUG]:state_change5:6163
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_23_99,object> 0.0 0.0]-------link handle:19861
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_23_99:17530
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <disappear:target,target> 0.0 0.0]-------link handle:19860
+[DEBUG]:disappear:target:19858
+[DEBUG]:target:19859
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_22_99,block> 1 0.00124844]-------link handle:19857
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_22_99:17523
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_22_99,Object> 1 0.00124844]-------link handle:19856
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_22_99:17523
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <disappear:actor,actor> 0.0 0.0]-------link handle:19855
+[DEBUG]:disappear:actor:19853
+[DEBUG]:actor:19854
+[DEBUG]:[InheritanceLink <state_change32,$var_prototype> 0.0 0.0]-------link handle:5966
+[DEBUG]:state_change32:5965
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_22_99,Object> 1 0.00124844]-------link handle:19852
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_22_99:19851
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <disappear1,disappear> 0.0 0.0]-------link handle:19850
+[DEBUG]:disappear1:5728
+[DEBUG]:disappear:19849
+[DEBUG]:[InheritanceLink <state_change33,$var_prototype> 0.0 0.0]-------link handle:5962
+[DEBUG]:state_change33:5961
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_9_107,object> 0.0 0.0]-------link handle:19848
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_9_107:17957
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_8_106,block> 1 0.00124844]-------link handle:19847
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_8_106:17950
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_8_106,Object> 1 0.00124844]-------link handle:19846
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_8_106:17950
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change54,$var_prototype> 0.0 0.0]-------link handle:5958
+[DEBUG]:state_change54:5957
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_8_106,Object> 1 0.00124844]-------link handle:19845
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_8_106:19844
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_22_99,object> 0.0 0.0]-------link handle:19843
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_22_99:17523
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_15_103,block> 1 0.00124844]-------link handle:19842
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_15_103:17516
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_15_103,Object> 1 0.00124844]-------link handle:19841
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_15_103:17516
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_15_103,Object> 1 0.00124844]-------link handle:19840
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_15_103:19839
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_8_106,object> 0.0 0.0]-------link handle:19838
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_8_106:17950
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_7_105,block> 1 0.00124844]-------link handle:19837
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_7_105:17943
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <state_change55,state_change> 0.0 0.0]-------link handle:19836
+[DEBUG]:state_change55:6818
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_7_105,Object> 1 0.00124844]-------link handle:19835
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_7_105:17943
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_7_105,Object> 1 0.00124844]-------link handle:19834
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_7_105:19833
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change56,$var_prototype> 0.0 0.0]-------link handle:5946
+[DEBUG]:state_change56:5945
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_15_103,object> 0.0 0.0]-------link handle:19832
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_15_103:17516
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_14_99,block> 1 0.00124844]-------link handle:19831
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_14_99:17509
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_14_99,Object> 1 0.00124844]-------link handle:19830
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_14_99:17509
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change31,$var_prototype> 0.0 0.0]-------link handle:5942
+[DEBUG]:state_change31:5941
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_14_99,Object> 1 0.00124844]-------link handle:19829
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_14_99:19828
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_7_105,object> 0.0 0.0]-------link handle:19827
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_7_105:17943
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_6_99,block> 1 0.00124844]-------link handle:19826
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_6_99:17936
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_6_99,Object> 1 0.00124844]-------link handle:19825
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_6_99:17936
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_6_99,Object> 1 0.00124844]-------link handle:19824
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_6_99:19823
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_14_99,object> 0.0 0.0]-------link handle:19822
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_14_99:17509
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_13_105,block> 1 0.00124844]-------link handle:19821
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_13_105:17502
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_13_105,Object> 1 0.00124844]-------link handle:19820
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_13_105:17502
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_13_105,Object> 1 0.00124844]-------link handle:19819
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_13_105:19818
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move16,move> 0.0 0.0]-------link handle:19817
+[DEBUG]:move16:6083
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_6_99,object> 0.0 0.0]-------link handle:19816
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_6_99:17936
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_5_103,block> 1 0.00124844]-------link handle:19815
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_5_103:17929
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_5_103,Object> 1 0.00124844]-------link handle:19814
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_5_103:17929
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change53,$var_prototype> 0.0 0.0]-------link handle:5926
+[DEBUG]:state_change53:5925
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_5_103,Object> 1 0.00124844]-------link handle:19813
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_5_103:19812
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_13_105,object> 0.0 0.0]-------link handle:19811
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_13_105:17502
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_12_106,block> 1 0.00124844]-------link handle:19810
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_12_106:17495
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <move5,$var_prototype> 0.0 0.0]-------link handle:5922
+[DEBUG]:move5:5921
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_12_106,Object> 1 0.00124844]-------link handle:19809
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_12_106:17495
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_12_106,Object> 1 0.00124844]-------link handle:19808
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_12_106:19807
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_13_5_103,object> 0.0 0.0]-------link handle:19806
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_13_5_103:17929
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <move37,$var_prototype> 0.0 0.0]-------link handle:5918
+[DEBUG]:move37:5917
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change33,state_change> 0.0 0.0]-------link handle:19805
+[DEBUG]:state_change33:5961
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_23_99,block> 1 0.00124844]-------link handle:19804
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_23_99:17922
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_23_99,Object> 1 0.00124844]-------link handle:19803
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_23_99:17922
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_23_99,Object> 1 0.00124844]-------link handle:19802
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_23_99:19801
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change39,$var_prototype> 0.0 0.0]-------link handle:5914
+[DEBUG]:state_change39:5913
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_12_106,object> 0.0 0.0]-------link handle:19800
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_12_106:17495
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_11_107,block> 1 0.00124844]-------link handle:19799
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_11_107:17488
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_11_107,Object> 1 0.00124844]-------link handle:19798
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_11_107:17488
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change51,$var_prototype> 0.0 0.0]-------link handle:5910
+[DEBUG]:state_change51:5909
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_11_107,Object> 1 0.00124844]-------link handle:19797
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_11_107:19796
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move11,move> 0.0 0.0]-------link handle:19795
+[DEBUG]:move11:6569
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_23_99,object> 0.0 0.0]-------link handle:19794
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_23_99:17922
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_22_99,block> 1 0.00124844]-------link handle:19793
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_22_99:17915
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_22_99,Object> 1 0.00124844]-------link handle:19792
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_22_99:17915
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_22_99,Object> 1 0.00124844]-------link handle:19791
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_22_99:19790
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_11_107,object> 0.0 0.0]-------link handle:19789
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_11_107:17488
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <move29,move> 0.0 0.0]-------link handle:19788
+[DEBUG]:move29:6411
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_10_108,block> 1 0.00124844]-------link handle:19787
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_10_108:17481
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_-348300,Battery> 1 0.00124844]-------link handle:19786
+[DEBUG]:id_-348300:4631
+[DEBUG]:Battery:19607
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_10_108,Object> 1 0.00124844]-------link handle:19785
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_10_108:17481
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_-348300,Object> 1 0.00124844]-------link handle:19784
+[DEBUG]:id_-348300:4631
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_10_108,Object> 1 0.00124844]-------link handle:19783
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_10_108:19782
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_-348300,Object> 1 0.00124844]-------link handle:19781
+[DEBUG]:id_-348300:19780
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move35,move> 0.0 0.0]-------link handle:19779
+[DEBUG]:move35:6922
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <state_change23,state_change> 0.0 0.0]-------link handle:19778
+[DEBUG]:state_change23:6455
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_22_99,object> 0.0 0.0]-------link handle:19777
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_22_99:17915
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_15_103,block> 1 0.00124844]-------link handle:19776
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_15_103:17908
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_15_103,Object> 1 0.00124844]-------link handle:19775
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_15_103:17908
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_15_103,Object> 1 0.00124844]-------link handle:19774
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_15_103:19773
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change19,$var_prototype> 0.0 0.0]-------link handle:5885
+[DEBUG]:state_change19:5884
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_10_108,object> 0.0 0.0]-------link handle:19772
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_10_108:17481
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_-348300,food_bowl> 1 0.00124844]-------link handle:19771
+[DEBUG]:id_-348300:4631
+[DEBUG]:food_bowl:19770
+[DEBUG]:[InheritanceLink <move14,move> 0.0 0.0]-------link handle:19769
+[DEBUG]:move14:5788
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <state_change60,state_change> 0.0 0.0]-------link handle:19768
+[DEBUG]:state_change60:6290
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_13_3_99,block> 1 0.00124844]-------link handle:19767
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_13_3_99:18337
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_9_107,block> 1 0.00124844]-------link handle:19766
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_9_107:17474
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_13_3_99,Object> 1 0.00124844]-------link handle:19765
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_13_3_99:18337
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_9_107,Object> 1 0.00124844]-------link handle:19764
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_9_107:17474
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_-348300,object> 0.0 0.0]-------link handle:19763
+[DEBUG]:id_-348300:4631
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_13_3_99,Object> 1 0.00124844]-------link handle:19762
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_13_3_99:19761
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change71,$var_prototype> 0.0 0.0]-------link handle:5873
+[DEBUG]:state_change71:5872
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_9_107,Object> 1 0.00124844]-------link handle:19760
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_9_107:19759
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change73,state_change> 0.0 0.0]-------link handle:19758
+[DEBUG]:state_change73:6866
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_15_103,object> 0.0 0.0]-------link handle:19757
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_15_103:17908
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change40,$var_prototype> 0.0 0.0]-------link handle:5869
+[DEBUG]:state_change40:5868
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_6920,Home> 1 0.00124844]-------link handle:19756
+[DEBUG]:id_6920:7425
+[DEBUG]:Home:19755
+[DEBUG]:[InheritanceLink <id_6920,Object> 1 0.00124844]-------link handle:19754
+[DEBUG]:id_6920:7425
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_14_99,block> 1 0.00124844]-------link handle:19753
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_14_99:17901
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_14_99,Object> 1 0.00124844]-------link handle:19752
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_14_99:17901
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6920,Object> 1 0.00124844]-------link handle:19751
+[DEBUG]:id_6920:19750
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_14_99,Object> 1 0.00124844]-------link handle:19749
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_14_99:19748
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <$entity,$attribute> 0.0 0.0]-------link handle:5861
+[DEBUG]:$entity:5848
+[DEBUG]:$attribute:5851
+[DEBUG]:[InheritanceLink <appear3,appear> 0.0 0.0]-------link handle:19747
+[DEBUG]:appear3:6589
+[DEBUG]:appear:19746
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_13_3_99,object> 0.0 0.0]-------link handle:19745
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_13_3_99:18337
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_9_107,object> 0.0 0.0]-------link handle:19744
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_9_107:17474
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_13_2_99,block> 1 0.00124844]-------link handle:19743
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_13_2_99:18330
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_8_106,block> 1 0.00124844]-------link handle:19742
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_8_106:17467
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_13_2_99,Object> 1 0.00124844]-------link handle:19741
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_13_2_99:18330
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_8_106,Object> 1 0.00124844]-------link handle:19740
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_8_106:17467
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change30,state_change> 0.0 0.0]-------link handle:19739
+[DEBUG]:state_change30:5671
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_13_2_99,Object> 1 0.00124844]-------link handle:19738
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_13_2_99:19737
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_8_106,Object> 1 0.00124844]-------link handle:19736
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_8_106:19735
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move7,move> 0.0 0.0]-------link handle:19734
+[DEBUG]:move7:6467
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_6920,pet_home> 1 0.00124844]-------link handle:19733
+[DEBUG]:id_6920:7425
+[DEBUG]:pet_home:19732
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_14_99,object> 0.0 0.0]-------link handle:19731
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_14_99:17901
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6920,object> 0.0 0.0]-------link handle:19730
+[DEBUG]:id_6920:7425
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_13_105,block> 1 0.00124844]-------link handle:19729
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_13_105:17894
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <move33,$var_prototype> 0.0 0.0]-------link handle:5841
+[DEBUG]:move33:5840
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_13_105,Object> 1 0.00124844]-------link handle:19728
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_13_105:17894
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6918,Soccerball> 1 0.00124844]-------link handle:19727
+[DEBUG]:id_6918:7413
+[DEBUG]:Soccerball:19726
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_13_105,Object> 1 0.00124844]-------link handle:19725
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_13_105:19724
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change3,state_change> 0.0 0.0]-------link handle:19723
+[DEBUG]:state_change3:6806
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <spawn_object369,spawn_object> 0.0 0.0]-------link handle:19722
+[DEBUG]:spawn_object369:6475
+[DEBUG]:spawn_object:19721
+[DEBUG]:[InheritanceLink <id_6918,Object> 1 0.00124844]-------link handle:19720
+[DEBUG]:id_6918:7413
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_13_2_99,object> 0.0 0.0]-------link handle:19719
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_13_2_99:18330
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_8_106,object> 0.0 0.0]-------link handle:19718
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_8_106:17467
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6918,Object> 1 0.00124844]-------link handle:19717
+[DEBUG]:id_6918:19716
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change28,$var_prototype> 0.0 0.0]-------link handle:5829
+[DEBUG]:state_change28:5828
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_13_1_99,block> 1 0.00124844]-------link handle:19715
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_13_1_99:18323
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_7_105,block> 1 0.00124844]-------link handle:19714
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_7_105:17460
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_13_1_99,Object> 1 0.00124844]-------link handle:19713
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_13_1_99:18323
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_7_105,Object> 1 0.00124844]-------link handle:19712
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_7_105:17460
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_13_1_99,Object> 1 0.00124844]-------link handle:19711
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_13_1_99:19710
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_7_105,Object> 1 0.00124844]-------link handle:19709
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_7_105:19708
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change78,$var_prototype> 0.0 0.0]-------link handle:5821
+[DEBUG]:state_change78:5820
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change29,state_change> 0.0 0.0]-------link handle:19707
+[DEBUG]:state_change29:6930
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <state_change15,state_change> 0.0 0.0]-------link handle:19706
+[DEBUG]:state_change15:6354
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_13_105,object> 0.0 0.0]-------link handle:19705
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_13_105:17894
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change10,$var_prototype> 0.0 0.0]-------link handle:5817
+[DEBUG]:state_change10:5816
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_12_106,block> 1 0.00124844]-------link handle:19704
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_12_106:17887
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_12_106,Object> 1 0.00124844]-------link handle:19703
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_12_106:17887
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move26,move> 0.0 0.0]-------link handle:19702
+[DEBUG]:move26:6079
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_12_106,Object> 1 0.00124844]-------link handle:19701
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_12_106:19700
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change50,$var_prototype> 0.0 0.0]-------link handle:5813
+[DEBUG]:state_change50:5812
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_13_1_99,object> 0.0 0.0]-------link handle:19699
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_13_1_99:18323
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_7_105,object> 0.0 0.0]-------link handle:19698
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_7_105:17460
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6918,object> 0.0 0.0]-------link handle:19697
+[DEBUG]:id_6918:7413
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_13_0_99,block> 1 0.00124844]-------link handle:19696
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_13_0_99:18316
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_6_99,block> 1 0.00124844]-------link handle:19695
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_6_99:17453
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_13_0_99,Object> 1 0.00124844]-------link handle:19694
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_13_0_99:18316
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_6_99,Object> 1 0.00124844]-------link handle:19693
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_6_99:17453
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_13_0_99,Object> 1 0.00124844]-------link handle:19692
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_13_0_99:19691
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6906,BatterySwitch> 1 0.00124844]-------link handle:19690
+[DEBUG]:id_6906:6878
+[DEBUG]:BatterySwitch:19689
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_6_99,Object> 1 0.00124844]-------link handle:19688
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_6_99:19687
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6906,Object> 1 0.00124844]-------link handle:19686
+[DEBUG]:id_6906:6878
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6906,Object> 1 0.00124844]-------link handle:19685
+[DEBUG]:id_6906:19684
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change65,state_change> 0.0 0.0]-------link handle:19683
+[DEBUG]:state_change65:5780
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_12_106,object> 0.0 0.0]-------link handle:19682
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_12_106:17887
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_11_107,block> 1 0.00124844]-------link handle:19681
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_11_107:17880
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_11_107,Object> 1 0.00124844]-------link handle:19680
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_11_107:17880
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_11_107,Object> 1 0.00124844]-------link handle:19679
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_11_107:19678
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_13_0_99,object> 0.0 0.0]-------link handle:19677
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_13_0_99:18316
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <move14,$var_prototype> 0.0 0.0]-------link handle:5789
+[DEBUG]:move14:5788
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change54,state_change> 0.0 0.0]-------link handle:19676
+[DEBUG]:state_change54:5957
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_6_99,object> 0.0 0.0]-------link handle:19675
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_6_99:17453
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_12_3_99,block> 1 0.00124844]-------link handle:19674
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_12_3_99:18309
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_5_103,block> 1 0.00124844]-------link handle:19673
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_5_103:17446
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_12_3_99,Object> 1 0.00124844]-------link handle:19672
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_12_3_99:18309
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6906,object> 0.0 0.0]-------link handle:19671
+[DEBUG]:id_6906:6878
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_5_103,Object> 1 0.00124844]-------link handle:19670
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_5_103:17446
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <Avatar,Agent> 1 1]-------link handle:19669
+[DEBUG]:Avatar:19668
+[DEBUG]:Agent:19653
+[DEBUG]:[InheritanceLink <state_change65,$var_prototype> 0.0 0.0]-------link handle:5781
+[DEBUG]:state_change65:5780
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_12_3_99,Object> 1 0.00124844]-------link handle:19667
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_12_3_99:19666
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_5_103,Object> 1 0.00124844]-------link handle:19665
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_5_103:19664
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move20,move> 0.0 0.0]-------link handle:19663
+[DEBUG]:move20:6306
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <Pet,Agent> 1 1]-------link handle:19661
+[DEBUG]:Pet:19660
+[DEBUG]:Agent:19653
+[DEBUG]:[InheritanceLink <$frameElementInstance,$frameElement> 0.0 0.0]-------link handle:5773
+[DEBUG]:$frameElementInstance:5763
+[DEBUG]:$frameElement:5764
+[DEBUG]:[InheritanceLink <id_6904,ClawSwitch> 1 0.00124844]-------link handle:19659
+[DEBUG]:id_6904:7399
+[DEBUG]:ClawSwitch:19658
+[DEBUG]:[InheritanceLink <Humanoid,Agent> 1 1]-------link handle:19657
+[DEBUG]:Humanoid:19656
+[DEBUG]:Agent:19653
+[DEBUG]:[InheritanceLink <id_6904,Object> 1 0.00124844]-------link handle:19655
+[DEBUG]:id_6904:7399
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <Agent,MovableAgent> 1 1]-------link handle:19654
+[DEBUG]:Agent:19653
+[DEBUG]:MovableAgent:19649
+[DEBUG]:[InheritanceLink <id_6904,Object> 1 0.00124844]-------link handle:19652
+[DEBUG]:id_6904:19651
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <Item,MovableAgent> 1 1]-------link handle:19650
+[DEBUG]:Item:19648
+[DEBUG]:MovableAgent:19649
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_11_107,object> 0.0 0.0]-------link handle:19647
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_11_107:17880
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <MovableObject,Object> 1 1]-------link handle:19646
+[DEBUG]:MovableObject:19645
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <appear5,$var_prototype> 0.0 0.0]-------link handle:5757
+[DEBUG]:appear5:5756
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <Structure,StaticObject> 1 1]-------link handle:19644
+[DEBUG]:Structure:19643
+[DEBUG]:StaticObject:19636
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_10_108,block> 1 0.00124844]-------link handle:19642
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_10_108:17873
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <Unknown,Object> 1 1]-------link handle:19641
+[DEBUG]:Unknown:19640
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change48,$var_prototype> 0.0 0.0]-------link handle:5753
+[DEBUG]:state_change48:5752
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_10_108,Object> 1 0.00124844]-------link handle:19639
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_10_108:17873
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_-348414,Battery> 1 0.00124844]-------link handle:19638
+[DEBUG]:id_-348414:4846
+[DEBUG]:Battery:19607
+[DEBUG]:[InheritanceLink <StaticObject,Object> 1 1]-------link handle:19637
+[DEBUG]:StaticObject:19636
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change61,$var_prototype> 0.0 0.0]-------link handle:5749
+[DEBUG]:state_change61:5748
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_10_108,Object> 1 0.00124844]-------link handle:19635
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_10_108:19634
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_-348414,Object> 1 0.00124844]-------link handle:19633
+[DEBUG]:id_-348414:4846
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change1,$var_prototype> 0.0 0.0]-------link handle:5745
+[DEBUG]:state_change1:5744
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_12_3_99,object> 0.0 0.0]-------link handle:19632
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_12_3_99:18309
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_8_5_103,object> 0.0 0.0]-------link handle:19631
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_8_5_103:17446
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_-348414,Object> 1 0.00124844]-------link handle:19630
+[DEBUG]:id_-348414:19629
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <bone,#Food> 1 1]-------link handle:19628
+[DEBUG]:bone:19626
+[DEBUG]:#Food:19627
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_12_2_99,block> 1 0.00124844]-------link handle:19625
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_12_2_99:18302
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_15_103,block> 1 0.00124844]-------link handle:19624
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_15_103:17439
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_12_2_99,Object> 1 0.00124844]-------link handle:19622
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_12_2_99:18302
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_15_103,Object> 1 0.00124844]-------link handle:19621
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_15_103:17439
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_12_2_99,Object> 1 0.00124844]-------link handle:19620
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_12_2_99:19619
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_15_103,Object> 1 0.00124844]-------link handle:19618
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_15_103:19617
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <disappear1,$var_prototype> 0.0 0.0]-------link handle:5729
+[DEBUG]:disappear1:5728
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <water,liquid> 1 1]-------link handle:19616
+[DEBUG]:water:19615
+[DEBUG]:liquid:19609
+[DEBUG]:[InheritanceLink <state_change42,state_change> 0.0 0.0]-------link handle:19614
+[DEBUG]:state_change42:6151
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <state_change7,$var_prototype> 0.0 0.0]-------link handle:5725
+[DEBUG]:state_change7:5724
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_6904,object> 0.0 0.0]-------link handle:19612
+[DEBUG]:id_6904:7399
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <liquid,#Substance> 1 1]-------link handle:19611
+[DEBUG]:liquid:19609
+[DEBUG]:#Substance:19610
+[DEBUG]:[InheritanceLink <state_change68,$var_prototype> 0.0 0.0]-------link handle:5721
+[DEBUG]:state_change68:5720
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_6898,Battery> 1 0.00124844]-------link handle:19608
+[DEBUG]:id_6898:3669
+[DEBUG]:Battery:19607
+[DEBUG]:[InheritanceLink <id_6898,Object> 1 0.00124844]-------link handle:19606
+[DEBUG]:id_6898:3669
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_-348414,$var_any> 0.0 0.0]-------link handle:5717
+[DEBUG]:id_-348414:4846
+[DEBUG]:$var_any:5598
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_10_108,object> 0.0 0.0]-------link handle:19604
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_10_108:17873
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <appear1,$var_prototype> 0.0 0.0]-------link handle:5702
+[DEBUG]:appear1:5701
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change30,$var_prototype> 0.0 0.0]-------link handle:5672
+[DEBUG]:state_change30:5671
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <appear2,$var_prototype> 0.0 0.0]-------link handle:5668
+[DEBUG]:appear2:5667
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <move8,$var_prototype> 0.0 0.0]-------link handle:5660
+[DEBUG]:move8:5659
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change74,$var_prototype> 0.0 0.0]-------link handle:5656
+[DEBUG]:state_change74:5655
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <disappear2,$var_prototype> 0.0 0.0]-------link handle:5628
+[DEBUG]:disappear2:5627
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_6858,$var_any> 0.0 0.0]-------link handle:5618
+[DEBUG]:id_6858:3273
+[DEBUG]:$var_any:5598
+[DEBUG]:[InheritanceLink <spawn_object371,$var_prototype> 0.0 0.0]-------link handle:5615
+[DEBUG]:spawn_object371:5614
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <move25,$var_prototype> 0.0 0.0]-------link handle:5611
+[DEBUG]:move25:5610
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_-21226,$var_any> 0.0 0.0]-------link handle:5602
+[DEBUG]:id_-21226:2586
+[DEBUG]:$var_any:5598
+[DEBUG]:[InheritanceLink <id_-225572,$var_any> 0.0 0.0]-------link handle:5599
+[DEBUG]:id_-225572:4898
+[DEBUG]:$var_any:5598
+[DEBUG]:[InheritanceLink <spawn_object286,$var_prototype> 0.0 0.0]-------link handle:5571
+[DEBUG]:spawn_object286:5570
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change43,$var_prototype> 0.0 0.0]-------link handle:5563
+[DEBUG]:state_change43:5562
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change76,$var_prototype> 0.0 0.0]-------link handle:5540
+[DEBUG]:state_change76:5539
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change17,$var_prototype> 0.0 0.0]-------link handle:6935
+[DEBUG]:state_change17:6934
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change29,$var_prototype> 0.0 0.0]-------link handle:6931
+[DEBUG]:state_change29:6930
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change18,$var_prototype> 0.0 0.0]-------link handle:6927
+[DEBUG]:state_change18:6926
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <move35,$var_prototype> 0.0 0.0]-------link handle:6923
+[DEBUG]:move35:6922
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <move2,$var_prototype> 0.0 0.0]-------link handle:6919
+[DEBUG]:move2:6918
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change52,$var_prototype> 0.0 0.0]-------link handle:6911
+[DEBUG]:state_change52:6910
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_6898,Object> 1 0.00124844]-------link handle:20797
+[DEBUG]:id_6898:20796
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_9_107,block> 1 0.00124844]-------link handle:20795
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_9_107:17866
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_9_107,Object> 1 0.00124844]-------link handle:20794
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_9_107:17866
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_9_107,Object> 1 0.00124844]-------link handle:20793
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_9_107:20792
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_12_2_99,object> 0.0 0.0]-------link handle:20791
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_12_2_99:18302
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <spawn_object6,$var_prototype> 0.0 0.0]-------link handle:6903
+[DEBUG]:spawn_object6:6902
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_15_103,object> 0.0 0.0]-------link handle:20790
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_15_103:17439
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_-348414,food_bowl> 1 0.00124844]-------link handle:20789
+[DEBUG]:id_-348414:4846
+[DEBUG]:food_bowl:19770
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_12_1_99,block> 1 0.00124844]-------link handle:20788
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_12_1_99:18295
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_14_99,block> 1 0.00124844]-------link handle:20787
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_14_99:17432
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_12_1_99,Object> 1 0.00124844]-------link handle:20786
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_12_1_99:18295
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_14_99,Object> 1 0.00124844]-------link handle:20785
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_14_99:17432
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_-348414,object> 0.0 0.0]-------link handle:20784
+[DEBUG]:id_-348414:4846
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_12_1_99,Object> 1 0.00124844]-------link handle:20783
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_12_1_99:20782
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_14_99,Object> 1 0.00124844]-------link handle:20781
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_14_99:20780
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6898,food_bowl> 1 0.00124844]-------link handle:20779
+[DEBUG]:id_6898:3669
+[DEBUG]:food_bowl:19770
+[DEBUG]:[InheritanceLink <move3,$var_prototype> 0.0 0.0]-------link handle:6891
+[DEBUG]:move3:6890
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_9_107,object> 0.0 0.0]-------link handle:20778
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_9_107:17866
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6898,object> 0.0 0.0]-------link handle:20777
+[DEBUG]:id_6898:3669
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_8_106,block> 1 0.00124844]-------link handle:20776
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_8_106:17859
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_8_106,Object> 1 0.00124844]-------link handle:20775
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_8_106:17859
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move34,$var_prototype> 0.0 0.0]-------link handle:6887
+[DEBUG]:move34:6886
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_6894,Lightning Cloud> 1 0.00124844]-------link handle:20774
+[DEBUG]:id_6894:7385
+[DEBUG]:Lightning Cloud:20773
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_8_106,Object> 1 0.00124844]-------link handle:20772
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_8_106:20771
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6894,Object> 1 0.00124844]-------link handle:20770
+[DEBUG]:id_6894:7385
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_12_1_99,object> 0.0 0.0]-------link handle:20769
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_12_1_99:18295
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_14_99,object> 0.0 0.0]-------link handle:20768
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_14_99:17432
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6894,Object> 1 0.00124844]-------link handle:20767
+[DEBUG]:id_6894:20766
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6906,$var_any> 0.0 0.0]-------link handle:6879
+[DEBUG]:id_6906:6878
+[DEBUG]:$var_any:5598
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_12_0_99,block> 1 0.00124844]-------link handle:20765
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_12_0_99:18288
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_13_105,block> 1 0.00124844]-------link handle:20764
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_13_105:17425
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_12_0_99,Object> 1 0.00124844]-------link handle:20763
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_12_0_99:18288
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_13_105,Object> 1 0.00124844]-------link handle:20762
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_13_105:17425
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_12_0_99,Object> 1 0.00124844]-------link handle:20761
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_12_0_99:20760
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_13_105,Object> 1 0.00124844]-------link handle:20759
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_13_105:20758
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move6,$var_prototype> 0.0 0.0]-------link handle:6871
+[DEBUG]:move6:6870
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <move5,move> 0.0 0.0]-------link handle:20757
+[DEBUG]:move5:5921
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <appear5,appear> 0.0 0.0]-------link handle:20756
+[DEBUG]:appear5:5756
+[DEBUG]:appear:19746
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_8_106,object> 0.0 0.0]-------link handle:20755
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_8_106:17859
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change73,$var_prototype> 0.0 0.0]-------link handle:6867
+[DEBUG]:state_change73:6866
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_7_105,block> 1 0.00124844]-------link handle:20754
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_7_105:17852
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_7_105,Object> 1 0.00124844]-------link handle:20753
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_7_105:17852
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6894,object> 0.0 0.0]-------link handle:20752
+[DEBUG]:id_6894:7385
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_7_105,Object> 1 0.00124844]-------link handle:20751
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_7_105:20750
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_12_0_99,object> 0.0 0.0]-------link handle:20749
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_12_0_99:18288
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_13_105,object> 0.0 0.0]-------link handle:20748
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_13_105:17425
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6886,cookTop> 1 0.00124844]-------link handle:20747
+[DEBUG]:id_6886:7376
+[DEBUG]:cookTop:20746
+[DEBUG]:[InheritanceLink <state_change4,$var_prototype> 0.0 0.0]-------link handle:6859
+[DEBUG]:state_change4:6858
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_6886,Object> 1 0.00124844]-------link handle:20745
+[DEBUG]:id_6886:7376
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_11_3_99,block> 1 0.00124844]-------link handle:20744
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_11_3_99:18281
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_12_106,block> 1 0.00124844]-------link handle:20743
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_12_106:17418
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_11_3_99,Object> 1 0.00124844]-------link handle:20742
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_11_3_99:18281
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6886,Object> 1 0.00124844]-------link handle:20741
+[DEBUG]:id_6886:20740
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_12_106,Object> 1 0.00124844]-------link handle:20739
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_12_106:17418
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_11_3_99,Object> 1 0.00124844]-------link handle:20738
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_11_3_99:20737
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_12_106,Object> 1 0.00124844]-------link handle:20736
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_12_106:20735
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move25,move> 0.0 0.0]-------link handle:20734
+[DEBUG]:move25:5610
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_7_105,object> 0.0 0.0]-------link handle:20733
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_7_105:17852
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change10,state_change> 0.0 0.0]-------link handle:20732
+[DEBUG]:state_change10:5816
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_6_99,block> 1 0.00124844]-------link handle:20731
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_6_99:17845
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <state_change6,$var_prototype> 0.0 0.0]-------link handle:6843
+[DEBUG]:state_change6:6842
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_6_99,Object> 1 0.00124844]-------link handle:20730
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_6_99:17845
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_6_99,Object> 1 0.00124844]-------link handle:20729
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_6_99:20728
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move37,move> 0.0 0.0]-------link handle:20727
+[DEBUG]:move37:5917
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <state_change70,$var_prototype> 0.0 0.0]-------link handle:6839
+[DEBUG]:state_change70:6838
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_11_3_99,object> 0.0 0.0]-------link handle:20726
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_11_3_99:18281
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_12_106,object> 0.0 0.0]-------link handle:20725
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_12_106:17418
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6886,object> 0.0 0.0]-------link handle:20724
+[DEBUG]:id_6886:7376
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_11_2_99,block> 1 0.00124844]-------link handle:20723
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_11_2_99:18274
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <state_change9,$var_prototype> 0.0 0.0]-------link handle:6835
+[DEBUG]:state_change9:6834
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <spawn_object371,spawn_object> 0.0 0.0]-------link handle:20722
+[DEBUG]:spawn_object371:5614
+[DEBUG]:spawn_object:19721
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_11_107,block> 1 0.00124844]-------link handle:20721
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_11_107:17411
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_11_2_99,Object> 1 0.00124844]-------link handle:20720
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_11_2_99:18274
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_11_107,Object> 1 0.00124844]-------link handle:20719
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_11_107:17411
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_11_2_99,Object> 1 0.00124844]-------link handle:20718
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_11_2_99:20717
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6884,stoveButton> 1 0.00124844]-------link handle:20716
+[DEBUG]:id_6884:7367
+[DEBUG]:stoveButton:20715
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_11_107,Object> 1 0.00124844]-------link handle:20714
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_11_107:20713
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6884,Object> 1 0.00124844]-------link handle:20712
+[DEBUG]:id_6884:7367
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change52,state_change> 0.0 0.0]-------link handle:20711
+[DEBUG]:state_change52:6910
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <state_change13,$var_prototype> 0.0 0.0]-------link handle:6823
+[DEBUG]:state_change13:6822
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_6884,Object> 1 0.00124844]-------link handle:20710
+[DEBUG]:id_6884:20709
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_6_99,object> 0.0 0.0]-------link handle:20708
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_6_99:17845
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_5_103,block> 1 0.00124844]-------link handle:20707
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_5_103:17838
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <state_change55,$var_prototype> 0.0 0.0]-------link handle:6819
+[DEBUG]:state_change55:6818
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_5_103,Object> 1 0.00124844]-------link handle:20706
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_5_103:17838
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move31,move> 0.0 0.0]-------link handle:20705
+[DEBUG]:move31:6734
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_5_103,Object> 1 0.00124844]-------link handle:20704
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_5_103:20703
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_11_2_99,object> 0.0 0.0]-------link handle:20702
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_11_2_99:18274
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_11_107,object> 0.0 0.0]-------link handle:20701
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_11_107:17411
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change78,state_change> 0.0 0.0]-------link handle:20700
+[DEBUG]:state_change78:5820
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_11_1_101,block> 1 0.00124844]-------link handle:20699
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_11_1_101:18267
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_10_108,block> 1 0.00124844]-------link handle:20698
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_10_108:17404
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_11_1_101,Object> 1 0.00124844]-------link handle:20697
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_11_1_101:18267
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_10_108,Object> 1 0.00124844]-------link handle:20696
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_10_108:17404
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_11_1_101,Object> 1 0.00124844]-------link handle:20695
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_11_1_101:20694
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change3,$var_prototype> 0.0 0.0]-------link handle:6807
+[DEBUG]:state_change3:6806
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_10_108,Object> 1 0.00124844]-------link handle:20693
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_10_108:20692
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6884,object> 0.0 0.0]-------link handle:20691
+[DEBUG]:id_6884:7367
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change36,$var_prototype> 0.0 0.0]-------link handle:6803
+[DEBUG]:state_change36:6802
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_6882,pan> 1 0.00124844]-------link handle:20690
+[DEBUG]:id_6882:7355
+[DEBUG]:pan:20689
+[DEBUG]:[InheritanceLink <id_6882,Object> 1 0.00124844]-------link handle:20688
+[DEBUG]:id_6882:7355
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6882,Object> 1 0.00124844]-------link handle:20687
+[DEBUG]:id_6882:20686
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_12_5_103,object> 0.0 0.0]-------link handle:20685
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_12_5_103:17838
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_23_99,block> 1 0.00124844]-------link handle:20684
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_23_99:17831
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_23_99,Object> 1 0.00124844]-------link handle:20683
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_23_99:17831
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move13,$var_prototype> 0.0 0.0]-------link handle:6795
+[DEBUG]:move13:6794
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change64,state_change> 0.0 0.0]-------link handle:20682
+[DEBUG]:state_change64:6632
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_23_99,Object> 1 0.00124844]-------link handle:20681
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_23_99:20680
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_11_1_101,object> 0.0 0.0]-------link handle:20679
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_11_1_101:18267
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_10_108,object> 0.0 0.0]-------link handle:20678
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_10_108:17404
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_11_0_101,block> 1 0.00124844]-------link handle:20677
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_11_0_101:18260
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_9_107,block> 1 0.00124844]-------link handle:20676
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_9_107:17397
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_11_0_101,Object> 1 0.00124844]-------link handle:20675
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_11_0_101:18260
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_9_107,Object> 1 0.00124844]-------link handle:20674
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_9_107:17397
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_11_0_101,Object> 1 0.00124844]-------link handle:20673
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_11_0_101:20672
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_9_107,Object> 1 0.00124844]-------link handle:20671
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_9_107:20670
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change71,state_change> 0.0 0.0]-------link handle:20669
+[DEBUG]:state_change71:5872
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_23_99,object> 0.0 0.0]-------link handle:20668
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_23_99:17831
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6882,object> 0.0 0.0]-------link handle:20667
+[DEBUG]:id_6882:7355
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_22_99,block> 1 0.00124844]-------link handle:20666
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_22_99:17824
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_22_99,Object> 1 0.00124844]-------link handle:20665
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_22_99:17824
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6876,chair> 1 0.00124844]-------link handle:20664
+[DEBUG]:id_6876:7339
+[DEBUG]:chair:20663
+[DEBUG]:[InheritanceLink <id_6876,Object> 1 0.00124844]-------link handle:20662
+[DEBUG]:id_6876:7339
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_22_99,Object> 1 0.00124844]-------link handle:20661
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_22_99:20660
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_11_0_101,object> 0.0 0.0]-------link handle:20659
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_11_0_101:18260
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6876,Object> 1 0.00124844]-------link handle:20658
+[DEBUG]:id_6876:20657
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <$frameGoalPredicateNode,#Motion:Goal> 0.0 0.0]-------link handle:6769
+[DEBUG]:$frameGoalPredicateNode:6750
+[DEBUG]:#Motion:Goal:6768
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_9_107,object> 0.0 0.0]-------link handle:20656
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_9_107:17397
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <move15,move> 0.0 0.0]-------link handle:20655
+[DEBUG]:move15:6095
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <$frameThemePredicateNode,#Motion:Theme> 0.0 0.0]-------link handle:6767
+[DEBUG]:$frameThemePredicateNode:6664
+[DEBUG]:#Motion:Theme:6766
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_10_3_99,block> 1 0.00124844]-------link handle:20654
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_10_3_99:18253
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_8_106,block> 1 0.00124844]-------link handle:20653
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_8_106:17390
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <$framePredicateNode,#Motion> 0.0 0.0]-------link handle:6765
+[DEBUG]:$framePredicateNode:6034
+[DEBUG]:#Motion:6764
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_10_3_99,Object> 1 0.00124844]-------link handle:20652
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_10_3_99:18253
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_8_106,Object> 1 0.00124844]-------link handle:20651
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_8_106:17390
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_10_3_99,Object> 1 0.00124844]-------link handle:20650
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_10_3_99:20649
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_8_106,Object> 1 0.00124844]-------link handle:20648
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_8_106:20647
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_-348360,Battery> 1 0.00124844]-------link handle:20646
+[DEBUG]:id_-348360:4105
+[DEBUG]:Battery:19607
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_22_99,object> 0.0 0.0]-------link handle:20645
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_22_99:17824
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_-348360,Object> 1 0.00124844]-------link handle:20644
+[DEBUG]:id_-348360:4105
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_-348360,Object> 1 0.00124844]-------link handle:20643
+[DEBUG]:id_-348360:20642
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_15_103,block> 1 0.00124844]-------link handle:20641
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_15_103:17817
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_15_103,Object> 1 0.00124844]-------link handle:20640
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_15_103:17817
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_15_103,Object> 1 0.00124844]-------link handle:20639
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_15_103:20638
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_10_3_99,object> 0.0 0.0]-------link handle:20637
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_10_3_99:18253
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6876,object> 0.0 0.0]-------link handle:20636
+[DEBUG]:id_6876:7339
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_8_106,object> 0.0 0.0]-------link handle:20635
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_8_106:17390
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <move36,$var_prototype> 0.0 0.0]-------link handle:6747
+[DEBUG]:move36:6746
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change:result-state,result-state> 0.0 0.0]-------link handle:20634
+[DEBUG]:state_change:result-state:20633
+[DEBUG]:result-state:19866
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_10_2_99,block> 1 0.00124844]-------link handle:20632
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_10_2_99:18246
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_6872,egg> 1 0.00124844]-------link handle:20631
+[DEBUG]:id_6872:7330
+[DEBUG]:egg:20273
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_7_105,block> 1 0.00124844]-------link handle:20630
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_7_105:17383
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_10_2_99,Object> 1 0.00124844]-------link handle:20629
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_10_2_99:18246
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6872,Object> 1 0.00124844]-------link handle:20628
+[DEBUG]:id_6872:7330
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_7_105,Object> 1 0.00124844]-------link handle:20627
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_7_105:17383
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change32,state_change> 0.0 0.0]-------link handle:20626
+[DEBUG]:state_change32:5965
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_10_2_99,Object> 1 0.00124844]-------link handle:20625
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_10_2_99:20624
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change9,state_change> 0.0 0.0]-------link handle:20623
+[DEBUG]:state_change9:6834
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <move31,$var_prototype> 0.0 0.0]-------link handle:6735
+[DEBUG]:move31:6734
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_6872,Object> 1 0.00124844]-------link handle:20622
+[DEBUG]:id_6872:20621
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_7_105,Object> 1 0.00124844]-------link handle:20620
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_7_105:20619
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change:NewValue,NewValue> 0.0 0.0]-------link handle:20618
+[DEBUG]:state_change:NewValue:20616
+[DEBUG]:NewValue:20617
+[DEBUG]:[InheritanceLink <state_change:OldValue,OldValue> 0.0 0.0]-------link handle:20615
+[DEBUG]:state_change:OldValue:20613
+[DEBUG]:OldValue:20614
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_15_103,object> 0.0 0.0]-------link handle:20612
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_15_103:17817
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change:stateName,stateName> 0.0 0.0]-------link handle:20611
+[DEBUG]:state_change:stateName:20609
+[DEBUG]:stateName:20610
+[DEBUG]:[InheritanceLink <id_-348360,food_bowl> 1 0.00124844]-------link handle:20608
+[DEBUG]:id_-348360:4105
+[DEBUG]:food_bowl:19770
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_14_99,block> 1 0.00124844]-------link handle:20607
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_14_99:17810
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_14_99,Object> 1 0.00124844]-------link handle:20606
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_14_99:17810
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_14_99,Object> 1 0.00124844]-------link handle:20605
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_14_99:20604
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change:target,target> 0.0 0.0]-------link handle:20603
+[DEBUG]:state_change:target:20602
+[DEBUG]:target:19859
+[DEBUG]:[InheritanceLink <state_change57,$var_prototype> 0.0 0.0]-------link handle:6715
+[DEBUG]:state_change57:6714
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_-348360,object> 0.0 0.0]-------link handle:20601
+[DEBUG]:id_-348360:4105
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_10_2_99,object> 0.0 0.0]-------link handle:20600
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_10_2_99:18246
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_7_105,object> 0.0 0.0]-------link handle:20599
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_7_105:17383
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6872,object> 0.0 0.0]-------link handle:20598
+[DEBUG]:id_6872:7330
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_10_1_101,block> 1 0.00124844]-------link handle:20597
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_10_1_101:18239
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <state_change:actor,actor> 0.0 0.0]-------link handle:20596
+[DEBUG]:state_change:actor:20595
+[DEBUG]:actor:19854
+[DEBUG]:[InheritanceLink <state_change27,$var_prototype> 0.0 0.0]-------link handle:6707
+[DEBUG]:state_change27:6706
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_6_99,block> 1 0.00124844]-------link handle:20594
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_6_99:17376
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_10_1_101,Object> 1 0.00124844]-------link handle:20593
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_10_1_101:18239
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_6_99,Object> 1 0.00124844]-------link handle:20592
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_6_99:17376
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6870,dish> 1 0.00124844]-------link handle:20591
+[DEBUG]:id_6870:7321
+[DEBUG]:dish:20325
+[DEBUG]:[InheritanceLink <move1,$var_prototype> 0.0 0.0]-------link handle:6703
+[DEBUG]:move1:6702
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_10_1_101,Object> 1 0.00124844]-------link handle:20590
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_10_1_101:20589
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change1,state_change> 0.0 0.0]-------link handle:20588
+[DEBUG]:state_change1:5744
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_6870,Object> 1 0.00124844]-------link handle:20587
+[DEBUG]:id_6870:7321
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change14,$var_prototype> 0.0 0.0]-------link handle:6699
+[DEBUG]:state_change14:6698
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_6_99,Object> 1 0.00124844]-------link handle:20586
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_6_99:20585
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6870,Object> 1 0.00124844]-------link handle:20584
+[DEBUG]:id_6870:20583
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change14,state_change> 0.0 0.0]-------link handle:20582
+[DEBUG]:state_change14:6698
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_14_99,object> 0.0 0.0]-------link handle:20581
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_14_99:17810
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <move2,move> 0.0 0.0]-------link handle:20580
+[DEBUG]:move2:6918
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_14_103,block> 1 0.00124844]-------link handle:20579
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_14_103:17803
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_14_103,Object> 1 0.00124844]-------link handle:20578
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_14_103:17803
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_14_103,Object> 1 0.00124844]-------link handle:20577
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_14_103:20576
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_10_1_101,object> 0.0 0.0]-------link handle:20575
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_10_1_101:18239
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_6_99,object> 0.0 0.0]-------link handle:20574
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_6_99:17376
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change59,state_change> 0.0 0.0]-------link handle:20573
+[DEBUG]:state_change59:6342
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_10_0_101,block> 1 0.00124844]-------link handle:20572
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_10_0_101:18232
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_5_103,block> 1 0.00124844]-------link handle:20571
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_5_103:17369
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_10_0_101,Object> 1 0.00124844]-------link handle:20570
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_10_0_101:18232
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6870,object> 0.0 0.0]-------link handle:20569
+[DEBUG]:id_6870:7321
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_5_103,Object> 1 0.00124844]-------link handle:20568
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_5_103:17369
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change28,state_change> 0.0 0.0]-------link handle:20567
+[DEBUG]:state_change28:5828
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_10_0_101,Object> 1 0.00124844]-------link handle:20566
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_10_0_101:20565
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <$frameThemePredicateNode,#Motion_directional:Theme> 0.0 0.0]-------link handle:6678
+[DEBUG]:$frameThemePredicateNode:6664
+[DEBUG]:#Motion_directional:Theme:6677
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_5_103,Object> 1 0.00124844]-------link handle:20564
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_5_103:20563
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <$frameDepictivePredicateNode,#Motion_directional:Depictive> 0.0 0.0]-------link handle:6676
+[DEBUG]:$frameDepictivePredicateNode:6525
+[DEBUG]:#Motion_directional:Depictive:6675
+[DEBUG]:[InheritanceLink <appear4,appear> 0.0 0.0]-------link handle:20562
+[DEBUG]:appear4:6640
+[DEBUG]:appear:19746
+[DEBUG]:[InheritanceLink <$frameSourcePredicateNode,#Motion_directional:Source> 0.0 0.0]-------link handle:6674
+[DEBUG]:$frameSourcePredicateNode:6662
+[DEBUG]:#Motion_directional:Source:6673
+[DEBUG]:[InheritanceLink <id_6868,table> 1 0.00124844]-------link handle:20561
+[DEBUG]:id_6868:7310
+[DEBUG]:table:20560
+[DEBUG]:[InheritanceLink <$framePredicateNode,#Motion_directional> 0.0 0.0]-------link handle:6672
+[DEBUG]:$framePredicateNode:6034
+[DEBUG]:#Motion_directional:6671
+[DEBUG]:[InheritanceLink <id_6868,Object> 1 0.00124844]-------link handle:20559
+[DEBUG]:id_6868:7310
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6868,Object> 1 0.00124844]-------link handle:20558
+[DEBUG]:id_6868:20557
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_14_103,object> 0.0 0.0]-------link handle:20556
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_14_103:17803
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_13_105,block> 1 0.00124844]-------link handle:20555
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_13_105:17796
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_13_105,Object> 1 0.00124844]-------link handle:20554
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_13_105:17796
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change4,state_change> 0.0 0.0]-------link handle:20553
+[DEBUG]:state_change4:6858
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <state_change22,state_change> 0.0 0.0]-------link handle:20552
+[DEBUG]:state_change22:6350
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_13_105,Object> 1 0.00124844]-------link handle:20551
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_13_105:20550
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_7_5_103,object> 0.0 0.0]-------link handle:20549
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_7_5_103:17369
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_10_0_101,object> 0.0 0.0]-------link handle:20548
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_10_0_101:18232
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_15_103,block> 1 0.00124844]-------link handle:20547
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_15_103:17362
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_9_3_99,block> 1 0.00124844]-------link handle:20546
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_9_3_99:18225
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_15_103,Object> 1 0.00124844]-------link handle:20545
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_15_103:17362
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change75,$var_prototype> 0.0 0.0]-------link handle:6657
+[DEBUG]:state_change75:6656
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_9_3_99,Object> 1 0.00124844]-------link handle:20544
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_9_3_99:18225
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_15_103,Object> 1 0.00124844]-------link handle:20543
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_15_103:20542
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_9_3_99,Object> 1 0.00124844]-------link handle:20541
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_9_3_99:20540
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change69,state_change> 0.0 0.0]-------link handle:20539
+[DEBUG]:state_change69:6001
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_6868,object> 0.0 0.0]-------link handle:20538
+[DEBUG]:id_6868:7310
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change45,state_change> 0.0 0.0]-------link handle:20537
+[DEBUG]:state_change45:6565
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_13_105,object> 0.0 0.0]-------link handle:20536
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_13_105:17796
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6866,Crate> 1 0.00124844]-------link handle:20535
+[DEBUG]:id_6866:7300
+[DEBUG]:Crate:20534
+[DEBUG]:[InheritanceLink <id_6866,Object> 1 0.00124844]-------link handle:20533
+[DEBUG]:id_6866:7300
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6866,Object> 1 0.00124844]-------link handle:20532
+[DEBUG]:id_6866:20531
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_12_106,block> 1 0.00124844]-------link handle:20530
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_12_106:17789
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_12_106,Object> 1 0.00124844]-------link handle:20529
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_12_106:17789
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <appear4,$var_prototype> 0.0 0.0]-------link handle:6641
+[DEBUG]:appear4:6640
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_12_106,Object> 1 0.00124844]-------link handle:20528
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_12_106:20527
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_15_103,object> 0.0 0.0]-------link handle:20526
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_15_103:17362
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_9_3_99,object> 0.0 0.0]-------link handle:20525
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_9_3_99:18225
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change24,$var_prototype> 0.0 0.0]-------link handle:6637
+[DEBUG]:state_change24:6636
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_14_99,block> 1 0.00124844]-------link handle:20524
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_14_99:17355
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_9_2_99,block> 1 0.00124844]-------link handle:20523
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_9_2_99:18218
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_14_99,Object> 1 0.00124844]-------link handle:20522
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_14_99:17355
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_9_2_99,Object> 1 0.00124844]-------link handle:20521
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_9_2_99:18218
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change64,$var_prototype> 0.0 0.0]-------link handle:6633
+[DEBUG]:state_change64:6632
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_14_99,Object> 1 0.00124844]-------link handle:20520
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_14_99:20519
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_9_2_99,Object> 1 0.00124844]-------link handle:20518
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_9_2_99:20517
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move28,move> 0.0 0.0]-------link handle:20516
+[DEBUG]:move28:6127
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_12_106,object> 0.0 0.0]-------link handle:20515
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_12_106:17789
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6866,object> 0.0 0.0]-------link handle:20514
+[DEBUG]:id_6866:7300
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_11_107,block> 1 0.00124844]-------link handle:20513
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_11_107:17782
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_11_107,Object> 1 0.00124844]-------link handle:20512
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_11_107:17782
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_11_107,Object> 1 0.00124844]-------link handle:20511
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_11_107:20510
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6864,TheLift> 1 0.00124844]-------link handle:20509
+[DEBUG]:id_6864:7291
+[DEBUG]:TheLift:20508
+[DEBUG]:[InheritanceLink <spawn_object370,spawn_object> 0.0 0.0]-------link handle:20507
+[DEBUG]:spawn_object370:6407
+[DEBUG]:spawn_object:19721
+[DEBUG]:[InheritanceLink <id_6864,Object> 1 0.00124844]-------link handle:20506
+[DEBUG]:id_6864:7291
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_14_99,object> 0.0 0.0]-------link handle:20505
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_14_99:17355
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_9_2_99,object> 0.0 0.0]-------link handle:20504
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_9_2_99:18218
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6864,Object> 1 0.00124844]-------link handle:20503
+[DEBUG]:id_6864:20502
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move33,move> 0.0 0.0]-------link handle:20501
+[DEBUG]:move33:5840
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_13_99,block> 1 0.00124844]-------link handle:20500
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_13_99:17348
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <state_change20,$var_prototype> 0.0 0.0]-------link handle:6612
+[DEBUG]:state_change20:6611
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_9_1_99,block> 1 0.00124844]-------link handle:20499
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_9_1_99:18211
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_13_99,Object> 1 0.00124844]-------link handle:20498
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_13_99:17348
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_9_1_99,Object> 1 0.00124844]-------link handle:20497
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_9_1_99:18211
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_13_99,Object> 1 0.00124844]-------link handle:20496
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_13_99:20495
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_9_1_99,Object> 1 0.00124844]-------link handle:20494
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_9_1_99:20493
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_-225572,Battery> 1 0.00124844]-------link handle:20492
+[DEBUG]:id_-225572:4898
+[DEBUG]:Battery:19607
+[DEBUG]:[InheritanceLink <id_-225572,Object> 1 0.00124844]-------link handle:20491
+[DEBUG]:id_-225572:4898
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_-225572,Object> 1 0.00124844]-------link handle:20490
+[DEBUG]:id_-225572:20489
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_-348360,$var_any> 0.0 0.0]-------link handle:6601
+[DEBUG]:id_-348360:4105
+[DEBUG]:$var_any:5598
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_11_107,object> 0.0 0.0]-------link handle:20488
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_11_107:17782
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <move22,move> 0.0 0.0]-------link handle:20487
+[DEBUG]:move22:6310
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <state_change58,state_change> 0.0 0.0]-------link handle:20486
+[DEBUG]:state_change58:5993
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_10_108,block> 1 0.00124844]-------link handle:20485
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_10_108:17775
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_10_108,Object> 1 0.00124844]-------link handle:20484
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_10_108:17775
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_10_108,Object> 1 0.00124844]-------link handle:20483
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_10_108:20482
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_13_99,object> 0.0 0.0]-------link handle:20481
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_13_99:17348
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_9_1_99,object> 0.0 0.0]-------link handle:20480
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_9_1_99:18211
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6864,object> 0.0 0.0]-------link handle:20479
+[DEBUG]:id_6864:7291
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_12_99,block> 1 0.00124844]-------link handle:20478
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_12_99:17341
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <appear3,$var_prototype> 0.0 0.0]-------link handle:6590
+[DEBUG]:appear3:6589
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_9_0_99,block> 1 0.00124844]-------link handle:20477
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_9_0_99:18204
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_-225572,food_bowl> 1 0.00124844]-------link handle:20476
+[DEBUG]:id_-225572:4898
+[DEBUG]:food_bowl:19770
+[DEBUG]:[InheritanceLink <state_change68,state_change> 0.0 0.0]-------link handle:20475
+[DEBUG]:state_change68:5720
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_6862,TheLiftButton> 1 0.00124844]-------link handle:20474
+[DEBUG]:id_6862:7282
+[DEBUG]:TheLiftButton:20473
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_12_99,Object> 1 0.00124844]-------link handle:20472
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_12_99:17341
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_9_0_99,Object> 1 0.00124844]-------link handle:20471
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_9_0_99:18204
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6862,Object> 1 0.00124844]-------link handle:20470
+[DEBUG]:id_6862:7282
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_12_99,Object> 1 0.00124844]-------link handle:20469
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_12_99:20468
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_9_0_99,Object> 1 0.00124844]-------link handle:20467
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_9_0_99:20466
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6862,Object> 1 0.00124844]-------link handle:20465
+[DEBUG]:id_6862:20464
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_-225572,object> 0.0 0.0]-------link handle:20463
+[DEBUG]:id_-225572:4898
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change18,state_change> 0.0 0.0]-------link handle:20462
+[DEBUG]:state_change18:6926
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <state_change46,$var_prototype> 0.0 0.0]-------link handle:6574
+[DEBUG]:state_change46:6573
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <move21,move> 0.0 0.0]-------link handle:20461
+[DEBUG]:move21:6246
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <state_change16,state_change> 0.0 0.0]-------link handle:20460
+[DEBUG]:state_change16:6131
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_10_108,object> 0.0 0.0]-------link handle:20459
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_10_108:17775
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change53,state_change> 0.0 0.0]-------link handle:20458
+[DEBUG]:state_change53:5925
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <move11,$var_prototype> 0.0 0.0]-------link handle:6570
+[DEBUG]:move11:6569
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change47,state_change> 0.0 0.0]-------link handle:20457
+[DEBUG]:state_change47:6167
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <move24,move> 0.0 0.0]-------link handle:20456
+[DEBUG]:move24:6059
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_9_107,block> 1 0.00124844]-------link handle:20455
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_9_107:17768
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_9_107,Object> 1 0.00124844]-------link handle:20454
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_9_107:17768
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change45,$var_prototype> 0.0 0.0]-------link handle:6566
+[DEBUG]:state_change45:6565
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_9_107,Object> 1 0.00124844]-------link handle:20453
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_9_107:20452
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_12_99,object> 0.0 0.0]-------link handle:20451
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_12_99:17341
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_9_0_99,object> 0.0 0.0]-------link handle:20450
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_9_0_99:18204
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change2,$var_prototype> 0.0 0.0]-------link handle:6562
+[DEBUG]:state_change2:6561
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <appear2,appear> 0.0 0.0]-------link handle:20449
+[DEBUG]:appear2:5667
+[DEBUG]:appear:19746
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_11_99,block> 1 0.00124844]-------link handle:20448
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_11_99:17334
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_8_3_99,block> 1 0.00124844]-------link handle:20447
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_8_3_99:18197
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_11_99,Object> 1 0.00124844]-------link handle:20446
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_11_99:17334
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_8_3_99,Object> 1 0.00124844]-------link handle:20445
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_8_3_99:18197
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6862,object> 0.0 0.0]-------link handle:20444
+[DEBUG]:id_6862:7282
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_11_99,Object> 1 0.00124844]-------link handle:20443
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_11_99:20442
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_8_3_99,Object> 1 0.00124844]-------link handle:20441
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_8_3_99:20440
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6858,Battery> 1 0.00124844]-------link handle:20439
+[DEBUG]:id_6858:3273
+[DEBUG]:Battery:19607
+[DEBUG]:[InheritanceLink <id_6858,Object> 1 0.00124844]-------link handle:20438
+[DEBUG]:id_6858:3273
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6858,Object> 1 0.00124844]-------link handle:20437
+[DEBUG]:id_6858:20436
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_9_107,object> 0.0 0.0]-------link handle:20435
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_9_107:17768
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <move4,move> 0.0 0.0]-------link handle:20434
+[DEBUG]:move4:6222
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <state_change44,state_change> 0.0 0.0]-------link handle:20433
+[DEBUG]:state_change44:6111
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_8_106,block> 1 0.00124844]-------link handle:20432
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_8_106:17761
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <$frameEntityPredicateNode,#Manipulation:Entity> 0.0 0.0]-------link handle:6544
+[DEBUG]:$frameEntityPredicateNode:6036
+[DEBUG]:#Manipulation:Entity:6543
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_8_106,Object> 1 0.00124844]-------link handle:20431
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_8_106:17761
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_8_106,Object> 1 0.00124844]-------link handle:20430
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_8_106:20429
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <$frameDepictivePredicateNode,#Manipulation:Depictive> 0.0 0.0]-------link handle:6542
+[DEBUG]:$frameDepictivePredicateNode:6525
+[DEBUG]:#Manipulation:Depictive:6541
+[DEBUG]:[InheritanceLink <state_change51,state_change> 0.0 0.0]-------link handle:20428
+[DEBUG]:state_change51:5909
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <$frameAgentPredicateNode,#Manipulation:Agent> 0.0 0.0]-------link handle:6540
+[DEBUG]:$frameAgentPredicateNode:6523
+[DEBUG]:#Manipulation:Agent:6539
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_11_99,object> 0.0 0.0]-------link handle:20427
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_11_99:17334
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_8_3_99,object> 0.0 0.0]-------link handle:20426
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_8_3_99:18197
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <$framePredicateNode,#Manipulation> 0.0 0.0]-------link handle:6538
+[DEBUG]:$framePredicateNode:6034
+[DEBUG]:#Manipulation:6537
+[DEBUG]:[InheritanceLink <spawn_object286,spawn_object> 0.0 0.0]-------link handle:20425
+[DEBUG]:spawn_object286:5570
+[DEBUG]:spawn_object:19721
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_10_99,block> 1 0.00124844]-------link handle:20424
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_10_99:17326
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_10_99,Object> 1 0.00124844]-------link handle:20423
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_10_99:17326
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_8_2_99,block> 1 0.00124844]-------link handle:20422
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_8_2_99:18190
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_8_2_99,Object> 1 0.00124844]-------link handle:20421
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_8_2_99:18190
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_10_99,Object> 1 0.00124844]-------link handle:20420
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_10_99:20419
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_8_2_99,Object> 1 0.00124844]-------link handle:20418
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_8_2_99:20417
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6858,food_bowl> 1 0.00124844]-------link handle:20416
+[DEBUG]:id_6858:3273
+[DEBUG]:food_bowl:19770
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_8_106,object> 0.0 0.0]-------link handle:20415
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_8_106:17761
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6858,object> 0.0 0.0]-------link handle:20414
+[DEBUG]:id_6858:3273
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_7_105,block> 1 0.00124844]-------link handle:20413
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_7_105:17754
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_7_105,Object> 1 0.00124844]-------link handle:20412
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_7_105:17754
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change8,state_change> 0.0 0.0]-------link handle:20411
+[DEBUG]:state_change8:6021
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_6840,Battery> 1 0.00124844]-------link handle:20410
+[DEBUG]:id_6840:4958
+[DEBUG]:Battery:19607
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_7_105,Object> 1 0.00124844]-------link handle:20409
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_7_105:20408
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6840,Object> 1 0.00124844]-------link handle:20407
+[DEBUG]:id_6840:4958
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6840,Object> 1 0.00124844]-------link handle:20406
+[DEBUG]:id_6840:20405
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change50,state_change> 0.0 0.0]-------link handle:20404
+[DEBUG]:state_change50:5812
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_10_99,object> 0.0 0.0]-------link handle:20403
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_10_99:17326
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_8_2_99,object> 0.0 0.0]-------link handle:20402
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_8_2_99:18190
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_9_99,block> 1 0.00124844]-------link handle:20401
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_9_99:17318
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_8_1_99,block> 1 0.00124844]-------link handle:20400
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_8_1_99:18183
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_9_99,Object> 1 0.00124844]-------link handle:20399
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_9_99:17318
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_8_1_99,Object> 1 0.00124844]-------link handle:20398
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_8_1_99:18183
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_9_99,Object> 1 0.00124844]-------link handle:20397
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_9_99:20396
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_8_1_99,Object> 1 0.00124844]-------link handle:20395
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_8_1_99:20394
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move30,$var_prototype> 0.0 0.0]-------link handle:6507
+[DEBUG]:move30:6506
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_7_105,object> 0.0 0.0]-------link handle:20393
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_7_105:17754
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_6_99,block> 1 0.00124844]-------link handle:20392
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_6_99:17747
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_6_99,Object> 1 0.00124844]-------link handle:20391
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_6_99:17747
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_-348300,$var_any> 0.0 0.0]-------link handle:6503
+[DEBUG]:id_-348300:4631
+[DEBUG]:$var_any:5598
+[DEBUG]:[InheritanceLink <id_6840,food_bowl> 1 0.00124844]-------link handle:20390
+[DEBUG]:id_6840:4958
+[DEBUG]:food_bowl:19770
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_6_99,Object> 1 0.00124844]-------link handle:20389
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_6_99:20388
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change48,state_change> 0.0 0.0]-------link handle:20387
+[DEBUG]:state_change48:5752
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_6840,object> 0.0 0.0]-------link handle:20386
+[DEBUG]:id_6840:4958
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <move18,move> 0.0 0.0]-------link handle:20385
+[DEBUG]:move18:6447
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_9_99,object> 0.0 0.0]-------link handle:20384
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_9_99:17318
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_8_1_99,object> 0.0 0.0]-------link handle:20383
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_8_1_99:18183
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6838,Battery> 1 0.00124844]-------link handle:20382
+[DEBUG]:id_6838:7259
+[DEBUG]:Battery:19607
+[DEBUG]:[InheritanceLink <id_6838,Object> 1 0.00124844]-------link handle:20381
+[DEBUG]:id_6838:7259
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_8_99,block> 1 0.00124844]-------link handle:20380
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_8_99:17310
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_8_0_99,block> 1 0.00124844]-------link handle:20379
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_8_0_99:18176
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_8_99,Object> 1 0.00124844]-------link handle:20378
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_8_99:17310
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_8_0_99,Object> 1 0.00124844]-------link handle:20377
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_8_0_99:18176
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change39,state_change> 0.0 0.0]-------link handle:20376
+[DEBUG]:state_change39:5913
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_6838,Object> 1 0.00124844]-------link handle:20375
+[DEBUG]:id_6838:20374
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_8_99,Object> 1 0.00124844]-------link handle:20373
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_8_99:20372
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change41,$var_prototype> 0.0 0.0]-------link handle:6484
+[DEBUG]:state_change41:6483
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_8_0_99,Object> 1 0.00124844]-------link handle:20371
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_8_0_99:20370
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <disappear3,disappear> 0.0 0.0]-------link handle:20369
+[DEBUG]:disappear3:6179
+[DEBUG]:disappear:19849
+[DEBUG]:[InheritanceLink <move8,move> 0.0 0.0]-------link handle:20368
+[DEBUG]:move8:5659
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_6_99,object> 0.0 0.0]-------link handle:20367
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_6_99:17747
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_6_103,block> 1 0.00124844]-------link handle:20366
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_6_103:17740
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_6_103,Object> 1 0.00124844]-------link handle:20365
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_6_103:17740
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_6_103,Object> 1 0.00124844]-------link handle:20364
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_6_103:20363
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <spawn_object369,$var_prototype> 0.0 0.0]-------link handle:6476
+[DEBUG]:spawn_object369:6475
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_8_99,object> 0.0 0.0]-------link handle:20362
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_8_99:17310
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change38,state_change> 0.0 0.0]-------link handle:20361
+[DEBUG]:state_change38:6326
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_3_0_BLOCK_8_0_99,object> 0.0 0.0]-------link handle:20360
+[DEBUG]:id_CHUNK_2_3_0_BLOCK_8_0_99:18176
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6838,food_bowl> 1 0.00124844]-------link handle:20359
+[DEBUG]:id_6838:7259
+[DEBUG]:food_bowl:19770
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_7_99,block> 1 0.00124844]-------link handle:20358
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_7_99:17302
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_7_99,Object> 1 0.00124844]-------link handle:20357
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_7_99:17302
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_15_103,block> 1 0.00124844]-------link handle:20356
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_15_103:18169
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <move7,$var_prototype> 0.0 0.0]-------link handle:6468
+[DEBUG]:move7:6467
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_7_99,Object> 1 0.00124844]-------link handle:20355
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_7_99:20354
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_15_103,Object> 1 0.00124844]-------link handle:20353
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_15_103:18169
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_15_103,Object> 1 0.00124844]-------link handle:20352
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_15_103:20351
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6838,object> 0.0 0.0]-------link handle:20350
+[DEBUG]:id_6838:7259
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change17,state_change> 0.0 0.0]-------link handle:20349
+[DEBUG]:state_change17:6934
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_6_103,object> 0.0 0.0]-------link handle:20348
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_6_103:17740
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change11,$var_prototype> 0.0 0.0]-------link handle:6460
+[DEBUG]:state_change11:6459
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_6830,dish> 1 0.00124844]-------link handle:20347
+[DEBUG]:id_6830:7250
+[DEBUG]:dish:20325
+[DEBUG]:[InheritanceLink <id_6830,Object> 1 0.00124844]-------link handle:20346
+[DEBUG]:id_6830:7250
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_5_103,block> 1 0.00124844]-------link handle:20345
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_5_103:17733
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_6830,Object> 1 0.00124844]-------link handle:20344
+[DEBUG]:id_6830:20343
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change23,$var_prototype> 0.0 0.0]-------link handle:6456
+[DEBUG]:state_change23:6455
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_5_103,Object> 1 0.00124844]-------link handle:20342
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_5_103:17733
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_5_103,Object> 1 0.00124844]-------link handle:20341
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_5_103:20340
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_7_99,object> 0.0 0.0]-------link handle:20339
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_7_99:17302
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_15_103,object> 0.0 0.0]-------link handle:20338
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_15_103:18169
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_6_99,block> 1 0.00124844]-------link handle:20337
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_6_99:17294
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_14_104,block> 1 0.00124844]-------link handle:20336
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_14_104:18162
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <move18,$var_prototype> 0.0 0.0]-------link handle:6448
+[DEBUG]:move18:6447
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_6_99,Object> 1 0.00124844]-------link handle:20335
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_6_99:17294
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_14_104,Object> 1 0.00124844]-------link handle:20334
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_14_104:18162
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_6_99,Object> 1 0.00124844]-------link handle:20333
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_6_99:20332
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_14_104,Object> 1 0.00124844]-------link handle:20331
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_14_104:20330
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_11_5_103,object> 0.0 0.0]-------link handle:20329
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_11_5_103:17733
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6830,object> 0.0 0.0]-------link handle:20328
+[DEBUG]:id_6830:7250
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_23_99,block> 1 0.00124844]-------link handle:20327
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_23_99:17726
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_6824,dish> 1 0.00124844]-------link handle:20326
+[DEBUG]:id_6824:7238
+[DEBUG]:dish:20325
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_23_99,Object> 1 0.00124844]-------link handle:20324
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_23_99:17726
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6824,Object> 1 0.00124844]-------link handle:20323
+[DEBUG]:id_6824:7238
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move17,move> 0.0 0.0]-------link handle:20322
+[DEBUG]:move17:6238
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_23_99,Object> 1 0.00124844]-------link handle:20321
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_23_99:20320
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_6824,Object> 1 0.00124844]-------link handle:20319
+[DEBUG]:id_6824:20318
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change43,state_change> 0.0 0.0]-------link handle:20317
+[DEBUG]:state_change43:5562
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_14_104,object> 0.0 0.0]-------link handle:20316
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_14_104:18162
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <move23,$var_prototype> 0.0 0.0]-------link handle:6428
+[DEBUG]:move23:6427
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_6_99,object> 0.0 0.0]-------link handle:20315
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_6_99:17294
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_13_105,block> 1 0.00124844]-------link handle:20314
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_13_105:18155
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_13_105,Object> 1 0.00124844]-------link handle:20313
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_13_105:18155
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_5_103,block> 1 0.00124844]-------link handle:20312
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_5_103:17287
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <move12,$var_prototype> 0.0 0.0]-------link handle:6424
+[DEBUG]:move12:6423
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_5_103,Object> 1 0.00124844]-------link handle:20311
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_5_103:17287
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_13_105,Object> 1 0.00124844]-------link handle:20310
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_13_105:20309
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_5_103,Object> 1 0.00124844]-------link handle:20308
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_5_103:20307
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_23_99,object> 0.0 0.0]-------link handle:20306
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_23_99:17726
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_22_99,block> 1 0.00124844]-------link handle:20305
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_22_99:17719
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_22_99,Object> 1 0.00124844]-------link handle:20304
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_22_99:17719
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change62,$var_prototype> 0.0 0.0]-------link handle:6416
+[DEBUG]:state_change62:6415
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_22_99,Object> 1 0.00124844]-------link handle:20303
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_22_99:20302
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change35,state_change> 0.0 0.0]-------link handle:20301
+[DEBUG]:state_change35:6091
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_6824,object> 0.0 0.0]-------link handle:20300
+[DEBUG]:id_6824:7238
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <move29,$var_prototype> 0.0 0.0]-------link handle:6412
+[DEBUG]:move29:6411
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_6822,egg> 1 0.00124844]-------link handle:20299
+[DEBUG]:id_6822:7229
+[DEBUG]:egg:20273
+[DEBUG]:[InheritanceLink <id_6822,Object> 1 0.00124844]-------link handle:20298
+[DEBUG]:id_6822:7229
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_13_105,object> 0.0 0.0]-------link handle:20297
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_13_105:18155
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6822,Object> 1 0.00124844]-------link handle:20296
+[DEBUG]:id_6822:20295
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <spawn_object370,$var_prototype> 0.0 0.0]-------link handle:6408
+[DEBUG]:spawn_object370:6407
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_6_5_103,object> 0.0 0.0]-------link handle:20294
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_6_5_103:17287
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <move6,move> 0.0 0.0]-------link handle:20293
+[DEBUG]:move6:6870
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_12_106,block> 1 0.00124844]-------link handle:20292
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_12_106:18148
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_12_106,Object> 1 0.00124844]-------link handle:20291
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_12_106:18148
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_15_103,block> 1 0.00124844]-------link handle:20290
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_15_103:17280
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_15_103,Object> 1 0.00124844]-------link handle:20289
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_15_103:17280
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_12_106,Object> 1 0.00124844]-------link handle:20288
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_12_106:20287
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_15_103,Object> 1 0.00124844]-------link handle:20286
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_15_103:20285
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_22_99,object> 0.0 0.0]-------link handle:20284
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_22_99:17719
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_15_103,block> 1 0.00124844]-------link handle:20283
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_15_103:17712
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_15_103,Object> 1 0.00124844]-------link handle:20282
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_15_103:17712
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move10,move> 0.0 0.0]-------link handle:20281
+[DEBUG]:move10:6278
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_15_103,Object> 1 0.00124844]-------link handle:20280
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_15_103:20279
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change76,state_change> 0.0 0.0]-------link handle:20278
+[DEBUG]:state_change76:5539
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_6822,object> 0.0 0.0]-------link handle:20277
+[DEBUG]:id_6822:7229
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_12_106,object> 0.0 0.0]-------link handle:20276
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_12_106:18148
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_15_103,object> 0.0 0.0]-------link handle:20275
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_15_103:17280
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_6820,egg> 1 0.00124844]-------link handle:20274
+[DEBUG]:id_6820:7217
+[DEBUG]:egg:20273
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_11_107,block> 1 0.00124844]-------link handle:20272
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_11_107:18141
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <$frameRelationTypePredicateNode,#Locative_relation:Relation_type> 0.0 0.0]-------link handle:6384
+[DEBUG]:$frameRelationTypePredicateNode:6362
+[DEBUG]:#Locative_relation:Relation_type:6383
+[DEBUG]:[InheritanceLink <move30,move> 0.0 0.0]-------link handle:20271
+[DEBUG]:move30:6506
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_6820,Object> 1 0.00124844]-------link handle:20270
+[DEBUG]:id_6820:7217
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <$frameGroundPredicateNode,#Locative_relation:Ground> 0.0 0.0]-------link handle:6382
+[DEBUG]:$frameGroundPredicateNode:6360
+[DEBUG]:#Locative_relation:Ground:6381
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_11_107,Object> 1 0.00124844]-------link handle:20269
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_11_107:18141
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change13,state_change> 0.0 0.0]-------link handle:20268
+[DEBUG]:state_change13:6822
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <$frameFigurePredicateNode,#Locative_relation:Figure> 0.0 0.0]-------link handle:6380
+[DEBUG]:$frameFigurePredicateNode:6358
+[DEBUG]:#Locative_relation:Figure:6379
+[DEBUG]:[InheritanceLink <id_6820,Object> 1 0.00124844]-------link handle:20267
+[DEBUG]:id_6820:20266
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <$framePredicateNode,#Locative_relation> 0.0 0.0]-------link handle:6378
+[DEBUG]:$framePredicateNode:6034
+[DEBUG]:#Locative_relation:6377
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_14_104,block> 1 0.00124844]-------link handle:20265
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_14_104:17273
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_11_107,Object> 1 0.00124844]-------link handle:20264
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_11_107:20263
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_14_104,Object> 1 0.00124844]-------link handle:20262
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_14_104:17273
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_14_104,Object> 1 0.00124844]-------link handle:20261
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_14_104:20260
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_15_103,object> 0.0 0.0]-------link handle:20259
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_15_103:17712
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_14_99,block> 1 0.00124844]-------link handle:20258
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_14_99:17705
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_14_99,Object> 1 0.00124844]-------link handle:20257
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_14_99:17705
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change21,state_change> 0.0 0.0]-------link handle:20256
+[DEBUG]:state_change21:6119
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_14_99,Object> 1 0.00124844]-------link handle:20255
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_14_99:20254
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move12,move> 0.0 0.0]-------link handle:20253
+[DEBUG]:move12:6423
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_11_107,object> 0.0 0.0]-------link handle:20252
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_11_107:18141
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_14_104,object> 0.0 0.0]-------link handle:20251
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_14_104:17273
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_10_108,block> 1 0.00124844]-------link handle:20250
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_10_108:18134
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_10_108,Object> 1 0.00124844]-------link handle:20249
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_10_108:18134
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change62,state_change> 0.0 0.0]-------link handle:20248
+[DEBUG]:state_change62:6415
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_10_108,Object> 1 0.00124844]-------link handle:20247
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_10_108:20246
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_13_105,block> 1 0.00124844]-------link handle:20245
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_13_105:17266
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_13_105,Object> 1 0.00124844]-------link handle:20244
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_13_105:17266
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_14_99,object> 0.0 0.0]-------link handle:20243
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_14_99:17705
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change15,$var_prototype> 0.0 0.0]-------link handle:6355
+[DEBUG]:state_change15:6354
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_6820,object> 0.0 0.0]-------link handle:20242
+[DEBUG]:id_6820:7217
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_13_105,Object> 1 0.00124844]-------link handle:20241
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_13_105:20240
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_14_103,block> 1 0.00124844]-------link handle:20239
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_14_103:17698
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <state_change22,$var_prototype> 0.0 0.0]-------link handle:6351
+[DEBUG]:state_change22:6350
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_14_103,Object> 1 0.00124844]-------link handle:20238
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_14_103:17698
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change67,state_change> 0.0 0.0]-------link handle:20237
+[DEBUG]:state_change67:6258
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_7110,Player> 1 0.00124844]-------link handle:20236
+[DEBUG]:id_7110:7060
+[DEBUG]:Player:20235
+[DEBUG]:[InheritanceLink <id_7110,Avatar> 1 0.00124844]-------link handle:20234
+[DEBUG]:id_7110:7060
+[DEBUG]:Avatar:19668
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_14_103,Object> 1 0.00124844]-------link handle:20233
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_14_103:20232
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change25,state_change> 0.0 0.0]-------link handle:20231
+[DEBUG]:state_change25:6314
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <state_change59,$var_prototype> 0.0 0.0]-------link handle:6343
+[DEBUG]:state_change59:6342
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_7110,Avatar> 1 0.00124844]-------link handle:20230
+[DEBUG]:id_7110:20229
+[DEBUG]:Avatar:19668
+[DEBUG]:[InheritanceLink <move3,move> 0.0 0.0]-------link handle:20228
+[DEBUG]:move3:6890
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_10_108,object> 0.0 0.0]-------link handle:20227
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_10_108:18134
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change63,state_change> 0.0 0.0]-------link handle:20226
+[DEBUG]:state_change63:6262
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_9_107,block> 1 0.00124844]-------link handle:20225
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_9_107:18127
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_13_105,object> 0.0 0.0]-------link handle:20224
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_13_105:17266
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_9_107,Object> 1 0.00124844]-------link handle:20223
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_9_107:18127
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_9_107,Object> 1 0.00124844]-------link handle:20222
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_9_107:20221
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_12_106,block> 1 0.00124844]-------link handle:20220
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_12_106:17259
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_12_106,Object> 1 0.00124844]-------link handle:20219
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_12_106:17259
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_14_103,object> 0.0 0.0]-------link handle:20218
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_14_103:17698
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_12_106,Object> 1 0.00124844]-------link handle:20217
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_12_106:20216
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_13_105,block> 1 0.00124844]-------link handle:20215
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_13_105:17691
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <state_change38,$var_prototype> 0.0 0.0]-------link handle:6327
+[DEBUG]:state_change38:6326
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_13_105,Object> 1 0.00124844]-------link handle:20214
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_13_105:17691
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_13_105,Object> 1 0.00124844]-------link handle:20213
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_13_105:20212
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_7110,avatar> 0.0 0.0]-------link handle:20211
+[DEBUG]:id_7110:7060
+[DEBUG]:avatar:20210
+[DEBUG]:[InheritanceLink <id_OAC_robotic,robotic> 1 0.00124844]-------link handle:20209
+[DEBUG]:id_OAC_robotic:5548
+[DEBUG]:robotic:20208
+[DEBUG]:[InheritanceLink <id_OAC_robotic,Pet> 1 0.00124844]-------link handle:20207
+[DEBUG]:id_OAC_robotic:5548
+[DEBUG]:Pet:19660
+[DEBUG]:[InheritanceLink <state_change6,state_change> 0.0 0.0]-------link handle:20206
+[DEBUG]:state_change6:6842
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_OAC_robotic,Pet> 1 0.00124844]-------link handle:20205
+[DEBUG]:id_OAC_robotic:20204
+[DEBUG]:Pet:19660
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_9_107,object> 0.0 0.0]-------link handle:20203
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_9_107:18127
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change25,$var_prototype> 0.0 0.0]-------link handle:6315
+[DEBUG]:state_change25:6314
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_8_106,block> 1 0.00124844]-------link handle:20202
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_8_106:18120
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_8_106,Object> 1 0.00124844]-------link handle:20201
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_8_106:18120
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_12_106,object> 0.0 0.0]-------link handle:20200
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_12_106:17259
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <state_change46,state_change> 0.0 0.0]-------link handle:20199
+[DEBUG]:state_change46:6573
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <move22,$var_prototype> 0.0 0.0]-------link handle:6311
+[DEBUG]:move22:6310
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_8_106,Object> 1 0.00124844]-------link handle:20198
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_8_106:20197
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_11_107,block> 1 0.00124844]-------link handle:20196
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_11_107:17252
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_13_105,object> 0.0 0.0]-------link handle:20195
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_13_105:17691
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <move20,$var_prototype> 0.0 0.0]-------link handle:6307
+[DEBUG]:move20:6306
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_11_107,Object> 1 0.00124844]-------link handle:20194
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_11_107:17252
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_11_107,Object> 1 0.00124844]-------link handle:20193
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_11_107:20192
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_12_106,block> 1 0.00124844]-------link handle:20191
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_12_106:17684
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_12_106,Object> 1 0.00124844]-------link handle:20190
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_12_106:17684
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_12_106,Object> 1 0.00124844]-------link handle:20189
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_12_106:20188
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move23,move> 0.0 0.0]-------link handle:20187
+[DEBUG]:move23:6427
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_8_106,object> 0.0 0.0]-------link handle:20186
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_8_106:18120
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_7_105,block> 1 0.00124844]-------link handle:20185
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_7_105:18113
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_7_105,Object> 1 0.00124844]-------link handle:20184
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_7_105:18113
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_OAC_robotic,pet> 0.0 0.0]-------link handle:20183
+[DEBUG]:id_OAC_robotic:5548
+[DEBUG]:pet:20182
+[DEBUG]:[InheritanceLink <state_change49,$var_prototype> 0.0 0.0]-------link handle:6295
+[DEBUG]:state_change49:6294
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_11_107,object> 0.0 0.0]-------link handle:20181
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_11_107:17252
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_7_105,Object> 1 0.00124844]-------link handle:20180
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_7_105:20179
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change60,$var_prototype> 0.0 0.0]-------link handle:6291
+[DEBUG]:state_change60:6290
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_12_106,object> 0.0 0.0]-------link handle:20178
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_12_106:17684
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_10_108,block> 1 0.00124844]-------link handle:20177
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_10_108:17245
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_10_108,Object> 1 0.00124844]-------link handle:20176
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_10_108:17245
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_10_108,Object> 1 0.00124844]-------link handle:20175
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_10_108:20174
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_11_107,block> 1 0.00124844]-------link handle:20173
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_11_107:17677
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_11_107,Object> 1 0.00124844]-------link handle:20172
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_11_107:17677
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_11_107,Object> 1 0.00124844]-------link handle:20171
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_11_107:20170
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move36,move> 0.0 0.0]-------link handle:20169
+[DEBUG]:move36:6746
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <state_change11,state_change> 0.0 0.0]-------link handle:20168
+[DEBUG]:state_change11:6459
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_7_105,object> 0.0 0.0]-------link handle:20167
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_7_105:18113
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <move10,$var_prototype> 0.0 0.0]-------link handle:6279
+[DEBUG]:move10:6278
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change49,state_change> 0.0 0.0]-------link handle:20166
+[DEBUG]:state_change49:6294
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_6_104,block> 1 0.00124844]-------link handle:20165
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_6_104:18106
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_6_104,Object> 1 0.00124844]-------link handle:20164
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_6_104:18106
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_6_104,Object> 1 0.00124844]-------link handle:20163
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_6_104:20162
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_10_108,object> 0.0 0.0]-------link handle:20161
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_10_108:17245
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_11_107,object> 0.0 0.0]-------link handle:20160
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_11_107:17677
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_9_107,block> 1 0.00124844]-------link handle:20159
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_9_107:17238
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_9_107,Object> 1 0.00124844]-------link handle:20158
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_9_107:17238
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_10_108,block> 1 0.00124844]-------link handle:20157
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_10_108:17670
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_9_107,Object> 1 0.00124844]-------link handle:20156
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_9_107:20155
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_10_108,Object> 1 0.00124844]-------link handle:20154
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_10_108:17670
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_10_108,Object> 1 0.00124844]-------link handle:20153
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_10_108:20152
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change36,state_change> 0.0 0.0]-------link handle:20151
+[DEBUG]:state_change36:6802
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <state_change63,$var_prototype> 0.0 0.0]-------link handle:6263
+[DEBUG]:state_change63:6262
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <state_change75,state_change> 0.0 0.0]-------link handle:20150
+[DEBUG]:state_change75:6656
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_6_104,object> 0.0 0.0]-------link handle:20149
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_6_104:18106
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_5_103,block> 1 0.00124844]-------link handle:20148
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_5_103:18099
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_5_103,Object> 1 0.00124844]-------link handle:20147
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_5_103:18099
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change67,$var_prototype> 0.0 0.0]-------link handle:6259
+[DEBUG]:state_change67:6258
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_5_103,Object> 1 0.00124844]-------link handle:20146
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_5_103:20145
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_9_107,object> 0.0 0.0]-------link handle:20144
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_9_107:17238
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_10_108,object> 0.0 0.0]-------link handle:20143
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_10_108:17670
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_8_106,block> 1 0.00124844]-------link handle:20142
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_8_106:17231
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_9_107,block> 1 0.00124844]-------link handle:20141
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_9_107:17663
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_8_106,Object> 1 0.00124844]-------link handle:20140
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_8_106:17231
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_9_107,Object> 1 0.00124844]-------link handle:20139
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_9_107:17663
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move32,$var_prototype> 0.0 0.0]-------link handle:6251
+[DEBUG]:move32:6250
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_8_106,Object> 1 0.00124844]-------link handle:20138
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_8_106:20137
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_9_107,Object> 1 0.00124844]-------link handle:20136
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_9_107:20135
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <move21,$var_prototype> 0.0 0.0]-------link handle:6247
+[DEBUG]:move21:6246
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_15_5_103,object> 0.0 0.0]-------link handle:20134
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_15_5_103:18099
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_15_103,block> 1 0.00124844]-------link handle:20133
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_15_103:18092
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_15_103,Object> 1 0.00124844]-------link handle:20132
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_15_103:18092
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_15_103,Object> 1 0.00124844]-------link handle:20131
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_15_103:20130
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <disappear4,$var_prototype> 0.0 0.0]-------link handle:6243
+[DEBUG]:disappear4:6242
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_9_107,object> 0.0 0.0]-------link handle:20129
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_9_107:17663
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_8_106,object> 0.0 0.0]-------link handle:20128
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_8_106:17231
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_8_106,block> 1 0.00124844]-------link handle:20127
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_8_106:17656
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <move17,$var_prototype> 0.0 0.0]-------link handle:6239
+[DEBUG]:move17:6238
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_8_106,Object> 1 0.00124844]-------link handle:20126
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_8_106:17656
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_7_105,block> 1 0.00124844]-------link handle:20125
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_7_105:17224
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_7_105,Object> 1 0.00124844]-------link handle:20124
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_7_105:17224
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_8_106,Object> 1 0.00124844]-------link handle:20123
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_8_106:20122
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_7_105,Object> 1 0.00124844]-------link handle:20121
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_7_105:20120
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_15_103,object> 0.0 0.0]-------link handle:20119
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_15_103:18092
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_14_99,block> 1 0.00124844]-------link handle:20118
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_14_99:18085
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <disappear4,disappear> 0.0 0.0]-------link handle:20117
+[DEBUG]:disappear4:6242
+[DEBUG]:disappear:19849
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_14_99,Object> 1 0.00124844]-------link handle:20116
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_14_99:18085
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_14_99,Object> 1 0.00124844]-------link handle:20115
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_14_99:20114
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <progressive,DefinedLinguisticConcept-Tense> 0.0 0.0]-------link handle:55
+[DEBUG]:progressive:54
+[DEBUG]:DefinedLinguisticConcept-Tense:50
+[DEBUG]:[InheritanceLink <state_change26,$var_prototype> 0.0 0.0]-------link handle:6227
+[DEBUG]:state_change26:6226
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_8_106,object> 0.0 0.0]-------link handle:20113
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_8_106:17656
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <present,DefinedLinguisticConcept-Tense> 0.0 0.0]-------link handle:53
+[DEBUG]:present:52
+[DEBUG]:DefinedLinguisticConcept-Tense:50
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_7_105,object> 0.0 0.0]-------link handle:20112
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_7_105:17224
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_7_105,block> 1 0.00124844]-------link handle:20111
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_7_105:17649
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <past,DefinedLinguisticConcept-Tense> 0.0 0.0]-------link handle:51
+[DEBUG]:past:49
+[DEBUG]:DefinedLinguisticConcept-Tense:50
+[DEBUG]:[InheritanceLink <move4,$var_prototype> 0.0 0.0]-------link handle:6223
+[DEBUG]:move4:6222
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_7_105,Object> 1 0.00124844]-------link handle:20110
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_7_105:17649
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_7_105,Object> 1 0.00124844]-------link handle:20109
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_7_105:20108
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <pronoun,DefinedLinguisticConcept-Pronoun> 0.0 0.0]-------link handle:48
+[DEBUG]:pronoun:46
+[DEBUG]:DefinedLinguisticConcept-Pronoun:47
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_6_104,block> 1 0.00124844]-------link handle:20107
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_6_104:17217
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_6_104,Object> 1 0.00124844]-------link handle:20106
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_6_104:17217
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_6_104,Object> 1 0.00124844]-------link handle:20105
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_6_104:20104
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <person,DefinedLinguisticConcept-Person> 0.0 0.0]-------link handle:45
+[DEBUG]:person:43
+[DEBUG]:DefinedLinguisticConcept-Person:44
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_14_99,object> 0.0 0.0]-------link handle:20103
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_14_99:18085
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_13_99,block> 1 0.00124844]-------link handle:20102
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_13_99:18078
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <WORD,DefinedLinguisticConcept-PartOfSpeech> 0.0 0.0]-------link handle:42
+[DEBUG]:WORD:41
+[DEBUG]:DefinedLinguisticConcept-PartOfSpeech:31
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_13_99,Object> 1 0.00124844]-------link handle:20101
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_13_99:18078
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_13_99,Object> 1 0.00124844]-------link handle:20100
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_13_99:20099
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <verb,DefinedLinguisticConcept-PartOfSpeech> 0.0 0.0]-------link handle:40
+[DEBUG]:verb:39
+[DEBUG]:DefinedLinguisticConcept-PartOfSpeech:31
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_7_105,object> 0.0 0.0]-------link handle:20098
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_7_105:17649
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <punctuation,DefinedLinguisticConcept-PartOfSpeech> 0.0 0.0]-------link handle:38
+[DEBUG]:punctuation:37
+[DEBUG]:DefinedLinguisticConcept-PartOfSpeech:31
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_6_99,block> 1 0.00124844]-------link handle:20097
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_6_99:17642
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <$frameMeasurementPredicateNode,#Dimension:Measurement> 0.0 0.0]-------link handle:6209
+[DEBUG]:$frameMeasurementPredicateNode:6193
+[DEBUG]:#Dimension:Measurement:6208
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_6_99,Object> 1 0.00124844]-------link handle:20096
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_6_99:17642
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <prep,DefinedLinguisticConcept-PartOfSpeech> 0.0 0.0]-------link handle:36
+[DEBUG]:prep:35
+[DEBUG]:DefinedLinguisticConcept-PartOfSpeech:31
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_6_104,object> 0.0 0.0]-------link handle:20095
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_6_104:17217
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <$frameObjectPredicateNode,#Dimension:Object> 0.0 0.0]-------link handle:6207
+[DEBUG]:$frameObjectPredicateNode:6191
+[DEBUG]:#Dimension:Object:6206
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_6_99,Object> 1 0.00124844]-------link handle:20094
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_6_99:20093
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <noun,DefinedLinguisticConcept-PartOfSpeech> 0.0 0.0]-------link handle:34
+[DEBUG]:noun:33
+[DEBUG]:DefinedLinguisticConcept-PartOfSpeech:31
+[DEBUG]:[InheritanceLink <$framePredicateNode,#Dimension> 0.0 0.0]-------link handle:6205
+[DEBUG]:$framePredicateNode:6034
+[DEBUG]:#Dimension:6204
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_5_103,block> 1 0.00124844]-------link handle:20092
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_5_103:17210
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <det,DefinedLinguisticConcept-PartOfSpeech> 0.0 0.0]-------link handle:32
+[DEBUG]:det:30
+[DEBUG]:DefinedLinguisticConcept-PartOfSpeech:31
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_5_103,Object> 1 0.00124844]-------link handle:20091
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_5_103:17210
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_5_103,Object> 1 0.00124844]-------link handle:20090
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_5_103:20089
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <singular,DefinedLinguisticConcept-NounNumber> 0.0 0.0]-------link handle:29
+[DEBUG]:singular:28
+[DEBUG]:DefinedLinguisticConcept-NounNumber:26
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_13_99,object> 0.0 0.0]-------link handle:20088
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_13_99:18078
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_12_99,block> 1 0.00124844]-------link handle:20087
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_12_99:18071
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <plural,DefinedLinguisticConcept-NounNumber> 0.0 0.0]-------link handle:27
+[DEBUG]:plural:25
+[DEBUG]:DefinedLinguisticConcept-NounNumber:26
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_12_99,Object> 1 0.00124844]-------link handle:20086
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_12_99:18071
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_12_99,Object> 1 0.00124844]-------link handle:20085
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_12_99:20084
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <.v,DefinedLinguisticConcept-Inflection> 0.0 0.0]-------link handle:24
+[DEBUG]:.v:23
+[DEBUG]:DefinedLinguisticConcept-Inflection:15
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_6_99,object> 0.0 0.0]-------link handle:20083
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_6_99:17642
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_6_103,block> 1 0.00124844]-------link handle:20082
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_6_103:17635
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <.n,DefinedLinguisticConcept-Inflection> 0.0 0.0]-------link handle:22
+[DEBUG]:.n:21
+[DEBUG]:DefinedLinguisticConcept-Inflection:15
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_6_103,Object> 1 0.00124844]-------link handle:20081
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_6_103:17635
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_6_103,Object> 1 0.00124844]-------link handle:20080
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_6_103:20079
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <.g,DefinedLinguisticConcept-Inflection> 0.0 0.0]-------link handle:20
+[DEBUG]:.g:19
+[DEBUG]:DefinedLinguisticConcept-Inflection:15
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_5_5_103,object> 0.0 0.0]-------link handle:20078
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_5_5_103:17210
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <.f,DefinedLinguisticConcept-Inflection> 0.0 0.0]-------link handle:18
+[DEBUG]:.f:17
+[DEBUG]:DefinedLinguisticConcept-Inflection:15
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_12_99,object> 0.0 0.0]-------link handle:20077
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_12_99:18071
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_11_104,block> 1 0.00124844]-------link handle:20076
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_11_104:18064
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <.a,DefinedLinguisticConcept-Inflection> 0.0 0.0]-------link handle:16
+[DEBUG]:.a:14
+[DEBUG]:DefinedLinguisticConcept-Inflection:15
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_11_104,Object> 1 0.00124844]-------link handle:20075
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_11_104:18064
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_11_104,Object> 1 0.00124844]-------link handle:20074
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_11_104:20073
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <hyp,DefinedLinguisticConcept-Hypothetical> 0.0 0.0]-------link handle:13
+[DEBUG]:hyp:11
+[DEBUG]:DefinedLinguisticConcept-Hypothetical:12
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_6_103,object> 0.0 0.0]-------link handle:20072
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_6_103:17635
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <move13,move> 0.0 0.0]-------link handle:20071
+[DEBUG]:move13:6794
+[DEBUG]:move:19662
+[DEBUG]:[InheritanceLink <DdD,BbB> 0.0 0.0]-------link handle:115737
+[DEBUG]:DdD:115735
+[DEBUG]:BbB:115736
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_5_103,block> 1 0.00124844]-------link handle:20070
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_5_103:17628
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <neuter,DefinedLinguisticConcept-Gender> 0.0 0.0]-------link handle:10
+[DEBUG]:neuter:9
+[DEBUG]:DefinedLinguisticConcept-Gender:5
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_5_103,Object> 1 0.00124844]-------link handle:20069
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_5_103:17628
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change20,state_change> 0.0 0.0]-------link handle:20068
+[DEBUG]:state_change20:6611
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <masculine,DefinedLinguisticConcept-Gender> 0.0 0.0]-------link handle:8
+[DEBUG]:masculine:7
+[DEBUG]:DefinedLinguisticConcept-Gender:5
+[DEBUG]:[InheritanceLink <disappear3,$var_prototype> 0.0 0.0]-------link handle:6180
+[DEBUG]:disappear3:6179
+[DEBUG]:$var_prototype:5538
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_5_103,Object> 1 0.00124844]-------link handle:20067
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_5_103:20066
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <feminine,DefinedLinguisticConcept-Gender> 0.0 0.0]-------link handle:6
+[DEBUG]:feminine:4
+[DEBUG]:DefinedLinguisticConcept-Gender:5
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_11_104,object> 0.0 0.0]-------link handle:20065
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_11_104:18064
+[DEBUG]:object:19603
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_10_104,block> 1 0.00124844]-------link handle:20064
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_10_104:18056
+[DEBUG]:block:19623
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_10_104,Object> 1 0.00124844]-------link handle:20063
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_10_104:18056
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <definite,DefinedLinguisticConcept-Determiner> 0.0 0.0]-------link handle:3
+[DEBUG]:definite:1
+[DEBUG]:DefinedLinguisticConcept-Determiner:2
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_14_10_104,Object> 1 0.00124844]-------link handle:20062
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_14_10_104:20061
+[DEBUG]:Object:19605
+[DEBUG]:[InheritanceLink <state_change7,state_change> 0.0 0.0]-------link handle:20060
+[DEBUG]:state_change7:5724
+[DEBUG]:state_change:19613
+[DEBUG]:[InheritanceLink <id_CHUNK_2_2_0_BLOCK_10_5_103,object> 0.0 0.0]-------link handle:20059
+[DEBUG]:id_CHUNK_2_2_0_BLOCK_10_5_103:17628
+[DEBUG]:object:19603

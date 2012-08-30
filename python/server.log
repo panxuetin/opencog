@@ -1,0 +1,8 @@
+node[TimeNode:13562266945]
+[AtTimeLink <13562266945,[EvaluationLink <right_of,[ListLink <id_6830,id_6820> 0.0 0.0]> 1 1]> 2 1]
+node[ObjectNode:id_6820]
+node[ObjectNode:id_6830]
+node[PredicateNode:right_of]
+[EvaluationLink <right_of,[ListLink <id_6830,id_6820> 0.0 0.0]> 1 1]
+[ListLink <id_6830,id_6820> 0.0 0.0]
+node[ConceptNode:___PLN___]
