@@ -1,0 +1,52 @@
+CMAKE_POLICY(SET CMP0005 OLD)
+
+ADD_DEFINITIONS(-DPVP_XSD_FILE_PATH=\\"${CMAKE_CURRENT_SOURCE_DIR}/BrainProxyAxon.xsd\\")
+
+SET(PAI_SOURCE_FILES
+    PAIUtils
+	ActionParamType
+	ActionParameter
+	ActionType
+	PetAction
+	ActionPlan
+	PAI
+	ActionPlanDispatcher
+    EmbodimentDOMParser
+    EmbodimentErrorHandler
+    EventResponder
+    EventDetector
+)
+
+IF (PROTOBUF_FOUND)
+    # Compile proto messages.
+    SET(PROTO_ARGS 
+        PROTOFILES PAI.MapInfo.proto
+        OUTPATH ${CMAKE_CURRENT_SOURCE_DIR}
+    )
+    PROTOBUF_GENERATE_CPP(PROTO_SRCS PROTO_HDRS ${PROTO_ARGS})
+    SET(PAI_SOURCE_FILES ${PAI_SOURCE_FILES} ${PROTO_SRCS})
+ENDIF (PROTOBUF_FOUND)
+
+ADD_LIBRARY (PAI
+    ${PAI_SOURCE_FILES}
+)
+
+SET(PAI_LINK_LIBS
+	AtomSpaceExtensions
+	util 
+    oac
+	${XERCESC_LIBRARIES}
+	${Boost_DATE_TIME_LIBRARY} 
+	${Boost_REGEX_LIBRARY}
+)
+
+IF (PROTOBUF_FOUND)
+    SET(PAI_LINK_LIBS ${PAI_LINK_LIBS} ${PROTOBUF_LIBRARY})
+ENDIF (PROTOBUF_FOUND)
+
+IF (GUILE_FOUND)
+   SET(PAI_LINK_LIBS smob server ${PAI_LINK_LIBS})
+ENDIF (GUILE_FOUND)
+
+TARGET_LINK_LIBRARIES(PAI ${PAI_LINK_LIBS})
+

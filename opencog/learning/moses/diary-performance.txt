@@ -1,0 +1,1526 @@
+
+Diary of performance measurements and tuning for MOSES
+------------------------------------------------------
+
+Maintained by Linas Vepstas. The contents below are not going to be
+explained in terribly great detail; this is for my personal use, and
+not a tutorial for the general public.  If you are a moses hacker,
+maybe this data will be interesting.  I'm only checking this into bzr
+so that I don't accidentally loose this data.  
+
+Timing measurements are very specific for my own computer; your results
+will be different.  Results will change as algorithms are modified; the
+below is being used to help me get baseline performance numbers, to
+understand how modifications affect performance, and to help make sure
+there are no regressions.
+
+=======================================================================
+Lessons learned
+
+There are many lessons learned from the results below.  Most of these
+have been incorporated into the code base.  Here's a summary of some of
+these.
+
+++ True hillcmbing vs. expanded neighborhood search. The original
+   "hillclimbing" code, circa bzr revision 6500, actually implemented a
+   kind of neighborhood search algorithm. That is, it searched a portion
+   of the nearest neighbors of an instance. If it found an improvement,
+   it returned to the metapop outer loop.  If it did not find
+   improvement, it expanded the search to 2nd-nearest neighbors, and so
+   on. The search was rarely exhaustive; the neighborhoods were 
+   sub-sampled, as the size of the neighborhoods grows combinatorially.
+
+   By bzr rev 6522, the algo was refactored to implement "true
+   hillclimbing".  A portion of the nearest neighbors are searched. If
+   improvement is found, the the best instance is defined as the new
+   center, and it's nearest neighbors are searched. This process is
+   repeated until there is no improvement, and only then does control
+   return to the metapop outer loop.  The "true hillclimbing" algo
+   provides a 2.3x performance improvement over the old algo, as
+   documented below.  The behaviour of the old algo can be regained by
+   using the -L1 -T1 -I0 flags.
+
+   The so-called "simulated annealing" code still implements the old,
+   local neighborhood search algo, except that it uses a temerature to
+   occasionally widen the search to farther distances.  Thus, it should
+   be renamed to "star-shaped search", as the searched neighborhood is
+   star-shaped; the fatness of the star depending on a temperature.
+
+
+++ The "high score" trap. The runtime performance of the code circa
+   bzr rev 6522-6560 had a very strong dependence on the initial random
+   seed. For many seeds, runtime was worse-than-exponentially slower as
+   compared to the fastest cases.  This appears to be due to the fact
+   that sometimes the top-scored exemplar in the metapopulation does not
+   make a very good tree on which to build knobs.  In essence, the outer
+   loop, the metapopulation loop, was a strict hill-climber; it worked
+   only with the top scorers.  The solution to this was to convert the
+   metapop select_exemplar() routine to use an annealing-style
+   temperature.  Thus, some fraction of the time, a lower-scoring
+   exemplar would be used as the starting place for knob-building.
+   Additional performance is gained by weighting the complexity into the
+   selection: that is, a lower-scored, but also lower complexity
+   exemplar may be a better starting place than a high-score,
+   high-complexity exemplar.  The discovery & solution of this behaviour
+   is documented on the opencog blog; the blog page captured in the
+   file documentation/Select_Exemplar.html in this directory. Misc data
+   and graphing tools can be found in diary/complexity-temperature.
+   In the diary below, this starts at the section titled:
+   ++++++ The "high score" trap. AKA "select exemplar annealing" +++++
+   The final, fixed form of this code can be found in bzr rev 6582;
+   the -v and the -z flags are used to set the complexity weight and
+   temperature. The resulting performance improvement is about 200x 
+   for 4-parity (runtime, 20 different random seeds, before: about
+   55K seconds = 15 hours, after: about 300 seconds)  This is a huge
+   win. 
+
+   BTW, its not just the temperature that does this, but also a better
+   control over the metapopulation size.  The metapop size is managed
+   by refering to the score of exemplars; this obviates the need for
+   the "dominated merge" logic.  The dominated merge logic is very
+   complicated and quite slow; skipping this accounts for a large
+   performance boost. (In addition, domination had a way of knocking
+   out exemplars with decent scores, needed for the annealing
+   choice).
+
+
+++ Exhaustive neighborhood search. The moses algo needs to apportion
+   cpu cycles between the outer, metapop loop, and the inner, deme
+   exploration loop.  The old algo, circa 6582, did this via a fraction
+   of the remaining cycles. If the max allowed cycles (-m flag) was too
+   low, the nearest neighbor exploration would be subsampled (instead of
+   an exhaustive search). Altering the nearest neighbor search (when the
+   hamming distance really is just one) to be an exhaustive search seems
+   to improve things.  Note this affects just the ban.csv dataset, as
+   this was not an issue for 4-parity. Part of the problem with the bank
+   dataset is that it jumps from relatively simple exemplars in the
+   first round, to very complex (squared) exemplars in later
+   knob-building rounds; these later exemplars are very expensive to
+   evaluate, so it makes sense to exhaust the simple cases first.
+   Fixed by bzr rev 6590.  See "budge" column in "regression" section
+   below.
+
+++ Better population control, skip behavioral score computation.
+   Older code kept an excessively bloated metapopulation, members of
+   which were astronomically unikely to be choosen as futre
+   exemplars.  This gets fixed. In addition, old code was computing
+   behavioral scores, even though domination-merging is no longer
+   used. (Domination merging is a pig). Skipping this provides a huge
+   performance saving for complex exemplars, such as the bank.csv
+   dataset, but only minor effects (about 7%) for 4-parity.  This
+   is all checked in by bzr rev 6617.  Note that the combined effects
+   of the last several changes are about 3x to 4x, changing times for
+   4-parity from about 300 sconds in rev 6582 to 72 secons in rev 6617.
+
+++ Correlated knob-turning.  Explores the hypothesis that
+   high-scoring instances are highly correlated.  This does indeed
+   seem to be the case for the bank.csv dataset, and so the best new 
+   instances are mergers of the previous high scorers.  This seems
+   to offer a huge win, by offering much of the benefit of EDA/BOA
+   with none of the cost. Research ongoing, will be checked in after
+   bzr 6617.
+
+=======================================================================
+Diary started in January 2012
+
++++++ True hillcmbing vs. expanded neighborhood search. +++++
+
+Opencog revision 6386:
+----------------------
+-Hpa -k3 -m50000    (3-parity)
+-r0: 0m15.051s
+-r1: 0m1.406s
+-r2: 0m15.265s
+-r3: 0m3.281s
+-r4: 0m17.628s
+-r5: 0m3.876s
+-r6: 0m5.590s
+-r7: 0m22.319s
+-r8: 0m19.817s
+-r9: 0m3.958s
+
+
+-Hpa -k4 -m50000
+(no r flag):  0m52.547s (best is -1)
+-r1: 0m51.907s  (also -1, as are result unless otherwise indicated)
+-r2: 1m26.161s
+-r3: 1m1.008s  (best is -2)
+-r4: 1m26.425s
+-r5: 1m15.517s
+-r6: 1m24.877s
+-r7: 0m53.119s (best is -2)
+-r8: 1m4.888s
+-r9: 1m20.561s (best is -2)
+
+To get the above in later versions, need to use -L1 -T1 flags.
+
+circa revision 6541:
+--------------------
+time opencog/learning/moses/main/moses -Hpa -k3 -m50000
+(no -r flag): 0m0.892s
+-r0: 0m0.535s
+-r1: 0m0.796s
+-r2: 0m7.317s
+-r3: 0m1.334s
+-r4: 0m0.895s
+-r5: 0m8.400s
+-r6: 0m2.420s
+-r7: 0m10.862s
+-r8: 0m2.026s
+-r9: 0m7.471s
+
+avg: 4.19 (approx)
+
+Again, Now with -L1 -T1:
+-r0: 0m9.078s
+-r1: 0m1.556s
+-r2: 0m23.966s
+-r3: 0m3.546s
+-r4: 0m5.201s
+-r5: 0m4.385s
+-r6: 0m9.747s
+-r7: 0m9.991s
+-r8: 0m19.364s
+-r9: 0m9.968s
+
+avg: 9.68 (approx)
+
+So the 'true hillclimbing' is 2.3x faster than old stuff, for this.
+
+Now try 4-parity...
+-Hpa -k4 -m50000
+-r0: 158 secs, -1 score
+-r1: 2m23.313s  (a -1 solution)
+-r2: 2m30.541s  (also -1, as are rest, unless indicated).
+-r3: 1m40.566s  (bravo perfect score!)
+-r4: 1m39.910s (best is -2)
+-r5: 2m4.012s
+-r6: 2m39.442s
+-r7: 0m42.020s (perfect score)
+-r8: 1m42.506s (-2)
+-r9: 2m9.784s (-2)
+
+so recap: -Hpa -k4 -m50000
+perfect score: 2
+-1 score: 5
+-2 score: 3
+
+So -m50K is not enough.
+
+try again -m150K
+-Hpa -k4 -m150000
+-r0: 278.223783 secs perfect score
+-r1: -1
+-r2: 180.539163 secs perfect score
+-r3: 97.197070 secs perfect score
+-r4: -2
+-r5: 142.639202
+-r6: -1
+-r7: 42.500166
+-r8: -1
+-r9: -2
+
+Note: perfect runtimes almost unchanged, and fewer loosers.
+
+so recap: -Hpa -k4 -m150000
+perfect score: 5
+-1 score: 3
+-2 score: 2
+
+try again -m450K
+-r0: 279.876706
+-r1: -1
+-r2: 185.149519
+-r3: 97.226776
+-r4: -1
+-r5: 145.637475
+-r6: -1
+-r7: 43.974498
+-r8: 709.072294
+-r9: -1
+
+so recap: -Hpa -k4 -m450000
+perfect score: 6
+-1 score: 4
+-2 score: 0
+
+try again -m1.6M
+-r0: 286.623444  secs
+-r1: -1
+-r2: 196.127073
+-r3: 100.873139
+-r4: 1690.134350
+-r5: 148.591779
+-r6: 9752.876748
+-r7: 51.243247
+-r8: 731.033613
+-r9: 2367.365400
+
+Comments on above:
+I've started trying to understand how hill-climbing actually works. Recall,
+we now have two styles of hill-climbing, and each behaves differently.  The
+"new style" does this:
+
+-- construct representation by adding knobs
+-- twiddle one knob at a time, till one knob causing greatest improvement is found.
+-- repeat above step until no more improvement.
+-- go back to step 1.
+
+I ran above on 4-parity, with ten different random seeds (-r0 through -r9)
+The time to solution (perfect score) depends *very strongly* on the random
+seed. In one case, a solution is found in less than a minute; a few more
+cases find a solution in 2-3-4 minutes anothr in 12 minutes, another in 25
+minutes, another in 45 minutes, another in 3 hours. In one case, no perfect
+score found after more than 3.5 hours search.
+
+
+I've graphed these (see attachment) in order of discovery.  I am trying to
+understand why this is happening, and what to do about it.  No clear ideas,
+yet. 
+
+I'm also trying to measure 4-parity using the "old-style" algo. Before I
+describe this, one salient remark:  the above timings are independent of the
+"max iterations" flag. That is, for "moses -Hpa -k4 -r2 -mNNN"  (4-parity,
+rand-seed=2, max-iter=NNN)  then, if NNN is large enough, a perfect score is
+obtained after 196 seconds, always, independent of NNN.  And if NNN is too
+small, no solution is found.  I mention this, because it is very different
+than the "old-style" behaviour.
+
+=======================================
+
+The "old-style" algorithm is this: (-L1 -T1)
+-- step 1. construct representation by adding knobs
+-- twiddle one knob at a time, till one knob causing greatest improvement is found.
+-- if there's improvement, go to step 1.
+-- if no improvement, twiddle two knobs simultaneously, and either go to step 1 or try 3
+knobs. 
+-- try up to five knobs, then go to step 1.
+
+Now, all over again but with -L1 -T1
+-Hpa -k4 -L1 -T1 -m50000
+-r0: -1
+-r1: -3
+-r2: 70.442446
+-r3: -1
+-r4: -2
+-r5: -4
+-r6: -1
+-r7: -2
+-r8: -2
+-r9: -3
+
+-Hpa -k4 -L1 -T1 -m150000
+-r0: 80.953417
+-r1: -1
+-r2: -1
+-r3: -2
+-r4: -2
+-r5: -2
+-r6: -2
+-r7: -1
+-r8: -2
+-r9: 138.244841
+
+-Hpa -k4 -L1 -T1 -m450000
+-r0: 419.329227
+-r1: 476.257538
+-r2: -1
+-r3: -1
+-r4: -1
+-r5: -2
+-r6: 585.746513
+-r7: 963.175023
+-r8: -2
+-r9: 413.799492
+
+-Hpa -k4 -L1 -T1 -m1600000
+-r0: 413.346996
+-r1: 490.218301
+-r2: 2844.111736
+-r3: 1144.400860
+-r4: 1110.296915
+-r5: 1973.547115
+-r6: 1012.321808
+-r7: fail OOM 5.5 gigs virt, 3.7g RSS
+
+Here, the behaviour is very different.  If NNN is small, then only one of
+ten random seeds result in a solution, in about a minute. The other 9 are
+wayy off.  If NNN is larger, two solutions are found, in about 2 minutes
+each, the other 8 are way off, but not as bad as before.  There is no
+solution in 1 minute!. The -r seed value that had previously found a soln
+now finds no soln.
+
+This pattern continues: for larger NNN, five solutions found, out of ten.
+The fastest one found takes 8 minutes; the slowest took 15 minutes.  That
+is, raising the max-iteration bound destroys the ability to find solutions
+quickly for some random seeds, while improving  number of seeds that do lead
+to solutions.  Very strange.
+
+=======================================
+++++++ The "high score" trap. AKA "select exemplar annealing" +++++
+
+Hypothesis: to answer question "why do some random seeds take so long w/
+hill-climbing"?  Highest ranked exemplars, no matter how they are festooned
+with knobs, have no knob settngs that improve the score. However, they have
+many, many settings that provide an equivalent score, and none of these
+dominate: thus the metapopulation keeps growing w/o bound. Thus, more and
+more exemplars get explored, going down the list, until one gets deep into
+the not-very-fit section of the metapopulation. Then, at last, an exemplar
+is found that, when properly decorated, does have knob settings that result
+in a solution.
+
+Propose: instead of exploring metapopulation from highest score to lowest,
+instead explore from lowest complexity to highest.  Problem: the correct
+parity solution is going to have a high complexity...
+
+Maybe weighted sum of complexity, score ...
+
+plot:
+deme generation, metapop size, score, complexity, evaluations.
+
+cat moses.log | grep Stats | cut -d" " -f5
+
+OK, so graphing the above states clearly indicates that the metapop grows
+without bound.  up until point when an improved score is found, and then the
+metapop is cut down to almost nothing at all.  Meanwhile, both score and
+complexity are held constant for very long periods of time.  (err. best
+score, and complexity of highest-ranked exemplar).
+
+  -M [ --max-candidates ] arg (=-1)     Maximum number of considered candidates
+                                        to be added to the metapopulation after
+                                        optimizing deme.
+                                        
+
+graph: time to next discovery.
+graph: eval time to num evals...
+experiment: limit max metapop size.
+
+Here's the old, uncapped, unlimited data:
+with revised timings, due to code restructuring (stubbing out logger calls)
+-r0: 410 gens 79883 evals   286 secs (262 secs revised)
+-r1: -1
+-r2: 196.127073 (revised 172 secs)
+-r3: 100.873139 (revised 93 secs)
+-r4: 1325 gens 486915 evals   1690 secs (revised 1560)  0.78 gens/sec  288 evals/sec
+-r5: 148.591779 (revised 134)
+-r6: 9752.876748
+-r7: 130 gens 20432 evals  51 secs (revised 39 secs)  2.5 gens/sec   400 evals/sec
+-r8: 510 gens 234820 evals 731.033613 (revised at 665 secs)
+-r9: 2367.365400 (revised 2150 secs)
+
+
+experiment: keep non-dominated exemplars only if they have a large hamming
+distance between one-another.
+
+Sucess! (kind of).... when limiting pool size to 1000 the -Hpa -k4 -r0 was solved in 98 secs
+instead of 260 secs.  However, smaller limits did not work...
+ Does sorting time make a big diff ?
+
+-r0-capped: 217 gens, 38338 evals 98 secs
+-r4-capped: 872 gens, 262530 evals 782 secs
+-r7 capped: 507 gens, 97009 evals 310 secs   XXXX so this gets worse!!
+-r8 capped: 788 gens, 265462 evals 698 secs   XXX this got worse ...
+
+do r8, then r9 then r6
+
+without the cap, get a population of over 6K towards the end.
+-- propose: remove anything that's been tried already.
+   tried that quickly, didn't seem to go well.  I don't like this idea...
+
+idea:
+-- limit the pool size to function of complexity:
+   e.g. 20 bit complexity requires 2^20 = 10^6 for exhaustive enumeration.
+   limit pool to 2^(complex/2) or 2^(2*complex/3) ... 
+
+------
+idea: select_exemplar() has a probability of selection that is SA-like.
+try hotter temperatures. Origianlly have T=1
+
+p = (p > 0 ? 0 : pow2((p - highest_comp)/T));
+
+-1 means timoeut at 450K
+
+        T=1     T=2    T=3
+-r0:     262       8      4
+-r1:  >19261      14    514   
+-r2:     172    5371    444
+-r3:      93    1168   5520
+-r4:    1560    1131     58
+-r5:     134     220   2106
+-r6:    9752.x   502     53
+-r7:      39      43   2566 
+-r8:     665     324   6867
+-r9:    2150     628    143        
+-r10:     30     522    158
+-r11:     15      67     77
+-r12:    360    1656    700
+-r13:    292     568    140
+-r14:    961      20    931
+-r15:   1972      83    306
+-r16:     34     916   1547
+-r17:   7138     187     90
+-r18: >31836    2991     22  (-m1.1M)
+-r19:    172     549    808
+
+450K == 1/2 hour
+
+re-sorting first ten by runtime:
+
+# first column: original data
+# second column: a 10% performance speedbump due to logging.
+# third column: broaden the complexity chooser (by 2)
+#
+1  51.243247   39 8
+2  100.873139  93 14
+3  148.591779  134   43
+4  196.127073  172   220
+5  286.623444  262   324
+6  731.033613  665   502
+7  1690.134350 1560  628
+8  2367.365400 2150  1134
+9  9752.876748 9752  1168
+
+restorting the first 20 by rutime:
+
+#
+# moses performance data, runtime in seconds
+# using default hillclimbing.
+# -Hpa -k4 in order of runtime
+#
+# first column: original data
+# second column: a 10% performance speedbump due to logging.
+# third column: broaden the complexity chooser (by 2)
+# fourth column: broaden the complexity chooser (by 3)
+#
+# in select_exemplar():
+# p = (p > 0 ? 0 : pow2((p - highest_comp)/T));
+#
+#   orig       T=1    T=2    T=3
+1   15          15      8      4
+2   30          30     14     22
+3   34          34     20     53
+4   51.24       39     43     58
+5   100.87      93     67     77
+6   148.59     134     83     90
+7   172        172    187    140
+8   196.12     172    220    143
+9   286.62     262    324    158
+10  292        292    502    306
+11  360        360    522    444
+12  731.03     665    549    514
+13  961        961    568    700
+14  1690.13   1560    628    808
+15  1972      1972    916    931
+16  2367.36   2150   1131   1547
+17  7138      7138   1168   2106
+18  9752.87   9752   1656   2566
+# 19 >19261 at -m1 for T=1
+19  9999     19261   2991   5520
+# 20  >31836 at -m1.1M for T=1
+20  9999      31836  5371   6867
+
+
+Email 6 Feb 2012:
+As mentioned before, the run-time performance of MOSES in finding a
+perfect solution to certain problems can sometimes take an exponentially
+long time, dependeing on the initial random seed.  I sent a graph
+before, and attached is a new one. As before, I've been focusing on the 
+4-parity problem.
+
+For those runs that tak huge amounts of time to solve, what appears to
+be happening is that the algo quickly finds a fairly good solution,
+matching all but one of the posible outputs, and then gets hung up. It
+examines huge numbers of exemplars, attaching knobs to each, twiddling
+these, finding plenty of new, non-dominated solutions. But it just can't
+find a fitter solution.  So, it occurred to me, perhaps it is failing to
+look at a diverse-enough set of initial exemplars.  I assumed that the
+algo was selecting the fittest possible exemplar, with the lowest
+possible complexity, and trying to mutate that. I figured that,
+perhaps, it would work faster if it occasionally attempted mutating
+some high-complexity exemplar.  (This was directly inspired by the other
+chain of emails).
+
+This is done in select_exemplar(). Turns out, the code was already doing
+the above. That is, even the so-called "hill-climbing" code doesn't
+hill-climb when picking an exemplar; instead it implements a 
+simulated-annealing-style algo. It didn't always pick the
+lowest-complexity exemplar to mutate, it sometimes did pick something
+more complex.  The problem is that the temperature was set too low.
+It didn't try the high-complexity exemplars often enough.  So I
+twiddled, and got the graph below.
+
+The label "pow2(-complexity/T)" refers to the line of code in
+select_exemplar().  I tried T=1,2,3. (T is the tmerpature; this is the
+Bolzmann distribution).  The original code had a hard-coded T=1 in it.
+
+-- Runtime improves by a factor of 2x or better for T=2, usually.
+   (The green line) Sort-of. Almost 10x better for the high-runtime
+   cases, but worse on the medium runtime cases.
+-- The exponential behavriour does not go away.  The overall slope
+   is unchanged.  The slope is bad: The fastest case takes 4 seconds.
+   Half the time, a perfect solution is found in under 300 seconds.
+   Half the time, a perfect solution requires much much much more than
+   that: sometimes many many hours.
+
+I'd like to try other temperatures, and a larger dataset, but this
+all requires a lot of cpu time.  Working on it ... 
+
+I've checked in code for this, but its not in final form yet.
+
+---------------------------------------------------
+
+As above, but for T=2 in select_exemplar() temperature, comparing
+capped and uncapped metapop size.
+
+       uncapped   capped
+-r0:        8        8
+-r1:       14       14
+-r2:     5371    >5957
+-r3:     1168      358
+-r4:     1131      680
+-r5:      220     1082
+-r6:      502      371
+-r7:       43       41
+-r8:      324       59
+-r9:      628       67
+-r10:     522       35
+-r11:      67      161
+-r12:    1656      548
+-r13:     568    >5553
+-r14:      20      104
+-r15:      83     1299
+-r16:     916       94
+-r17:     187      459
+-r18:    2991     1211
+-r19:     549       43
+
+Wow! a clear winner!
+Temp=2 clamped, avg time== 913 secs
+
+And again for temp=1
+
+                clamped
+        T=1       T=1
+-r0:     262      494
+-r1:  >19261      226
+-r2:     172      834
+-r3:      93      108
+-r4:    1560       72
+-r5:     134      398
+-r6:    9752.x   4559
+-r7:      39      135
+-r8:     665      212
+-r9:    2150      927
+-r10:     30      770
+-r11:     15     2225
+-r12:    360      646
+-r13:    292     3522
+-r14:    961      871
+-r15:   1972       68
+-r16:     34       70
+-r17:   7138    >5948
+-r18: >31836      235
+-r19:    172     2028
+
+Temp=1 clamped, avg time== 1221 secs
+Wow .. a clear looser!
+
+         T=3    clamped
+-r0:        4      4
+-r1:      514   1047
+-r2:      444    118
+-r3:     5520    855
+-r4:       58     60
+-r5:     2106    192
+-r6:       53     46
+-r7:     2566   2074
+-r8:     6867    235
+-r9:      143    138 
+-r10:     158    936
+-r11:      77    114
+-r12:     700   1268
+-r13:     140     35
+-r14:     931    128
+-r15:     306   1260
+-r16:    1547     34
+-r17:      90    722
+-r18:      22     39
+-r19:     808    860
+
+
+avg clamped == 508 -- wow this is the best yet ... 
+There's no long-running outliers to pull the thing way out ... 
+graph shows that T=2 is still the best, so use that in the code.
+
+Current consolidated dataset:
+
+#
+# moses performance data, runtime in seconds
+# using default hillclimbing.
+# -Hpa -k4 in order of runtime
+#
+# first column: original data
+# second column: a 10% performance speedbump due to logging.
+# third column: broaden the complexity chooser (by 2)
+# fourth column: broaden the complexity chooser (by 3)
+# fifth col: T=2 and clamped metapop size.
+#
+# in select_exemplar():
+# p = (p > 0 ? 0 : pow2((p - highest_comp)/T));
+#
+#                                 clamp  clamp  clamp 
+#   orig       T=1    T=2    T=3   T=2    T=1    T=3
+1   15          15      8      4     8     68      4
+2   30          30     14     22    14     70     34
+3   34          34     20     53    35     72     35
+4   51.24       39     43     58    41    108     39
+5   100.87      93     67     77    43    135     46
+6   148.59     134     83     90    59    212     60
+7   172        172    187    140    67    226    114
+8   196.12     172    220    143    94    235    118
+9   286.62     262    324    158   104    398    128
+10  292        292    502    306   161    494    138
+11  360        360    522    444   359    646    192
+12  731.03     665    549    514   371    770    235
+13  961        961    568    700   358    834    722
+14  1690.13   1560    628    808   459    871    835
+15  1972      1972    916    931   548    927    855
+16  2367.36   2150   1131   1547   680   2028    860
+17  7138      7138   1168   2106  1082   2225   1047
+18  9752.87   9752   1656   2566  1211   3522   1260
+# 19 >19261 at -m1.1M for T=1,  >6666 at -m1.6M
+19  9999     19261   2991   5520  6666   4559   1268
+# 20  >31836 at -m1.1M for T=1  the 6666 7777 values are bogus
+20  9999      31836  5371   6867  7777   6666   2074
+
+
+See http://blog.opencog.org/2012/02/07/tuning-moses/ for written
+explanation.
+==================================================================
+
+Try again with -I1 .. what will this do??
+Also explore -P pos_size_ratio
+
+As above, for T=2 in select_exemplar() temperature, comparing
+capped and uncapped metapop size.  (capped is done via the auto-capping
+mechanism that is the current default.)
+
+Third column is with -I1 spec'ed, so that metapop includes dominated
+exemplars.
+
+forth column: -P40 -- pop-size-ratio = 40
+
+       uncapped   capped   domin   P40    P10
+-r0:        8        8       8      9      8
+-r1:       14       14      15     15     15
+-r2:     5371    >5957   >1453  >1574  >1623
+-r3:     1168      358     344    356    358
+-r4:     1131      680     662    698    718
+-r5:      220     1082    1022   1090   1136
+-r6:      502      371     374    374    407
+-r7:       43       41      44     43     44
+-r8:      324       59      62     61     63
+-r9:      628       67      69     68     69
+-r10:     522       35      36     35     36
+-r11:      67      161     160    159    163
+-r12:    1656      548     543           567
+-r13:     568    >5553   >1355         >1496
+-r14:      20      104     108           109
+-r15:      83     1299    1290          1351
+-r16:     916       94      92            93
+-r17:     187      459     502           477
+-r18:    2991     1211   >1147         >1185
+-r19:     549       43      45            45
+
+
+Looks like a tie to me... 
+Upshot: using the -I1 flag to keep dominated exemplars in the population
+does not seem to affect runtime. I'm guessing that this is because the
+dominated exemplars are never selected.
+
+==================================================================
+
+Modified sort order:
+bool composite_score::operator>(const composite_score &r)
+{
+   return (3*first + second) > (3*r.first + r.second);
+}
+
+This results in the metapop being kept in a different order, for
+example, the first 12 entries might be this:
+
+metap 0 score=-5 complex=-8
+metap 1 score=-5 complex=-8
+metap 2 score=-8 complex=0
+metap 3 score=-6 complex=-6
+metap 4 score=-6 complex=-6
+metap 5 score=-6 complex=-6
+metap 6 score=-6 complex=-6
+metap 7 score=-5 complex=-9
+metap 8 score=-5 complex=-9
+metap 9 score=-5 complex=-9
+metap 10 score=-8 complex=-1
+metap 11 score=-8 complex=-1
+
+OK, so 3 (plus auto-clamping) fails, no solutions found at all.
+Disable autoclamping.  Gahh .. seems to run forever ... 
+Redesign clamping ... 
+
+Below, for different mixing weights W
+
+         capped  W=4    W=5    W=6    W=8    W=3    W=2
+-r0:        8     40      2     11     71    144   >516
+-r1:       14    121     79    122     50  >1004   >536
+-r2:    >5957     77     84    202  >1448    103   >543
+-r3:      358    471     16     99    521     69   >556
+-r4:      680     76     35     74  >1247    150   >503 
+-r5:     1082    280     44     46     88    404   >524
+-r6:      371     95    785    100     83    382   >541
+-r7:       41    125    425     53    153     53   >510
+-r8:       59     86  >1236  >1148    898     38   >525
+-r9:       67     48     31  >1365  >1401     95   >551
+-r10:      35     34     94     40     50    192   >528
+-r11:     161    319    761   1060   1230    197   >552
+-r12:     548     42    786    176  >1348     44   >545
+-r13:   >5553    154     49    251  >1323     47   >508
+-r14:     104     69    451    211     29     21   >545
+-r15:    1299    287   1483    105    169    140   >551
+-r16:      94  >1907     82     51    103    266   >509
+-r17:     459    141    196    165    900    127   >508
+-r18:    1211     87  >1095  >1123    402     93   >558
+-r19:      43     73     72    630    392    188   >557
+
+
+W=4 avg == 227
+
+==================================================================
+
+Arghhhh Move to floats, revamp, all changes
+
+set weight to very large to regain old behaviour (i.e. rank first by
+score, next by complexity).
+
+As above -Hpa -k4 ...
+-z12 -v1 -m50000  (90 seconds, when no solution)
+
+negative numbers indicate no solution, and how many wrong the best
+guess had.
+
+z:    -z12  -z12   -z12   -z12   -z12   -z12    -z4    -z4   -z4    -z4
+temp: -v100 -v50   -v20   -v10    -v5    -v2    -v5    -v2   -v1    -v3
+-r0:   -2     -1     -1     -1     -1     -1     34     43    -1     30
+-r1:   -1     80     -1     -2     16     30     72     -2    -1     -2
+-r2:   -1     -1     65     36     33    111     34    155   150     -1
+-r3:   14     -2     -2     -1     -2     -1     81     -1    -1     -3
+-r4:   67     67     -1     -1     27     -2     69     -1    36     83
+-r5:   -2     -2     -3     -3     -1     92     -1     -1    -2     -2
+-r6:  102     -1     -1     10     29     -1     67     -2    -1     62
+-r7:   -1     -1     -1     -2     -1     -2     21     77    45     -1
+-r8:   -3    133     34     -1     -2     -2     39     52    62     84
+-r9:   -2     -2     -1     -2     -1     -1     -1     18    22     16
+-r10:  -2     -1     51     23     -2     -1     -1     -2    63     -2
+-r11:  -1     -1     35    103     25     48     -2     -1    58    116
+-r12:  -1     -1     29     -1     28     38     91     36    60     -1
+-r13: 109     74     -1    105     -1     11     -1     -1   122     -1
+-r14:  -2    103     -2     -1     45     53     21    172    -2    133
+-r15:  -1     -1     -1    123     -1     86     -2     -2    -1     -1
+-r16:  -1     -1     66     17     -2     -1     -1     16    -1     69
+-r17:  -2     83     11     -1     89     -1    208     -2    -2     -1
+-r18:  -1     -1     26     -1     -2     -1     75    147    -1     91
+-r19:  41     91     -1     -2     -2     -1    113     -1    -1     -1
+
+tot:    5      7      8      7      8      8     13      9     9
+
+The tot bove is how many had perfect score, out of the 20.
+
+Again, but this time with longer tun-times, for the graphs:
+-m45000
+
+z:        -z4     -z4
+temp:     -v5     -v2
+-r0:       34      43
+-r1:       72     705
+-r2:       34     770
+-r3:       81     213
+-r4:       69     426
+-r5:      276     136
+-r6:       67      -1
+-r7:       21
+-r8:       39
+-r9:      279
+-r10:     661
+-r11:     243
+-r12:      91
+-r13:     152
+-r14:      21
+-r15:     282
+-r16:     284
+-r17:     208
+-r18:      75
+-r19:     113 
+
+avg:      161
+
+==================================================================
+Above may bre non-reprodubile, due to changes in the max-pop-size logic.
+So restart data collection.
+
+As above -Hpa -k4 ...
+
+z:      -z3   -z3   -z3   -z4   -z4   -z4   -z2   -z2 -z3.5 -z3.5 -z3.5
+temp:   -v3   -v5   -v7   -v5   -v3   -v7   -v3   -v5   -v5   -v4   -v6
+-r0:    308    19    24   711    42   631    -4    -4    24    59    33
+-r1:    156   239    49   760   100   106    -4    -3    61   117   104
+-r2:     72   230    76   103   802   136    -4         227    30    95
+-r3:     84   349    83    73   296    48               207    41   101
+-r4:    254    35   203   232    41    82                47   375    54
+-r5:     85    94   168    19   109   337                22   110    23
+-r6:    396    98   114    62   504   113               129    42   124
+-r7:    182   715    17   586    43    88               222    66    28
+-r8:     34    59   140   137    72   161               234   617    75
+-r9:    819    73    71    25    14   132               125    24    61
+-r10:   173   170   120   260   579  1166                34    19    27
+-r11:    52    96    40    90   118   650               135    92    38
+-r12:   188    16   716    70   701   670                21   241    23
+-r13:   379    76   141   378   416   220               140    83    31
+-r14:   136   518   502   230   242   560                88    52    51
+-r15:   361    44    82    71   975    22                85   135   172
+-r16:   250   258    74   261  1123   111                55    54     6
+-r17:    34   387  1047   187   762   710               132   142    87
+-r18:    11   168   516   183   183    85               114    33    15
+-r19:    13     9    49   806    20   411                 5    10    52
+
+avg:    199   183  211    262   357   322               105   117    60
+120avg:       179                                       115
+240avg:                                                             109
+
+setting:  avg:   avg-over-what:
+z3.5-v9   132    120 iter
+z3.5-v7   110    120 iter
+z3.5-v6   109    240 iter
+z3.5-v5   115    120
+z3.5-v4   131    120
+
+Holy cow, that last one is smokin!
+But a run over 240 different random seeds averaged out to only 109
+seconds, not 60 seconds, so the smaller run just was not realistic.
+
+==================================================================
+
+ Attempts at 5-parity
+
+parity -k5 results   -Hpa -k5 
+
+All are -m150K unless otherwise noted, right?
+All are for bzr rev 6582, unless otherwise noted.
+
+
+                                                 rev 6622
+                                   -m450K -m1.5M  -m1.5M
+     -z4v6 -z5v6 -z6v6 -z7v6 -z6v4  -z6v6 -z6v6   -z6v6
+-r0    -8    -6    -6    -8    -6    -4     -3      -1
+-r1    -6    -8    -9    -6    -6    -4     -2      -2
+-r2    -8    -9    -5    -8    -5    -5     -3      -4
+-r3    -9    -6    -7    -8    -6    -3     -1     907
+-r4    -6    -6    -9    -9    -9    -6     -1      -3
+-r5   -11    -8    -6    -7    -5    -6     -4    1796
+-r6    -6    -6    -6    -8    -6    -2   6881      -3
+-r7    -6    -9    -6   -10   -10    -2   3078      -2
+-r8    -4    -5    -7    -6    -8    -5             -4
+-r9    -8    -7    -7    -6    -6    -4             -3
+-r10   -7    -8    -6    -7    -7    -6             -4
+-r11   -6    -6    -6    -6   -10    -4            714
+-r12   -9    -6    -5    -5    -7  1117           4032
+-r13   -9    -7    -4    -7    -6    -4             -3
+-r14   -7    -7    -6    -6    -7    -4             -5
+-r15   -7    -8    -7    -7    -7    -5             -4
+-r16  -10    -5    -6    -5    -9    -5             -1
+-r17  -10    -5    -8   -10    -7    -4             -4
+-r18   -5   -10   -10    -6    -5    -4             -4
+-r19   -8    -6    -8    -5    -8    -3           5906
+
+best: -4x1       -4x1   
+      -5x1 -5x3  -5x2   -5x3  -5x3
+      -6x5 -6x7  -6x8   -6x6  -6x6
+
+
+Use the -s0 flag to turn off caching, so as not to run out of RAM.
+ ... WOW! HOLY COW! That makes a HUGE difference in RAM usage!!
+
+-s1: 2419 at 04:45:26:632 from 21 at 03:25:09:777 == 1:20:17 == 4817
+-s0: 2419 at 06:12:58:836 from 21 at 04:45:49:574 == 1:27:09 == 5229
+
+Hmmm ... turning it off results in an 8% slowdown.
+
+/sbin/sysctl vm.swappiness
+
+===========================================================
+Is over-fitting a danger?  Well, we are over-fitting if the compexlity
+of the solution formula approaches the complexity of the raw table of
+data.  So lets compare them:
+
+3-arity: 3 boolean-valued inputs one boolean-valued output,
+total: 2^3=8 rows 4 bits per row: thus, complexity of table
+is 4x8=32 bits.
+typical moses solution: 10 or 11 bits.
+
+4-arity: 4 boolean-valued inputs one boolean-valued output,
+total: 2^4=16 rows 5 bits per row: thus, complexity of table
+is 5x16=80 bits.
+typical moses solution: 20 bits
+
+Clearly, for the parity problem, the solution does not over-fit.
+
+===========================================================
+Data collected on the bank.csv test case (in the example-data directory).
+
+Original hill-climbing algorithm:
+moses -Hit -uQ3 -i bank.csv -W1
+
+        score   time
+-m10K:  -361     128
+-m20K:  -278     487
+-m40K:  -215    1808
+-m80K:
+
+Re-do -- the above had a bug in reduct, where the argmument of impulse()
+was not being reduced.  Fixed in bzr commit 6586
+
+          z-default             -z6 -vdefault      -z10, -v1
+         score   time  plex  score  time  plex  score time   plex
+-m10K:   -361     176   39   -346   194    34    -367  162    25
+-m20K:   -258     477   47   -275   540    41    -274  656    51
+-m40K:   -210    2496   71
+-m80K:   -174   15445 
+-m160K:  -159   50430
+
+complexity of bank.csv:
+91 lines, 38 bits input per line, one contin out, valued: 1-16: 4 bits
+total: 91x42 = 3822 bits
+Conclude: it'll be hard to over-fit the data, at the rate we are going.
+
+Note really poor run-time performance of above.  This seems to be due to
+this:  First, we build a fairly small exemplar, and hill-climb it... but
+not until exhaustion, because the hill-climbing budget is badly
+calculated.  Then, for the second round, we build a massively complex
+exemplar, which is very expensive to evaluate... and then we don't even
+beother to exhaust the nearest-neighbor search before throwing it away.
+Solution: at least do an exhaustive search for closest
+nearest-neightbors, before giving up.  This seems to help:
+
+              z-default           exhaust             copy avoid
+         score   time  plex   score   time  plex   score   time   plex
+-m10K:   -340    45     14    -340     45    14    -340     41    14
+-m20K:   -265   167     30    -265    171    32    -265    162    32
+-m40K:   -228   658     52    -248   3103    40    -248   2670    40
+-m80K:                        -219  11117    50    -219  10435    50
+-m160K:                       -196  29415    60    -196  26655    60
+-m320K:                        4 gigs ram...
+
+Gahh ... -m40K goes to 3103 seconds, -248 score, -40 complexity when
+the first search is exhausted, and the second exemplar gets built.
+The second exemplar is huge/complex, and very slow to evaluate...
+
+OK, "Select candidates to merge" is taking too long:
+8754 in 2:16 or 136 secs = 15 millisecs each -- now 2:10
+11904 in 1:35:23 or 5723 secs = 480 millisecs each -- now 1:29:09
+29846 in 4:19:24 = 15563 secs = 520 millisecs each -- now 
+
+The "copy avoid" columns avoid a few pointless copies of the combo
+tree to the stack.  The --now times are the copy-avoid.
+
+Performance of 
+        auto select_candidates =
+in metapopulation.h is still a disaster area.
+But this is entirely due to 
+combo_tree tr = this->_rep->get_candidate(inst, true);
+which in turn has 80% of time spent in get_clean_combo_tree()
+in representation/representation.cc 
+and this is not easily fixable.
+
+======================================================================
+
+Redo, with -n log -n exp -n sin  and again with -ndiv
+
+             baseline            nosin exp log       nosinexplog nodiv
+         score   time   plex   score   time  plex   score   time  plex
+-m10K:   -340     41    14     -274    128    47     -258    256   32
+-m20K:   -265    162    32     -222    519    55     -232    720   42
+-m40K:   -248   2670    40     -182   1413    67     -190   1986   57
+-m80K:   -219  10435    50     -145   3950    87
+-m160K:  -196  26655    60
+-m320K:
+
+======================================================================
+
+Redo, with correlated hillclimbing
+basedline is 
+-Hit -uQ3 -i bank.csv -W1 -x1 -lDEBUG -n sin -n log -n exp
+
+"baseline" is from the above (the -n sinexplog flags)
+
+"40-corr" keeps only the top 40 instances for the next hill-climbing
+round. Since each climb uses up one instance, its impossible to have
+more than 40 climbs, so hill-climbing then terminates, and control returns
+to the metapop loop.
+
+The "re-up+trim" column does two things: 1) adds a new population control
+mechanism, and 2) does a full nearest-neighbr search every tenth hill-climb.
+For the other 9, it uses the same top-40 instances.
+
+The "trim-only" column removes the top-40 code, keeps to trimmed metapop
+size code, and also skips computation of behavioral scores.  Notice how
+trim-only score match the baseline, but offer a 2x run-time improvement.
+"trim-only" is exactly the code in bzr version 6616, no modifications.
+
+The "curr+reup" column shows bzr rev 6616 plus the reup algo.  Its almost
+identical to "re-up+trim", and slightly faster, which is good: nothing was
+lost during the intervening hacking. (40/10 means: 40 instances from the
+1-simplex, and a full nn scan every 10 generations.)  This is the current
+winner.
+
+The "100/20" column keeps the 100 top-scoring instances for the next
+round, and does a full nearest-neighborhood search only every 20
+rounds.
+
+The "40/20" column keeps the 40 top-scoring instances for the next
+round, and does a full nearest-neighborhood search only every 20
+rounds.
+
+The "40/6" column keeps the 40 top-scoring instances for the next
+round, and does a full nearest-neighborhood search every 6
+rounds.
+
+
+             baseline              40-corr              re-up + trim
+         score   time  plex    score   time  plex    score   time  plex
+-m10K:   -274    128    47     -258    268    62     -185     245   57
+-m20K:   -222    519    55     -142    972   115     -128     571   78
+-m40K:   -182   1413    67     -135   3007   125     -116    2176   90
+-m80K:   -145   3950    87                           -116    6042   92
+
+
+                                      nn5                    nn6
+             trim-only          curr+reup(40/10)           100/20
+         score   time  plex    score   time  plex    score   time  plex
+-m10K:    -273    91    48      -185    231   57      -214   233    80
+-m20K:    -222   256    53      -128    543   78      -159  1082   104
+-m40K:    -183   635    63      -116   2043   90      -146  2991   112
+-m80K:    -148  1898    85
+-m160K:   -125  7798   108
+ 
+
+                 nn7                   nn8
+                40/20                  40/6                  20/6
+         score   time  plex    score   time  plex    score   time  plex
+-m10K:    -240   175    59      -252   144   53
+-m20K:    -150   544    89      -147   383   79
+-m40K:    -115  1760   112      -116  1506  108
+-m80K:    
+-m160K:   
+
+
+New baseline: below: bzr rev 6645  (actually, this, but without Nils's
+most recent 12 changes... Nil's changes introduce something screwy...).
+
+"baseline" is as code is checked in. -- Except -- GATHER_STATS is
+defined, so this does introduce a sorting overhead that is hopefully
+not too big ...  !?
+
+"40/10" is the usual (40 instances, full nearest-neighbor refressh 
+every 10 generations), with the 1-simplex.  
+
+"40/rescan" evaluates 40 instances, but performs a full neighbor
+refresh only when no improvement is seen.  Again, this is 1-simplex.
+
+"40/10/2" is same as 40/10, but with the 2-simplex. (this is nn11, its
+inferior to nn13, nn14 and nn15, according to a graph).
+
+"40/10/3" is same as 40/10, but with the 3-simplex.
+
+"40+40+40/10/1+2+3" is all three, combined, with full neighborhood
+re-eval every 10 generations.  40 new instances per simplex.
+
+"rescan/1+2+3" is all three, combined, with full neighborhood re-eval
+only when there's no improvement.  40 new instances per simplex.
+
+"r6660" is bzr rev 6660, but with the simplex&rescan code turned on,
+GATHER_STATS turned off.  I was expecting this to be same as above,
+but its not. Don't understand why... slower to get going than either of
+last two, but breaks past the barrier... Partial answer: 1) the
+min_score_improvement logic was accidentally broken in this rev, and
+also 2) there is more random-seed variability than I expected...
+
+"nolast" is 6660, with simplex and rescan, but the last-chance simplex
+disabled. Seems to get started a bit faster, than the previous, but
+stalls out sooner. Is this accidental i.e. due to random seed?
+
+"r6660-r1" is same as r6660, but with -r1 random seed, instead of r0
+(all others are r0).  at first faster, then false behind at 20K but
+pulls ahead by 40K...  go figure... 
+
+"r6660-r2" is same as r6660, but with -r2 random seed, instead of r0
+
+"volume" explores 10/40/70 instances inthe 1/2/3-simplex. Total is still
+120 as before.
+
+Argghh. Many/most(???) of above have a min_score_improvement of 0.0 not
+0.5, and thus suffer from crazy score tweaking. This should not affect 
+the short runs, but could be ruinous for the long runs ...
+
+"r6661-r1" is same as r6660-r1 but with the min_improvment regression
+fixed.  Also slightly modified "last-chance" logic.
+
+"r6663-r1" is same as above, but with two silly loop fixes, including
+putting back "last chance" as before.  Probably will make very little
+difference...
+
+"rebase" is revision 6666, but without the -Z1 flag. This should
+reproduce the old, full-neighbor-scan version of the code.  Poor
+performance is expected... and, indeed, it seems to resemble "baseline"
+
+"renew" is revision 6666, with the -Z1 flag. This should match
+"r6663-r1" exactly... and indeed, it does.
+
+"all-small" is revision 6670, with -r1 -Z1 flag. The change here is an
+exhaustive search of the local neighborhood, when the local neighb is
+small.  This gives very good results for the smaller exemplar sizes
+for the first few exemplars.
+
+"regress" is revision 6726, trying to make sure things still work.
+There was a change in the loop termination criteria.  -r1 -Z1
+
+
+              baseline            40/10 (nn9)         40/rescan (nn10)
+         score  time  plex     score  time  plex     score  time  plex
+-m10k:   -255     65    50     -163    170   54      -179    207   59
+-m20k:   -229    243    53     -139    688   71      -160    655   71
+-m40k:   -187    798    64     -131   1829   80      -130   1490   87
+-m80k:   -153   1933    86     -131   4797   79      -125   5124   92
+-m160k:  -131   7476   104
+-m320k:  -120  30129   119
+-m640k:  -119  97385   117
+
+
+           40/10/2 (nn11)        40/10/3 (nn12)    40+40+40/10/1+2+3 (nn13)
+         score  time  plex     score  time  plex     score  time  plex
+-m10k:   -302     62   27      -282     75   45      -203     98   47
+-m20k:   -208    196   47      -209    220   59      -145    305   62
+-m40k:   -135    740   72      -167    718   76      -118   1112   87
+-m80k:   -116   2451   89      -149   1986   85      -118   3502   85
+-m160k:                                              -118  10326   85
+-m320k:                                              -118  24011   85
+
+
+        rescan/1+2+3 (nn14)     r6660 (nn15,20)         nolast (nn16)
+         score  time  plex     score  time  plex     score  time  plex
+-m10k:   -248    138   44      -305     82   47      -309     80   47
+-m20k:   -160    462   66      -184    381   86      -187    301   70
+-m40k:   -125   1354   86      -125   1553  119      -109   1057  122
+-m80k:   -115   4010  104      -100   5112  137      -104   4410  122
+-m160k:                         -95  19500  137
+
+
+        r6660-r1 (nn17,21)       r6660-r2 (nn18)        volume (nn19)
+         score  time  plex     score  time  plex     score  time  plex
+-m10k:   -298     81   47      -305     82   48      -315     79   38 
+-m20k:   -206    318   71      -206    322   71      -192    302   61
+-m40k:   -117   1179  118      -118   1294  119      -118   1033   99
+-m80k:    -94   8000  128                            -109   4490  111
+-m160k:   -89  18000  129                            -108  16954  112
+-m320k:   -89  48000  128                            -105  35820  115
+
+
+          r6661-r1 (nn22)       r6661-r0 (nn23)       r6661-r2 (nn24)
+         score  time  plex     score  time  plex     score  time  plex
+-m10k:   -298     85   46      -305     84   47      -302     81   48
+-m20k:   -206    329   71      -183    382   86      -206    316   70
+-m40k:   -119   1175  112      -130   1650  114      -120   1304  114
+-m80k:   -104   5369  124      -101   4985  129       -97   4592  127
+-m160k:   
+
+          r6662-r1 (nn25)       r6663-r1 (nn26)        rebase (nn27)
+         score  time  plex     score  time  plex     score  time  plex
+-m10k:   -298     82   47      -303     78   48      -248     57   59
+-m20k:   -206    317   71      -210    304   68      -231    223   64
+-m40k:   -117   1167  118      -125   1016  101      -190    839   75
+-m80k:    -94   5001  128      -108   3637  113      -162   2150   85
+-m160k:   -89  16603  130      -102  14793  120
+-m320k:   -89  39974  129
+
+
+           renew (nn28)         all-small (nn29)      regress (nn30)
+         score  time  plex     score  time  plex     score  time  plex
+-m10k:   -303     76   48      -248     58   59      -248     57   59
+-m20k:   -210    305   68      -206    266   74      -206    264   74
+-m40k:   -125   1032  101      -132   1086  114      -132   1064  114
+-m80k:   -108   3877  113      -122   6638  129
+-m160k:  -102  14427  120      -121  20186  127
+-m320k:  -101  41033  121      -121  45621  125
+
+
+======================================================================
+Regression test parity performance
+
+The "budge" column shows the effect of exhaustive nearest-neighbor
+search in hill-climbing.  Conclusion: this is a sure-fire win! Woot!
+commited in bzr revision 6589/6590.
+
+The "trim" column shows the effect of triming the deme, by score,
+before merging it into the metapop.  It also uses a score-weighted
+metapop population control. (previous metapop posize control was
+indirect and wonky, and less effective).  committed in bzr revision 
+6611 (this revision).  Notice that this is worse than before, 
+which is unearthed below ... the reason turns out to be the introduction
+of "min_score_improvement" in rev 6594.
+
+The "tops" column shows the effect of trim, plus the top-score approach.
+It does seem better than trim ... 
+
+The "wtf" column is bzr rev 6610, trying to figure out what broke.
+Answer: rev 6593 was OK but 6594 broke. this is due to 
+min_score_improvement added in optimization/optimization.h lin 535
+(i.e. min_score=0.5 was introduced then.)
+
+The "r6594" column is performance of revision 6594.  Note the
+horrible degradation of performance, compared to "trim".
+Using this rev, and setting min_score=0.0 gets us the nice 
+desirable "budge" numbers.  The reason that r6594 is worse than
+"wtf" is because "wtf" contains a copy optimization, introduced in
+revision 6598.
+
+"boost" is rev 6596 (i.e. uses boost for the compare ops) but with
+min_score=0. Compare this to "budge", which differs from this mostly in
+the use of boost for the inequality compares.  Is it justified to
+conclude that boost is harmful? If so, then just barely...
+
+The "min0" column is latest rev 6611 i.e. budge+trim, and min_score=0.0
+OK, best yet.
+
+The "prim" column is the pre-trim revision 6610, with the min_score=0.0
+Clearly, this is nearly identical to the "boost" column. The only real
+difference between these two is the no-copy fix, introduced in rev 6598.
+We conclude that the no-copy change gives us: (98-94)/94 = 4% performance.
+
+As above -Hpa -k4 -z3.5 -v5 -m350000
+
+         orig  budge  trim   tops   wtf   r6594  boost   min0  prim
+-r0:      24    23     55     55    236     57    137     18    134
+-r1:      61    60    120     24    248     34     30     81     29
+-r2:     227   144     50     50     49     72     86     35     83
+-r3:     207    36     23     23    129     91    103    199     99
+-r4:      47    45     31     31     58    131    573    165    554
+-r5:      22    22    185    229    319    105    121     80    115
+-r6:     129   115     32    179    296    133     29     26     28
+-r7:     222    58     21     36     24     15     76     43     73
+-r8:     234   521    162    184     61    225     61    308     58
+-r9:     125    54    297    319    142    216     72     80     69
+-r10:     34    33     41     40     90    269     86     71     83
+-r11:    135    44     37     37     32     80     43     39     41
+-r12:     21    20    206    109    197    226     46     16     44
+-r13:    140    70    510     35    185    220     93     24     90
+-r14:     88   116    223    453    190    378      5      5      5
+-r15:     85    70     76     54     83     31     50     35     48
+-r16:     55   107    258    135    229     58    113     73    108
+-r17:    132   195     22     22     44    115    103     89    101
+-r18:    114   104     39     31     63    398     67     81     64
+-r19:      5     5     37    195     57    270     65    276     64
+
+avg:     105    93    121    112    137    156     98     87     94
+double-checked:         y                                  y      y
+
+Below:
+"min0" as above: revision 6611, with min_score = 0.0
+
+"weigh" is rev 6611, with min_score = 0.5*weight/(weight+1)
+Compare this to "trim" above, which is exactly the same code, but
+without this weight correction (i.e. min_score = 0.5)
+
+"no-bs" is rev 6616: don't compute the behavioural score, because it's
+not needed unless one is doing domination-based merging.  (Note scores
+are consistently 1-2 seconds slower than "weigh", this seems to be due
+to other background jobs on this machine, and/or different cache patterns.
+Reversing flag does not change time.)
+
+"corr" is rev 6619: a correlated neighboring instance search. A bit
+of a regression from previous results, but seems to be due entirely
+to one outlier.  Further experiments/tuning to follow...
+
+"no-cache" is rev 6620: correlated search disabled, but also -s0 on
+command line to disable caching.  This results in much much lower
+mem usage.  No perf benefit within error bars: (73-72)/72 < 1%
+
+"nored" is as above, but with -d0 on command line: skips the reduction
+of exemplars before scoring. (scores the knob-turned exemplar directly).
+Not quite twice as slow, as a result.
+
+"erase" is a revised low-score erasure algorithm.  Cause of the disasterous
+slowdown is .. unclear. I think it is due to the erase() triggering a sort
+of the metapop, which then damages performance.
+
+
+         min0  weigh  no-bs  corr  no-cache nored   erase
+-r0:      18     35     37    116     37      71     345
+-r1:      81     52     54     98     54     281     120
+-r2:      35    107    112     34    112      23      74
+-r3:     199     15     16     56     16      31      24
+-r4:     165     15     16     17     16      81     242
+-r5:      80     38     41     23     40     107      41
+-r6:      26    111    115     60    115      37     104
+-r7:      43     67     68     17     69      28     122
+-r8:     308    170    112    181    113     187      67
+-r9:      80     39     41     40     41      61     141
+-r10:     71    150    193     31    195      84      58
+-r11:     39     18     19     18     19      57      22
+-r12:     16    129    133     98    133     124      77
+-r13:     24     98     99    145    100     102     160
+-r14:      5    155    151    195    151     405      91
+-r15:     35     42     43    150     42      49     279
+-r16:     73     72     75    343     75     365      52
+-r17:     89     32     33     51     33     461      22
+-r18:     81     36     37     31     37      77     103
+-r19:    276     51     53     29     53      22      23
+
+avg:      87     72     72     87     73     133     109
+
+
+Again:
+"baseline": revision 6616 (same as no-bs column above)
+
+"wtf": revision 6629 -- why is this not identical to baseline ?? Oh,
+because recent changes broke neighborhood size counting.
+
+"refix": revision 6630 -- why is this not identical to baseline ?? 
+Didn't 6630 restore the old logic?  Anyway, scratching the outlier
+gets us a reasonable number for the avg ... 
+
+"r6642" is bzr rev 6642 -- clearly something is very broken here.
+
+"r6634" is bzr rev 6634 -- seems to be identical to refix/6630
+
+"r6636" is bzr rev 6636 -- seems to be same as 6642; very broken.
+
+"improv" is rv 6636 with scoring.cc min_improv() set to 0.0, not 0.5
+OK, this has a different profile, but a passble time.  Ahh. Bug: 
+main/moses_exec.h:    opt_params.min_score_improv =
+bb_score.min_improv();  this is just plain wrong.
+setting to 0.4 gives r6634 results.
+
+"check" is revision 6651 -- simplex code disabled.  Very interesting,
+seems to be identical distribution to r6642, but 15% slower.  (this is
+probably because I did not comment out all of the simplex code. whoops)
+
+"reimp" is rev 6652, but with the min_improv logic fixed.  (and the 
+simplex code commented out; this time, all of it).  Looks like we are
+back to refix performance levels.  Again, ditching the outlier, we
+get comparable perf to before.
+
+"zippo" is same as above, but with min_improv set to zero. Seems to be
+identical to improv, which is expected.  But why are all of these slower
+than the baseline ?? Answer: fluke, see immediately below.
+
+"120avg": Are the avg stats trustworthy? To determine this, run with
+120 different random seeds.  This should give signficantly better
+results the effect of outliers.  Hmm. Graphing the 120 and fitting
+an exponential decay shows a very clear exp(90*p) trend line, ruined
+by 7-8 outliers.  Both reimp and zippo have exactly the same trend.
+Redo of baseline 6616 for 120 also gives same graph, and even slightly
+worse, overall. Yayyy! This gives bzr rev 6653 a clean bill of health!
+Woot!
+
+(This also justifies discarding outliers...)
+
+As above -Hpa -k4 -z3.5 -v5 -m350000
+
+      baseline  wtf   refix  r6642 r6634 r6636 improv check reimp zippo
+-r0:      37     56     36    174    37   170    23    213    37    22
+-r1:      54    118    128     89   130    86    58    113   132    56
+-r2:     112     39     38     70    38    67    89     87    39    85
+-r3:      16    116     38    137    39   133   165    169    39   163
+-r4:      16     72     81    226    83   218    43    281    85    42
+-r5:      41     67     67    260    67   253    21    316    70    21
+-r6:     115     23     83    130         126   111    159    87   108
+-r7:      68     15     15     14          14   195     18    15   188
+-r8:     112     86     70    374         360   195    450    72   189
+-r9:      41    112    104    172                75    209   108    74
+-r10:    193     61     60     32                32     42    62    31
+-r11:     19     89     84     39               133     50    87   129
+-r12:    133     81     53    126                20    156    55    20
+-r13:     99     74     74    351               121    429    77   118
+-r14:    151     39     37    149               113    202    38   108
+-r15:     43    137    506     29                70     35   521    67
+-r16:     75     51     51    248                49    302    52    48
+-r17:     33    125    118    112               247    137   122   238
+-r18:     37    107    116    192               100    240   120    97
+-r19:     53     57     56    297                 5    365    58     5
+
+avg:      72     77     91    162                93    198    94    90
+120avg:  111                                                 102   107
+
+-------------------------------------
+See notes above: revision 6653 gets a clean bill of health!  Good to go!
+
+"simp" is 6653, simplex enabled, but rescan disabled.  Default
+min_improv=0.5 setting (weighted down to 0.28)
+
+"enab" is 6653, with simplex and rescan enabled, using flag -L1 to
+terminate search immediately.  Clearly, this doesn't bypass the core
+problem.
+
+"rech" is 6666; expect this to be comparable to previous runs.  In fact,
+its identical to "zippo" above. No regression, no mystery, good to go.
+
+"rchk" is r6726.1.2; some minor changes in termination criteria, should not
+have a big effect...  Hmm, numbers seems to be identical to "rech"+20%.
+Which means the termination was not affected (random numbers are drawn
+in the same order), but something added to the execution time ... !?
+
+As above -Hpa -k4 -z3.5 -v5 -m350000
+
+      simp   enab  rech   rchk
+-r0:   101    188    22     28
+-r1:   284     -2    58     71
+-r2:   200    384    88   -109
+-r3:   133    245   167    206
+-r4:    32    154    43     53
+-r5:    24    173    21     26
+-r6:    63    189   111    139
+-r7:   114     57   191    247
+-r8:    84    139   193    242
+-r9:    62     43    75     94
+-r10:   80    404    33     40
+-r11:  199    855   134    165
+-r12:   13    423    20     25
+-r13:  122     87   120    151
+-r14:   43     98   115    139
+-r15:   97    170    71     85
+-r16:  396    127    49     60
+-r17:   43    587   246    200
+-r18:   47     99   100    124
+-r19:  102    910     5      6
+
+avg:   112    318    93    111
+
+
+
+================================================================
+Bank dataset measurements  columns are final score.
+This is circa bzr rev 6647 or so. (actually, 6647, with Nils most
+recent 12 changes removed).
+
+-mxx == different numbers of iterations.
+Conclude: very little variation due to random number gen. This is very
+different than the parity problem.
+
+           -m10000                -m20000            -m40000
+:      time  score  plex     time  score  plex    time  score  plex
+-r0:     65  255.8    50     250   229.8    53     741  187.1    64
+-r1:     65  255.8    51     246   229.8    53     771  187.1    64
+-r2:     65  255.8    51     248   231.65   54     745  187.1    64
+-r3:     64  255.8    50     247   229.8    53     749  187.1    65
+-r4:     65  256.1    49     247   230.3    52     758  186.5    66
+-r5:     65  257.5    51     248   230.3    53     760  184.1    67
+-r6:     65  256.1    49     248   232.06   53     784  186.5    65
+-r7:     66  259.8    51     249   230.3    54     743  184.5    67
+-r8:     65  256.1    50     248   230.8    52     771  186.5    66
+-r9:     64  255.8    48     247   229.87   53     793  186.1    65
