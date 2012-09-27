@@ -62,7 +62,6 @@ def load_scm_file(a, filename):
     ident_stack = []
     atom_stack = []
     root = None
-    no_link = { }
     define_dict = { }
     try:
         f = open(filename, "r")
