@@ -1,15 +1,50 @@
 #include <highgui.h>
+#include <imgproc\imgproc_c.h>
 #include <stdio.h>
-//int main(int argc, const char *argv[])
-//{
-////    IplImage* img =  cvLoadImage( argv[1] );
-////    cvNamedWindow( "Example1", CV_WINDOW_AUTOSIZE );
-////    cvShowImage( "Example1", img );
-////    cvWaitKey(0);
-////    cvReleaseImage( &img );
-////    cvDestroyWindow( "Example1" );
-//
-//}
+
+
+struct LuvPixel
+{
+	float l;
+	float u;
+	float v;
+	
+};
+RgbtoLuvPcm(imgA, width, height, luvData);
+
+//MyLUV *luvData = new MyLUV[width*height];
+IplImage* to_gray_image(const IplImage* psrc)
+{
+    IplImage* gray_img  = cvCreateImage(cvGetSize(pSrc),pSrc->depth,1);
+    cvCvtColor(pSrc,gray,CV_BGR2GRAY); 
+    return gray_img
+}
+
+typedef Image<RgbPixel> RgbImage;
+void get_rgbs(const IplImage* psrc, int width, int height)
+{
+    
+    RgbImage  imgR(pSrc);
+}
+
+
+void to_luv_image(const IplImage *pSrc, LuvPixel luvData[])
+{
+	long xstart=0;
+	long deltapos=0;
+    int width = pSrc->width;
+    int height = pSrc->height;
+    RgbImage img(pSrc);
+	for (int i = 0; i < height; i++)
+     {
+		 xstart = i*width;
+        for ( int j = 0; j < width; j++)
+        {
+			deltapos = xstart + j;
+            rgb2luv((int)img[i][j].r,(int)img[i][j].g , (int)img[i][j].b ,luvData[deltapos] );
+		}
+	 }
+}
 
 
 void
@@ -89,3 +124,16 @@ main(int argc, char** argv)
     cvReleaseImage(&img);
         return 0;
 }
+void fn(const IplImage *img)
+{
+
+//    IplImage* img2 = NULL;
+//    img2 = cvCreateImage(cvGetSize(img),img->depth,img->nChannels);
+//    cvCopy(img,img2);
+    int width = img->width;         //图像宽度
+    int height = img->height;           //图像高度
+    int depth = img->depth;         //图像位深(IPL_DEPTH_8U...)
+    int channels = img->nChannels;      //图像通道数(1、2、3、4)
+    int imgSize = img->imageSize;       //图像大小 imageSize = height*widthStep
+}
+
