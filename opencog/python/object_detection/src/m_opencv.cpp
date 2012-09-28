@@ -72,29 +72,33 @@ void output_info_img(const IplImage *img)
 
 }
 
-//void get_rgbs(const IplImage* psrc, int width, int height)
-//{
-//    
-//    RgbImage  imgR(pSrc);
-////    int width = pSrc->width;
-////    int height = pSrc->height;
-////	for (int i = 0; i < height; i++)
-////     {
-////		 xstart = i*width;
-////        for ( int j = 0; j < width; j++)
-////        {
-////			deltapos = xstart + j;
-////            rgb2luv((int)img[i][j].r,(int)img[i][j].g , (int)img[i][j].b ,luvData[deltapos] );
-////		}
-////	 }
-//}
+void get_rgbs(IplImage* pSrc)
+{
+    
+    RgbImage  imgR(pSrc);
+    int width = pSrc->width;
+    int height = pSrc->height;
+	for (int i = 0; i < height; i++)
+     {
+        for ( int j = 0; j < width; j++)
+        {
+//            std::cout<<"r:"<<(int)imgR[i][j].r<<std::endl;
+//            std::cout<<"g:"<<(int)imgR[i][j].g<<std::endl;
+//            std::cout<<"b:"<<(int)imgR[i][j].b<<std::endl;
+            imgR[i][j].r = 0;
+            imgR[i][j].g = 255;
+            imgR[i][j].b = 0;
+		}
+	 }
+}
 
 
 LuvPixel* get_luv_image(const IplImage *pSrc)
 {
 	long xstart=0;
 	long deltapos=0;
-    RgbImage img(pSrc);
+    IplImage *temp = const_cast<IplImage*>(pSrc);
+    RgbImage img(temp);
     int width = pSrc->width;
     int height = pSrc->height;
     LuvPixel *luvData = new LuvPixel[width * height];

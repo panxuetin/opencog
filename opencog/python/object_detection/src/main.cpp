@@ -13,16 +13,18 @@ int main(int argc, char** argv)
     }
 
     IplImage* img =  cvLoadImage(argv[1], 1);
+    get_rgbs(img);
 //    cv::Mat mtx(img);
 
     /* create a window and install mouse handler */
     cvNamedWindow("gray_img", 1);
 
-    cvShowImage("img",get_gray_image(img));
-    int *grays = image_gray_values(img);
-    for (int i = 0; i < img->width * img->height; i++) {
-        std::cout<<grays[i]<<std::endl;
-    }
+//    cvShowImage("img",get_gray_image(img));
+    cvShowImage("img",img);
+//    int *grays = image_gray_values(img);
+//    for (int i = 0; i < img->width * img->height; i++) {
+//        std::cout<<grays[i]<<std::endl;
+//    }
     output_info_img(get_gray_image(img));
     cvWaitKey(0);
 

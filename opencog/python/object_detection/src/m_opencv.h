@@ -7,11 +7,11 @@
 template<class T> class Image
 {
     private:
-        const IplImage* imgp;
+        IplImage* imgp;
     public:
-        Image(const IplImage* img=0):imgp(img) {}
+        Image(IplImage* img=0):imgp(img) {}
         ~Image(){imgp=0;}
-//        void operator=(IplImage* img) {imgp=img;}
+        void operator=(IplImage* img) {imgp=img;}
         inline T* operator[](const int rowIndx) {
             return ((T *)(imgp->imageData + rowIndx*imgp->widthStep));}
 }; 
@@ -38,6 +38,7 @@ IplImage* get_gray_image(const IplImage* psrc);
 LuvPixel* get_luv_image(const IplImage *pSrc);
 int* image_gray_values(const IplImage *pSrc);
 void output_info_img(const IplImage *img);
+void get_rgbs(IplImage* pSrc);
 
 //void get_rgbs(const IplImage* psrc, int width, int height);
 #endif /* end of include guard: M_OPENCV.H */
