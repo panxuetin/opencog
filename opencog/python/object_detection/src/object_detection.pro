@@ -17,10 +17,11 @@ DEFINES += DEBUG
 TEMPLATE = app
 TARGET = 
 
-INCLUDEPATH += /usr/include/opencv
-LIBS += /usr/lib/libopencv_highgui.so /usr/lib/libopencv_core.so
+INCLUDEPATH += /usr/include/opencv 
+LIBS += /usr/lib/libopencv_highgui.so /usr/lib/libopencv_core.so /usr/lib/libopencv_imgproc.so
 
 # Input
 #HEADERS += pdf_document.h \
-       #using.h
-SOURCES += main.cpp 
+#HEADERS += m_opencv.h           
+SOURCES += main.cpp \
+           m_opencv.cpp

@@ -1,17 +1,8 @@
-#ifndef M_OPENCV.H
+#include <iostream>
+#include <cv.h>
+#include "m_opencv.h"
 
-#define M_OPENCV.H
-
-typedef Image<RgbPixel> RgbImage;
-struct LuvPixel
-{
-	float l;
-	float u;
-	float v;
-	
-};
-
-void rgb2luv(int R,int G, int B, LuvPixel* luvdata)
+void rgb2luv(int R,int G, int B, LuvPixel& luvdata)
  {
 		float rf, gf, bf;
 		float r, g, b, X_, Y_, Z_, X, Y, Z, fx, fy, fz, xr, yr, zr;
@@ -54,67 +45,82 @@ void rgb2luv(int R,int G, int B, LuvPixel* luvdata)
 			L = k * yr;
 		u = 13*L*(u_ -ur_);
 		v = 13*L*(v_ -vr_);
-		luvdata->l = (int) (2.55*L + .5);
-		luvdata->u = (int) (u + .5); 
-		luvdata->v = (int) (v + .5);       
+		luvdata.l = (int) (2.55*L + .5);
+		luvdata.u = (int) (u + .5); 
+		luvdata.v = (int) (v + .5);       
 } 
-IplImage* get_gray_image(const IplImage* psrc)
+
+IplImage* get_gray_image(const IplImage* pSrc)
 {
     IplImage* gray_img  = cvCreateImage(cvGetSize(pSrc),pSrc->depth,1);
-    cvCvtColor(pSrc,gray,CV_BGR2GRAY); 
-    return gray_img
+    cvCvtColor(pSrc,gray_img,CV_BGR2GRAY); 
+    return gray_img;
 }
 
-void info_img(const IplImage *img)
+void output_info_img(const IplImage *img)
 {
 
 //    IplImage* img2 = NULL;
 //    img2 = cvCreateImage(cvGetSize(img),img->depth,img->nChannels);
 //    cvCopy(img,img2);
-    int width = img->width;         //图像宽度
-    int height = img->height;           //图像高度
-    int depth = img->depth;         //图像位深(IPL_DEPTH_8U...)
-    int channels = img->nChannels;      //图像通道数(1、2、3、4)
-    int imgSize = img->imageSize;       //图像大小 imageSize = height*widthStep
+    std::cout<<"the width of image:"<<img->width<<std::endl;
+    std::cout<<"the height of image:"<<img->height<<std::endl;
+    std::cout<<"the widthStep of image:"<<img->widthStep<<std::endl;
+    std::cout<<"the depth of image:"<<img->depth<<std::endl;
+    std::cout<<"the number of channels in image:"<<img->nChannels<<std::endl;
+    std::cout<<"the size of image( height * widthStep):"<<img->imageSize<<std::endl;
+
 }
 
-void get_rgbs(const IplImage* psrc, int width, int height)
-{
-    
-    RgbImage  imgR(pSrc);
-//    int width = pSrc->width;
-//    int height = pSrc->height;
-//	for (int i = 0; i < height; i++)
-//     {
-//		 xstart = i*width;
-//        for ( int j = 0; j < width; j++)
-//        {
-//			deltapos = xstart + j;
-//            rgb2luv((int)img[i][j].r,(int)img[i][j].g , (int)img[i][j].b ,luvData[deltapos] );
-//		}
-//	 }
-}
+//void get_rgbs(const IplImage* psrc, int width, int height)
+//{
+//    
+//    RgbImage  imgR(pSrc);
+////    int width = pSrc->width;
+////    int height = pSrc->height;
+////	for (int i = 0; i < height; i++)
+////     {
+////		 xstart = i*width;
+////        for ( int j = 0; j < width; j++)
+////        {
+////			deltapos = xstart + j;
+////            rgb2luv((int)img[i][j].r,(int)img[i][j].g , (int)img[i][j].b ,luvData[deltapos] );
+////		}
+////	 }
+//}
 
 
 LuvPixel* get_luv_image(const IplImage *pSrc)
 {
 	long xstart=0;
 	long deltapos=0;
+    RgbImage img(pSrc);
     int width = pSrc->width;
     int height = pSrc->height;
-    LuvPixel *luvData = new[width * height]
-    RgbImage img(pSrc);
+    LuvPixel *luvData = new LuvPixel[width * height];
 	for (int i = 0; i < height; i++)
      {
 		 xstart = i*width;
         for ( int j = 0; j < width; j++)
         {
 			deltapos = xstart + j;
-            rgb2luv((int)img[i][j].r,(int)img[i][j].g , (int)img[i][j].b ,luvData[deltapos] );
+            rgb2luv((int)img[i][j].r,(int)img[i][j].g , (int)img[i][j].b, luvData[deltapos] );
 		}
 	 }
 }
 
 
+int* image_gray_values(const IplImage *pSrc)
+{
+    int* gray_mx = new int[ pSrc->height * pSrc->width];
+    for (int y = 0;y < pSrc->height; y++)
+    {
+        for (int x = 0; x < pSrc->width; x++)
+        {
+            int pos = pSrc->width*y+x;
+            gray_mx[pos] = ((uchar *)(pSrc->imageData))[y * pSrc->widthStep + x];
+        }
+    }
+    return gray_mx;
 
-#endif /* end of include guard: M_OPENCV.H */
+}
